@@ -24,9 +24,14 @@ def get_all_url(text):
 
 def main():
     #print(get_all_url("http:aaaaaa\n  and ahahha ahhaha http:wtf"))
+    url_pool = []
+
     for post in get_posts('SHISEIDOHK', pages=3):
+
         print(post['time'])
-        print(get_all_url(post['text']))
+        urls = [i for i in list(dict.fromkeys(get_all_url(post['text']))) if i not in url_pool]
+        url_pool.extend(urls)
+        print(urls)
         print("==============")
 
 if __name__ == "__main__":
