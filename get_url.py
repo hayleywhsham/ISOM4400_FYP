@@ -3,10 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-#from facebook_scraper import get_posts
-
-#for post in get_posts('viutv.hk', pages=2):
-#    print(post['text'])
 
 def main():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
