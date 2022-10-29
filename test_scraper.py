@@ -7,6 +7,11 @@ def get_only_url(text):
     start = text.find('http')
     if start == -1:
         return "", -1
+
+    #TODO add "bit.ly" as valid link start
+
+    #start_pos = 
+
     space_pos = text[start:].find(" ") + start if text[start:].find(" ") != -1 else len(text)
     nextrow_pos = text[start:].find("\n") + start if text[start:].find("\n") != -1 else len(text)
     end = min(space_pos,nextrow_pos)
