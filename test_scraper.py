@@ -8,9 +8,12 @@ def get_only_url(text):
     if start == -1:
         return "", -1
 
-    #TODO add "bit.ly" as valid link start
+    #TODO
+    # add "bit.ly" as valid link start
+    # for loop, find min of ['bit.ly', 'http', ...] and is not -1 as starting point -> must-have
+    # this list should be cumulative (non-volatile) -> good to have
 
-    #start_pos = 
+    #start_pos =
 
     space_pos = text[start:].find(" ") + start if text[start:].find(" ") != -1 else len(text)
     nextrow_pos = text[start:].find("\n") + start if text[start:].find("\n") != -1 else len(text)
