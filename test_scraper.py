@@ -16,8 +16,8 @@ def get_only_url(text):
     #start_pos =
 
     space_pos = text[start:].find(" ") + start if text[start:].find(" ") != -1 else len(text)
-    nextrow_pos = text[start:].find("\n") + start if text[start:].find("\n") != -1 else len(text)
-    end = min(space_pos,nextrow_pos)
+    next_row_pos = text[start:].find("\n") + start if text[start:].find("\n") != -1 else len(text)
+    end = min(space_pos,next_row_pos)
     return text[start:end], end
 
 def get_all_url(text):

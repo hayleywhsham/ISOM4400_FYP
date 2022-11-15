@@ -1,0 +1,25 @@
+<RCC>
+  <qresource prefix="/image">
+
+      <file alias="link_violet.png">link_violet.png</file>
+      <file alias="info_violet.png">info_violet.png</file>
+      <file alias="info_light_grey.png">info_light_grey.png</file>
+      <file alias="edit_violet.png">edit_violet.png</file>
+      <file alias="edit_light_grey.png">edit_light_grey.png</file>
+      <file alias="view_violet.png">view_violet.png</file>
+      <file alias="view_light_grey.png">view_light_grey.png</file>
+
+
+
+      <file alias="import_white.png">import_white.png</file>
+      <file alias="search_white.png">search_white.png</file>
+      <file alias="arrow_up_white.png">arrow_up_white.png</file>
+      <file alias="arrow_down_white.png">arrow_down_white.png</file>
+      <file alias="arrow_down_grey.png">arrow_down_grey.png</file>
+
+      <file alias="arrow_left_white.png">arrow_left_white.png</file>
+      <file alias="arrow_right_white.png">arrow_right_white.png</file>
+
+
+  </qresource>
+</RCC>
