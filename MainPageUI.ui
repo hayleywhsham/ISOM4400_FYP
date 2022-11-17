@@ -1786,7 +1786,7 @@ color: white;</string>
        <property name="geometry">
         <rect>
          <x>69</x>
-         <y>239</y>
+         <y>220</y>
          <width>541</width>
          <height>31</height>
         </rect>
@@ -1905,7 +1905,7 @@ font: 87 10pt &quot;Arial Black&quot;;</string>
          <x>70</x>
          <y>110</y>
          <width>541</width>
-         <height>121</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -1927,7 +1927,7 @@ QFrame
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>20</y>
+          <y>10</y>
           <width>270</width>
           <height>30</height>
          </rect>
@@ -2010,7 +2010,7 @@ QComboBox QAbstractItemView
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>70</y>
+          <y>60</y>
           <width>270</width>
           <height>30</height>
          </rect>
@@ -2158,9 +2158,9 @@ QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/
        <widget class="QComboBox" name="input_info_edit_page_choose_opt_in_out">
         <property name="geometry">
          <rect>
-          <x>360</x>
-          <y>80</y>
-          <width>141</width>
+          <x>310</x>
+          <y>70</y>
+          <width>191</width>
           <height>21</height>
          </rect>
         </property>
@@ -2182,7 +2182,7 @@ QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/
 	background-color: rgb(238, 238, 238);
 	color: rgb(98, 98, 98);
 	border-radius: 5px;
-	font-size: 10px;
+	font-size: 12px;
 	padding-left: 10px;
 }
 
@@ -2263,6 +2263,222 @@ QComboBox QAbstractItemView
          </property>
         </item>
        </widget>
+       <widget class="QComboBox" name="input_info_edit_page_pics">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>40</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>-1</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 5px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+
+QComboBox::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 10px;
+	width: 10px;
+}
+
+QComboBox::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView
+{
+    color: rgb(98, 98, 98); /*dark grey*/
+	background-color: white;
+    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	selection-color: white;
+	border-radius: 0px;
+}
+
+</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="maxVisibleItems">
+         <number>3</number>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtBottom</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>P.I.C.S.</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>P.I.C.S.</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>P.I.C.S.</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
+         </property>
+        </item>
+       </widget>
+       <widget class="QComboBox" name="input_info_edit_page_tnc">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>10</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>-1</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 5px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+
+QComboBox::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 10px;
+	width: 10px;
+}
+
+QComboBox::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView
+{
+    color: rgb(98, 98, 98); /*dark grey*/
+	background-color: white;
+    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	selection-color: white;
+	border-radius: 0px;
+}
+
+</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="maxVisibleItems">
+         <number>3</number>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtBottom</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
+         </property>
+        </item>
+       </widget>
       </widget>
       <widget class="QFrame" name="frame_info_edit_page_remarks">
        <property name="geometry">
@@ -2315,9 +2531,9 @@ font: 87 10pt &quot;Arial Black&quot;;</string>
        <property name="geometry">
         <rect>
          <x>70</x>
-         <y>280</y>
+         <y>250</y>
          <width>541</width>
-         <height>171</height>
+         <height>201</height>
         </rect>
        </property>
        <property name="styleSheet">
