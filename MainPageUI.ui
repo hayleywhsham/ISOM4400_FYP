@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -1848,7 +1848,7 @@ font: 87 9pt &quot;Arial Black&quot;;</string>
         <rect>
          <x>70</x>
          <y>70</y>
-         <width>551</width>
+         <width>471</width>
          <height>41</height>
         </rect>
        </property>
@@ -1879,7 +1879,7 @@ font: 87 9pt &quot;Arial Black&quot;;</string>
          <rect>
           <x>120</x>
           <y>10</y>
-          <width>421</width>
+          <width>351</width>
           <height>21</height>
          </rect>
         </property>
@@ -1942,8 +1942,8 @@ color: white;</string>
         <rect>
          <x>69</x>
          <y>220</y>
-         <width>541</width>
-         <height>31</height>
+         <width>471</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="frameShape">
@@ -1972,9 +1972,9 @@ color: white;</string>
       <widget class="QFrame" name="frame_info_edit_page_pii_categorisation">
        <property name="geometry">
         <rect>
-         <x>640</x>
+         <x>560</x>
          <y>70</y>
-         <width>581</width>
+         <width>541</width>
          <height>281</height>
         </rect>
        </property>
@@ -2005,7 +2005,7 @@ color: white;</string>
          <rect>
           <x>0</x>
           <y>40</y>
-          <width>581</width>
+          <width>541</width>
           <height>241</height>
          </rect>
         </property>
@@ -2029,7 +2029,7 @@ QFrame
           <rect>
            <x>10</x>
            <y>9</y>
-           <width>560</width>
+           <width>511</width>
            <height>221</height>
           </rect>
          </property>
@@ -2119,13 +2119,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>545</width>
+            <width>496</width>
             <height>500</height>
            </rect>
           </property>
           <property name="minimumSize">
            <size>
-            <width>540</width>
+            <width>450</width>
             <height>500</height>
            </size>
           </property>
@@ -2137,7 +2137,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
             <rect>
              <x>6</x>
              <y>10</y>
-             <width>541</width>
+             <width>471</width>
              <height>281</height>
             </rect>
            </property>
@@ -2152,25 +2152,25 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
              <enum>QFormLayout::DontWrapRows</enum>
             </property>
             <property name="verticalSpacing">
-             <number>12</number>
+             <number>6</number>
             </property>
             <property name="leftMargin">
-             <number>6</number>
+             <number>0</number>
             </property>
             <property name="topMargin">
-             <number>6</number>
+             <number>0</number>
             </property>
             <property name="rightMargin">
-             <number>6</number>
+             <number>0</number>
             </property>
             <property name="bottomMargin">
-             <number>6</number>
+             <number>0</number>
             </property>
             <item row="0" column="0">
              <widget class="QLabel" name="lbl_info_edit_page_label">
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>100</width>
                 <height>0</height>
                </size>
               </property>
@@ -2186,7 +2186,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
              <widget class="QComboBox" name="input_info_edit_page_category">
               <property name="minimumSize">
                <size>
-                <width>270</width>
+                <width>250</width>
                 <height>30</height>
                </size>
               </property>
@@ -2275,7 +2275,7 @@ QComboBox QAbstractItemView
              <widget class="QLabel" name="lbl_info_edit_page_label_2">
               <property name="minimumSize">
                <size>
-                <width>200</width>
+                <width>100</width>
                 <height>0</height>
                </size>
               </property>
@@ -2291,7 +2291,7 @@ QComboBox QAbstractItemView
              <widget class="QComboBox" name="input_info_edit_page_category_2">
               <property name="minimumSize">
                <size>
-                <width>270</width>
+                <width>250</width>
                 <height>30</height>
                </size>
               </property>
@@ -2385,7 +2385,7 @@ QComboBox QAbstractItemView
       <widget class="Line" name="deco_info_edit_page_vline">
        <property name="geometry">
         <rect>
-         <x>620</x>
+         <x>540</x>
          <y>70</y>
          <width>20</width>
          <height>381</height>
@@ -2406,7 +2406,7 @@ QComboBox QAbstractItemView
         <rect>
          <x>70</x>
          <y>110</y>
-         <width>541</width>
+         <width>471</width>
          <height>101</height>
         </rect>
        </property>
@@ -2428,9 +2428,9 @@ QFrame
        <widget class="QComboBox" name="input_info_edit_page_choose_marketing_purpose">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>10</x>
           <y>10</y>
-          <width>270</width>
+          <width>241</width>
           <height>30</height>
          </rect>
         </property>
@@ -2486,6 +2486,9 @@ QComboBox QAbstractItemView
         <property name="editable">
          <bool>false</bool>
         </property>
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
         <property name="insertPolicy">
          <enum>QComboBox::InsertAtBottom</enum>
         </property>
@@ -2511,9 +2514,9 @@ QComboBox QAbstractItemView
        <widget class="QDateEdit" name="input_info_edit_page_expiring_date">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>10</x>
           <y>60</y>
-          <width>270</width>
+          <width>241</width>
           <height>30</height>
          </rect>
         </property>
@@ -2660,7 +2663,7 @@ QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/
        <widget class="QComboBox" name="input_info_edit_page_choose_opt_in_out">
         <property name="geometry">
          <rect>
-          <x>310</x>
+          <x>260</x>
           <y>70</y>
           <width>191</width>
           <height>21</height>
@@ -2768,7 +2771,7 @@ QComboBox QAbstractItemView
        <widget class="QComboBox" name="input_info_edit_page_pics">
         <property name="geometry">
          <rect>
-          <x>310</x>
+          <x>260</x>
           <y>40</y>
           <width>191</width>
           <height>21</height>
@@ -2876,7 +2879,7 @@ QComboBox QAbstractItemView
        <widget class="QComboBox" name="input_info_edit_page_tnc">
         <property name="geometry">
          <rect>
-          <x>310</x>
+          <x>260</x>
           <y>10</y>
           <width>191</width>
           <height>21</height>
@@ -2985,9 +2988,9 @@ QComboBox QAbstractItemView
       <widget class="QFrame" name="frame_info_edit_page_remarks">
        <property name="geometry">
         <rect>
-         <x>640</x>
+         <x>560</x>
          <y>360</y>
-         <width>581</width>
+         <width>541</width>
          <height>91</height>
         </rect>
        </property>
@@ -3018,7 +3021,7 @@ QComboBox QAbstractItemView
          <rect>
           <x>13</x>
           <y>38</y>
-          <width>561</width>
+          <width>521</width>
           <height>51</height>
          </rect>
         </property>
@@ -3035,7 +3038,7 @@ padding: 5px;</string>
         <rect>
          <x>70</x>
          <y>240</y>
-         <width>541</width>
+         <width>471</width>
          <height>211</height>
         </rect>
        </property>
@@ -3046,7 +3049,7 @@ padding: 5px;</string>
       <widget class="QPushButton" name="button_info_edit_page_next">
        <property name="geometry">
         <rect>
-         <x>1190</x>
+         <x>1070</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -3078,7 +3081,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QPushButton" name="button_info_edit_page_previous">
        <property name="geometry">
         <rect>
-         <x>1020</x>
+         <x>900</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -3110,7 +3113,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLabel" name="lbl_info_edit_page_total_pages">
        <property name="geometry">
         <rect>
-         <x>1143</x>
+         <x>1020</x>
          <y>460</y>
          <width>41</width>
          <height>31</height>
@@ -3126,7 +3129,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLabel" name="lbl_info_edit_page_slash">
        <property name="geometry">
         <rect>
-         <x>1110</x>
+         <x>990</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -3142,7 +3145,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLineEdit" name="input_info_edit_page_current_page">
        <property name="geometry">
         <rect>
-         <x>1070</x>
+         <x>950</x>
          <y>459</y>
          <width>41</width>
          <height>31</height>
@@ -3654,7 +3657,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <bool>false</bool>
         </property>
         <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
+         <bool>true</bool>
         </attribute>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>true</bool>
@@ -3669,7 +3672,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
+         <bool>true</bool>
         </attribute>
         <attribute name="verticalHeaderCascadingSectionResizes">
          <bool>false</bool>
