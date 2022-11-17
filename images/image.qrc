@@ -23,6 +23,8 @@
       <file alias="save_white.png">save_white.png</file>
       <file alias="tick_white.png">tick_white.png</file>
       <file alias="cross_white.png">cross_white.png</file>
+      <file alias="tick_green.png">tick_green.png</file>
+      <file alias="cross_red.png">cross_red.png</file>
       <file alias="question_mark_grey.png">question_mark_grey.png</file>
 
 
