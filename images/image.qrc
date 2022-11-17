@@ -12,6 +12,7 @@
 
 
       <file alias="import_white.png">import_white.png</file>
+      <file alias="export_white.png">export_white.png</file>
       <file alias="search_white.png">search_white.png</file>
       <file alias="arrow_up_white.png">arrow_up_white.png</file>
       <file alias="arrow_down_white.png">arrow_down_white.png</file>

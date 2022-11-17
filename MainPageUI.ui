@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -1686,7 +1686,7 @@ color: rgb(217, 217, 217)</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: #f3f4f8;
-font: 75 12pt &quot;Arial&quot;;</string>
+font: 87 9pt &quot;Arial Black&quot;;</string>
       </property>
       <widget class="QFrame" name="frame_info_edit_page_full_true_path">
        <property name="geometry">
@@ -2887,9 +2887,339 @@ font: 87 10pt &quot;Arial Black&quot;;</string>
         <string notr="true"/>
        </property>
       </widget>
+      <widget class="QPushButton" name="button_info_edit_page_next">
+       <property name="geometry">
+        <rect>
+         <x>1190</x>
+         <y>460</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 51, 141);
+border-radius: 15px;
+font: 87 9pt &quot;Arial Black&quot;;
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="images/image.qrc">
+         <normaloff>:/image/arrow_right_white.png</normaloff>:/image/arrow_right_white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="button_info_edit_page_previous">
+       <property name="geometry">
+        <rect>
+         <x>1020</x>
+         <y>460</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 51, 141);
+border-radius: 15px;
+font: 87 9pt &quot;Arial Black&quot;;
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="images/image.qrc">
+         <normaloff>:/image/arrow_left_white.png</normaloff>:/image/arrow_left_white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_total_pages">
+       <property name="geometry">
+        <rect>
+         <x>1143</x>
+         <y>460</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>16</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_slash">
+       <property name="geometry">
+        <rect>
+         <x>1110</x>
+         <y>460</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>/</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="input_info_edit_page_current_page">
+       <property name="geometry">
+        <rect>
+         <x>1070</x>
+         <y>459</y>
+         <width>41</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid rgb(217, 217, 217);
+border-radius: 5px;</string>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="report_page"/>
+    <widget class="QWidget" name="report_page">
+     <widget class="QWidget" name="widget_report_page_progress" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1281</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
+background-color: #f3f4f8;</string>
+      </property>
+      <widget class="QProgressBar" name="progressBar_report_page_progress">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>1141</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">*{
+	border: 0px;
+	border-radius: 11px;
+
+	background: rgb(217, 217, 217);
+	
+}
+::chunk{
+	background-color: rgb(72, 54, 152);
+	border-radius: 11px;
+}</string>
+       </property>
+       <property name="value">
+        <number>100</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+       <property name="invertedAppearance">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_report_page_progress_step1_active">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>70</y>
+         <width>161</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(72, 54, 152)
+</string>
+       </property>
+       <property name="text">
+        <string>Find Marketing Website URL</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_report_page_progress_step2_active">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>70</y>
+         <width>161</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(72, 54, 152)</string>
+       </property>
+       <property name="text">
+        <string>Information from Web Scrapping</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_report_page_progress_step3_active">
+       <property name="geometry">
+        <rect>
+         <x>770</x>
+         <y>70</y>
+         <width>111</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+color: rgb(72, 54, 152)</string>
+       </property>
+       <property name="text">
+        <string>Information Edits</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_report_page_progress_step4_active">
+       <property name="geometry">
+        <rect>
+         <x>1090</x>
+         <y>70</y>
+         <width>101</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+color:rgb(72, 54, 152)</string>
+       </property>
+       <property name="text">
+        <string>View Report</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_report_page_progress_step1_link_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/link_violet.png);</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_report_page_progress_step2_info_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/info_violet.png)</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_report_page_progress_step3_edit_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>720</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/edit_violet.png)</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_report_page_progress_step4_view_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>1040</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/view_violet.png)</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>
