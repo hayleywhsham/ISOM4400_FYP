@@ -38,7 +38,7 @@
    <string notr="true">font: 16pt &quot;Arial&quot;;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget_Header" native="true">
+   <widget class="QWidget" name="widget_global_header" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -50,7 +50,7 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(0, 51, 141);</string>
     </property>
-    <widget class="QLabel" name="lbl_Header">
+    <widget class="QLabel" name="lbl_global_header">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -1320,7 +1320,7 @@ QTableWidget::item
          <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <row>
          <property name="text">
@@ -1461,7 +1461,757 @@ QTableWidget::item
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="info_edit_page"/>
+    <widget class="QWidget" name="info_edit_page">
+     <widget class="QWidget" name="widget_info_edit_page_progress" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1281</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 87 10pt &quot;Arial Black&quot;;
+background-color: #f3f4f8;</string>
+      </property>
+      <widget class="QProgressBar" name="progressBar_info_edit_page_progress">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>1141</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">*{
+	border: 0px;
+	border-radius: 11px;
+
+	background: rgb(217, 217, 217);
+	
+}
+::chunk{
+	background-color: rgb(72, 54, 152);
+	border-radius: 11px;
+}</string>
+       </property>
+       <property name="value">
+        <number>75</number>
+       </property>
+       <property name="textVisible">
+        <bool>false</bool>
+       </property>
+       <property name="invertedAppearance">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_progress_step1_active">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>70</y>
+         <width>161</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(72, 54, 152)
+</string>
+       </property>
+       <property name="text">
+        <string>Find Marketing Website URL</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_progress_step2_active">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>70</y>
+         <width>161</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(72, 54, 152)</string>
+       </property>
+       <property name="text">
+        <string>Information from Web Scrapping</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_progress_step3_active">
+       <property name="geometry">
+        <rect>
+         <x>770</x>
+         <y>70</y>
+         <width>111</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+color: rgb(72, 54, 152)</string>
+       </property>
+       <property name="text">
+        <string>Information Edits</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_info_edit_page_progress_step4">
+       <property name="geometry">
+        <rect>
+         <x>1090</x>
+         <y>70</y>
+         <width>101</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+color: rgb(217, 217, 217)</string>
+       </property>
+       <property name="text">
+        <string>View Report</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_info_edit_page_progress_step1_link_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/link_violet.png);</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_info_edit_page_progress_step2_info_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/info_violet.png)</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_info_edit_page_progress_step3_edit_active" native="true">
+       <property name="geometry">
+        <rect>
+         <x>720</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/edit_violet.png)</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="img_info_edit_page_progress_step4_view" native="true">
+       <property name="geometry">
+        <rect>
+         <x>1040</x>
+         <y>80</y>
+         <width>40</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">image: url(:/image/view_light_grey.png)</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="widget_info_edit_page_result" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>160</y>
+        <width>1281</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #f3f4f8;
+font: 75 12pt &quot;Arial&quot;;</string>
+      </property>
+      <widget class="QFrame" name="frame_info_edit_page_full_true_path">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>70</y>
+         <width>551</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl_info_edit_page_full_true_path">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Full True Path</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl_info_edit_page_full_url">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>10</y>
+          <width>421</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>8</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <underline>true</underline>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 87 8pt &quot;Arial Black&quot;;
+color: rgb(0, 163, 161);</string>
+        </property>
+        <property name="text">
+         <string>www.abcde.com</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QPushButton" name="button_info_edit_page_save_all_edits">
+       <property name="geometry">
+        <rect>
+         <x>1060</x>
+         <y>20</y>
+         <width>161</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(109, 32, 119);
+border-radius: 15px;
+font: 87 10pt &quot;Arial Black&quot;;
+color: white;</string>
+       </property>
+       <property name="text">
+        <string>Save All Edits</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images/image.qrc">
+         <normaloff>:/image/save_white.png</normaloff>:/image/save_white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame_info_edit_page_screenshot">
+       <property name="geometry">
+        <rect>
+         <x>69</x>
+         <y>239</y>
+         <width>541</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl_info_edit_page_screenshot">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Screenshot</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_info_edit_page_pii_categorisation">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>70</y>
+         <width>581</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl_info_edit_page_pii_categorisation">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>561</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>PII - Form Labels Categorisation</string>
+        </property>
+       </widget>
+       <widget class="QScrollArea" name="scrollArea_info_edit_page_labels_category">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>40</y>
+          <width>561</width>
+          <height>231</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 145, 218);
+border-radius: 25px;
+font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>561</width>
+           <height>231</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="Line" name="deco_info_edit_page_vline">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>70</y>
+         <width>20</width>
+         <height>381</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(217, 217, 217);</string>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame_info_edit_page_marketing_web_details">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>110</y>
+         <width>541</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">*{font: 87 10pt &quot;Arial Black&quot;;}
+
+QFrame
+{
+	background-color: rgb(0, 145, 218);
+	border-radius: 25px;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="input_info_edit_page_choose_marketing_purpose">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>271</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>-1</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 15px;
+	font-size: 15px;
+	padding-left: 20px;
+}
+
+QComboBox::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 15px;
+	width: 15px;
+}
+
+QComboBox::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 45px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView
+{
+    color: rgb(98, 98, 98); /*dark grey*/
+	background-color: white;
+    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	selection-color: white;
+	border-radius: 0px;
+}
+
+</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtBottom</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+        </property>
+        <item>
+         <property name="text">
+          <string>Marketing Purpose</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Promotion</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Member Registration</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QDateEdit" name="input_info_edit_page_expiring_date">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>70</y>
+          <width>271</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QDateEdit
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 15px;
+}
+
+QDateEdit::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 45px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QDateEdit::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 15px;
+	width: 15px;
+}
+
+/*Calendar*/
+/* Navigation bar */
+QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}
+
+QCalendarWidget QToolButton
+{
+  	height: 30px;
+  	width: 100px;
+  	color: white;
+  	background-color: rgb(0, 51, 141); /*KPMG Blue*/
+  }
+
+QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/
+
+/*Month*/
+QCalendarWidget QMenu
+{
+  	width: 120px;
+	align: center;
+  	font-size: 12px;
+  	color: white;
+  	background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/
+  }
+
+
+/*Year*/
+QCalendarWidget QSpinBox
+{ 
+  	width: 50px; 
+  	color: white; 
+  	background-color: rgb(0, 51, 141); /*KPMG Blue*/
+  	selection-background-color: rgb(98, 98, 98); /*grey*/ 
+  	selection-color: rgb(255, 255, 255);
+  }
+
+QCalendarWidget QSpinBox::up-button
+{
+	subcontrol-origin:border;
+	subcontrol-position:top right;
+	image: url(:/image/arrow_up_white.png);
+	width:16px;
+	border-width:1px;
+}
+
+QCalendarWidget QSpinBox::down-button
+{
+	subcontrol-origin:border;
+	subcontrol-position:bottom right;
+	image: url(:/image/arrow_down_white.png);
+	width:16px;
+	border-width:1px;
+	border-top-width:0;
+}
+/*Prev/Next Month Arrows*/
+#qt_calendar_prevmonth {
+    icon-size: 30px;
+    qproperty-icon: url(:/image/arrow_left_white.png);
+}
+#qt_calendar_nextmonth {
+    icon-size: 30px;
+    qproperty-icon: url(:/image/arrow_right_white.png);
+}
+
+  /* normal days */
+QCalendarWidget QAbstractItemView:enabled 
+{
+  	color: rgb(238, 238, 238);  /*super light grey*/
+  	background-color: rgb(98, 98, 98); /*grey*/ 
+  	selection-background-color: rgb(64, 64, 64); /*dark grey*/
+  	selection-color: rgb(0, 163, 161); /*kpmg green*/
+}
+   
+/* days in other months */
+QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}</string>
+        </property>
+        <property name="wrapping">
+         <bool>false</bool>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::UpDownArrows</enum>
+        </property>
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2021</year>
+          <month>1</month>
+          <day>1</day>
+         </datetime>
+        </property>
+        <property name="currentSection">
+         <enum>QDateTimeEdit::YearSection</enum>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy/MM/dd</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_info_edit_page_remarks">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>360</y>
+         <width>581</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QLabel" name="lbl_info_edit_page_remarks">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>561</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Remarks</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="input_info_edit_page_remarks">
+        <property name="geometry">
+         <rect>
+          <x>13</x>
+          <y>38</y>
+          <width>561</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(217, 217, 217);
+border-radius: 15px;
+font: 87 10pt &quot;Arial Black&quot;;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGraphicsView" name="graphicsView_info_edit_page_screenshot">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>280</y>
+         <width>541</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </widget>
+    </widget>
     <widget class="QWidget" name="report_page"/>
    </widget>
   </widget>

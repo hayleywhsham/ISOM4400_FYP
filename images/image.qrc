@@ -20,6 +20,11 @@
       <file alias="arrow_left_white.png">arrow_left_white.png</file>
       <file alias="arrow_right_white.png">arrow_right_white.png</file>
 
+      <file alias="save_white.png">save_white.png</file>
+      <file alias="tick_white.png">tick_white.png</file>
+      <file alias="cross_white.png">cross_white.png</file>
+      <file alias="question_mark_grey.png">question_mark_grey.png</file>
+
 
   </qresource>
 </RCC>
