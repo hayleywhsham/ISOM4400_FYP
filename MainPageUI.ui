@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -350,7 +350,7 @@ color: rgb(217, 217, 217)</string>
        <property name="geometry">
         <rect>
          <x>330</x>
-         <y>90</y>
+         <y>60</y>
          <width>601</width>
          <height>371</height>
         </rect>
@@ -1193,7 +1193,7 @@ color: rgb(98, 98, 98);</string>
          <rect>
           <x>380</x>
           <y>10</y>
-          <width>121</width>
+          <width>571</width>
           <height>31</height>
          </rect>
         </property>
@@ -1959,7 +1959,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <property name="widgetResizable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents">
+         <widget class="QWidget" name="scrollAreaWidgetContents_info_edit_page">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -1986,7 +1986,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
              <height>281</height>
             </rect>
            </property>
-           <layout class="QFormLayout" name="formLayout">
+           <layout class="QFormLayout" name="formLayout_info_edit_page_scrolling_content">
             <property name="sizeConstraint">
              <enum>QLayout::SetMinimumSize</enum>
             </property>
@@ -2870,7 +2870,8 @@ QComboBox QAbstractItemView
         <property name="styleSheet">
          <string notr="true">background-color: rgb(217, 217, 217);
 border-radius: 15px;
-font: 87 10pt &quot;Arial Black&quot;;</string>
+font: 87 10pt &quot;Arial Black&quot;;
+padding: 5px;</string>
         </property>
        </widget>
       </widget>
@@ -3346,7 +3347,7 @@ color: white;</string>
         <enum>QFrame::Raised</enum>
        </property>
       </widget>
-      <widget class="QPushButton" name="button_report_page_export_csv_2">
+      <widget class="QPushButton" name="button_report_page_back_edits">
        <property name="geometry">
         <rect>
          <x>70</x>
