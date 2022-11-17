@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -1373,7 +1373,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <bool>false</bool>
         </property>
         <attribute name="horizontalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>true</bool>
@@ -1388,7 +1388,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -3378,7 +3378,7 @@ font: 75 12pt &quot;Arial&quot;;</string>
          <rect>
           <x>20</x>
           <y>10</y>
-          <width>231</width>
+          <width>301</width>
           <height>31</height>
          </rect>
         </property>
@@ -3386,13 +3386,13 @@ font: 75 12pt &quot;Arial&quot;;</string>
          <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
         </property>
         <property name="text">
-         <string>List of Marketing Websites</string>
+         <string>Marketing Websites Report Preview</string>
         </property>
        </widget>
        <widget class="QLabel" name="lbl_report_page_last_updated">
         <property name="geometry">
          <rect>
-          <x>280</x>
+          <x>330</x>
           <y>10</y>
           <width>101</width>
           <height>31</height>
@@ -3409,9 +3409,9 @@ color: rgb(98, 98, 98);</string>
        <widget class="QLabel" name="lbl_report_page_last_updated_datetime">
         <property name="geometry">
          <rect>
-          <x>380</x>
+          <x>430</x>
           <y>10</y>
-          <width>771</width>
+          <width>721</width>
           <height>31</height>
          </rect>
         </property>
@@ -3471,6 +3471,411 @@ color: white;</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
+       <widget class="QTableWidget" name="table_report_page_report">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>1131</width>
+          <height>411</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget{color: rgb(0, 51, 141);}
+QAbstractItemView{background-color: transparent;}
+QTableCornerButton::section{background-color:transparent;}
+
+
+QHeaderView::section
+{
+	qproperty-defaultAlignment: AlignHCenter AlignVCenter;
+	color: rgb(0, 51, 141);
+	background-color: transparent;
+	font: 87 12pt &quot;Arial Black&quot;;
+	border-bottom: 1px solid rgb(98, 98, 98);
+}
+
+
+
+
+
+/*Scroll Bar*/
+QScrollBar:vertical
+{
+	background-color: rgb(217, 217, 217); /*Grey*/
+	width: 15px;
+	margin: 15px 3px 15px 3px;
+	border-radius: 4px;
+    }
+
+QScrollBar::handle:vertical
+{
+	background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	min-height: 5px;
+	border-radius: 4px;
+}
+
+QScrollBar::sub-line:vertical
+{
+	margin: 3px 0px 3px 0px;
+	border-image: url(:/qss_icons/rc/up_arrow_disabled.png);
+	height: 10px;
+	width: 10px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+	margin: 3px 0px 3px 0px;
+	border-image: url(:/qss_icons/rc/down_arrow_disabled.png);
+	height: 10px;
+	width: 10px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on
+{
+	border-image: url(:/qss_icons/rc/up_arrow.png);
+	height: 10px;
+	width: 10px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on
+{
+	border-image: url(:/qss_icons/rc/down_arrow.png);
+	height: 10px;
+	width: 10px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical
+{
+	background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+	background: none;
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::MultiSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::DotLine</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <row>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>5</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>6</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>7</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>9</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>10</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>11</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>12</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>13</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>14</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>15</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>16</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>17</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>18</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>19</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>20</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>Brand</string>
+         </property>
+         <property name="background">
+          <color>
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Source</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Post Date</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Link</string>
+         </property>
+         <property name="background">
+          <color>
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Full True Path</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Purpose</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>PII?</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>T&amp;C?</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Opt-in/Opt-out?</string>
+         </property>
+        </column>
+        <item row="0" column="0">
+         <property name="text">
+          <string>ABC</string>
+         </property>
+        </item>
+        <item row="0" column="1">
+         <property name="text">
+          <string>Facebook</string>
+         </property>
+        </item>
+        <item row="0" column="2">
+         <property name="text">
+          <string>2022/09/15</string>
+         </property>
+        </item>
+        <item row="0" column="3">
+         <property name="text">
+          <string>www.abc.com</string>
+         </property>
+        </item>
+        <item row="0" column="4">
+         <property name="text">
+          <string>www.abcde.com</string>
+         </property>
+        </item>
+        <item row="0" column="5">
+         <property name="text">
+          <string>Campaign</string>
+         </property>
+        </item>
+        <item row="0" column="6">
+         <property name="text">
+          <string>Active</string>
+         </property>
+        </item>
+        <item row="0" column="7">
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </item>
+        <item row="0" column="8">
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </item>
+        <item row="0" column="9">
+         <property name="text">
+          <string>No</string>
+         </property>
+        </item>
+        <item row="1" column="0">
+         <property name="text">
+          <string>ABC</string>
+         </property>
+        </item>
+        <item row="1" column="1">
+         <property name="text">
+          <string>Facebook</string>
+         </property>
+        </item>
+        <item row="1" column="2">
+         <property name="text">
+          <string>2022/09/16</string>
+         </property>
+        </item>
+        <item row="1" column="3">
+         <property name="text">
+          <string>bitly.com</string>
+         </property>
+        </item>
+        <item row="1" column="4">
+         <property name="text">
+          <string>www.testing.com</string>
+         </property>
+        </item>
+        <item row="1" column="5">
+         <property name="text">
+          <string>Member Registration</string>
+         </property>
+        </item>
+        <item row="1" column="6">
+         <property name="text">
+          <string>Nearly Expired</string>
+         </property>
+        </item>
+        <item row="1" column="7">
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </item>
+        <item row="1" column="8">
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </item>
+        <item row="1" column="9">
+         <property name="text">
+          <string>Yes</string>
+         </property>
+        </item>
+       </widget>
       </widget>
       <widget class="QPushButton" name="button_report_page_back_edits">
        <property name="geometry">
