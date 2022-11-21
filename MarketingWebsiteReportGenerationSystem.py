@@ -17,6 +17,7 @@ class MainWindow(QMainWindow):
     def init_link_page(self):
         print("hi")
 
+
     def test_change_page(self):
         self.init_link_page()
         self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
