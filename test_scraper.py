@@ -1,4 +1,4 @@
-## this can only scrap links in description starting with "http"
+## this can only scrap links in description starting with "http" and "bit.ly"
 ## post['link'] will only return the first link in that post
 
 from facebook_scraper import get_posts
@@ -36,7 +36,7 @@ def main():
 
     for post in get_posts('hktvmall', pages=3):
         print("Post Time:",post['time'])
-        urls = list(set(get_all_url(post['text']))) #set: unique
+        urls = list(set(get_all_url(post['text']))) # set: unique
         url_pool.extend(urls)
         print(urls)
         print("="*15)
