@@ -32,14 +32,14 @@ def get_all_url(string):
     return urls
 
 def main():
-    url_pool = []
+    url_pool= set()
 
     for post in get_posts('hktvmall', pages=3):
         print("Post Time:",post['time'])
-        urls = list(set(get_all_url(post['text']))) # set: unique
-        url_pool.extend(urls)
+        urls = set(get_all_url(post['text'])) # set: unique per post
+        url_pool.update(urls)
         print(urls)
         print("="*15)
-
+    print(url_pool)
 if __name__ == "__main__":
     main()
