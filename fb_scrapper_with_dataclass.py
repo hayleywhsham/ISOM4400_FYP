@@ -1,9 +1,20 @@
+## NOT DONE YET!
 ## this can only scrap links in description starting with "http" and "bit.ly"
 ## post['link'] will only return the first link in that post
 
+
 from facebook_scraper import get_posts
 import pandas as pd
+import datetime
+from dataclasses import dataclass
 
+@dataclass
+class MarkWeb:
+    brand: str
+    source: str
+    post_datetime: datetime.datetime
+    short_link: str
+    full_link: str
 
 def get_all_url(string):
     urls = []
@@ -35,7 +46,6 @@ def get_all_url(string):
 
 def main(fb_page_name):
     url_pool= set()
-    mark_web_dict = {"Brand":[],"Source":[],"Post Time":[],"Short Link":[]}
     brand = fb_page_name
     source = "Facebook"
 
@@ -46,13 +56,13 @@ def main(fb_page_name):
         url_pool.update(urls)
         #print(urls)
         for url in urls:
-            mark_web_dict["Brand"].append(brand)
-            mark_web_dict["Source"].append(source)
-            mark_web_dict["Post Time"].append(post_time)
-            mark_web_dict["Short Link"].append(url)
+            #mark_web = MarkWeb(brand=brand, source=source, \
+                               post_datetime=post_time, \
+                               short_link=url, \
+                               full_link=url)
 
     #print(url_pool)
-    df = pd.DataFrame(mark_web_dict)
+    df = pd.DataFrame(mark_web)
     print(df)
 
 

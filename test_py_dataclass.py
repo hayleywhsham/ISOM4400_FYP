@@ -12,7 +12,7 @@ class MarkWeb:
 
 def main() -> None:
     mark_web = MarkWeb(brand="hktvmall", source="Facebook", \
-                       post_datetime= "2022-12-23 16:30:50",\
+                       post_datetime= "2022-12-23 16:30:50", \
                        short_link="https://bit.ly/3GaLReF", \
                        full_link="https://bit.ly/3GaLReF")
     print(mark_web)
