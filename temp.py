@@ -1,10 +1,10 @@
 import pandas as pd
+link_set = {"link1.com", "link2.com"}
 test_dict = {"Name": [],  "Link":[]}
-test_dict["Name"].append("bottle")
-test_dict["Link"].append({"link1.com", "link2.com"})
-test_dict["Name"].append("pan")
-test_dict["Link"].append({"link3.com", "link4.com"})
 
+for link in link_set:
+    test_dict["Name"].append("bottle")
+    test_dict["Link"].append(link)
 print(test_dict)
 print("=======")
 df = pd.DataFrame(test_dict)
