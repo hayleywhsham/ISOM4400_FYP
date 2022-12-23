@@ -31,10 +31,12 @@ def get_all_url(string):
 
     return urls
 
-def main():
+def main(fb_page_name):
     url_pool= set()
+    marketing_web_dict = {"Brand":[],"Source":[],"Post Time":[],"Link":[]}
 
-    for post in get_posts('hktvmall', pages=3):
+    for post in get_posts(fb_page_name, pages=3):
+
         print("Post Time:",post['time'])
         urls = set(get_all_url(post['text'])) # set: unique per post
         url_pool.update(urls)
@@ -42,4 +44,4 @@ def main():
         print("="*15)
     print(url_pool)
 if __name__ == "__main__":
-    main()
+    main('hktvmall')
