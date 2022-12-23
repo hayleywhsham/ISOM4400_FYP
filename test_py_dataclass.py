@@ -1,10 +1,10 @@
 import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-@dataclass
+@dataclass (frozen=True)
 class MarkWeb:
     brand: str
-    source: str #= field(default="FB")
+    source: str
     post_datetime: datetime.datetime
     short_link: str
     full_link: str
