@@ -48,7 +48,7 @@ def main(link):
     for product in products:
         print(product.find("span",{"class":"M7eMe"}).text)
 
-#       read category from WordList by read text files
+#       read category from PII_WordList by read text files
 #          change the output from printing labels to categorising labels
 
 #if __name__ == "__main__":
