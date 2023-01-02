@@ -61,11 +61,6 @@ def check_word_list(scraped_list):
             for defined_text in defined_categories[1:]:
                 if item.casefold() == defined_text.casefold():
                     Label_Category_dict["Category"].append(defined_categories[0])
-# There will be many scrapped text, so the wordlist will keep track of unwanted text as "Unrelated"
-        if Label_Category_dict["Category"][-1] == "Unrelated":
-            Label_Category_dict["Category"].pop()
-            Label_Category_dict["Label"].pop()
-            item_count -= 1
 # check for keywords (not exact match)
         if len(Label_Category_dict["Category"]) < item_count:
             for defined_categories in defined_category_list:
@@ -87,8 +82,9 @@ def check_word_list(scraped_list):
             case "Opt-in/Opt-out":
                 Keywords_Exist_dict["Exist?"][2] = "Yes"
     i = 0
+# output excludes T&C, P.I.C.S, Opt-in/Opt-out, etc. as they would be separately outputted
     while i < len(Label_Category_dict["Category"]):
-        if Label_Category_dict["Category"][i] == "T&C" or Label_Category_dict["Category"][i] == "P.I.C.S" or Label_Category_dict["Category"][i] == "Opt-in/Opt-out":
+        if Label_Category_dict["Category"][i] == "T&C" or Label_Category_dict["Category"][i] == "P.I.C.S" or Label_Category_dict["Category"][i] == "Opt-in/Opt-out" or Label_Category_dict["Category"][i] == "Marketing Purpose" or Label_Category_dict["Category"][i] == "Expiry Date" or Label_Category_dict["Category"][i] == "Unrelated":
             Label_Category_dict["Category"].pop(i)
             Label_Category_dict["Label"].pop(i)
             i -= 1
