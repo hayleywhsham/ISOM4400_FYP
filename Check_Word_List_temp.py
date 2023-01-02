@@ -48,6 +48,11 @@ def check_word_list(scraped_list):
     import_categories()
     item_list = scraped_list
     item_count = 0
+    categories = str(defined_category_list[0][0])
+# only for visualization without UI
+    for category in defined_category_list[1:]:
+        categories = str(categories + ", " + category[0])
+    print("Categories include: " + categories)
 # check for keywords (exact match) and categories
     for item in item_list:
         Label_Category_dict["Label"].append(item)
@@ -56,7 +61,7 @@ def check_word_list(scraped_list):
             for defined_text in defined_categories[1:]:
                 if item.casefold() == defined_text.casefold():
                     Label_Category_dict["Category"].append(defined_categories[0])
-# There will be many scrapped text, so the wordlist will keep track of unwanted text
+# There will be many scrapped text, so the wordlist will keep track of unwanted text as "Unrelated"
         if Label_Category_dict["Category"][-1] == "Unrelated":
             Label_Category_dict["Category"].pop()
             Label_Category_dict["Label"].pop()
