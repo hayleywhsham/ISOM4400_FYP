@@ -41,7 +41,7 @@ class Ui_MainWindow(object):
         font.setWeight(10)
         self.lbl_global_header.setFont(font)
         self.lbl_global_header.setStyleSheet("font: 87 22pt \"思源黑體 Heavy\";\n"
-                                             "color: white;")
+"color: white;")
         self.lbl_global_header.setObjectName("lbl_global_header")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget.setEnabled(True)
@@ -62,21 +62,21 @@ class Ui_MainWindow(object):
         self.widget_search_page_progress = QtWidgets.QWidget(self.search_page)
         self.widget_search_page_progress.setGeometry(QtCore.QRect(0, 0, 1281, 161))
         self.widget_search_page_progress.setStyleSheet("font: 87 10pt \"Arial Black\";\n"
-                                                       "background-color: #f3f4f8;")
+"background-color: #f3f4f8;")
         self.widget_search_page_progress.setObjectName("widget_search_page_progress")
         self.progressBar_search_page_progress = QtWidgets.QProgressBar(self.widget_search_page_progress)
         self.progressBar_search_page_progress.setGeometry(QtCore.QRect(80, 40, 1141, 23))
         self.progressBar_search_page_progress.setStyleSheet("*{\n"
-                                                            "    border: 0px;\n"
-                                                            "    border-radius: 11px;\n"
-                                                            "\n"
-                                                            "    background: rgb(217, 217, 217);\n"
-                                                            "    \n"
-                                                            "}\n"
-                                                            "::chunk{\n"
-                                                            "    background-color: rgb(72, 54, 152);\n"
-                                                            "    border-radius: 11px;\n"
-                                                            "}")
+"    border: 0px;\n"
+"    border-radius: 11px;\n"
+"\n"
+"    background: rgb(217, 217, 217);\n"
+"    \n"
+"}\n"
+"::chunk{\n"
+"    background-color: rgb(72, 54, 152);\n"
+"    border-radius: 11px;\n"
+"}")
         self.progressBar_search_page_progress.setProperty("value", 25)
         self.progressBar_search_page_progress.setTextVisible(False)
         self.progressBar_search_page_progress.setInvertedAppearance(False)
@@ -85,7 +85,7 @@ class Ui_MainWindow(object):
         self.lbl_search_page_progress_step1_active.setGeometry(QtCore.QRect(170, 70, 161, 61))
         self.lbl_search_page_progress_step1_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_search_page_progress_step1_active.setStyleSheet("color: rgb(72, 54, 152)\n"
-                                                                 "")
+"")
         self.lbl_search_page_progress_step1_active.setScaledContents(False)
         self.lbl_search_page_progress_step1_active.setWordWrap(True)
         self.lbl_search_page_progress_step1_active.setObjectName("lbl_search_page_progress_step1_active")
@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
         self.lbl_search_page_progress_step2.setGeometry(QtCore.QRect(460, 70, 161, 61))
         self.lbl_search_page_progress_step2.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_search_page_progress_step2.setStyleSheet("\n"
-                                                          "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_search_page_progress_step2.setScaledContents(False)
         self.lbl_search_page_progress_step2.setWordWrap(True)
         self.lbl_search_page_progress_step2.setObjectName("lbl_search_page_progress_step2")
@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         self.lbl_search_page_progress_step3.setGeometry(QtCore.QRect(770, 70, 111, 61))
         self.lbl_search_page_progress_step3.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_search_page_progress_step3.setStyleSheet("\n"
-                                                          "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_search_page_progress_step3.setScaledContents(False)
         self.lbl_search_page_progress_step3.setWordWrap(True)
         self.lbl_search_page_progress_step3.setObjectName("lbl_search_page_progress_step3")
@@ -109,7 +109,7 @@ class Ui_MainWindow(object):
         self.lbl_search_page_progress_step4.setGeometry(QtCore.QRect(1090, 70, 101, 61))
         self.lbl_search_page_progress_step4.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_search_page_progress_step4.setStyleSheet("\n"
-                                                          "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_search_page_progress_step4.setScaledContents(False)
         self.lbl_search_page_progress_step4.setWordWrap(True)
         self.lbl_search_page_progress_step4.setObjectName("lbl_search_page_progress_step4")
@@ -140,9 +140,9 @@ class Ui_MainWindow(object):
         self.frame_search_page_input_area = QtWidgets.QFrame(self.widget_search_page_input)
         self.frame_search_page_input_area.setGeometry(QtCore.QRect(330, 60, 601, 371))
         self.frame_search_page_input_area.setStyleSheet("background-color: rgb(0, 145, 218);\n"
-                                                        "border-radius: 25px;\n"
-                                                        "font: 87 10pt \"Arial Black\";\n"
-                                                        "color:rgb(255, 255, 255)")
+"border-radius: 25px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"color:rgb(255, 255, 255)")
         self.frame_search_page_input_area.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_search_page_input_area.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_search_page_input_area.setObjectName("frame_search_page_input_area")
@@ -191,102 +191,102 @@ class Ui_MainWindow(object):
         self.input_search_page_from_date.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.input_search_page_from_date.setAutoFillBackground(False)
         self.input_search_page_from_date.setStyleSheet("QDateEdit\n"
-                                                       "{\n"
-                                                       "    background-color: rgb(238, 238, 238);\n"
-                                                       "    color: rgb(98, 98, 98);\n"
-                                                       "    border-radius: 15px;\n"
-                                                       "}\n"
-                                                       "\n"
-                                                       "QDateEdit::drop-down\n"
-                                                       "{\n"
-                                                       "    subcontrol-origin: padding;\n"
-                                                       "    subcontrol-position: top right;\n"
-                                                       "    width: 45px; \n"
-                                                       "    border-top-right-radius: 3px;\n"
-                                                       "    border-bottom-right-radius: 3px;\n"
-                                                       "}\n"
-                                                       "\n"
-                                                       "QDateEdit::down-arrow\n"
-                                                       "{\n"
-                                                       "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                       "    height: 15px;\n"
-                                                       "    width: 15px;\n"
-                                                       "}\n"
-                                                       "\n"
-                                                       "/*Calendar*/\n"
-                                                       "/* Navigation bar */\n"
-                                                       "QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
-                                                       "\n"
-                                                       "QCalendarWidget QToolButton\n"
-                                                       "{\n"
-                                                       "      height: 30px;\n"
-                                                       "      width: 100px;\n"
-                                                       "      color: white;\n"
-                                                       "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                       "  }\n"
-                                                       "\n"
-                                                       "QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
-                                                       "\n"
-                                                       "/*Month*/\n"
-                                                       "QCalendarWidget QMenu\n"
-                                                       "{\n"
-                                                       "      width: 120px;\n"
-                                                       "    align: center;\n"
-                                                       "      font-size: 12px;\n"
-                                                       "      color: white;\n"
-                                                       "      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
-                                                       "  }\n"
-                                                       "\n"
-                                                       "\n"
-                                                       "/*Year*/\n"
-                                                       "QCalendarWidget QSpinBox\n"
-                                                       "{ \n"
-                                                       "      width: 50px; \n"
-                                                       "      color: white; \n"
-                                                       "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                       "      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                       "      selection-color: rgb(255, 255, 255);\n"
-                                                       "  }\n"
-                                                       "\n"
-                                                       "QCalendarWidget QSpinBox::up-button\n"
-                                                       "{\n"
-                                                       "    subcontrol-origin:border;\n"
-                                                       "    subcontrol-position:top right;\n"
-                                                       "    image: url(:/image/arrow_up_white.png);\n"
-                                                       "    width:16px;\n"
-                                                       "    border-width:1px;\n"
-                                                       "}\n"
-                                                       "\n"
-                                                       "QCalendarWidget QSpinBox::down-button\n"
-                                                       "{\n"
-                                                       "    subcontrol-origin:border;\n"
-                                                       "    subcontrol-position:bottom right;\n"
-                                                       "    image: url(:/image/arrow_down_white.png);\n"
-                                                       "    width:16px;\n"
-                                                       "    border-width:1px;\n"
-                                                       "    border-top-width:0;\n"
-                                                       "}\n"
-                                                       "/*Prev/Next Month Arrows*/\n"
-                                                       "#qt_calendar_prevmonth {\n"
-                                                       "    icon-size: 30px;\n"
-                                                       "    qproperty-icon: url(:/image/arrow_left_white.png);\n"
-                                                       "}\n"
-                                                       "#qt_calendar_nextmonth {\n"
-                                                       "    icon-size: 30px;\n"
-                                                       "    qproperty-icon: url(:/image/arrow_right_white.png);\n"
-                                                       "}\n"
-                                                       "\n"
-                                                       "  /* normal days */\n"
-                                                       "QCalendarWidget QAbstractItemView:enabled \n"
-                                                       "{\n"
-                                                       "      color: rgb(238, 238, 238);  /*super light grey*/\n"
-                                                       "      background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                       "      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
-                                                       "      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
-                                                       "}\n"
-                                                       "   \n"
-                                                       "/* days in other months */\n"
-                                                       "QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"/*Calendar*/\n"
+"/* Navigation bar */\n"
+"QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
+"\n"
+"QCalendarWidget QToolButton\n"
+"{\n"
+"      height: 30px;\n"
+"      width: 100px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"  }\n"
+"\n"
+"QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
+"\n"
+"/*Month*/\n"
+"QCalendarWidget QMenu\n"
+"{\n"
+"      width: 120px;\n"
+"    align: center;\n"
+"      font-size: 12px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
+"  }\n"
+"\n"
+"\n"
+"/*Year*/\n"
+"QCalendarWidget QSpinBox\n"
+"{ \n"
+"      width: 50px; \n"
+"      color: white; \n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-color: rgb(255, 255, 255);\n"
+"  }\n"
+"\n"
+"QCalendarWidget QSpinBox::up-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:top right;\n"
+"    image: url(:/image/arrow_up_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox::down-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:bottom right;\n"
+"    image: url(:/image/arrow_down_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"    border-top-width:0;\n"
+"}\n"
+"/*Prev/Next Month Arrows*/\n"
+"#qt_calendar_prevmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_left_white.png);\n"
+"}\n"
+"#qt_calendar_nextmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_right_white.png);\n"
+"}\n"
+"\n"
+"  /* normal days */\n"
+"QCalendarWidget QAbstractItemView:enabled \n"
+"{\n"
+"      color: rgb(238, 238, 238);  /*super light grey*/\n"
+"      background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
+"      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
+"}\n"
+"   \n"
+"/* days in other months */\n"
+"QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
         self.input_search_page_from_date.setWrapping(False)
         self.input_search_page_from_date.setFrame(True)
         self.input_search_page_from_date.setAlignment(QtCore.Qt.AlignCenter)
@@ -301,11 +301,11 @@ class Ui_MainWindow(object):
         self.input_search_page_from_fb_page.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
         self.input_search_page_from_fb_page.setAutoFillBackground(False)
         self.input_search_page_from_fb_page.setStyleSheet("*{\n"
-                                                          "    background-color: rgb(238, 238, 238);\n"
-                                                          "    border-radius: 15px;\n"
-                                                          "    color: rgb(98, 98, 98);\n"
-                                                          "    padding-left: 10px;\n"
-                                                          "}")
+"    background-color: rgb(238, 238, 238);\n"
+"    border-radius: 15px;\n"
+"    color: rgb(98, 98, 98);\n"
+"    padding-left: 10px;\n"
+"}")
         self.input_search_page_from_fb_page.setText("")
         self.input_search_page_from_fb_page.setMaxLength(100)
         self.input_search_page_from_fb_page.setCursorPosition(0)
@@ -313,8 +313,8 @@ class Ui_MainWindow(object):
         self.button_search_page_import_csv = QtWidgets.QPushButton(self.frame_search_page_input_area)
         self.button_search_page_import_csv.setGeometry(QtCore.QRect(80, 220, 151, 41))
         self.button_search_page_import_csv.setStyleSheet("background-color: rgb(0, 51, 141);\n"
-                                                         "border-radius: 15px;\n"
-                                                         "")
+"border-radius: 15px;\n"
+"")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/image/import_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_search_page_import_csv.setIcon(icon)
@@ -324,7 +324,7 @@ class Ui_MainWindow(object):
         self.button_search_page_search_marketing_sites = QtWidgets.QPushButton(self.frame_search_page_input_area)
         self.button_search_page_search_marketing_sites.setGeometry(QtCore.QRect(160, 300, 281, 41))
         self.button_search_page_search_marketing_sites.setStyleSheet("background-color: rgb(109, 32, 119);\n"
-                                                                     "border-radius: 15px;")
+"border-radius: 15px;")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/image/search_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_search_page_search_marketing_sites.setIcon(icon1)
@@ -336,102 +336,102 @@ class Ui_MainWindow(object):
         self.input_search_page_to_date.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.input_search_page_to_date.setAutoFillBackground(False)
         self.input_search_page_to_date.setStyleSheet("QDateEdit\n"
-                                                     "{\n"
-                                                     "    background-color: rgb(238, 238, 238);\n"
-                                                     "    color: rgb(98, 98, 98);\n"
-                                                     "    border-radius: 15px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QDateEdit::drop-down\n"
-                                                     "{\n"
-                                                     "    subcontrol-origin: padding;\n"
-                                                     "    subcontrol-position: top right;\n"
-                                                     "    width: 45px; \n"
-                                                     "    border-top-right-radius: 3px;\n"
-                                                     "    border-bottom-right-radius: 3px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QDateEdit::down-arrow\n"
-                                                     "{\n"
-                                                     "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                     "    height: 15px;\n"
-                                                     "    width: 15px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "/*Calendar*/\n"
-                                                     "/* Navigation bar */\n"
-                                                     "QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
-                                                     "\n"
-                                                     "QCalendarWidget QToolButton\n"
-                                                     "{\n"
-                                                     "      height: 30px;\n"
-                                                     "      width: 100px;\n"
-                                                     "      color: white;\n"
-                                                     "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                     "  }\n"
-                                                     "\n"
-                                                     "QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
-                                                     "\n"
-                                                     "/*Month*/\n"
-                                                     "QCalendarWidget QMenu\n"
-                                                     "{\n"
-                                                     "      width: 120px;\n"
-                                                     "    align: center;\n"
-                                                     "      font-size: 12px;\n"
-                                                     "      color: white;\n"
-                                                     "      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
-                                                     "  }\n"
-                                                     "\n"
-                                                     "\n"
-                                                     "/*Year*/\n"
-                                                     "QCalendarWidget QSpinBox\n"
-                                                     "{ \n"
-                                                     "      width: 50px; \n"
-                                                     "      color: white; \n"
-                                                     "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                     "      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                     "      selection-color: rgb(255, 255, 255);\n"
-                                                     "  }\n"
-                                                     "\n"
-                                                     "QCalendarWidget QSpinBox::up-button\n"
-                                                     "{\n"
-                                                     "    subcontrol-origin:border;\n"
-                                                     "    subcontrol-position:top right;\n"
-                                                     "    image: url(:/image/arrow_up_white.png);\n"
-                                                     "    width:16px;\n"
-                                                     "    border-width:1px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QCalendarWidget QSpinBox::down-button\n"
-                                                     "{\n"
-                                                     "    subcontrol-origin:border;\n"
-                                                     "    subcontrol-position:bottom right;\n"
-                                                     "    image: url(:/image/arrow_down_white.png);\n"
-                                                     "    width:16px;\n"
-                                                     "    border-width:1px;\n"
-                                                     "    border-top-width:0;\n"
-                                                     "}\n"
-                                                     "/*Prev/Next Month Arrows*/\n"
-                                                     "#qt_calendar_prevmonth {\n"
-                                                     "    icon-size: 30px;\n"
-                                                     "    qproperty-icon: url(:/image/arrow_left_white.png);\n"
-                                                     "}\n"
-                                                     "#qt_calendar_nextmonth {\n"
-                                                     "    icon-size: 30px;\n"
-                                                     "    qproperty-icon: url(:/image/arrow_right_white.png);\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "  /* normal days */\n"
-                                                     "QCalendarWidget QAbstractItemView:enabled \n"
-                                                     "{\n"
-                                                     "      color: rgb(238, 238, 238);  /*super light grey*/\n"
-                                                     "      background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                     "      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
-                                                     "      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
-                                                     "}\n"
-                                                     "   \n"
-                                                     "/* days in other months */\n"
-                                                     "QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"/*Calendar*/\n"
+"/* Navigation bar */\n"
+"QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
+"\n"
+"QCalendarWidget QToolButton\n"
+"{\n"
+"      height: 30px;\n"
+"      width: 100px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"  }\n"
+"\n"
+"QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
+"\n"
+"/*Month*/\n"
+"QCalendarWidget QMenu\n"
+"{\n"
+"      width: 120px;\n"
+"    align: center;\n"
+"      font-size: 12px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
+"  }\n"
+"\n"
+"\n"
+"/*Year*/\n"
+"QCalendarWidget QSpinBox\n"
+"{ \n"
+"      width: 50px; \n"
+"      color: white; \n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-color: rgb(255, 255, 255);\n"
+"  }\n"
+"\n"
+"QCalendarWidget QSpinBox::up-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:top right;\n"
+"    image: url(:/image/arrow_up_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox::down-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:bottom right;\n"
+"    image: url(:/image/arrow_down_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"    border-top-width:0;\n"
+"}\n"
+"/*Prev/Next Month Arrows*/\n"
+"#qt_calendar_prevmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_left_white.png);\n"
+"}\n"
+"#qt_calendar_nextmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_right_white.png);\n"
+"}\n"
+"\n"
+"  /* normal days */\n"
+"QCalendarWidget QAbstractItemView:enabled \n"
+"{\n"
+"      color: rgb(238, 238, 238);  /*super light grey*/\n"
+"      background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
+"      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
+"}\n"
+"   \n"
+"/* days in other months */\n"
+"QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
         self.input_search_page_to_date.setWrapping(False)
         self.input_search_page_to_date.setFrame(True)
         self.input_search_page_to_date.setAlignment(QtCore.Qt.AlignCenter)
@@ -451,9 +451,9 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         font.setWeight(9)
         self.lbl_search_page_from_fb_page_error_msg.setFont(font)
-        self.lbl_search_page_from_fb_page_error_msg.setStyleSheet("color: rgb(255, 0, 0);\n"
-                                                                  "background-color: transparent;\n"
-                                                                  "font: 75 10pt \"Arial\";")
+        self.lbl_search_page_from_fb_page_error_msg.setStyleSheet("color: rgb(255, 0, 0,0);\n"
+"background-color: transparent;\n"
+"font: 75 10pt \"Arial\";")
         self.lbl_search_page_from_fb_page_error_msg.setObjectName("lbl_search_page_from_fb_page_error_msg")
         self.stackedWidget.addWidget(self.search_page)
         self.links_page = QtWidgets.QWidget()
@@ -461,21 +461,21 @@ class Ui_MainWindow(object):
         self.widget_links_page_progress = QtWidgets.QWidget(self.links_page)
         self.widget_links_page_progress.setGeometry(QtCore.QRect(0, 0, 1281, 161))
         self.widget_links_page_progress.setStyleSheet("font: 87 10pt \"Arial Black\";\n"
-                                                      "background-color: #f3f4f8;")
+"background-color: #f3f4f8;")
         self.widget_links_page_progress.setObjectName("widget_links_page_progress")
         self.progressBar_links_page_progress = QtWidgets.QProgressBar(self.widget_links_page_progress)
         self.progressBar_links_page_progress.setGeometry(QtCore.QRect(80, 40, 1141, 23))
         self.progressBar_links_page_progress.setStyleSheet("*{\n"
-                                                           "    border: 0px;\n"
-                                                           "    border-radius: 11px;\n"
-                                                           "\n"
-                                                           "    background: rgb(217, 217, 217);\n"
-                                                           "    \n"
-                                                           "}\n"
-                                                           "::chunk{\n"
-                                                           "    background-color: rgb(72, 54, 152);\n"
-                                                           "    border-radius: 11px;\n"
-                                                           "}")
+"    border: 0px;\n"
+"    border-radius: 11px;\n"
+"\n"
+"    background: rgb(217, 217, 217);\n"
+"    \n"
+"}\n"
+"::chunk{\n"
+"    background-color: rgb(72, 54, 152);\n"
+"    border-radius: 11px;\n"
+"}")
         self.progressBar_links_page_progress.setProperty("value", 50)
         self.progressBar_links_page_progress.setTextVisible(False)
         self.progressBar_links_page_progress.setInvertedAppearance(False)
@@ -484,7 +484,7 @@ class Ui_MainWindow(object):
         self.lbl_links_page_progress_step1_active.setGeometry(QtCore.QRect(170, 70, 161, 61))
         self.lbl_links_page_progress_step1_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_links_page_progress_step1_active.setStyleSheet("color: rgb(72, 54, 152)\n"
-                                                                "")
+"")
         self.lbl_links_page_progress_step1_active.setScaledContents(False)
         self.lbl_links_page_progress_step1_active.setWordWrap(True)
         self.lbl_links_page_progress_step1_active.setObjectName("lbl_links_page_progress_step1_active")
@@ -499,7 +499,7 @@ class Ui_MainWindow(object):
         self.lbl_links_page_progress_step3.setGeometry(QtCore.QRect(770, 70, 111, 61))
         self.lbl_links_page_progress_step3.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_links_page_progress_step3.setStyleSheet("\n"
-                                                         "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_links_page_progress_step3.setScaledContents(False)
         self.lbl_links_page_progress_step3.setWordWrap(True)
         self.lbl_links_page_progress_step3.setObjectName("lbl_links_page_progress_step3")
@@ -507,7 +507,7 @@ class Ui_MainWindow(object):
         self.lbl_links_page_progress_step4.setGeometry(QtCore.QRect(1090, 70, 101, 61))
         self.lbl_links_page_progress_step4.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_links_page_progress_step4.setStyleSheet("\n"
-                                                         "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_links_page_progress_step4.setScaledContents(False)
         self.lbl_links_page_progress_step4.setWordWrap(True)
         self.lbl_links_page_progress_step4.setObjectName("lbl_links_page_progress_step4")
@@ -534,7 +534,7 @@ class Ui_MainWindow(object):
         self.widget_links_page_result = QtWidgets.QWidget(self.links_page)
         self.widget_links_page_result.setGeometry(QtCore.QRect(0, 160, 1281, 501))
         self.widget_links_page_result.setStyleSheet("background-color: #f3f4f8;\n"
-                                                    "font: 75 12pt \"Arial\";")
+"font: 75 12pt \"Arial\";")
         self.widget_links_page_result.setObjectName("widget_links_page_result")
         self.frame_links_page_heading = QtWidgets.QFrame(self.widget_links_page_result)
         self.frame_links_page_heading.setGeometry(QtCore.QRect(70, 20, 951, 41))
@@ -548,19 +548,19 @@ class Ui_MainWindow(object):
         self.lbl_links_page_last_updated = QtWidgets.QLabel(self.frame_links_page_heading)
         self.lbl_links_page_last_updated.setGeometry(QtCore.QRect(280, 10, 101, 31))
         self.lbl_links_page_last_updated.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
-                                                       "color: rgb(98, 98, 98);")
+"color: rgb(98, 98, 98);")
         self.lbl_links_page_last_updated.setObjectName("lbl_links_page_last_updated")
         self.lbl_links_page_last_updated_datetime = QtWidgets.QLabel(self.frame_links_page_heading)
         self.lbl_links_page_last_updated_datetime.setGeometry(QtCore.QRect(380, 10, 571, 31))
         self.lbl_links_page_last_updated_datetime.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
-                                                                "color: rgb(98, 98, 98);")
+"color: rgb(98, 98, 98);")
         self.lbl_links_page_last_updated_datetime.setObjectName("lbl_links_page_last_updated_datetime")
         self.button_links_page_scrap_info = QtWidgets.QPushButton(self.widget_links_page_result)
         self.button_links_page_scrap_info.setGeometry(QtCore.QRect(1030, 20, 191, 41))
         self.button_links_page_scrap_info.setStyleSheet("background-color: rgb(109, 32, 119);\n"
-                                                        "border-radius: 15px;\n"
-                                                        "font: 87 10pt \"Arial Black\";\n"
-                                                        "color: white;")
+"border-radius: 15px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"color: white;")
         self.button_links_page_scrap_info.setIcon(icon1)
         self.button_links_page_scrap_info.setIconSize(QtCore.QSize(15, 15))
         self.button_links_page_scrap_info.setFlat(False)
@@ -573,86 +573,86 @@ class Ui_MainWindow(object):
         self.table_links_page_link_list = QtWidgets.QTableWidget(self.frame_links_page_list)
         self.table_links_page_link_list.setGeometry(QtCore.QRect(20, 0, 1131, 411))
         self.table_links_page_link_list.setStyleSheet("QTableWidget{color: rgb(0, 51, 141);}\n"
-                                                      "QAbstractItemView{background-color: transparent;}\n"
-                                                      "QTableCornerButton::section{background-color:transparent;}\n"
-                                                      "\n"
-                                                      "\n"
-                                                      "QHeaderView::section\n"
-                                                      "{\n"
-                                                      "    qproperty-defaultAlignment: AlignHCenter AlignVCenter;\n"
-                                                      "    color: rgb(0, 51, 141);\n"
-                                                      "    background-color: transparent;\n"
-                                                      "    font: 87 12pt \"Arial Black\";\n"
-                                                      "    border-bottom: 1px solid rgb(98, 98, 98);\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "\n"
-                                                      "\n"
-                                                      "\n"
-                                                      "\n"
-                                                      "/*Scroll Bar*/\n"
-                                                      "QScrollBar:vertical\n"
-                                                      "{\n"
-                                                      "    background-color: rgb(217, 217, 217); /*Grey*/\n"
-                                                      "    width: 15px;\n"
-                                                      "    margin: 15px 3px 15px 3px;\n"
-                                                      "    border-radius: 4px;\n"
-                                                      "    }\n"
-                                                      "\n"
-                                                      "QScrollBar::handle:vertical\n"
-                                                      "{\n"
-                                                      "    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                      "    min-height: 5px;\n"
-                                                      "    border-radius: 4px;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::sub-line:vertical\n"
-                                                      "{\n"
-                                                      "    margin: 3px 0px 3px 0px;\n"
-                                                      "    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
-                                                      "    height: 10px;\n"
-                                                      "    width: 10px;\n"
-                                                      "    subcontrol-position: top;\n"
-                                                      "    subcontrol-origin: margin;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::add-line:vertical\n"
-                                                      "{\n"
-                                                      "    margin: 3px 0px 3px 0px;\n"
-                                                      "    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
-                                                      "    height: 10px;\n"
-                                                      "    width: 10px;\n"
-                                                      "    subcontrol-position: bottom;\n"
-                                                      "    subcontrol-origin: margin;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
-                                                      "{\n"
-                                                      "    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
-                                                      "    height: 10px;\n"
-                                                      "    width: 10px;\n"
-                                                      "    subcontrol-position: top;\n"
-                                                      "    subcontrol-origin: margin;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
-                                                      "{\n"
-                                                      "    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
-                                                      "    height: 10px;\n"
-                                                      "    width: 10px;\n"
-                                                      "    subcontrol-position: bottom;\n"
-                                                      "    subcontrol-origin: margin;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
-                                                      "{\n"
-                                                      "    background: none;\n"
-                                                      "}\n"
-                                                      "\n"
-                                                      "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
-                                                      "{\n"
-                                                      "    background: none;\n"
-                                                      "}")
+"QAbstractItemView{background-color: transparent;}\n"
+"QTableCornerButton::section{background-color:transparent;}\n"
+"\n"
+"\n"
+"QHeaderView::section\n"
+"{\n"
+"    qproperty-defaultAlignment: AlignHCenter AlignVCenter;\n"
+"    color: rgb(0, 51, 141);\n"
+"    background-color: transparent;\n"
+"    font: 87 12pt \"Arial Black\";\n"
+"    border-bottom: 1px solid rgb(98, 98, 98);\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"/*Scroll Bar*/\n"
+"QScrollBar:vertical\n"
+"{\n"
+"    background-color: rgb(217, 217, 217); /*Grey*/\n"
+"    width: 15px;\n"
+"    margin: 15px 3px 15px 3px;\n"
+"    border-radius: 4px;\n"
+"    }\n"
+"\n"
+"QScrollBar::handle:vertical\n"
+"{\n"
+"    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    min-height: 5px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
+"{\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
+"{\n"
+"    background: none;\n"
+"}")
         self.table_links_page_link_list.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.table_links_page_link_list.setFrameShadow(QtWidgets.QFrame.Plain)
         self.table_links_page_link_list.setLineWidth(0)
@@ -664,47 +664,7 @@ class Ui_MainWindow(object):
         self.table_links_page_link_list.setGridStyle(QtCore.Qt.DotLine)
         self.table_links_page_link_list.setObjectName("table_links_page_link_list")
         self.table_links_page_link_list.setColumnCount(5)
-        self.table_links_page_link_list.setRowCount(20)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(11, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(12, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(13, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(14, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(15, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(16, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(17, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(18, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setVerticalHeaderItem(19, item)
+        self.table_links_page_link_list.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setBackground(QtGui.QColor(255, 255, 255))
         self.table_links_page_link_list.setHorizontalHeaderItem(0, item)
@@ -717,32 +677,12 @@ class Ui_MainWindow(object):
         self.table_links_page_link_list.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_links_page_link_list.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(0, 1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(0, 2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(0, 3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(0, 4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(1, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(1, 1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(1, 2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(1, 3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_links_page_link_list.setItem(1, 4, item)
         self.table_links_page_link_list.horizontalHeader().setVisible(True)
         self.table_links_page_link_list.horizontalHeader().setCascadingSectionResizes(True)
         self.table_links_page_link_list.horizontalHeader().setHighlightSections(True)
         self.table_links_page_link_list.horizontalHeader().setSortIndicatorShown(True)
         self.table_links_page_link_list.horizontalHeader().setStretchLastSection(False)
-        self.table_links_page_link_list.verticalHeader().setVisible(True)
+        self.table_links_page_link_list.verticalHeader().setVisible(False)
         self.table_links_page_link_list.verticalHeader().setCascadingSectionResizes(False)
         self.stackedWidget.addWidget(self.links_page)
         self.info_edit_page = QtWidgets.QWidget()
@@ -750,21 +690,21 @@ class Ui_MainWindow(object):
         self.widget_info_edit_page_progress = QtWidgets.QWidget(self.info_edit_page)
         self.widget_info_edit_page_progress.setGeometry(QtCore.QRect(0, 0, 1281, 161))
         self.widget_info_edit_page_progress.setStyleSheet("font: 87 10pt \"Arial Black\";\n"
-                                                          "background-color: #f3f4f8;")
+"background-color: #f3f4f8;")
         self.widget_info_edit_page_progress.setObjectName("widget_info_edit_page_progress")
         self.progressBar_info_edit_page_progress = QtWidgets.QProgressBar(self.widget_info_edit_page_progress)
         self.progressBar_info_edit_page_progress.setGeometry(QtCore.QRect(80, 40, 1141, 23))
         self.progressBar_info_edit_page_progress.setStyleSheet("*{\n"
-                                                               "    border: 0px;\n"
-                                                               "    border-radius: 11px;\n"
-                                                               "\n"
-                                                               "    background: rgb(217, 217, 217);\n"
-                                                               "    \n"
-                                                               "}\n"
-                                                               "::chunk{\n"
-                                                               "    background-color: rgb(72, 54, 152);\n"
-                                                               "    border-radius: 11px;\n"
-                                                               "}")
+"    border: 0px;\n"
+"    border-radius: 11px;\n"
+"\n"
+"    background: rgb(217, 217, 217);\n"
+"    \n"
+"}\n"
+"::chunk{\n"
+"    background-color: rgb(72, 54, 152);\n"
+"    border-radius: 11px;\n"
+"}")
         self.progressBar_info_edit_page_progress.setProperty("value", 75)
         self.progressBar_info_edit_page_progress.setTextVisible(False)
         self.progressBar_info_edit_page_progress.setInvertedAppearance(False)
@@ -773,7 +713,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_progress_step1_active.setGeometry(QtCore.QRect(170, 70, 161, 61))
         self.lbl_info_edit_page_progress_step1_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_info_edit_page_progress_step1_active.setStyleSheet("color: rgb(72, 54, 152)\n"
-                                                                    "")
+"")
         self.lbl_info_edit_page_progress_step1_active.setScaledContents(False)
         self.lbl_info_edit_page_progress_step1_active.setWordWrap(True)
         self.lbl_info_edit_page_progress_step1_active.setObjectName("lbl_info_edit_page_progress_step1_active")
@@ -788,7 +728,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_progress_step3_active.setGeometry(QtCore.QRect(770, 70, 111, 61))
         self.lbl_info_edit_page_progress_step3_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_info_edit_page_progress_step3_active.setStyleSheet("\n"
-                                                                    "color: rgb(72, 54, 152)")
+"color: rgb(72, 54, 152)")
         self.lbl_info_edit_page_progress_step3_active.setScaledContents(False)
         self.lbl_info_edit_page_progress_step3_active.setWordWrap(True)
         self.lbl_info_edit_page_progress_step3_active.setObjectName("lbl_info_edit_page_progress_step3_active")
@@ -796,7 +736,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_progress_step4.setGeometry(QtCore.QRect(1090, 70, 101, 61))
         self.lbl_info_edit_page_progress_step4.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_info_edit_page_progress_step4.setStyleSheet("\n"
-                                                             "color: rgb(217, 217, 217)")
+"color: rgb(217, 217, 217)")
         self.lbl_info_edit_page_progress_step4.setScaledContents(False)
         self.lbl_info_edit_page_progress_step4.setWordWrap(True)
         self.lbl_info_edit_page_progress_step4.setObjectName("lbl_info_edit_page_progress_step4")
@@ -804,20 +744,17 @@ class Ui_MainWindow(object):
         self.img_info_edit_page_progress_step1_link_active.setGeometry(QtCore.QRect(120, 80, 40, 40))
         self.img_info_edit_page_progress_step1_link_active.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.img_info_edit_page_progress_step1_link_active.setStyleSheet("image: url(:/image/link_violet.png);")
-        self.img_info_edit_page_progress_step1_link_active.setObjectName(
-            "img_info_edit_page_progress_step1_link_active")
+        self.img_info_edit_page_progress_step1_link_active.setObjectName("img_info_edit_page_progress_step1_link_active")
         self.img_info_edit_page_progress_step2_info_active = QtWidgets.QWidget(self.widget_info_edit_page_progress)
         self.img_info_edit_page_progress_step2_info_active.setGeometry(QtCore.QRect(410, 80, 40, 40))
         self.img_info_edit_page_progress_step2_info_active.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.img_info_edit_page_progress_step2_info_active.setStyleSheet("image: url(:/image/info_violet.png)")
-        self.img_info_edit_page_progress_step2_info_active.setObjectName(
-            "img_info_edit_page_progress_step2_info_active")
+        self.img_info_edit_page_progress_step2_info_active.setObjectName("img_info_edit_page_progress_step2_info_active")
         self.img_info_edit_page_progress_step3_edit_active = QtWidgets.QWidget(self.widget_info_edit_page_progress)
         self.img_info_edit_page_progress_step3_edit_active.setGeometry(QtCore.QRect(720, 80, 40, 40))
         self.img_info_edit_page_progress_step3_edit_active.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.img_info_edit_page_progress_step3_edit_active.setStyleSheet("image: url(:/image/edit_violet.png)")
-        self.img_info_edit_page_progress_step3_edit_active.setObjectName(
-            "img_info_edit_page_progress_step3_edit_active")
+        self.img_info_edit_page_progress_step3_edit_active.setObjectName("img_info_edit_page_progress_step3_edit_active")
         self.img_info_edit_page_progress_step4_view = QtWidgets.QWidget(self.widget_info_edit_page_progress)
         self.img_info_edit_page_progress_step4_view.setGeometry(QtCore.QRect(1040, 80, 40, 40))
         self.img_info_edit_page_progress_step4_view.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -826,7 +763,7 @@ class Ui_MainWindow(object):
         self.widget_info_edit_page_result = QtWidgets.QWidget(self.info_edit_page)
         self.widget_info_edit_page_result.setGeometry(QtCore.QRect(0, 160, 1281, 501))
         self.widget_info_edit_page_result.setStyleSheet("background-color: #f3f4f8;\n"
-                                                        "font: 87 9pt \"Arial Black\";")
+"font: 87 9pt \"Arial Black\";")
         self.widget_info_edit_page_result.setObjectName("widget_info_edit_page_result")
         self.frame_info_edit_page_full_true_path = QtWidgets.QFrame(self.widget_info_edit_page_result)
         self.frame_info_edit_page_full_true_path.setGeometry(QtCore.QRect(70, 70, 471, 41))
@@ -848,15 +785,15 @@ class Ui_MainWindow(object):
         font.setWeight(10)
         self.lbl_info_edit_page_full_url.setFont(font)
         self.lbl_info_edit_page_full_url.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
-                                                       "color: rgb(0, 163, 161);")
+"color: rgb(0, 163, 161);")
         self.lbl_info_edit_page_full_url.setWordWrap(True)
         self.lbl_info_edit_page_full_url.setObjectName("lbl_info_edit_page_full_url")
         self.button_info_edit_page_save_all_edits = QtWidgets.QPushButton(self.widget_info_edit_page_result)
         self.button_info_edit_page_save_all_edits.setGeometry(QtCore.QRect(1060, 20, 161, 41))
         self.button_info_edit_page_save_all_edits.setStyleSheet("background-color: rgb(109, 32, 119);\n"
-                                                                "border-radius: 15px;\n"
-                                                                "font: 87 10pt \"Arial Black\";\n"
-                                                                "color: white;")
+"border-radius: 15px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"color: white;")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/image/save_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_info_edit_page_save_all_edits.setIcon(icon2)
@@ -884,94 +821,90 @@ class Ui_MainWindow(object):
         self.frame_info_edit_page_categorisation_box = QtWidgets.QFrame(self.frame_info_edit_page_pii_categorisation)
         self.frame_info_edit_page_categorisation_box.setGeometry(QtCore.QRect(0, 40, 541, 241))
         self.frame_info_edit_page_categorisation_box.setStyleSheet("*{font: 87 10pt \"Arial Black\";}\n"
-                                                                   "\n"
-                                                                   "QFrame\n"
-                                                                   "{\n"
-                                                                   "    background-color: rgb(0, 145, 218);\n"
-                                                                   "    border-radius: 25px;\n"
-                                                                   "}")
+"\n"
+"QFrame\n"
+"{\n"
+"    background-color: rgb(0, 145, 218);\n"
+"    border-radius: 25px;\n"
+"}")
         self.frame_info_edit_page_categorisation_box.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_info_edit_page_categorisation_box.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_info_edit_page_categorisation_box.setObjectName("frame_info_edit_page_categorisation_box")
-        self.scrollArea_info_edit_page_categorisation_content = QtWidgets.QScrollArea(
-            self.frame_info_edit_page_categorisation_box)
+        self.scrollArea_info_edit_page_categorisation_content = QtWidgets.QScrollArea(self.frame_info_edit_page_categorisation_box)
         self.scrollArea_info_edit_page_categorisation_content.setGeometry(QtCore.QRect(10, 9, 511, 221))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.scrollArea_info_edit_page_categorisation_content.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(self.scrollArea_info_edit_page_categorisation_content.sizePolicy().hasHeightForWidth())
         self.scrollArea_info_edit_page_categorisation_content.setSizePolicy(sizePolicy)
         self.scrollArea_info_edit_page_categorisation_content.setStyleSheet("*{background-color: rgb(0, 145, 218);}\n"
-                                                                            "\n"
-                                                                            "QScrollBar:vertical\n"
-                                                                            "{\n"
-                                                                            "    background-color: rgb(217, 217, 217); /*Grey*/\n"
-                                                                            "    width: 15px;\n"
-                                                                            "    margin: 15px 3px 15px 3px;\n"
-                                                                            "    border-radius: 4px;\n"
-                                                                            "    }\n"
-                                                                            "\n"
-                                                                            "QScrollBar::handle:vertical\n"
-                                                                            "{\n"
-                                                                            "    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                                            "    min-height: 5px;\n"
-                                                                            "    border-radius: 4px;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::sub-line:vertical\n"
-                                                                            "{\n"
-                                                                            "    margin: 3px 0px 3px 0px;\n"
-                                                                            "    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
-                                                                            "    height: 10px;\n"
-                                                                            "    width: 10px;\n"
-                                                                            "    subcontrol-position: top;\n"
-                                                                            "    subcontrol-origin: margin;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::add-line:vertical\n"
-                                                                            "{\n"
-                                                                            "    margin: 3px 0px 3px 0px;\n"
-                                                                            "    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
-                                                                            "    height: 10px;\n"
-                                                                            "    width: 10px;\n"
-                                                                            "    subcontrol-position: bottom;\n"
-                                                                            "    subcontrol-origin: margin;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
-                                                                            "{\n"
-                                                                            "    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
-                                                                            "    height: 10px;\n"
-                                                                            "    width: 10px;\n"
-                                                                            "    subcontrol-position: top;\n"
-                                                                            "    subcontrol-origin: margin;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
-                                                                            "{\n"
-                                                                            "    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
-                                                                            "    height: 10px;\n"
-                                                                            "    width: 10px;\n"
-                                                                            "    subcontrol-position: bottom;\n"
-                                                                            "    subcontrol-origin: margin;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
-                                                                            "{\n"
-                                                                            "    background: none;\n"
-                                                                            "}\n"
-                                                                            "\n"
-                                                                            "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
-                                                                            "{\n"
-                                                                            "    background: none;\n"
-                                                                            "}")
+"\n"
+"QScrollBar:vertical\n"
+"{\n"
+"    background-color: rgb(217, 217, 217); /*Grey*/\n"
+"    width: 15px;\n"
+"    margin: 15px 3px 15px 3px;\n"
+"    border-radius: 4px;\n"
+"    }\n"
+"\n"
+"QScrollBar::handle:vertical\n"
+"{\n"
+"    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    min-height: 5px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
+"{\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
+"{\n"
+"    background: none;\n"
+"}")
         self.scrollArea_info_edit_page_categorisation_content.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
-        self.scrollArea_info_edit_page_categorisation_content.setObjectName(
-            "scrollArea_info_edit_page_categorisation_content")
+        self.scrollArea_info_edit_page_categorisation_content.setObjectName("scrollArea_info_edit_page_categorisation_content")
         self.scrollAreaWidgetContents_info_edit_page = QtWidgets.QWidget()
         self.scrollAreaWidgetContents_info_edit_page.setGeometry(QtCore.QRect(0, 0, 496, 500))
         self.scrollAreaWidgetContents_info_edit_page.setMinimumSize(QtCore.QSize(450, 500))
@@ -982,8 +915,7 @@ class Ui_MainWindow(object):
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout_info_edit_page_scrolling_content = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
-        self.formLayout_info_edit_page_scrolling_content.setFieldGrowthPolicy(
-            QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout_info_edit_page_scrolling_content.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout_info_edit_page_scrolling_content.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
         self.formLayout_info_edit_page_scrolling_content.setContentsMargins(0, 0, 0, 0)
         self.formLayout_info_edit_page_scrolling_content.setVerticalSpacing(6)
@@ -992,8 +924,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_label.setMinimumSize(QtCore.QSize(100, 0))
         self.lbl_info_edit_page_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.lbl_info_edit_page_label.setObjectName("lbl_info_edit_page_label")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.LabelRole,
-                                                                   self.lbl_info_edit_page_label)
+        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label)
         self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
         self.input_info_edit_page_category.setMinimumSize(QtCore.QSize(250, 30))
         self.input_info_edit_page_category.setMaximumSize(QtCore.QSize(270, 30))
@@ -1006,40 +937,40 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_category.setFont(font)
         self.input_info_edit_page_category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_category.setStyleSheet("QComboBox\n"
-                                                         "{\n"
-                                                         "    background-color: rgb(238, 238, 238);\n"
-                                                         "    color: rgb(98, 98, 98);\n"
-                                                         "    border-radius: 15px;\n"
-                                                         "    font-size: 15px;\n"
-                                                         "    padding-left: 20px;\n"
-                                                         "}\n"
-                                                         "\n"
-                                                         "QComboBox::down-arrow\n"
-                                                         "{\n"
-                                                         "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                         "    height: 15px;\n"
-                                                         "    width: 15px;\n"
-                                                         "}\n"
-                                                         "\n"
-                                                         "QComboBox::drop-down\n"
-                                                         "{\n"
-                                                         "    subcontrol-origin: padding;\n"
-                                                         "    subcontrol-position: top right;\n"
-                                                         "    width: 45px; \n"
-                                                         "    border-top-right-radius: 3px;\n"
-                                                         "    border-bottom-right-radius: 3px;\n"
-                                                         "}\n"
-                                                         "\n"
-                                                         "QComboBox QAbstractItemView\n"
-                                                         "{\n"
-                                                         "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                         "    background-color: white;\n"
-                                                         "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                         "    selection-color: white;\n"
-                                                         "    border-radius: 0px;\n"
-                                                         "}\n"
-                                                         "\n"
-                                                         "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"    font-size: 15px;\n"
+"    padding-left: 20px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_category.setEditable(False)
         self.input_info_edit_page_category.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
         self.input_info_edit_page_category.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
@@ -1047,14 +978,12 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_category.addItem("")
         self.input_info_edit_page_category.addItem("")
         self.input_info_edit_page_category.addItem("")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole,
-                                                                   self.input_info_edit_page_category)
+        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category)
         self.lbl_info_edit_page_label_2 = QtWidgets.QLabel(self.formLayoutWidget)
         self.lbl_info_edit_page_label_2.setMinimumSize(QtCore.QSize(100, 0))
         self.lbl_info_edit_page_label_2.setStyleSheet("color: rgb(255, 255, 255);")
         self.lbl_info_edit_page_label_2.setObjectName("lbl_info_edit_page_label_2")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole,
-                                                                   self.lbl_info_edit_page_label_2)
+        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label_2)
         self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
         self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
         self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
@@ -1067,40 +996,40 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_category_2.setFont(font)
         self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
-                                                           "{\n"
-                                                           "    background-color: rgb(238, 238, 238);\n"
-                                                           "    color: rgb(98, 98, 98);\n"
-                                                           "    border-radius: 15px;\n"
-                                                           "    font-size: 15px;\n"
-                                                           "    padding-left: 20px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "QComboBox::down-arrow\n"
-                                                           "{\n"
-                                                           "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                           "    height: 15px;\n"
-                                                           "    width: 15px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "QComboBox::drop-down\n"
-                                                           "{\n"
-                                                           "    subcontrol-origin: padding;\n"
-                                                           "    subcontrol-position: top right;\n"
-                                                           "    width: 45px; \n"
-                                                           "    border-top-right-radius: 3px;\n"
-                                                           "    border-bottom-right-radius: 3px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "QComboBox QAbstractItemView\n"
-                                                           "{\n"
-                                                           "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                           "    background-color: white;\n"
-                                                           "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                           "    selection-color: white;\n"
-                                                           "    border-radius: 0px;\n"
-                                                           "}\n"
-                                                           "\n"
-                                                           "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"    font-size: 15px;\n"
+"    padding-left: 20px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_category_2.setEditable(False)
         self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
         self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
@@ -1108,8 +1037,7 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_category_2.addItem("")
         self.input_info_edit_page_category_2.addItem("")
         self.input_info_edit_page_category_2.addItem("")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole,
-                                                                   self.input_info_edit_page_category_2)
+        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category_2)
         self.scrollArea_info_edit_page_categorisation_content.setWidget(self.scrollAreaWidgetContents_info_edit_page)
         self.deco_info_edit_page_vline = QtWidgets.QFrame(self.widget_info_edit_page_result)
         self.deco_info_edit_page_vline.setGeometry(QtCore.QRect(540, 70, 20, 381))
@@ -1120,17 +1048,16 @@ class Ui_MainWindow(object):
         self.frame_info_edit_page_marketing_web_details = QtWidgets.QFrame(self.widget_info_edit_page_result)
         self.frame_info_edit_page_marketing_web_details.setGeometry(QtCore.QRect(70, 110, 471, 101))
         self.frame_info_edit_page_marketing_web_details.setStyleSheet("*{font: 87 10pt \"Arial Black\";}\n"
-                                                                      "\n"
-                                                                      "QFrame\n"
-                                                                      "{\n"
-                                                                      "    background-color: rgb(0, 145, 218);\n"
-                                                                      "    border-radius: 25px;\n"
-                                                                      "}")
+"\n"
+"QFrame\n"
+"{\n"
+"    background-color: rgb(0, 145, 218);\n"
+"    border-radius: 25px;\n"
+"}")
         self.frame_info_edit_page_marketing_web_details.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_info_edit_page_marketing_web_details.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_info_edit_page_marketing_web_details.setObjectName("frame_info_edit_page_marketing_web_details")
-        self.input_info_edit_page_choose_marketing_purpose = QtWidgets.QComboBox(
-            self.frame_info_edit_page_marketing_web_details)
+        self.input_info_edit_page_choose_marketing_purpose = QtWidgets.QComboBox(self.frame_info_edit_page_marketing_web_details)
         self.input_info_edit_page_choose_marketing_purpose.setGeometry(QtCore.QRect(10, 10, 241, 30))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
@@ -1141,46 +1068,44 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_choose_marketing_purpose.setFont(font)
         self.input_info_edit_page_choose_marketing_purpose.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_choose_marketing_purpose.setStyleSheet("QComboBox\n"
-                                                                         "{\n"
-                                                                         "    background-color: rgb(238, 238, 238);\n"
-                                                                         "    color: rgb(98, 98, 98);\n"
-                                                                         "    border-radius: 15px;\n"
-                                                                         "    font-size: 15px;\n"
-                                                                         "    padding-left: 20px;\n"
-                                                                         "}\n"
-                                                                         "\n"
-                                                                         "QComboBox::down-arrow\n"
-                                                                         "{\n"
-                                                                         "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                                         "    height: 15px;\n"
-                                                                         "    width: 15px;\n"
-                                                                         "}\n"
-                                                                         "\n"
-                                                                         "QComboBox::drop-down\n"
-                                                                         "{\n"
-                                                                         "    subcontrol-origin: padding;\n"
-                                                                         "    subcontrol-position: top right;\n"
-                                                                         "    width: 45px; \n"
-                                                                         "    border-top-right-radius: 3px;\n"
-                                                                         "    border-bottom-right-radius: 3px;\n"
-                                                                         "}\n"
-                                                                         "\n"
-                                                                         "QComboBox QAbstractItemView\n"
-                                                                         "{\n"
-                                                                         "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                                         "    background-color: white;\n"
-                                                                         "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                                         "    selection-color: white;\n"
-                                                                         "    border-radius: 0px;\n"
-                                                                         "}\n"
-                                                                         "\n"
-                                                                         "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"    font-size: 15px;\n"
+"    padding-left: 20px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_choose_marketing_purpose.setEditable(False)
         self.input_info_edit_page_choose_marketing_purpose.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        self.input_info_edit_page_choose_marketing_purpose.setSizeAdjustPolicy(
-            QtWidgets.QComboBox.AdjustToMinimumContentsLength)
-        self.input_info_edit_page_choose_marketing_purpose.setObjectName(
-            "input_info_edit_page_choose_marketing_purpose")
+        self.input_info_edit_page_choose_marketing_purpose.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        self.input_info_edit_page_choose_marketing_purpose.setObjectName("input_info_edit_page_choose_marketing_purpose")
         self.input_info_edit_page_choose_marketing_purpose.addItem("")
         self.input_info_edit_page_choose_marketing_purpose.addItem("")
         self.input_info_edit_page_choose_marketing_purpose.addItem("")
@@ -1189,114 +1114,112 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_expiring_date.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.input_info_edit_page_expiring_date.setAutoFillBackground(False)
         self.input_info_edit_page_expiring_date.setStyleSheet("QDateEdit\n"
-                                                              "{\n"
-                                                              "    background-color: rgb(238, 238, 238);\n"
-                                                              "    color: rgb(98, 98, 98);\n"
-                                                              "    border-radius: 15px;\n"
-                                                              "}\n"
-                                                              "\n"
-                                                              "QDateEdit::drop-down\n"
-                                                              "{\n"
-                                                              "    subcontrol-origin: padding;\n"
-                                                              "    subcontrol-position: top right;\n"
-                                                              "    width: 45px; \n"
-                                                              "    border-top-right-radius: 3px;\n"
-                                                              "    border-bottom-right-radius: 3px;\n"
-                                                              "}\n"
-                                                              "\n"
-                                                              "QDateEdit::down-arrow\n"
-                                                              "{\n"
-                                                              "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                              "    height: 15px;\n"
-                                                              "    width: 15px;\n"
-                                                              "}\n"
-                                                              "\n"
-                                                              "/*Calendar*/\n"
-                                                              "/* Navigation bar */\n"
-                                                              "QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
-                                                              "\n"
-                                                              "QCalendarWidget QToolButton\n"
-                                                              "{\n"
-                                                              "      height: 30px;\n"
-                                                              "      width: 100px;\n"
-                                                              "      color: white;\n"
-                                                              "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                              "  }\n"
-                                                              "\n"
-                                                              "QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
-                                                              "\n"
-                                                              "/*Month*/\n"
-                                                              "QCalendarWidget QMenu\n"
-                                                              "{\n"
-                                                              "      width: 120px;\n"
-                                                              "    align: center;\n"
-                                                              "      font-size: 12px;\n"
-                                                              "      color: white;\n"
-                                                              "      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
-                                                              "  }\n"
-                                                              "\n"
-                                                              "\n"
-                                                              "/*Year*/\n"
-                                                              "QCalendarWidget QSpinBox\n"
-                                                              "{ \n"
-                                                              "      width: 50px; \n"
-                                                              "      color: white; \n"
-                                                              "      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
-                                                              "      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                              "      selection-color: rgb(255, 255, 255);\n"
-                                                              "  }\n"
-                                                              "\n"
-                                                              "QCalendarWidget QSpinBox::up-button\n"
-                                                              "{\n"
-                                                              "    subcontrol-origin:border;\n"
-                                                              "    subcontrol-position:top right;\n"
-                                                              "    image: url(:/image/arrow_up_white.png);\n"
-                                                              "    width:16px;\n"
-                                                              "    border-width:1px;\n"
-                                                              "}\n"
-                                                              "\n"
-                                                              "QCalendarWidget QSpinBox::down-button\n"
-                                                              "{\n"
-                                                              "    subcontrol-origin:border;\n"
-                                                              "    subcontrol-position:bottom right;\n"
-                                                              "    image: url(:/image/arrow_down_white.png);\n"
-                                                              "    width:16px;\n"
-                                                              "    border-width:1px;\n"
-                                                              "    border-top-width:0;\n"
-                                                              "}\n"
-                                                              "/*Prev/Next Month Arrows*/\n"
-                                                              "#qt_calendar_prevmonth {\n"
-                                                              "    icon-size: 30px;\n"
-                                                              "    qproperty-icon: url(:/image/arrow_left_white.png);\n"
-                                                              "}\n"
-                                                              "#qt_calendar_nextmonth {\n"
-                                                              "    icon-size: 30px;\n"
-                                                              "    qproperty-icon: url(:/image/arrow_right_white.png);\n"
-                                                              "}\n"
-                                                              "\n"
-                                                              "  /* normal days */\n"
-                                                              "QCalendarWidget QAbstractItemView:enabled \n"
-                                                              "{\n"
-                                                              "      color: rgb(238, 238, 238);  /*super light grey*/\n"
-                                                              "      background-color: rgb(98, 98, 98); /*grey*/ \n"
-                                                              "      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
-                                                              "      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
-                                                              "}\n"
-                                                              "   \n"
-                                                              "/* days in other months */\n"
-                                                              "QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"/*Calendar*/\n"
+"/* Navigation bar */\n"
+"QCalendarWidget QWidget#qt_calendar_navigationbar{ background-color: rgb(0, 51, 141); /*KPMG Blue*/}\n"
+"\n"
+"QCalendarWidget QToolButton\n"
+"{\n"
+"      height: 30px;\n"
+"      width: 100px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"  }\n"
+"\n"
+"QCalendarWidget QWidget{ alternate-background-color:rgb(0, 94, 184); } /*KPMG Medium Blue*/\n"
+"\n"
+"/*Month*/\n"
+"QCalendarWidget QMenu\n"
+"{\n"
+"      width: 120px;\n"
+"    align: center;\n"
+"      font-size: 12px;\n"
+"      color: white;\n"
+"      background-color: rgb(0, 94, 184); /*KPMG Medium Blue*/\n"
+"  }\n"
+"\n"
+"\n"
+"/*Year*/\n"
+"QCalendarWidget QSpinBox\n"
+"{ \n"
+"      width: 50px; \n"
+"      color: white; \n"
+"      background-color: rgb(0, 51, 141); /*KPMG Blue*/\n"
+"      selection-background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-color: rgb(255, 255, 255);\n"
+"  }\n"
+"\n"
+"QCalendarWidget QSpinBox::up-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:top right;\n"
+"    image: url(:/image/arrow_up_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox::down-button\n"
+"{\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:bottom right;\n"
+"    image: url(:/image/arrow_down_white.png);\n"
+"    width:16px;\n"
+"    border-width:1px;\n"
+"    border-top-width:0;\n"
+"}\n"
+"/*Prev/Next Month Arrows*/\n"
+"#qt_calendar_prevmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_left_white.png);\n"
+"}\n"
+"#qt_calendar_nextmonth {\n"
+"    icon-size: 30px;\n"
+"    qproperty-icon: url(:/image/arrow_right_white.png);\n"
+"}\n"
+"\n"
+"  /* normal days */\n"
+"QCalendarWidget QAbstractItemView:enabled \n"
+"{\n"
+"      color: rgb(238, 238, 238);  /*super light grey*/\n"
+"      background-color: rgb(98, 98, 98); /*grey*/ \n"
+"      selection-background-color: rgb(64, 64, 64); /*dark grey*/\n"
+"      selection-color: rgb(0, 163, 161); /*kpmg green*/\n"
+"}\n"
+"   \n"
+"/* days in other months */\n"
+"QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/}")
         self.input_info_edit_page_expiring_date.setWrapping(False)
         self.input_info_edit_page_expiring_date.setFrame(True)
         self.input_info_edit_page_expiring_date.setAlignment(QtCore.Qt.AlignCenter)
         self.input_info_edit_page_expiring_date.setReadOnly(False)
         self.input_info_edit_page_expiring_date.setButtonSymbols(QtWidgets.QAbstractSpinBox.UpDownArrows)
-        self.input_info_edit_page_expiring_date.setDateTime(
-            QtCore.QDateTime(QtCore.QDate(2021, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.input_info_edit_page_expiring_date.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 1, 1), QtCore.QTime(0, 0, 0)))
         self.input_info_edit_page_expiring_date.setCurrentSection(QtWidgets.QDateTimeEdit.YearSection)
         self.input_info_edit_page_expiring_date.setCalendarPopup(True)
         self.input_info_edit_page_expiring_date.setObjectName("input_info_edit_page_expiring_date")
-        self.input_info_edit_page_choose_opt_in_out = QtWidgets.QComboBox(
-            self.frame_info_edit_page_marketing_web_details)
+        self.input_info_edit_page_choose_opt_in_out = QtWidgets.QComboBox(self.frame_info_edit_page_marketing_web_details)
         self.input_info_edit_page_choose_opt_in_out.setGeometry(QtCore.QRect(260, 70, 191, 21))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
@@ -1307,46 +1230,45 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_choose_opt_in_out.setFont(font)
         self.input_info_edit_page_choose_opt_in_out.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_choose_opt_in_out.setStyleSheet("QComboBox\n"
-                                                                  "{\n"
-                                                                  "    background-color: rgb(238, 238, 238);\n"
-                                                                  "    color: rgb(98, 98, 98);\n"
-                                                                  "    border-radius: 5px;\n"
-                                                                  "    font-size: 12px;\n"
-                                                                  "    padding-left: 10px;\n"
-                                                                  "}\n"
-                                                                  "\n"
-                                                                  "\n"
-                                                                  "QComboBox::down-arrow\n"
-                                                                  "{\n"
-                                                                  "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                                  "    height: 10px;\n"
-                                                                  "    width: 10px;\n"
-                                                                  "}\n"
-                                                                  "\n"
-                                                                  "QComboBox::drop-down\n"
-                                                                  "{\n"
-                                                                  "    subcontrol-origin: padding;\n"
-                                                                  "    subcontrol-position: top right;\n"
-                                                                  "    width: 25px; \n"
-                                                                  "    border-top-right-radius: 3px;\n"
-                                                                  "    border-bottom-right-radius: 3px;\n"
-                                                                  "}\n"
-                                                                  "\n"
-                                                                  "QComboBox QAbstractItemView\n"
-                                                                  "{\n"
-                                                                  "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                                  "    background-color: white;\n"
-                                                                  "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                                  "    selection-color: white;\n"
-                                                                  "    border-radius: 0px;\n"
-                                                                  "}\n"
-                                                                  "\n"
-                                                                  "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 5px;\n"
+"    font-size: 12px;\n"
+"    padding-left: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_choose_opt_in_out.setEditable(False)
         self.input_info_edit_page_choose_opt_in_out.setMaxVisibleItems(3)
         self.input_info_edit_page_choose_opt_in_out.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        self.input_info_edit_page_choose_opt_in_out.setSizeAdjustPolicy(
-            QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        self.input_info_edit_page_choose_opt_in_out.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
         self.input_info_edit_page_choose_opt_in_out.setIconSize(QtCore.QSize(15, 15))
         self.input_info_edit_page_choose_opt_in_out.setObjectName("input_info_edit_page_choose_opt_in_out")
         icon3 = QtGui.QIcon()
@@ -1369,41 +1291,41 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_pics.setFont(font)
         self.input_info_edit_page_pics.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_pics.setStyleSheet("QComboBox\n"
-                                                     "{\n"
-                                                     "    background-color: rgb(238, 238, 238);\n"
-                                                     "    color: rgb(98, 98, 98);\n"
-                                                     "    border-radius: 5px;\n"
-                                                     "    font-size: 12px;\n"
-                                                     "    padding-left: 10px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "\n"
-                                                     "QComboBox::down-arrow\n"
-                                                     "{\n"
-                                                     "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                     "    height: 10px;\n"
-                                                     "    width: 10px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QComboBox::drop-down\n"
-                                                     "{\n"
-                                                     "    subcontrol-origin: padding;\n"
-                                                     "    subcontrol-position: top right;\n"
-                                                     "    width: 25px; \n"
-                                                     "    border-top-right-radius: 3px;\n"
-                                                     "    border-bottom-right-radius: 3px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "QComboBox QAbstractItemView\n"
-                                                     "{\n"
-                                                     "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                     "    background-color: white;\n"
-                                                     "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                     "    selection-color: white;\n"
-                                                     "    border-radius: 0px;\n"
-                                                     "}\n"
-                                                     "\n"
-                                                     "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 5px;\n"
+"    font-size: 12px;\n"
+"    padding-left: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_pics.setEditable(False)
         self.input_info_edit_page_pics.setMaxVisibleItems(3)
         self.input_info_edit_page_pics.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
@@ -1424,41 +1346,41 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_tnc.setFont(font)
         self.input_info_edit_page_tnc.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.input_info_edit_page_tnc.setStyleSheet("QComboBox\n"
-                                                    "{\n"
-                                                    "    background-color: rgb(238, 238, 238);\n"
-                                                    "    color: rgb(98, 98, 98);\n"
-                                                    "    border-radius: 5px;\n"
-                                                    "    font-size: 12px;\n"
-                                                    "    padding-left: 10px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "QComboBox::down-arrow\n"
-                                                    "{\n"
-                                                    "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                    "    height: 10px;\n"
-                                                    "    width: 10px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QComboBox::drop-down\n"
-                                                    "{\n"
-                                                    "    subcontrol-origin: padding;\n"
-                                                    "    subcontrol-position: top right;\n"
-                                                    "    width: 25px; \n"
-                                                    "    border-top-right-radius: 3px;\n"
-                                                    "    border-bottom-right-radius: 3px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QComboBox QAbstractItemView\n"
-                                                    "{\n"
-                                                    "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                    "    background-color: white;\n"
-                                                    "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                    "    selection-color: white;\n"
-                                                    "    border-radius: 0px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "")
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 5px;\n"
+"    font-size: 12px;\n"
+"    padding-left: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 25px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
         self.input_info_edit_page_tnc.setEditable(False)
         self.input_info_edit_page_tnc.setMaxVisibleItems(3)
         self.input_info_edit_page_tnc.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
@@ -1480,9 +1402,9 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_remarks = QtWidgets.QTextEdit(self.frame_info_edit_page_remarks)
         self.input_info_edit_page_remarks.setGeometry(QtCore.QRect(13, 38, 521, 51))
         self.input_info_edit_page_remarks.setStyleSheet("background-color: rgb(217, 217, 217);\n"
-                                                        "border-radius: 15px;\n"
-                                                        "font: 87 10pt \"Arial Black\";\n"
-                                                        "padding: 5px;")
+"border-radius: 15px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"padding: 5px;")
         self.input_info_edit_page_remarks.setObjectName("input_info_edit_page_remarks")
         self.graphicsView_info_edit_page_screenshot = QtWidgets.QGraphicsView(self.widget_info_edit_page_result)
         self.graphicsView_info_edit_page_screenshot.setGeometry(QtCore.QRect(70, 240, 471, 211))
@@ -1491,9 +1413,9 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_next = QtWidgets.QPushButton(self.widget_info_edit_page_result)
         self.button_info_edit_page_next.setGeometry(QtCore.QRect(1070, 460, 31, 31))
         self.button_info_edit_page_next.setStyleSheet("background-color: rgb(0, 51, 141);\n"
-                                                      "border-radius: 15px;\n"
-                                                      "font: 87 9pt \"Arial Black\";\n"
-                                                      "color: rgb(255, 255, 255);")
+"border-radius: 15px;\n"
+"font: 87 9pt \"Arial Black\";\n"
+"color: rgb(255, 255, 255);")
         self.button_info_edit_page_next.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/image/arrow_right_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -1504,9 +1426,9 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_previous = QtWidgets.QPushButton(self.widget_info_edit_page_result)
         self.button_info_edit_page_previous.setGeometry(QtCore.QRect(900, 460, 31, 31))
         self.button_info_edit_page_previous.setStyleSheet("background-color: rgb(0, 51, 141);\n"
-                                                          "border-radius: 15px;\n"
-                                                          "font: 87 9pt \"Arial Black\";\n"
-                                                          "color: rgb(255, 255, 255);")
+"border-radius: 15px;\n"
+"font: 87 9pt \"Arial Black\";\n"
+"color: rgb(255, 255, 255);")
         self.button_info_edit_page_previous.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap(":/image/arrow_left_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -1525,7 +1447,7 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_current_page = QtWidgets.QLineEdit(self.widget_info_edit_page_result)
         self.input_info_edit_page_current_page.setGeometry(QtCore.QRect(950, 459, 41, 31))
         self.input_info_edit_page_current_page.setStyleSheet("border: 1px solid rgb(217, 217, 217);\n"
-                                                             "border-radius: 5px;")
+"border-radius: 5px;")
         self.input_info_edit_page_current_page.setAlignment(QtCore.Qt.AlignCenter)
         self.input_info_edit_page_current_page.setObjectName("input_info_edit_page_current_page")
         self.lbl_info_page_error_msg = QtWidgets.QLabel(self.widget_info_edit_page_result)
@@ -1538,9 +1460,9 @@ class Ui_MainWindow(object):
         font.setWeight(9)
         self.lbl_info_page_error_msg.setFont(font)
         self.lbl_info_page_error_msg.setStyleSheet("color: rgb(255, 0, 0);\n"
-                                                   "background-color: transparent;\n"
-                                                   "font: 75 10pt \"Arial\";")
-        self.lbl_info_page_error_msg.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+"background-color: transparent;\n"
+"font: 75 10pt \"Arial\";")
+        self.lbl_info_page_error_msg.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lbl_info_page_error_msg.setObjectName("lbl_info_page_error_msg")
         self.stackedWidget.addWidget(self.info_edit_page)
         self.report_page = QtWidgets.QWidget()
@@ -1548,21 +1470,21 @@ class Ui_MainWindow(object):
         self.widget_report_page_progress = QtWidgets.QWidget(self.report_page)
         self.widget_report_page_progress.setGeometry(QtCore.QRect(0, 0, 1281, 161))
         self.widget_report_page_progress.setStyleSheet("font: 87 10pt \"Arial Black\";\n"
-                                                       "background-color: #f3f4f8;")
+"background-color: #f3f4f8;")
         self.widget_report_page_progress.setObjectName("widget_report_page_progress")
         self.progressBar_report_page_progress = QtWidgets.QProgressBar(self.widget_report_page_progress)
         self.progressBar_report_page_progress.setGeometry(QtCore.QRect(80, 40, 1141, 23))
         self.progressBar_report_page_progress.setStyleSheet("*{\n"
-                                                            "    border: 0px;\n"
-                                                            "    border-radius: 11px;\n"
-                                                            "\n"
-                                                            "    background: rgb(217, 217, 217);\n"
-                                                            "    \n"
-                                                            "}\n"
-                                                            "::chunk{\n"
-                                                            "    background-color: rgb(72, 54, 152);\n"
-                                                            "    border-radius: 11px;\n"
-                                                            "}")
+"    border: 0px;\n"
+"    border-radius: 11px;\n"
+"\n"
+"    background: rgb(217, 217, 217);\n"
+"    \n"
+"}\n"
+"::chunk{\n"
+"    background-color: rgb(72, 54, 152);\n"
+"    border-radius: 11px;\n"
+"}")
         self.progressBar_report_page_progress.setProperty("value", 100)
         self.progressBar_report_page_progress.setTextVisible(False)
         self.progressBar_report_page_progress.setInvertedAppearance(False)
@@ -1571,7 +1493,7 @@ class Ui_MainWindow(object):
         self.lbl_report_page_progress_step1_active.setGeometry(QtCore.QRect(170, 70, 161, 61))
         self.lbl_report_page_progress_step1_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_report_page_progress_step1_active.setStyleSheet("color: rgb(72, 54, 152)\n"
-                                                                 "")
+"")
         self.lbl_report_page_progress_step1_active.setScaledContents(False)
         self.lbl_report_page_progress_step1_active.setWordWrap(True)
         self.lbl_report_page_progress_step1_active.setObjectName("lbl_report_page_progress_step1_active")
@@ -1586,7 +1508,7 @@ class Ui_MainWindow(object):
         self.lbl_report_page_progress_step3_active.setGeometry(QtCore.QRect(770, 70, 111, 61))
         self.lbl_report_page_progress_step3_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_report_page_progress_step3_active.setStyleSheet("\n"
-                                                                 "color: rgb(72, 54, 152)")
+"color: rgb(72, 54, 152)")
         self.lbl_report_page_progress_step3_active.setScaledContents(False)
         self.lbl_report_page_progress_step3_active.setWordWrap(True)
         self.lbl_report_page_progress_step3_active.setObjectName("lbl_report_page_progress_step3_active")
@@ -1594,7 +1516,7 @@ class Ui_MainWindow(object):
         self.lbl_report_page_progress_step4_active.setGeometry(QtCore.QRect(1090, 70, 101, 61))
         self.lbl_report_page_progress_step4_active.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.lbl_report_page_progress_step4_active.setStyleSheet("\n"
-                                                                 "color:rgb(72, 54, 152)")
+"color:rgb(72, 54, 152)")
         self.lbl_report_page_progress_step4_active.setScaledContents(False)
         self.lbl_report_page_progress_step4_active.setWordWrap(True)
         self.lbl_report_page_progress_step4_active.setObjectName("lbl_report_page_progress_step4_active")
@@ -1621,7 +1543,7 @@ class Ui_MainWindow(object):
         self.widget_report_page_result = QtWidgets.QWidget(self.report_page)
         self.widget_report_page_result.setGeometry(QtCore.QRect(0, 160, 1281, 501))
         self.widget_report_page_result.setStyleSheet("background-color: #f3f4f8;\n"
-                                                     "font: 75 12pt \"Arial\";")
+"font: 75 12pt \"Arial\";")
         self.widget_report_page_result.setObjectName("widget_report_page_result")
         self.frame_report_page_heading = QtWidgets.QFrame(self.widget_report_page_result)
         self.frame_report_page_heading.setGeometry(QtCore.QRect(70, 70, 1151, 51))
@@ -1635,19 +1557,19 @@ class Ui_MainWindow(object):
         self.lbl_report_page_last_updated = QtWidgets.QLabel(self.frame_report_page_heading)
         self.lbl_report_page_last_updated.setGeometry(QtCore.QRect(330, 10, 101, 31))
         self.lbl_report_page_last_updated.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
-                                                        "color: rgb(98, 98, 98);")
+"color: rgb(98, 98, 98);")
         self.lbl_report_page_last_updated.setObjectName("lbl_report_page_last_updated")
         self.lbl_report_page_last_updated_datetime = QtWidgets.QLabel(self.frame_report_page_heading)
         self.lbl_report_page_last_updated_datetime.setGeometry(QtCore.QRect(430, 10, 721, 31))
         self.lbl_report_page_last_updated_datetime.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
-                                                                 "color: rgb(98, 98, 98);")
+"color: rgb(98, 98, 98);")
         self.lbl_report_page_last_updated_datetime.setObjectName("lbl_report_page_last_updated_datetime")
         self.button_report_page_export_csv = QtWidgets.QPushButton(self.widget_report_page_result)
         self.button_report_page_export_csv.setGeometry(QtCore.QRect(1030, 20, 191, 41))
         self.button_report_page_export_csv.setStyleSheet("background-color: rgb(109, 32, 119);\n"
-                                                         "border-radius: 15px;\n"
-                                                         "font: 87 10pt \"Arial Black\";\n"
-                                                         "color: white;")
+"border-radius: 15px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"color: white;")
         icon8 = QtGui.QIcon()
         icon8.addPixmap(QtGui.QPixmap(":/image/export_white.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.button_report_page_export_csv.setIcon(icon8)
@@ -1662,86 +1584,86 @@ class Ui_MainWindow(object):
         self.table_report_page_report = QtWidgets.QTableWidget(self.frame_report_page_list)
         self.table_report_page_report.setGeometry(QtCore.QRect(20, 0, 1131, 361))
         self.table_report_page_report.setStyleSheet("QTableWidget{color: rgb(0, 51, 141);}\n"
-                                                    "QAbstractItemView{background-color: transparent;}\n"
-                                                    "QTableCornerButton::section{background-color:transparent;}\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "QHeaderView::section\n"
-                                                    "{\n"
-                                                    "    qproperty-defaultAlignment: AlignHCenter AlignVCenter;\n"
-                                                    "    color: rgb(0, 51, 141);\n"
-                                                    "    background-color: transparent;\n"
-                                                    "    font: 87 12pt \"Arial Black\";\n"
-                                                    "    border-bottom: 1px solid rgb(98, 98, 98);\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "\n"
-                                                    "/*Scroll Bar*/\n"
-                                                    "QScrollBar:vertical\n"
-                                                    "{\n"
-                                                    "    background-color: rgb(217, 217, 217); /*Grey*/\n"
-                                                    "    width: 15px;\n"
-                                                    "    margin: 15px 3px 15px 3px;\n"
-                                                    "    border-radius: 4px;\n"
-                                                    "    }\n"
-                                                    "\n"
-                                                    "QScrollBar::handle:vertical\n"
-                                                    "{\n"
-                                                    "    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                    "    min-height: 5px;\n"
-                                                    "    border-radius: 4px;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::sub-line:vertical\n"
-                                                    "{\n"
-                                                    "    margin: 3px 0px 3px 0px;\n"
-                                                    "    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
-                                                    "    height: 10px;\n"
-                                                    "    width: 10px;\n"
-                                                    "    subcontrol-position: top;\n"
-                                                    "    subcontrol-origin: margin;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::add-line:vertical\n"
-                                                    "{\n"
-                                                    "    margin: 3px 0px 3px 0px;\n"
-                                                    "    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
-                                                    "    height: 10px;\n"
-                                                    "    width: 10px;\n"
-                                                    "    subcontrol-position: bottom;\n"
-                                                    "    subcontrol-origin: margin;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
-                                                    "{\n"
-                                                    "    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
-                                                    "    height: 10px;\n"
-                                                    "    width: 10px;\n"
-                                                    "    subcontrol-position: top;\n"
-                                                    "    subcontrol-origin: margin;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
-                                                    "{\n"
-                                                    "    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
-                                                    "    height: 10px;\n"
-                                                    "    width: 10px;\n"
-                                                    "    subcontrol-position: bottom;\n"
-                                                    "    subcontrol-origin: margin;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
-                                                    "{\n"
-                                                    "    background: none;\n"
-                                                    "}\n"
-                                                    "\n"
-                                                    "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
-                                                    "{\n"
-                                                    "    background: none;\n"
-                                                    "}")
+"QAbstractItemView{background-color: transparent;}\n"
+"QTableCornerButton::section{background-color:transparent;}\n"
+"\n"
+"\n"
+"QHeaderView::section\n"
+"{\n"
+"    qproperty-defaultAlignment: AlignHCenter AlignVCenter;\n"
+"    color: rgb(0, 51, 141);\n"
+"    background-color: transparent;\n"
+"    font: 87 12pt \"Arial Black\";\n"
+"    border-bottom: 1px solid rgb(98, 98, 98);\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"/*Scroll Bar*/\n"
+"QScrollBar:vertical\n"
+"{\n"
+"    background-color: rgb(217, 217, 217); /*Grey*/\n"
+"    width: 15px;\n"
+"    margin: 15px 3px 15px 3px;\n"
+"    border-radius: 4px;\n"
+"    }\n"
+"\n"
+"QScrollBar::handle:vertical\n"
+"{\n"
+"    background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    min-height: 5px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
+"{\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
+"{\n"
+"    background: none;\n"
+"}")
         self.table_report_page_report.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.table_report_page_report.setFrameShadow(QtWidgets.QFrame.Plain)
         self.table_report_page_report.setLineWidth(0)
@@ -1866,9 +1788,9 @@ class Ui_MainWindow(object):
         self.button_report_page_back_edits = QtWidgets.QPushButton(self.widget_report_page_result)
         self.button_report_page_back_edits.setGeometry(QtCore.QRect(70, 20, 161, 41))
         self.button_report_page_back_edits.setStyleSheet("background-color: rgb(109, 32, 119);\n"
-                                                         "border-radius: 15px;\n"
-                                                         "font: 87 10pt \"Arial Black\";\n"
-                                                         "color: white;")
+"border-radius: 15px;\n"
+"font: 87 10pt \"Arial Black\";\n"
+"color: white;")
         self.button_report_page_back_edits.setIcon(icon7)
         self.button_report_page_back_edits.setIconSize(QtCore.QSize(15, 15))
         self.button_report_page_back_edits.setFlat(False)
@@ -1913,46 +1835,6 @@ class Ui_MainWindow(object):
         self.lbl_links_page_last_updated_datetime.setText(_translate("MainWindow", "2022/09/15 13:54"))
         self.button_links_page_scrap_info.setText(_translate("MainWindow", "Search Information"))
         self.table_links_page_link_list.setSortingEnabled(False)
-        item = self.table_links_page_link_list.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "1"))
-        item = self.table_links_page_link_list.verticalHeaderItem(1)
-        item.setText(_translate("MainWindow", "2"))
-        item = self.table_links_page_link_list.verticalHeaderItem(2)
-        item.setText(_translate("MainWindow", "3"))
-        item = self.table_links_page_link_list.verticalHeaderItem(3)
-        item.setText(_translate("MainWindow", "4"))
-        item = self.table_links_page_link_list.verticalHeaderItem(4)
-        item.setText(_translate("MainWindow", "5"))
-        item = self.table_links_page_link_list.verticalHeaderItem(5)
-        item.setText(_translate("MainWindow", "6"))
-        item = self.table_links_page_link_list.verticalHeaderItem(6)
-        item.setText(_translate("MainWindow", "7"))
-        item = self.table_links_page_link_list.verticalHeaderItem(7)
-        item.setText(_translate("MainWindow", "8"))
-        item = self.table_links_page_link_list.verticalHeaderItem(8)
-        item.setText(_translate("MainWindow", "9"))
-        item = self.table_links_page_link_list.verticalHeaderItem(9)
-        item.setText(_translate("MainWindow", "10"))
-        item = self.table_links_page_link_list.verticalHeaderItem(10)
-        item.setText(_translate("MainWindow", "11"))
-        item = self.table_links_page_link_list.verticalHeaderItem(11)
-        item.setText(_translate("MainWindow", "12"))
-        item = self.table_links_page_link_list.verticalHeaderItem(12)
-        item.setText(_translate("MainWindow", "13"))
-        item = self.table_links_page_link_list.verticalHeaderItem(13)
-        item.setText(_translate("MainWindow", "14"))
-        item = self.table_links_page_link_list.verticalHeaderItem(14)
-        item.setText(_translate("MainWindow", "15"))
-        item = self.table_links_page_link_list.verticalHeaderItem(15)
-        item.setText(_translate("MainWindow", "16"))
-        item = self.table_links_page_link_list.verticalHeaderItem(16)
-        item.setText(_translate("MainWindow", "17"))
-        item = self.table_links_page_link_list.verticalHeaderItem(17)
-        item.setText(_translate("MainWindow", "18"))
-        item = self.table_links_page_link_list.verticalHeaderItem(18)
-        item.setText(_translate("MainWindow", "19"))
-        item = self.table_links_page_link_list.verticalHeaderItem(19)
-        item.setText(_translate("MainWindow", "20"))
         item = self.table_links_page_link_list.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Brand"))
         item = self.table_links_page_link_list.horizontalHeaderItem(1)
@@ -1963,32 +1845,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Link"))
         item = self.table_links_page_link_list.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Full True Path"))
-        __sortingEnabled = self.table_links_page_link_list.isSortingEnabled()
-        self.table_links_page_link_list.setSortingEnabled(False)
-        item = self.table_links_page_link_list.item(0, 0)
-        item.setText(_translate("MainWindow", "ABC"))
-        item = self.table_links_page_link_list.item(0, 1)
-        item.setText(_translate("MainWindow", "Facebook"))
-        item = self.table_links_page_link_list.item(0, 2)
-        item.setText(_translate("MainWindow", "2022/09/15"))
-        item = self.table_links_page_link_list.item(0, 3)
-        item.setText(_translate("MainWindow", "www.abc.com"))
-        item = self.table_links_page_link_list.item(0, 4)
-        item.setText(_translate("MainWindow", "www.abcde.com"))
-        item = self.table_links_page_link_list.item(1, 0)
-        item.setText(_translate("MainWindow", "ABC"))
-        item = self.table_links_page_link_list.item(1, 1)
-        item.setText(_translate("MainWindow", "Facebook"))
-        item = self.table_links_page_link_list.item(1, 2)
-        item.setText(_translate("MainWindow", "2022/09/16"))
-        item = self.table_links_page_link_list.item(1, 3)
-        item.setText(_translate("MainWindow", "bitly.com"))
-        item = self.table_links_page_link_list.item(1, 4)
-        item.setText(_translate("MainWindow", "www.testing.com"))
-        self.table_links_page_link_list.setSortingEnabled(__sortingEnabled)
         self.lbl_info_edit_page_progress_step1_active.setText(_translate("MainWindow", "Find Marketing Website URL"))
-        self.lbl_info_edit_page_progress_step2_active.setText(
-            _translate("MainWindow", "Information from Web Scrapping"))
+        self.lbl_info_edit_page_progress_step2_active.setText(_translate("MainWindow", "Information from Web Scrapping"))
         self.lbl_info_edit_page_progress_step3_active.setText(_translate("MainWindow", "Information Edits"))
         self.lbl_info_edit_page_progress_step4.setText(_translate("MainWindow", "View Report"))
         self.lbl_info_edit_page_full_true_path.setText(_translate("MainWindow", "Full True Path"))
@@ -2006,8 +1864,7 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_category_2.setItemText(2, _translate("MainWindow", "Address"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(0, _translate("MainWindow", "Marketing Purpose"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(1, _translate("MainWindow", "Promotion"))
-        self.input_info_edit_page_choose_marketing_purpose.setItemText(2,
-                                                                       _translate("MainWindow", "Member Registration"))
+        self.input_info_edit_page_choose_marketing_purpose.setItemText(2, _translate("MainWindow", "Member Registration"))
         self.input_info_edit_page_expiring_date.setDisplayFormat(_translate("MainWindow", "yyyy/MM/dd"))
         self.input_info_edit_page_choose_opt_in_out.setItemText(0, _translate("MainWindow", "Opt-in/Opt-out"))
         self.input_info_edit_page_choose_opt_in_out.setItemText(1, _translate("MainWindow", "Opt-in/Opt-out"))
@@ -2136,13 +1993,11 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Yes"))
         self.table_report_page_report.setSortingEnabled(__sortingEnabled)
         self.button_report_page_back_edits.setText(_translate("MainWindow", "Back to Edits"))
-
-
 import image_rc
+
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
