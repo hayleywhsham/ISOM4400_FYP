@@ -1290,7 +1290,10 @@ color: white;</string>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QTableWidget{color: rgb(0, 51, 141);}
+         <string notr="true">QTableWidget{
+	color: rgb(0, 51, 141);
+	width:100%;
+}
 QAbstractItemView{background-color: transparent;}
 QTableCornerButton::section{background-color:transparent;}
 
