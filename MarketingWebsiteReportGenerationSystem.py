@@ -13,12 +13,21 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+
+        # default values for dates
+        today_date = QDateTime.currentDateTime().date()
+        self.ui.input_search_page_to_date.setDateTime(today_date)
+        self.ui.input_search_page_from_date.setDateTime(today_date)
+        self.ui.input_search_page_to_date.setMaximumDate(today_date)
+        self.ui.input_search_page_from_date.setMaximumDate(today_date)
+
         # Connect Function: only connect once for each button
 
         self.ui.button_search_page_search_marketing_sites.clicked.connect(self.search_urls)
         self.ui.input_search_page_from_fb_page.returnPressed.connect(self.ui.button_search_page_search_marketing_sites.click)
 
     def search_urls(self):
+
         # PlaceHolder
         start_date = self.ui.input_search_page_from_date.date().toPyDate()
         end_date = self.ui.input_search_page_to_date.date().toPyDate()
@@ -33,10 +42,10 @@ class MainWindow(QMainWindow):
         else:
             self.ui.lbl_search_page_from_fb_page_error_msg.setStyleSheet("""
             color: rgb(255, 0, 0);
-background-color: transparent;
-font: 75 10pt "Arial";
+            background-color: transparent;
+            font: 75 10pt "Arial";
             """)
-            self.ui.lbl_search_page_from_fb_page_error_msg.setText("Please input FaceBook Page tag!")
+            self.ui.lbl_search_page_from_fb_page_error_msg.setText("Please input Facebook Page tag!")
 
     def init_links_page(self, urls_dict_list):
         self.ui.table_links_page_link_list.verticalHeader().setVisible(True)

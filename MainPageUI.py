@@ -572,7 +572,10 @@ class Ui_MainWindow(object):
         self.frame_links_page_list.setObjectName("frame_links_page_list")
         self.table_links_page_link_list = QtWidgets.QTableWidget(self.frame_links_page_list)
         self.table_links_page_link_list.setGeometry(QtCore.QRect(20, 0, 1131, 411))
-        self.table_links_page_link_list.setStyleSheet("QTableWidget{color: rgb(0, 51, 141);}\n"
+        self.table_links_page_link_list.setStyleSheet("QTableWidget{\n"
+"    color: rgb(0, 51, 141);\n"
+"    width:100%;\n"
+"}\n"
 "QAbstractItemView{background-color: transparent;}\n"
 "QTableCornerButton::section{background-color:transparent;}\n"
 "\n"
@@ -1808,7 +1811,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Marketing Website Report Generation System"))
         self.lbl_global_header.setText(_translate("MainWindow", "MARKETING WEBSITE REPORT GENERATION SYSTEM"))
         self.lbl_search_page_progress_step1_active.setText(_translate("MainWindow", "Find Marketing Website URL"))
         self.lbl_search_page_progress_step2.setText(_translate("MainWindow", "Information from Web Scrapping"))
