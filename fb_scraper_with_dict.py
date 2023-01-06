@@ -42,7 +42,7 @@ def get_all_urls(fb_page_name: str, start_date: datetime.date, end_date: datetim
     brand = fb_page_name
     source = "Facebook"
 
-    for post in get_posts(fb_page_name, pages=3):
+    for post in get_posts(fb_page_name, pages=3, options={"posts_per_page": 20}):
         post_time = post['time']
         # print("Post Time:",post['time'])
         urls = set(get_all_url_from_string(post['text']))  # set: unique per post
