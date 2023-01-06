@@ -46,24 +46,16 @@ def get_all_url(string):
 
 def main(fb_page_name):
     url_pool= set()
-    brand = fb_page_name
-    source = "Facebook"
 
-    for post in get_posts(fb_page_name, pages=3):
-        post_time = post['time']
-        # print("Post Time:",post['time'])
+    for post in get_posts(fb_page_name, pages=3, options={"posts_per_page": 200}):
+        #post_time = post['time']
+
+        print("Post Time:",post['time'])
         urls = set(get_all_url(post['text'])) # set: unique per post
         url_pool.update(urls)
-        #print(urls)
-        for url in urls:
-            #mark_web = MarkWeb(brand=brand, source=source, \
-                               post_datetime=post_time, \
-                               short_link=url, \
-                               full_link=url)
+        print(urls)
+        print("+++++++++++++++++++")
 
-    #print(url_pool)
-    df = pd.DataFrame(mark_web)
-    print(df)
 
 
 if __name__ == "__main__":
