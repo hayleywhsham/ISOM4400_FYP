@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 import sys
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_urls
+import datetime
 
 
 class MainWindow(QMainWindow):
@@ -25,7 +26,8 @@ class MainWindow(QMainWindow):
         self.ui.button_search_page_search_marketing_sites.clicked.connect(self.search_urls)
         self.ui.input_search_page_from_fb_page.returnPressed.connect(self.ui.button_search_page_search_marketing_sites.click)
         # reset Max from_date when to_date is changed
-        self.ui.input_search_page_to_date.dateChanged.connect(lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
+        self.ui.input_search_page_to_date.dateChanged.connect(\
+            lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
 
 
@@ -61,7 +63,8 @@ class MainWindow(QMainWindow):
             self.ui.table_links_page_link_list.setItem(rowPosition, 2, QTableWidgetItem(url_dict["PostTime"]))
             self.ui.table_links_page_link_list.setItem(rowPosition, 3, QTableWidgetItem(url_dict["ShortLink"]))
 
-    # def to_date_changed(self, new_to_date):
+        last_update_time = QDateTime.currentDateTime().toPyDateTime().strftime("%Y/%m/%d %H:%M")
+        self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
 
 
 

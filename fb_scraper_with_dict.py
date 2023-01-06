@@ -53,7 +53,7 @@ def get_all_urls(fb_page_name: str, start_date: datetime.date, end_date: datetim
                 {
                     "Brand": brand,
                     "Source": source,
-                    "PostTime": post_time.strftime("%m/%d/%Y, %H:%M:%S"),
+                    "PostTime": post_time.strftime("%Y/%m/%d %H:%M"),
                     "ShortLink": url
                 }
             )
