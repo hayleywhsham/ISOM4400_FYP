@@ -16,8 +16,8 @@ class MainWindow(QMainWindow):
 
         # default values for dates
         today_date = QDateTime.currentDateTime().date()
-        self.ui.input_search_page_to_date.setDateTime(today_date)
-        self.ui.input_search_page_from_date.setDateTime(today_date)
+        self.ui.input_search_page_to_date.setDateTime(QDateTime.currentDateTime())
+        self.ui.input_search_page_from_date.setDateTime(QDateTime.currentDateTime())
         self.ui.input_search_page_to_date.setMaximumDate(today_date)
         self.ui.input_search_page_from_date.setMaximumDate(today_date)
 
