@@ -2,25 +2,24 @@
 ## this can only scrap links in description starting with "http" and "bit.ly"
 ## post['link'] will only return the first link in that post
 
-
 from facebook_scraper import get_posts
 import pandas as pd
 import datetime
 from dataclasses import dataclass
 
-@dataclass
-class MarkWeb:
-    brand: str
-    source: str
-    post_datetime: datetime.datetime
-    short_link: str
-    full_link: str
+# @dataclass
+# class MarkWeb:
+#     brand: str
+#     source: str
+#     post_datetime: datetime.datetime
+#     short_link: str
+#     full_link: str
 
 def get_all_url(string):
     urls = []
 
     target_list = ["http", "bit.ly"]
-    end_target_list = ["\n", " "]
+    end_target_list = ["\n", " ", "更多"]
     end_pos = 0
 
     while end_pos < len(string):
