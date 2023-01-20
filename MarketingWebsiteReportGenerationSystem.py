@@ -13,32 +13,6 @@ import threading
 from facebook_scraper import get_posts
 
 
-def get_all_urls(fb_page_name: str, post_no: int, start_date: datetime.date, end_date: datetime.date):
-    url_pool = set()
-    mark_web_dict_list = []
-    brand = fb_page_name
-    source = "Facebook"
-
-    for post in get_posts(fb_page_name, pages=4, options={
-        "posts_per_page": post_no // 4,
-        "cookies": "./fbUserToken.json"
-    }):
-        post_time = post['time']
-        # print("Post Time:",post['time'])
-        urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-        url_pool.update(urls)
-        # print(urls)
-        for url in urls:
-            mark_web_dict_list.append(
-                {
-                    "Brand": brand,
-                    "Source": source,
-                    "PostTime": post_time.strftime("%Y/%m/%d %H:%M"),
-                    "ShortLink": url
-                }
-            )
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -61,7 +35,7 @@ class MainWindow(QMainWindow):
         self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
 
         # reset Max from_date when to_date is changed
-        self.ui.input_search_page_to_date.dateChanged.connect( \
+        self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
     def search_urls_from_csv(self):
