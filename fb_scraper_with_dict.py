@@ -2,9 +2,7 @@
 ## post['link'] will only return the first link in that post
 import datetime
 
-import pandas
 from facebook_scraper import get_posts
-import pandas as pd
 
 
 def get_all_url_from_string(string) -> list[str]:
@@ -36,13 +34,16 @@ def get_all_url_from_string(string) -> list[str]:
     return urls
 
 
-def get_all_urls(fb_page_name: str, start_date: datetime.date, end_date: datetime.date) -> list:
+def get_all_urls(fb_page_name: str,post_no:int ,start_date: datetime.date, end_date: datetime.date) -> list:
     url_pool = set()
     mark_web_dict_list = []
     brand = fb_page_name
     source = "Facebook"
 
-    for post in get_posts(fb_page_name, pages=3, options={"posts_per_page": 20}):
+    for post in get_posts(fb_page_name, pages=4, options={
+        "posts_per_page": post_no//4,
+        "cookies":"./fbUserToken.json"
+    }):
         post_time = post['time']
         # print("Post Time:",post['time'])
         urls = set(get_all_url_from_string(post['text']))  # set: unique per post
@@ -57,8 +58,5 @@ def get_all_urls(fb_page_name: str, start_date: datetime.date, end_date: datetim
                     "ShortLink": url
                 }
             )
-
     return mark_web_dict_list
 
-# if __name__ == "__main__":
-#     main('hktvmall')

@@ -3,8 +3,40 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
 from MainPageUI import Ui_MainWindow
-from fb_scraper_with_dict import get_all_urls
+from fb_scraper_with_dict import get_all_url_from_string
 import datetime
+import csv
+import tkinter
+from tkinter import filedialog
+import threading
+
+from facebook_scraper import get_posts
+
+
+def get_all_urls(fb_page_name: str, post_no: int, start_date: datetime.date, end_date: datetime.date):
+    url_pool = set()
+    mark_web_dict_list = []
+    brand = fb_page_name
+    source = "Facebook"
+
+    for post in get_posts(fb_page_name, pages=4, options={
+        "posts_per_page": post_no // 4,
+        "cookies": "./fbUserToken.json"
+    }):
+        post_time = post['time']
+        # print("Post Time:",post['time'])
+        urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+        url_pool.update(urls)
+        # print(urls)
+        for url in urls:
+            mark_web_dict_list.append(
+                {
+                    "Brand": brand,
+                    "Source": source,
+                    "PostTime": post_time.strftime("%Y/%m/%d %H:%M"),
+                    "ShortLink": url
+                }
+            )
 
 
 class MainWindow(QMainWindow):
@@ -24,26 +56,43 @@ class MainWindow(QMainWindow):
 
         # Connect Function: only connect once for each button
         self.ui.button_search_page_search_marketing_sites.clicked.connect(self.search_urls)
-        self.ui.input_search_page_from_fb_page.returnPressed.connect(self.ui.button_search_page_search_marketing_sites.click)
+        self.ui.input_search_page_from_fb_page.returnPressed.connect(
+            self.ui.button_search_page_search_marketing_sites.click)
+        self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
+
         # reset Max from_date when to_date is changed
-        self.ui.input_search_page_to_date.dateChanged.connect(\
+        self.ui.input_search_page_to_date.dateChanged.connect( \
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
+    def search_urls_from_csv(self):
+        tkinter.Tk().withdraw()
+        csv_path = filedialog.askopenfilename(filetypes=[("Excel files", ".csv")])
 
+        with open(csv_path, "r") as file:
+            fb_names = list(csv.reader(file, delimiter=","))
 
+        start_date = self.ui.input_search_page_from_date.date().toPyDate()
+        end_date = self.ui.input_search_page_to_date.date().toPyDate()
+
+        for fb_name in fb_names:
+            print(fb_name[0])
+            t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
+            t.start()
+
+        self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
     def search_urls(self):
 
         # PlaceHolder
-        start_date = self.ui.input_search_page_from_date.date().toPyDate()
-        end_date = self.ui.input_search_page_to_date.date().toPyDate()
 
         user_input: str = self.ui.input_search_page_from_fb_page.text()
         urls_dict_list = None
 
         if user_input != "":
-            urls_dict_list = get_all_urls(user_input, start_date, end_date)
             self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
-            self.init_links_page(urls_dict_list)
+            start_date = self.ui.input_search_page_from_date.date().toPyDate()
+            end_date = self.ui.input_search_page_to_date.date().toPyDate()
+            t1 = threading.Thread(target=self.init_links_page, args=(user_input, start_date, end_date))
+            t1.start()
         else:
             self.ui.lbl_search_page_from_fb_page_error_msg.setStyleSheet("""
             color: rgb(255, 0, 0);
@@ -52,20 +101,45 @@ class MainWindow(QMainWindow):
             """)
             self.ui.lbl_search_page_from_fb_page_error_msg.setText("Please input Facebook Page tag!")
 
-    def init_links_page(self, urls_dict_list):
+    def init_links_page(self, fb_page_name: str, start_date: datetime.date, end_date: datetime.date):
         self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
         self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        for url_dict in urls_dict_list:
-            rowPosition = self.ui.table_links_page_link_list.rowCount()
-            self.ui.table_links_page_link_list.insertRow(rowPosition)
-            self.ui.table_links_page_link_list.setItem(rowPosition, 0, QTableWidgetItem(url_dict["Brand"]))
-            self.ui.table_links_page_link_list.setItem(rowPosition, 1, QTableWidgetItem(url_dict["Source"]))
-            self.ui.table_links_page_link_list.setItem(rowPosition, 2, QTableWidgetItem(url_dict["PostTime"]))
-            self.ui.table_links_page_link_list.setItem(rowPosition, 3, QTableWidgetItem(url_dict["ShortLink"]))
+        self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
+        url_pool = set()
+        fb_page_name = fb_page_name
+        source = "Facebook"
 
-        last_update_time = QDateTime.currentDateTime().toPyDateTime().strftime("%Y/%m/%d %H:%M")
+        for post in get_posts(fb_page_name,
+                              pages=10,
+
+                              # Will be blocked easily by Facebook, Facebook API highly restricted
+                              # Without cookie can only get 60 newest posts from page
+                              # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+
+                              # cookies="./fbUserToken.json",
+                              options={
+                                  "posts_per_page": 20
+                              }):
+            post_time = post['time']
+            # print("Post Time:",type(post['time']))
+            # print(f'data: start_date:{start_date},post_time: {post_time},end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {post["text"][:10]}\n')
+            if(post_time.date() < start_date):
+                break
+            if (post_time.date() <= end_date):
+                urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+                url_pool.update(urls)
+                # print(urls)
+                for url in urls:
+                    rowPosition = self.ui.table_links_page_link_list.rowCount()
+                    self.ui.table_links_page_link_list.insertRow(rowPosition)
+                    self.ui.table_links_page_link_list.setItem(rowPosition, 0, QTableWidgetItem(fb_page_name))
+                    self.ui.table_links_page_link_list.setItem(rowPosition, 1, QTableWidgetItem(source))
+                    self.ui.table_links_page_link_list.setItem(rowPosition, 2,
+                                                               QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
+                    self.ui.table_links_page_link_list.setItem(rowPosition, 3, QTableWidgetItem(url))
+
+        last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-
 
 
 def main():
