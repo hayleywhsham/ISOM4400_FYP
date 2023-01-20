@@ -34,29 +34,5 @@ def get_all_url_from_string(string) -> list[str]:
     return urls
 
 
-def get_all_urls(fb_page_name: str,post_no:int ,start_date: datetime.date, end_date: datetime.date) -> list:
-    url_pool = set()
-    mark_web_dict_list = []
-    brand = fb_page_name
-    source = "Facebook"
 
-    for post in get_posts(fb_page_name, pages=4, options={
-        "posts_per_page": post_no//4,
-        "cookies":"./fbUserToken.json"
-    }):
-        post_time = post['time']
-        # print("Post Time:",post['time'])
-        urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-        url_pool.update(urls)
-        # print(urls)
-        for url in urls:
-            mark_web_dict_list.append(
-                {
-                    "Brand": brand,
-                    "Source": source,
-                    "PostTime": post_time.strftime("%Y/%m/%d %H:%M"),
-                    "ShortLink": url
-                }
-            )
-    return mark_web_dict_list
 
