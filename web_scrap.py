@@ -48,10 +48,13 @@ def main(link):
 
     try:
         soup = BeautifulSoup(driver.page_source, "html.parser")
-        print(soup)
-#        links = soup.select()
+        text = soup.get_text()
+        lines = (line.strip() for line in text.splitlines())
+        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+        text = '\n'.join(chunk for chunk in chunks if chunk)
     except Exception:
-        driver.back()
+        print(Exception)
+    return text
 
 
 main(url_1)
