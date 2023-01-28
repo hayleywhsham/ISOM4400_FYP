@@ -1,19 +1,14 @@
 import MainPageUI
 
-def check_word_list(scraped_list):
-    item_count = 0
+
+def update_ui_labels(Label_Category_Dict):
     update_label = MainPageUI.Ui_MainWindow.lbl_info_edit_page_label
-    for line in scraped_list:
-        if item_count != 0:
-            update_label = MainPageUI.Ui_MainWindow.lbl_info_edit_page_label + "_" + "item_count"
-        update_label.settext(line)
-        word_file = open("PII_WordList", "r")
-        for categories in word_file:
-            if MainPageUI.Ui_MainWindow.lbl_info_edit_page_label.text.upper in categories.upper:
-                MainPageUI.Ui_MainWindow.input_info_page_category = categories[0]
+    update_category = MainPageUI.Ui_MainWindow.input_info_page_category
+    for i in len(Label_Category_Dict["Label"]):
+        if i != 0:
+            update_label = MainPageUI.Ui_MainWindow.lbl_info_edit_page_label + "_" + i
+            update_category = MainPageUI.Ui_MainWindow.input_info_page_category + "_" + i
+        update_label.settext(Label_Category_Dict["Label"][i])
+        update_category.text = Label_Category_Dict["Category"][i]
 
 
-test_list = ["name", "name"]
-check_word_list(test_list)
-print(MainPageUI.Ui_MainWindow.lbl_info_edit_page_label.text)
-print(MainPageUI.Ui_MainWindow.input_info_page_category)

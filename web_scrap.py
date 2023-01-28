@@ -23,7 +23,7 @@ username = "hugofyptest@gmail.com"
 password = "FYP4400test"
 
 
-def web_scrape(link):
+def web_scrape(counter, link):
 #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     chrome_options = Options()
 #    chrome_options.add_argument("start-maximized")
@@ -41,7 +41,8 @@ def web_scrape(link):
                                           'scale': 1},
                                  }
     base_64_png = driver.execute_cdp_cmd('Page.captureScreenshot', screenshot_config)
-    with open("test.png", "wb") as fh:
+    ScreenShot_path = str("Screen_Captures/ScreenShot_" + str(counter))
+    with open(f"{ScreenShot_path}.png", "wb") as fh:
         fh.write(base64.urlsafe_b64decode(base_64_png['data']))
     try:
         soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -67,17 +68,14 @@ def web_scrape(link):
     return text_list, link_list
 
 
-url_list = [url_1]
-for url in url_list:
-    print(url)
-    web_scrape(url)
+url_list = [url_1, url_2, url_3, url_4]
+for i in range(len(url_list)):
+    print(url_list[i])
+    web_scrape(i, url_list[i])
     print()
 
 
 # TODO exception: Google login - Google blocked selenium controlled browser login
-# TODO Some text no line breaks not easy to categorise
+# TODO Some text no line breaks not easy to categorise (google form)
 # TODO too many irrelevant text (especially shopping sites) will go through categorisation? waste so much time | if not how choose useful info
 # TODO UI
-# TODO screenshot separate files (set directory or UI?)
-
-
