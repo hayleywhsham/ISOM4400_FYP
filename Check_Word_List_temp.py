@@ -3,13 +3,7 @@
 
 
 import pandas as pd
-import web_scrap
-defined_category_list = []
-text_list = []
-url_list = []
-Label_Category_dict = {"Label": [],  "Category": []}
-Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
-url_1 = "https://www.hktvmall.com/hktv/zh/%E8%B6%85%E7%B4%9A%E5%B7%BF%E5%A0%B4/%E8%B6%85%E7%B4%9A%E5%B8%82%E5%A0%B4/%E9%87%8D%E9%87%8F%E7%B4%9A%E6%8E%A8%E4%BB%8B/%E6%B0%B4%E6%9E%9C-%E8%94%AC%E8%8F%9C/main/search?q=%3Arelevance%3Astreet%3Amain%3Acategory%3AAA11030500001"
+from Page_3_variables import *
 
 
 # categories are personal information and keywords such as T&C, P.I.C.S and opt-in/opt-out
@@ -98,9 +92,4 @@ def check_word_list(scraped_list):
     return df1, df2
 
 
-test_list = ["姓名", "address", "密碼", "Password", "購物金額", "本人已閱讀並同意是次推廣活動條款及細則，有關的個人資料收集聲明及XXX有限公司 個人資料私隱的政策和實踐", "本人同意接受由XXX有限公司發出之食品及飲品的宣傳及推廣資訊", "Last Name"]
-text_list, url_list = web_scrap.web_scrape(url_1)
-Category_Set, Keyword_Set = check_word_list(text_list)
-print(Category_Set)
-print()
-print(Keyword_Set)
+
