@@ -47,14 +47,9 @@ def update_defined_category(word, category):
 
 
 def check_word_list(scraped_list):
-    import_categories()
     item_list = scraped_list
     item_count = 0
     categories = str(defined_category_list[0][0])
-# only for visualization without UI
-    for category in defined_category_list[1:]:
-        categories = str(categories + ", " + category[0])
-    print("Categories include: " + categories)
 # check for keywords (exact match) and categories
     for item in item_list:
         Label_Category_dict["Label"].append(item)
@@ -84,13 +79,4 @@ def check_word_list(scraped_list):
             case "Opt-in/Opt-out":
                 Keywords_Exist_dict["Exist?"][2] = "Yes"
     i = 0
-# output excludes T&C, P.I.C.S, Opt-in/Opt-out, etc. as they would be separately outputted
-    while i < len(Label_Category_dict["Category"]):
-        if Label_Category_dict["Category"][i] == "T&C" or Label_Category_dict["Category"][i] == "P.I.C.S" or Label_Category_dict["Category"][i] == "Opt-in/Opt-out" or Label_Category_dict["Category"][i] == "Marketing Purpose" or Label_Category_dict["Category"][i] == "Expiry Date" or Label_Category_dict["Category"][i] == "Unrelated":
-            Label_Category_dict["Category"].pop(i)
-            Label_Category_dict["Label"].pop(i)
-            i -= 1
-        i += 1
-    df1 = pd.DataFrame(Label_Category_dict)
-    df2 = pd.DataFrame(Keywords_Exist_dict)
-    return df1, df2
+    return Label_Category_dict, Keywords_Exist_dict

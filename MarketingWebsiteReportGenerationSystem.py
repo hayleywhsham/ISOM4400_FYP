@@ -4,7 +4,7 @@ from PyQt5.QtCore import *
 import sys
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
-from Check_Word_List import import_categories, update_defined_category, check_word_list
+from Check_Word_List import import_categories, update_defined_category, check_word_list, define_categories
 from Page_3_variables import *
 import datetime
 import csv
@@ -121,7 +121,10 @@ class MainWindow(QMainWindow):
 
     def scrape_website_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
+        self.ui.input_info_edit_page_category.removeItem(1)
+        self.ui.input_info_edit_page_category.removeItem(1)
         self.ui.input_info_edit_page_category.addItems(define_categories())
+        self.ui.graphicsView_info_edit_page_screenshot.setVisible()
 
 def main():
     app = QApplication(sys.argv)
