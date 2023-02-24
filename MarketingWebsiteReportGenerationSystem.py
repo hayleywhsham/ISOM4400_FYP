@@ -4,6 +4,8 @@ from PyQt5.QtCore import *
 import sys
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
+from Check_Word_List import import_categories, update_defined_category, check_word_list
+from Page_3_variables import *
 import datetime
 import csv
 import tkinter
@@ -33,6 +35,7 @@ class MainWindow(QMainWindow):
         self.ui.input_search_page_from_fb_page.returnPressed.connect(
             self.ui.button_search_page_search_marketing_sites.click)
         self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
+        self.ui.button_links_page_scrap_info.clicked.connect(self.scrape_website_page)
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
@@ -115,6 +118,10 @@ class MainWindow(QMainWindow):
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
 
+
+    def scrape_website_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
+        self.ui.input_info_edit_page_category.addItems(define_categories())
 
 def main():
     app = QApplication(sys.argv)
