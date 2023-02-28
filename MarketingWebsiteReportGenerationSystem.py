@@ -6,6 +6,7 @@ from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
 from Check_Word_List import import_categories, update_defined_category, check_word_list, define_categories
 from Page_3_variables import *
+from web_scrap import *
 import datetime
 import csv
 import tkinter
@@ -124,7 +125,16 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_category.removeItem(1)
         self.ui.input_info_edit_page_category.removeItem(1)
         self.ui.input_info_edit_page_category.addItems(define_categories())
-        self.ui.graphicsView_info_edit_page_screenshot.setVisible()
+        try:
+            scraped_text_list, scraped_link_list = web_scrape(1, url_1)
+            Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
+            self.ui.lbl_info_page_error_msg.setVisible(False)
+            self.ui.lbl_info_edit_page_full_url.setText(url_1)
+            self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+            self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+        except(Exception):
+            self.ui.lbl_info_page_error_msg.setText(str(Exception))
+
 
 def main():
     app = QApplication(sys.argv)

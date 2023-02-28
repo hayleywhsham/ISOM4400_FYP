@@ -65,10 +65,6 @@ def check_word_list(scraped_list):
                     if defined_text.casefold() in item.casefold():
                         Label_Category_dict["Category"].append(defined_categories[0])
                         break
-        if len(Label_Category_dict["Category"]) < item_count:
-            new_category = input(str("Category for " + item + " is:"))
-            Label_Category_dict["Category"].append(new_category)
-            update_defined_category(item, new_category)
 # Convert from category list to keyword list
     for i in range(len(Label_Category_dict["Category"])):
         match Label_Category_dict["Category"][i]:
