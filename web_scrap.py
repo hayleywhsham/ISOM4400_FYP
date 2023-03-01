@@ -45,25 +45,15 @@ def web_scrape(counter, link):
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
         text = '\n'.join(chunk for chunk in chunks if chunk)
         text_list = text.split("\n")
-    except Exception:
-        print(Exception)
+    except Exception as e:
+        print(str(e))
     try:
         soup = BeautifulSoup(driver.page_source, "html.parser")
         link_list = []
         for links in soup.find_all("a"):
             link_list.append(links.get("href"))
-    except Exception:
-        print(Exception)
-    print(text_list)
-    print(link_list)
+    except Exception as e:
+        print(str(e))
+        pass
     sleep(10)
     return text_list, link_list
-
-
-
-
-
-# TODO exception: Google login - Google blocked selenium controlled browser login
-# TODO Some text no line breaks not easy to categorise (google form)
-# TODO too many irrelevant text (especially shopping sites) will go through categorisation? waste so much time | if not how choose useful info
-# TODO UI

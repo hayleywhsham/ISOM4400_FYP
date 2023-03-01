@@ -65,6 +65,9 @@ def check_word_list(scraped_list):
                     if defined_text.casefold() in item.casefold():
                         Label_Category_dict["Category"].append(defined_categories[0])
                         break
+                    else:
+                        Label_Category_dict["Category"].append("")
+
 # Convert from category list to keyword list
     for i in range(len(Label_Category_dict["Category"])):
         match Label_Category_dict["Category"][i]:

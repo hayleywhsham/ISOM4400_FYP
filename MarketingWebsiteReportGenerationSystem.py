@@ -122,18 +122,46 @@ class MainWindow(QMainWindow):
 
     def scrape_website_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
-        self.ui.input_info_edit_page_category.removeItem(1)
-        self.ui.input_info_edit_page_category.removeItem(1)
         self.ui.input_info_edit_page_category.addItems(define_categories())
         try:
+#use url list
             scraped_text_list, scraped_link_list = web_scrape(1, url_1)
             Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
-            self.ui.lbl_info_page_error_msg.setVisible(False)
             self.ui.lbl_info_edit_page_full_url.setText(url_1)
-            self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
-            self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
-        except(Exception):
-            self.ui.lbl_info_page_error_msg.setText(str(Exception))
+            try:
+                for items_no in range(len(Label_Category_dict["Label"])):
+                    if items_no == 0:
+                        self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+                        if Label_Category_dict["Category"][0] == "":
+                            self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
+                        else:
+                            self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+                    else:
+                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
+                        if Label_Category_dict["Category"][items_no] == "":
+                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
+                        else:
+                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
+            except Exception as e:
+                print(str(e))
+                pass
+            if Keywords_Exist_dict["Exist?"][0] == "Yes":
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_tnc.setCurrentText(2)
+            if Keywords_Exist_dict["Exist?"][1] == "Yes":
+                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_pics.setCurrentText(2)
+            if Keywords_Exist_dict["Exist?"][2] == "Yes":
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentText(2)
+            self.ui.lbl_info_page_error_msg.setVisible(False)
+        except Exception as e:
+            self.ui.lbl_info_page_error_msg.setText(str(e))
+            self.ui.lbl_info_page_error_msg.setVisible(True)
+            pass
 
 
 def main():
