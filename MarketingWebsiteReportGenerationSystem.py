@@ -122,29 +122,30 @@ class MainWindow(QMainWindow):
 
     def scrape_website_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
-        self.ui.input_info_edit_page_category.addItems(define_categories())
         try:
-#use url list
-            scraped_text_list, scraped_link_list = web_scrape(1, url_1)
+            #use url list
+            scraped_text_list, scraped_link_list = web_scrape(1, url_2)
             Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
-            self.ui.lbl_info_edit_page_full_url.setText(url_1)
-            try:
-                for items_no in range(len(Label_Category_dict["Label"])):
+            self.ui.lbl_info_edit_page_full_url.setText(url_2)
+            for items_no in range(len(Label_Category_dict)):
+                try:
                     if items_no == 0:
+                        self.ui.input_info_edit_page_category.addItems(define_categories())
                         self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
                         if Label_Category_dict["Category"][0] == "":
                             self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                         else:
                             self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
                     else:
+                        setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
                         setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
                         if Label_Category_dict["Category"][items_no] == "":
                             setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
                         else:
                             setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
-            except Exception as e:
-                print(str(e))
-                pass
+                except Exception as e:
+                    print(str(e))
+                    continue
             if Keywords_Exist_dict["Exist?"][0] == "Yes":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
             else:
@@ -162,6 +163,7 @@ class MainWindow(QMainWindow):
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
             pass
+        self.ui.graphicsView_info_edit_page_screenshot.setWindowFilePath("Screen_Captures/ScreenShot_0.png")
 
 
 def main():
