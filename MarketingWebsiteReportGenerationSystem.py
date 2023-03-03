@@ -37,10 +37,21 @@ class MainWindow(QMainWindow):
             self.ui.button_search_page_search_marketing_sites.click)
         self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
         self.ui.button_links_page_scrap_info.clicked.connect(self.scrape_website_page)
+        self.ui.button_info_edit_page_next.clicked.connect(self.next_page)
+        self.ui.button_info_edit_page_previous.clicked.connect(self.previous_page)
+        self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
+        self.ui.button_report_page_back_edits.clicked.connect(self.back_to_edits)
+#        self.ui.button_report_page_export_csv.clicked.connect()
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
+
+        # update dropdown = update category list
+#        self.ui.input_info_edit_page_category.currentTextChanged.connect()
+
+        # change page when manually typed page number
+        self.ui.input_info_edit_page_current_page.textChanged.connect(self.scrape_website_page)
 
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
@@ -119,16 +130,47 @@ class MainWindow(QMainWindow):
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
 
+    def next_page(self):
+        page_number = int(self.ui.input_info_edit_page_current_page.text())
+        max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
+        if page_number < max_pages:
+            self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
+            self.update_page()
+
+    def previous_page(self):
+        page_number = int(self.ui.input_info_edit_page_current_page.text())
+        if page_number > 1:
+            self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
+            self.update_page()
+
+    def update_page(self):
+        marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        exp_date = self.ui.input_info_edit_page_expiring_date.date()
+        tnc = self.ui.input_info_edit_page_tnc.currentText()
+        pics = self.ui.input_info_edit_page_pics.currentText()
+        opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
+        remarks = self.ui.input_info_edit_page_remarks.toPlainText()
+        self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
+        self.ui.input_info_edit_page_expiring_date.date().toPyDate()
+        self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
+        self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+        self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
+        self.ui.input_info_edit_page_remarks.clear()
+        self.ui.lbl_info_edit_page_label.setText("label 1")
+        self.ui.input_info_edit_page_category.setCurrentIndex(0)
 
     def scrape_website_page(self):
+        page_number = int(self.ui.input_info_edit_page_current_page.text())
+        self.ui.lbl_info_edit_page_total_pages.setText(str(10))
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         try:
             #use url list
-            scraped_text_list, scraped_link_list = web_scrape(1, url_2)
+            scraped_text_list, scraped_link_list = web_scrape(page_number, url_2)
             Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
             self.ui.lbl_info_edit_page_full_url.setText(url_2)
             for items_no in range(len(Label_Category_dict)):
                 try:
+                    # set labels and categories dynamically
                     if items_no == 0:
                         self.ui.input_info_edit_page_category.addItems(define_categories())
                         self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
@@ -149,21 +191,34 @@ class MainWindow(QMainWindow):
             if Keywords_Exist_dict["Exist?"][0] == "Yes":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
             else:
-                self.ui.input_info_edit_page_tnc.setCurrentText(2)
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
             if Keywords_Exist_dict["Exist?"][1] == "Yes":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(1)
             else:
-                self.ui.input_info_edit_page_pics.setCurrentText(2)
+                self.ui.input_info_edit_page_pics.setCurrentIndex(2)
             if Keywords_Exist_dict["Exist?"][2] == "Yes":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
             else:
-                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentText(2)
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
             self.ui.lbl_info_page_error_msg.setVisible(False)
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
             pass
-        self.ui.graphicsView_info_edit_page_screenshot.setWindowFilePath("Screen_Captures/ScreenShot_0.png")
+        self.ui.graphicsView_info_edit_page_screenshot.setWindowFilePath(f"Screen_Captures/ScreenShot_{page_number}.png")
+
+    def update_category(self):
+        update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
+    def preview_output(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
+
+    def back_to_edits(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
+
+    def export_to_csv(self):
+        pass
+        # save scraped results from local variable to csv format
+
 
 
 def main():

@@ -49,7 +49,6 @@ def update_defined_category(word, category):
 def check_word_list(scraped_list):
     item_list = scraped_list
     item_count = 0
-    categories = str(defined_category_list[0][0])
 # check for keywords (exact match) and categories
     for item in item_list:
         Label_Category_dict["Label"].append(item)
@@ -66,6 +65,7 @@ def check_word_list(scraped_list):
                         Label_Category_dict["Category"].append(defined_categories[0])
                         break
                     else:
+                        # if no match at all then empty
                         Label_Category_dict["Category"].append("")
 
 # Convert from category list to keyword list
