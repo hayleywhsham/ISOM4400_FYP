@@ -166,6 +166,7 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_pics.setCurrentIndex(0)
         self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
         self.ui.input_info_edit_page_remarks.clear()
+
         self.ui.lbl_info_edit_page_label.setText("label 1")
         self.ui.input_info_edit_page_category.setCurrentIndex(0)
         self.scene_info_edit_page_screenshot = QGraphicsScene()
@@ -188,6 +189,8 @@ class MainWindow(QMainWindow):
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
                 full_url_list.append(full_url)
+
+# put to new function and call for update and initialize, input = page number
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
             self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
             Label_Category_dict = all_Label_Category_dict[0]
@@ -234,6 +237,7 @@ class MainWindow(QMainWindow):
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
             self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
         self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
+# put to new function and call for update and initialize
 
     def update_category(self):
         update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
