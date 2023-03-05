@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import sys
+import os
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
 from Check_Word_List import import_categories, update_defined_category, check_word_list, define_categories
@@ -238,8 +239,9 @@ class MainWindow(QMainWindow):
         # save scraped results from local variable to csv format
 
 
-
 def main():
+    for screenshot in os.listdir("Screen_Captures"):
+        os.remove("Screen_Captures/"+screenshot)
     app = QApplication(sys.argv)
     main_window = MainWindow()
     main_window.show()
