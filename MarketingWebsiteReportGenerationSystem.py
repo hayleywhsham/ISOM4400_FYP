@@ -17,6 +17,11 @@ import threading
 from facebook_scraper import get_posts
 
 
+def clear_screenshots():
+    for screenshot in os.listdir("Screen_Captures"):
+        os.remove("Screen_Captures/" + screenshot)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -52,7 +57,7 @@ class MainWindow(QMainWindow):
 #        self.ui.input_info_edit_page_category.currentTextChanged.connect(self.update_page)
 
         # change page when manually typed page number
-        self.ui.input_info_edit_page_current_page.textChanged.connect(self.scrape_website_page)
+        self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
 
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
@@ -70,6 +75,7 @@ class MainWindow(QMainWindow):
             t.start()
 
         self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
+
     def search_urls(self):
 
         # PlaceHolder
@@ -136,13 +142,11 @@ class MainWindow(QMainWindow):
         max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
         if page_number < max_pages:
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
-            self.update_page()
 
     def previous_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
-            self.update_page()
 
     def update_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
@@ -152,7 +156,10 @@ class MainWindow(QMainWindow):
         pics = self.ui.input_info_edit_page_pics.currentText()
         opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
         remarks = self.ui.input_info_edit_page_remarks.toPlainText()
-        self.ui.lbl_info_edit_page_full_url.setText(full_url_list[page_number - 1])
+        try:
+            self.ui.lbl_info_edit_page_full_url.setText(full_url_list[page_number - 1])
+        except:
+            self.ui.lbl_info_edit_page_full_url.setText("Full url here")
         self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
         self.ui.input_info_edit_page_expiring_date.date().toPyDate()
         self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
@@ -161,15 +168,16 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_remarks.clear()
         self.ui.lbl_info_edit_page_label.setText("label 1")
         self.ui.input_info_edit_page_category.setCurrentIndex(0)
-        scene = QGraphicsScene()
-        scene.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
-        self.ui.graphicsView_info_edit_page_screenshot.setScene(scene)
+        self.scene_info_edit_page_screenshot = QGraphicsScene()
+        if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
+            self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
+        self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
 
     def scrape_website_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         try:
-            #use url list
+            #use url from last step for scraping
             url_list = list(self.url_pool)
             for url in url_list:
                 if not url.startswith("http://"):
@@ -183,48 +191,49 @@ class MainWindow(QMainWindow):
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
             self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
             Label_Category_dict = all_Label_Category_dict[0]
-            print(full_url_list)
-            for items_no in range(len(Label_Category_dict)):
-                try:
-                    # set labels and categories dynamically
-                    if items_no == 0:
-                        self.ui.input_info_edit_page_category.addItems(define_categories())
-                        self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
-                        if Label_Category_dict["Category"][0] == "":
-                            self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
-                        else:
-                            self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
-                    else:
-                        #self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
-                        setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
-                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
-                        if Label_Category_dict["Category"][items_no] == "":
-                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
-                        else:
-                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
-                except Exception as e:
-                    print(str(e))
-                    continue
-            if Keywords_Exist_dict["Exist?"][0] == "Yes":
-                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
-            else:
-                self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
-            if Keywords_Exist_dict["Exist?"][1] == "Yes":
-                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-            else:
-                self.ui.input_info_edit_page_pics.setCurrentIndex(2)
-            if Keywords_Exist_dict["Exist?"][2] == "Yes":
-                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-            else:
-                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
-            self.ui.lbl_info_page_error_msg.setVisible(False)
+            if Label_Category_dict != []:
+                for items_no in range(len(Label_Category_dict)):
+                    try:
+                        # set labels and categories dynamically
+                        if items_no == 0:
+                            self.ui.input_info_edit_page_category.addItems(define_categories())
+                            self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+                            if Label_Category_dict["Category"][0] == "":
+                                self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
+                            else:
+                                self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
+                        #else:
+                            #self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
+                            #setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
+                            #setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
+                            #if Label_Category_dict["Category"][items_no] == "":
+                                #setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
+                            #else:
+                                #setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
+                    except Exception as e:
+                        print(str(e))
+                        continue
+                if Keywords_Exist_dict["Exist?"][0] == "Yes":
+                    self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
+                else:
+                    self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
+                if Keywords_Exist_dict["Exist?"][1] == "Yes":
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+                else:
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(2)
+                if Keywords_Exist_dict["Exist?"][2] == "Yes":
+                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
+                else:
+                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
+                self.ui.lbl_info_page_error_msg.setVisible(False)
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
             pass
-        scene = QGraphicsScene()
-        scene.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
-        self.ui.graphicsView_info_edit_page_screenshot.setScene(scene)
+        self.scene_info_edit_page_screenshot = QGraphicsScene()
+        if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
+            self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
+        self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
 
     def update_category(self):
         update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
@@ -240,8 +249,7 @@ class MainWindow(QMainWindow):
 
 
 def main():
-    for screenshot in os.listdir("Screen_Captures"):
-        os.remove("Screen_Captures/"+screenshot)
+    clear_screenshots()
     app = QApplication(sys.argv)
     main_window = MainWindow()
     main_window.show()
