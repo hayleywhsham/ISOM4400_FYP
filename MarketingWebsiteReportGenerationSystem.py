@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
         # update dropdown = update category list
-#        self.ui.input_info_edit_page_category.currentTextChanged.connect()
+#        self.ui.input_info_edit_page_category.currentTextChanged.connect(self.update_page)
 
         # change page when manually typed page number
         self.ui.input_info_edit_page_current_page.textChanged.connect(self.scrape_website_page)
@@ -150,6 +150,7 @@ class MainWindow(QMainWindow):
         pics = self.ui.input_info_edit_page_pics.currentText()
         opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
         remarks = self.ui.input_info_edit_page_remarks.toPlainText()
+        self.ui.lbl_info_edit_page_full_url.setText(url_2)
         self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
         self.ui.input_info_edit_page_expiring_date.date().toPyDate()
         self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
@@ -165,26 +166,30 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         try:
             #use url list
-            scraped_text_list, scraped_link_list = web_scrape(page_number, url_2)
-            Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
+            url_list = [url_1, url_2]
+            for i in len(url_list):
+                scraped_text_list, scraped_link_list = web_scrape(i, url_list[i])
+                Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
+                all_Label_Category_dict.append(Label_Category_dict)
+                all_Keywords_Exist_dict.append(Keywords_Exist_dict)
             self.ui.lbl_info_edit_page_full_url.setText(url_2)
             for items_no in range(len(Label_Category_dict)):
                 try:
                     # set labels and categories dynamically
                     if items_no == 0:
                         self.ui.input_info_edit_page_category.addItems(define_categories())
-                        self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+                        self.ui.lbl_info_edit_page_label.setText(all_Label_Category_dict[0]["Label"][0])
                         if Label_Category_dict["Category"][0] == "":
                             self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                         else:
-                            self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+                            self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
                     else:
                         setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
-                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
+                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, all_Label_Category_dict[0]["Label"][items_no]))
                         if Label_Category_dict["Category"][items_no] == "":
                             setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
                         else:
-                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
+                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, all_Label_Category_dict[0]["Category"][items_no]))
                 except Exception as e:
                     print(str(e))
                     continue
