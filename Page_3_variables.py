@@ -3,6 +3,7 @@ password = "FYP4400test"
 defined_category_list = []
 text_list = []
 url_list = []
+full_url_list = []
 Label_Category_dict = {"Label": [],  "Category": []}
 Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
 scraped_text_list = []

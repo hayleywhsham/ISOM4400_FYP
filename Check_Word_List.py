@@ -25,14 +25,16 @@ def define_categories():
 
 def update_defined_category(word, category):
     category_exist = False
-#    for defined_categories in defined_category_list:
-#       if word.casefold() in defined_categories.casefold():
-#           defined_categories
+    # check if word already exists in categories and remove
+    for defined_categories in defined_category_list:
+        if word.casefold() in defined_categories.casefold():
+            defined_categories.remove(word)
 # Checking if the category already exists in the predefined list, if yes then append list, if not then add new list
     for defined_categories in defined_category_list:
         if (category.casefold() == "" and defined_categories[0] == "Unrelated") or category.casefold() == defined_categories[0].casefold():
             defined_categories.append(word)
             category_exist = True
+            break
     if not category_exist:
         defined_category_list.append([category, word])
 # Write the updated wordlist into the text file
@@ -81,5 +83,3 @@ def check_word_list(scraped_list):
                 Keywords_Exist_dict["Exist?"][2] = "Yes"
     i = 0
     return Label_Category_dict, Keywords_Exist_dict
-
-print(import_categories())

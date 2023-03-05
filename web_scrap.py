@@ -1,18 +1,10 @@
 import base64
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.common import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-import Check_Word_List_temp
-from Page_3_variables import *
 
 
 def web_scrape(counter, link):
@@ -56,4 +48,5 @@ def web_scrape(counter, link):
         print(str(e))
         pass
     sleep(10)
-    return text_list, link_list
+    full_url = driver.current_url
+    return text_list, link_list, full_url

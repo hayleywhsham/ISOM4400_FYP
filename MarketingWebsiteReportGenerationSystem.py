@@ -94,7 +94,7 @@ class MainWindow(QMainWindow):
         self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
         self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
-        url_pool = set()
+        self.url_pool = set()
         fb_page_name = fb_page_name
         source = "Facebook"
 
@@ -116,7 +116,7 @@ class MainWindow(QMainWindow):
                 break
             if (post_time.date() <= end_date):
                 urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                url_pool.update(urls)
+                self.url_pool.update(urls)
                 # print(urls)
                 for url in urls:
                     rowPosition = self.ui.table_links_page_link_list.rowCount()
@@ -144,13 +144,14 @@ class MainWindow(QMainWindow):
             self.update_page()
 
     def update_page(self):
+        page_number = int(self.ui.input_info_edit_page_current_page.text())
         marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
         exp_date = self.ui.input_info_edit_page_expiring_date.date()
         tnc = self.ui.input_info_edit_page_tnc.currentText()
         pics = self.ui.input_info_edit_page_pics.currentText()
         opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
         remarks = self.ui.input_info_edit_page_remarks.toPlainText()
-        self.ui.lbl_info_edit_page_full_url.setText(url_2)
+        self.ui.lbl_info_edit_page_full_url.setText(full_url_list[page_number - 1])
         self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
         self.ui.input_info_edit_page_expiring_date.date().toPyDate()
         self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
@@ -159,37 +160,47 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_remarks.clear()
         self.ui.lbl_info_edit_page_label.setText("label 1")
         self.ui.input_info_edit_page_category.setCurrentIndex(0)
+        scene = QGraphicsScene()
+        scene.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
+        self.ui.graphicsView_info_edit_page_screenshot.setScene(scene)
 
     def scrape_website_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
-        self.ui.lbl_info_edit_page_total_pages.setText(str(10))
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         try:
             #use url list
-            url_list = [url_1, url_2]
-            for i in len(url_list):
-                scraped_text_list, scraped_link_list = web_scrape(i, url_list[i])
+            url_list = list(self.url_pool)
+            for url in url_list:
+                if not url.startswith("http://"):
+                    url = "http://" + url
+            for i in range(len(url_list)):
+                scraped_text_list, scraped_link_list, full_url = web_scrape(i, url_list[i])
                 Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
-            self.ui.lbl_info_edit_page_full_url.setText(url_2)
+                full_url_list.append(full_url)
+            self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
+            self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
+            Label_Category_dict = all_Label_Category_dict[0]
+            print(full_url_list)
             for items_no in range(len(Label_Category_dict)):
                 try:
                     # set labels and categories dynamically
                     if items_no == 0:
                         self.ui.input_info_edit_page_category.addItems(define_categories())
-                        self.ui.lbl_info_edit_page_label.setText(all_Label_Category_dict[0]["Label"][0])
+                        self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
                         if Label_Category_dict["Category"][0] == "":
                             self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                         else:
                             self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
                     else:
+                        #self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
                         setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
-                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, all_Label_Category_dict[0]["Label"][items_no]))
+                        setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
                         if Label_Category_dict["Category"][items_no] == "":
                             setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
                         else:
-                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, all_Label_Category_dict[0]["Category"][items_no]))
+                            setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
                 except Exception as e:
                     print(str(e))
                     continue
@@ -210,7 +221,9 @@ class MainWindow(QMainWindow):
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
             pass
-        self.ui.graphicsView_info_edit_page_screenshot.setWindowFilePath(f"Screen_Captures/ScreenShot_{page_number}.png")
+        scene = QGraphicsScene()
+        scene.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
+        self.ui.graphicsView_info_edit_page_screenshot.setScene(scene)
 
     def update_category(self):
         update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
