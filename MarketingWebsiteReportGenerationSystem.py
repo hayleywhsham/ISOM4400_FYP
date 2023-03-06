@@ -183,11 +183,11 @@ class MainWindow(QMainWindow):
         try:
             # use url from last step for scraping
             url_list = list(self.url_pool)
-            for url in url_list:
-                if not url.startswith("http://"):
-                    url = "http://" + url
-            for i in range(len(url_list)):
-                scraped_text_list, scraped_link_list, full_url = web_scrape(i, url_list[i])
+            for i, url in enumerate(url_list):
+                if not (url.startswith("http://") or url.startswith("https://")):
+                    url_list[i] = "http://" + url
+            for i, url in enumerate(url_list):
+                scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
                 Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
@@ -207,16 +207,9 @@ class MainWindow(QMainWindow):
                             if Label_Category_dict["Category"][0] == "":
                                 self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                             else:
-                                self.ui.input_info_edit_page_category.setCurrentText(
-                                    all_Label_Category_dict[0]["Category"][0])
-                        # else:
-                        # self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
-                        # setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
-                        # setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
-                        # if Label_Category_dict["Category"][items_no] == "":
-                        # setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
-                        # else:
-                        # setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
+                                self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+                        else:
+                            self.add_new_combobox()
                     except Exception as e:
                         print(str(e))
                         continue
@@ -236,6 +229,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
+            print(str(e))
             pass
         self.scene_info_edit_page_screenshot = QGraphicsScene()
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
@@ -256,6 +250,29 @@ class MainWindow(QMainWindow):
     def export_to_csv(self):
         pass
         # save scraped results from local variable to csv format
+
+    def add_new_combobox(self):
+        self.columnWidgets = []
+        row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
+        print(row)
+        try:
+            Category = QComboBox()
+            Category.addItems(self.categoryList.categories.keys())
+            print(Category.itemText(i) for i in range(Category.count()))
+            try:
+                if Label_Category_dict["Category"][0] == "":
+                    Category.setCurrentText("Choose Category")
+                else:
+                    Category.setCurrentText(Label_Category_dict["Category"][0])
+            except Exception as e:
+                print("another error", str(e))
+            self.ui.formLayout_info_edit_page_scrolling_content.addRow(Label_Category_dict["Label"][row], Category)
+            self.columnWidgets.append(Category)
+        except Exception as e:
+            print("new error", str(e))
+
+    def get_combobox_data(self):
+        return [t.currentText() for t in self.columnWidgets]
 
 
 def main():
