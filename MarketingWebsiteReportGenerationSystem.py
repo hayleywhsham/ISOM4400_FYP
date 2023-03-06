@@ -1,3 +1,4 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -23,6 +24,7 @@ def clear_screenshots():
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -167,8 +169,8 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
         self.ui.input_info_edit_page_remarks.clear()
 
-        self.ui.lbl_info_edit_page_label.setText("label 1")
-        self.ui.input_info_edit_page_category.setCurrentIndex(0)
+        self.ui.lbl_info_edit_page_label_1.setText("label 1")
+        self.ui.input_info_edit_page_category_1.setCurrentIndex(0)
         self.scene_info_edit_page_screenshot = QGraphicsScene()
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
             self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
@@ -180,31 +182,35 @@ class MainWindow(QMainWindow):
         try:
             #use url from last step for scraping
             url_list = list(self.url_pool)
-            for url in url_list:
-                if not url.startswith("http://"):
-                    url = "http://" + url
+            for i, url in enumerate(url_list):
+                if not (url.startswith("http://") or url.startswith("https://")):
+                    url_list[i] = "https://" + url
             for i in range(len(url_list)):
                 scraped_text_list, scraped_link_list, full_url = web_scrape(i, url_list[i])
                 Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
                 full_url_list.append(full_url)
+        except Exception as e:
+            print(str(e))
 
 # put to new function and call for update and initialize, input = page number
+        try:
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
             self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
             Label_Category_dict = all_Label_Category_dict[0]
             if Label_Category_dict != []:
                 for items_no in range(len(Label_Category_dict)):
                     try:
+                        self.add_new_category_boxes(Label_Category_dict["Label"][0], Label_Category_dict["Category"][0])
                         # set labels and categories dynamically
                         if items_no == 0:
-                            self.ui.input_info_edit_page_category.addItems(define_categories())
-                            self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+                            self.ui.input_info_edit_page_category_1.addItems(define_categories())
+                            self.ui.lbl_info_edit_page_label_1.setText(Label_Category_dict["Label"][0])
                             if Label_Category_dict["Category"][0] == "":
-                                self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
+                                self.ui.input_info_edit_page_category_1.setCurrentText("Choose Category")
                             else:
-                                self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
+                                self.ui.input_info_edit_page_category_1.setCurrentText(Label_Category_dict["Category"][0])
                         #else:
                             #self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
                             #setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
@@ -233,6 +239,7 @@ class MainWindow(QMainWindow):
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
             pass
+        print(all_Label_Category_dict)
         self.scene_info_edit_page_screenshot = QGraphicsScene()
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
             self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
@@ -240,9 +247,70 @@ class MainWindow(QMainWindow):
 # put to new function and call for update and initialize
 
     def update_category(self):
-        update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
+        update_defined_category(self.ui.lbl_info_edit_page_label_1, self.ui.input_info_edit_page_category_1)
     def preview_output(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
+
+    def add_new_category_boxes(self, label, category):
+        self.ui.formLayout_info_edit_page_scrolling_content.layout().addRow(label, QtWidgets.QComboBox)
+
+    def add_new_category_box(self, number):
+        _translate = QtCore.QCoreApplication.translate
+        self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
+        self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
+        self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(10)
+        self.input_info_edit_page_category_2.setFont(font)
+        self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
+                                                           "{\n"
+                                                           "    background-color: rgb(238, 238, 238);\n"
+                                                           "    color: rgb(98, 98, 98);\n"
+                                                           "    border-radius: 15px;\n"
+                                                           "    font-size: 15px;\n"
+                                                           "    padding-left: 20px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "QComboBox::down-arrow\n"
+                                                           "{\n"
+                                                           "    border-image: url(:/image/arrow_down_grey.png);\n"
+                                                           "    height: 15px;\n"
+                                                           "    width: 15px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "QComboBox::drop-down\n"
+                                                           "{\n"
+                                                           "    subcontrol-origin: padding;\n"
+                                                           "    subcontrol-position: top right;\n"
+                                                           "    width: 45px; \n"
+                                                           "    border-top-right-radius: 3px;\n"
+                                                           "    border-bottom-right-radius: 3px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "QComboBox QAbstractItemView\n"
+                                                           "{\n"
+                                                           "    color: rgb(98, 98, 98); /*dark grey*/\n"
+                                                           "    background-color: white;\n"
+                                                           "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+                                                           "    selection-color: white;\n"
+                                                           "    border-radius: 0px;\n"
+                                                           "}\n"
+                                                           "\n"
+                                                           "")
+        self.input_info_edit_page_category_2.setEditable(False)
+        self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        self.input_info_edit_page_category_2.setObjectName("input_info_edit_page_category_2")
+        self.input_info_edit_page_category_2.addItem("")
+        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole,
+                                                                   self.input_info_edit_page_category_2)
+        self.input_info_edit_page_category_2.setItemText(0, "")
+        self.input_info_edit_page_category_2.setItemText(0, _translate("MainWindow", "Choose Category"))
 
     def back_to_edits(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
