@@ -8,7 +8,7 @@ from Page_3_variables import *
 
 # categories are personal information and keywords such as T&C, P.I.C.S and opt-in/opt-out
 def import_categories():
-    with open("WordList", "r", encoding="utf8") as word_file:
+    with open("Wordlist.txt", "r", encoding="utf8") as word_file:
         while True:
             categories = word_file.readline()
             defined_category_list.append(categories.replace(", ", ",").replace("\n", "").split(","))
@@ -29,7 +29,7 @@ def update_defined_category(word, category):
     if not category_exist:
         defined_category_list.append([category, word])
 # Write the updated wordlist into the text file
-    with open("WordList", "w", encoding="utf8") as word_file:
+    with open("Wordlist.txt", "w", encoding="utf8") as word_file:
         for line in defined_category_list[:-1]:
             word_file.write(line[0])
             for item in line[1:]:

@@ -1,6 +1,6 @@
-username = "hugofyptest@gmail.com"
-password = "FYP4400test"
-defined_category_list = []
+username: str = "hugofyptest@gmail.com"
+password: str = "FYP4400test"
+defined_category_list: list[list[str]] = []
 text_list = []
 url_list = []
 full_url_list = []

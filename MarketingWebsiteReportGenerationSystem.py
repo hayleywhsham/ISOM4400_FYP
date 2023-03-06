@@ -5,7 +5,7 @@ import sys
 import os
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
-from Check_Word_List import import_categories, update_defined_category, check_word_list, define_categories
+from Check_Word_List import check_word_list,CategoryList
 from Page_3_variables import *
 from web_scrap import *
 import datetime
@@ -25,6 +25,8 @@ def clear_screenshots():
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.categoryList = CategoryList()
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -47,14 +49,14 @@ class MainWindow(QMainWindow):
         self.ui.button_info_edit_page_previous.clicked.connect(self.previous_page)
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
         self.ui.button_report_page_back_edits.clicked.connect(self.back_to_edits)
-#        self.ui.button_report_page_export_csv.clicked.connect()
+        #        self.ui.button_report_page_export_csv.clicked.connect()
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
         # update dropdown = update category list
-#        self.ui.input_info_edit_page_category.currentTextChanged.connect(self.update_page)
+        #        self.ui.input_info_edit_page_category.currentTextChanged.connect(self.update_page)
 
         # change page when manually typed page number
         self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
@@ -117,22 +119,23 @@ class MainWindow(QMainWindow):
                                   "posts_per_page": 20
                               }):
             post_time = post['time']
-            # print("Post Time:",type(post['time']))
-            # print(f'data: start_date:{start_date},post_time: {post_time},end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {post["text"][:10]}\n')
-            if(post_time.date() < start_date):
+            # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
+            # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
+            # post["text"][:10]}\n')
+            if (post_time.date() < start_date):
                 break
             if (post_time.date() <= end_date):
                 urls = set(get_all_url_from_string(post['text']))  # set: unique per post
                 self.url_pool.update(urls)
                 # print(urls)
                 for url in urls:
-                    rowPosition = self.ui.table_links_page_link_list.rowCount()
-                    self.ui.table_links_page_link_list.insertRow(rowPosition)
-                    self.ui.table_links_page_link_list.setItem(rowPosition, 0, QTableWidgetItem(fb_page_name))
-                    self.ui.table_links_page_link_list.setItem(rowPosition, 1, QTableWidgetItem(source))
-                    self.ui.table_links_page_link_list.setItem(rowPosition, 2,
+                    row_position = self.ui.table_links_page_link_list.rowCount()
+                    self.ui.table_links_page_link_list.insertRow(row_position)
+                    self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(fb_page_name))
+                    self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(source))
+                    self.ui.table_links_page_link_list.setItem(row_position, 2,
                                                                QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
-                    self.ui.table_links_page_link_list.setItem(rowPosition, 3, QTableWidgetItem(url))
+                    self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(url))
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
@@ -178,7 +181,7 @@ class MainWindow(QMainWindow):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         try:
-            #use url from last step for scraping
+            # use url from last step for scraping
             url_list = list(self.url_pool)
             for url in url_list:
                 if not url.startswith("http://"):
@@ -190,7 +193,7 @@ class MainWindow(QMainWindow):
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
                 full_url_list.append(full_url)
 
-# put to new function and call for update and initialize, input = page number
+            # put to new function and call for update and initialize, input = page number
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
             self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
             Label_Category_dict = all_Label_Category_dict[0]
@@ -199,20 +202,21 @@ class MainWindow(QMainWindow):
                     try:
                         # set labels and categories dynamically
                         if items_no == 0:
-                            self.ui.input_info_edit_page_category.addItems(define_categories())
+                            self.ui.input_info_edit_page_category.addItems(self.categoryList.categories.keys())
                             self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
                             if Label_Category_dict["Category"][0] == "":
                                 self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                             else:
-                                self.ui.input_info_edit_page_category.setCurrentText(all_Label_Category_dict[0]["Category"][0])
-                        #else:
-                            #self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
-                            #setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
-                            #setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
-                            #if Label_Category_dict["Category"][items_no] == "":
-                                #setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
-                            #else:
-                                #setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
+                                self.ui.input_info_edit_page_category.setCurrentText(
+                                    all_Label_Category_dict[0]["Category"][0])
+                        # else:
+                        # self.input_info_edit_page_category_3 = QtWidgets.QComboBox(self.formLayoutWidget)
+                        # setattr(f'self.ui.input_info_edit_page_category_{items_no}', "addItems", (define_categories()))
+                        # setattr(f'self.ui.lbl_info_edit_page_label_{items_no+1}', "setText", (self, Label_Category_dict["Label"][items_no]))
+                        # if Label_Category_dict["Category"][items_no] == "":
+                        # setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, "Choose Category"))
+                        # else:
+                        # setattr(f'self.ui.input_info_edit_page_category_{items_no+1}', "setCurrentText", (self, Label_Category_dict["Category"][items_no]))
                     except Exception as e:
                         print(str(e))
                         continue
@@ -237,10 +241,12 @@ class MainWindow(QMainWindow):
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
             self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
         self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
-# put to new function and call for update and initialize
+
+    # put to new function and call for update and initialize
 
     def update_category(self):
-        update_defined_category(self.ui.lbl_info_edit_page_label, self.ui.input_info_edit_page_category)
+        self.categoryList.update_defined_category(self.ui.lbl_info_edit_page_label.text(), self.ui.input_info_edit_page_category.text())
+
     def preview_output(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
