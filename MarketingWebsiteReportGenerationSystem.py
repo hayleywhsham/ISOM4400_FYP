@@ -152,7 +152,14 @@ class MainWindow(QMainWindow):
 
     def update_page(self):
         #Get current page information (i.e. selected dropdown items)
-        page_number = int(self.ui.input_info_edit_page_current_page.text())
+        try:
+            page_number = int(self.ui.input_info_edit_page_current_page.text())
+        except ValueError as e:
+            if self.ui.input_info_edit_page_current_page.text() == '':
+                pass
+            else:
+                print(str(e))
+
         #marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
         #exp_date = self.ui.input_info_edit_page_expiring_date.date()
         #tnc = self.ui.input_info_edit_page_tnc.currentText()
@@ -243,9 +250,8 @@ class MainWindow(QMainWindow):
 
     def export_to_csv(self):
         with open("test_output.csv", "w", encoding="utf8") as word_file:
-            word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out")
+            word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out\n")
             for exports in self.export_info:
-                print(exports)
                 word_file.write(str(exports) + "\n")
 
         # save scraped results from local variable to csv format
