@@ -8,12 +8,13 @@ class CategoryList:
     self.categories -> dictionary {category: str : category_names: list[str]}
 
     """
+
     def __init__(self):
         self.categories = {}
         with open("WordList.txt", "r", encoding="utf8") as word_file:
             # dictionary: {category: str : category_names: list[str]}
 
-            self.categories = json.loads(word_file.readline().replace("'",'"'))
+            self.categories = json.loads(word_file.readline().replace("'", '"'))
 
     def update_defined_category(self, new_category_names: str, new_category: str):
         isChanged = False
@@ -43,86 +44,80 @@ class CategoryList:
             with open("WordList.txt", "w", encoding="utf8") as word_file:
                 word_file.write(str(self.categories))
 
+    # categories are personal information and keywords such as T&C, P.I.C.S and opt-in/opt-out
+    # def import_categories():
+    #     with open("Wordlist.txt", "r", encoding="utf8") as word_file:
+    #         while True:
+    #             categories = word_file.readline()
+    #             defined_category_list.append(categories.replace(", ", ",").replace("\n", "").split(","))
+    #             if not categories:
+    #                 break
+    #     word_file.close()
+    #     defined_category_list.pop()
+    #     return defined_category_list
+    #
+    #
+    # def define_categories():
+    #     return [c[0] for c in import_categories()]
+    #
+    #
+    # def update_defined_category(word, category):
+    #     category_exist = False
+    #
+    #     # check if word already exists in other categories and remove it
+    #     for defined_categories in defined_category_list:
+    #         defined_categories.remove(word)
+    #
+    #     # Checking if the category already exists in the predefined list, if yes then append list, if not then add new list
+    #     for defined_categories in defined_category_list:
+    #         if (category.casefold() == "" and defined_categories[0] == "Unrelated") or category.casefold() == \
+    #                 defined_categories[0].casefold():
+    #             defined_categories.append(word)
+    #             category_exist = True
+    #             break
+    #
+    #     if not category_exist:
+    #         defined_category_list.append([category, word])
+    #     # Write the updated wordlist into the text file
+    #     with open("Wordlist.txt", "w", encoding="utf8") as word_file:
+    #         for line in defined_category_list[:-1]:
+    #             word_file.write(line[0])
+    #             for item in line[1:]:
+    #                 word_file.write(str(", " + item))
+    #             word_file.write("\n")
+    #         word_file.write(defined_category_list[-1][0])
+    #         for item in defined_category_list[-1][1:]:
+    #             word_file.write(str(", " + item))
+    #     word_file.close()
+    #     return defined_category_list
 
-# categories are personal information and keywords such as T&C, P.I.C.S and opt-in/opt-out
-# def import_categories():
-#     with open("Wordlist.txt", "r", encoding="utf8") as word_file:
-#         while True:
-#             categories = word_file.readline()
-#             defined_category_list.append(categories.replace(", ", ",").replace("\n", "").split(","))
-#             if not categories:
-#                 break
-#     word_file.close()
-#     defined_category_list.pop()
-#     return defined_category_list
-#
-#
-# def define_categories():
-#     return [c[0] for c in import_categories()]
-#
-#
-# def update_defined_category(word, category):
-#     category_exist = False
-#
-#     # check if word already exists in other categories and remove it
-#     for defined_categories in defined_category_list:
-#         defined_categories.remove(word)
-#
-#     # Checking if the category already exists in the predefined list, if yes then append list, if not then add new list
-#     for defined_categories in defined_category_list:
-#         if (category.casefold() == "" and defined_categories[0] == "Unrelated") or category.casefold() == \
-#                 defined_categories[0].casefold():
-#             defined_categories.append(word)
-#             category_exist = True
-#             break
-#
-#     if not category_exist:
-#         defined_category_list.append([category, word])
-#     # Write the updated wordlist into the text file
-#     with open("Wordlist.txt", "w", encoding="utf8") as word_file:
-#         for line in defined_category_list[:-1]:
-#             word_file.write(line[0])
-#             for item in line[1:]:
-#                 word_file.write(str(", " + item))
-#             word_file.write("\n")
-#         word_file.write(defined_category_list[-1][0])
-#         for item in defined_category_list[-1][1:]:
-#             word_file.write(str(", " + item))
-#     word_file.close()
-#     return defined_category_list
-
-
-def check_word_list(scraped_list):
-    item_list = scraped_list
-    item_count = 0
-    # check for keywords (exact match) and categories
-    for item in item_list:
-        Label_Category_dict["Label"].append(item)
-        item_count += 1
-        for defined_categories in defined_category_list:
-            for defined_text in defined_categories[1:]:
-                if item.casefold() == defined_text.casefold():
-                    Label_Category_dict["Category"].append(defined_categories[0])
-        # check for keywords (not exact match)
-        if len(Label_Category_dict["Category"]) < item_count:
-            for defined_categories in defined_category_list:
-                for defined_text in defined_categories[1:]:
-                    if defined_text.casefold() in item.casefold():
+    def check_word_list(self, scraped_list: list):
+        # check for keywords (exact match) and categories
+        for item in scraped_list:
+            Label_Category_dict["Label"].append(item)
+            for defined_categories, category_texts in self.categories.items():
+                for defined_text in category_texts:
+                    if item.casefold() == defined_text.casefold():
                         Label_Category_dict["Category"].append(defined_categories[0])
                         break
-                    else:
-                        # if no match at all then empty
-                        Label_Category_dict["Category"].append("")
+            # check for keywords (not exact match)
+            if len(Label_Category_dict["Category"]) < len(Label_Category_dict["Label"]):
+                for defined_categories, category_texts in self.categories.items():
+                    for defined_text in category_texts:
+                        if defined_text.casefold() in item.casefold():
+                            Label_Category_dict["Category"].append(defined_categories[0])
+                            break
+                        else:
+                            # if no match at all then empty
+                            Label_Category_dict["Category"].append("")
 
-    # Convert from category list to keyword list
-    for category in Label_Category_dict["Category"]:
-        if category == "T&C":
-            Keywords_Exist_dict["Exist?"][0] = "Yes"
-        elif category == "P.I.C.S":
-            Keywords_Exist_dict["Exist?"][1] = "Yes"
-        elif category == "Opt-in/Opt-out":
-            Keywords_Exist_dict["Exist?"][2] = "Yes"
+        # Convert from category list to keyword list
+        for category in Label_Category_dict["Category"]:
+            if category == "T&C":
+                Keywords_Exist_dict["Exist?"][0] = "Yes"
+            elif category == "P.I.C.S":
+                Keywords_Exist_dict["Exist?"][1] = "Yes"
+            elif category == "Opt-in/Opt-out":
+                Keywords_Exist_dict["Exist?"][2] = "Yes"
 
-    return Label_Category_dict, Keywords_Exist_dict
-
-
+        return Label_Category_dict, Keywords_Exist_dict

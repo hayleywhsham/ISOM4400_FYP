@@ -1,3 +1,4 @@
+from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -5,7 +6,7 @@ import sys
 import os
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
-from Check_Word_List import check_word_list,CategoryList
+from Check_Word_List import CategoryList
 from Page_3_variables import *
 from web_scrap import *
 import datetime
@@ -180,39 +181,40 @@ class MainWindow(QMainWindow):
     def scrape_website_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
-        try:
-            # use url from last step for scraping
-            url_list = list(self.url_pool)
-            for i, url in enumerate(url_list):
-                if not (url.startswith("http://") or url.startswith("https://")):
-                    url_list[i] = "http://" + url
-            for i, url in enumerate(url_list):
-                scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
-                Label_Category_dict, Keywords_Exist_dict = check_word_list(scraped_text_list)
-                all_Label_Category_dict.append(Label_Category_dict)
-                all_Keywords_Exist_dict.append(Keywords_Exist_dict)
-                full_url_list.append(full_url)
+        category_list = CategoryList()
+        # use url from last step for scraping
+        url_list = list(self.url_pool)
+        for i, url in enumerate(url_list):
+            if not (url.startswith("http://") or url.startswith("https://")):
+                url = "http://" + url
+            scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
+            Label_Category_dict, Keywords_Exist_dict = category_list.check_word_list(scraped_text_list)
+            all_Label_Category_dict.append(Label_Category_dict)
+            all_Keywords_Exist_dict.append(Keywords_Exist_dict)
+            full_url_list.append(full_url)
 
-            # put to new function and call for update and initialize, input = page number
-            self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
-            self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
-            Label_Category_dict = all_Label_Category_dict[0]
-            if Label_Category_dict != []:
-                for items_no in range(len(Label_Category_dict)):
-                    try:
-                        # set labels and categories dynamically
-                        if items_no == 0:
-                            self.ui.input_info_edit_page_category.addItems(self.categoryList.categories.keys())
-                            self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
-                            if Label_Category_dict["Category"][0] == "":
-                                self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
-                            else:
-                                self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+        # put to new function and call for update and initialize, input = page number
+        self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
+        self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
+        Label_Category_dict = all_Label_Category_dict[0]
+        category_list = self.categoryList
+        if Label_Category_dict != []:
+            for items_no in range(len(Label_Category_dict)):
+                try:
+                    # set labels and categories dynamically
+                    if items_no == 0:
+                        self.ui.input_info_edit_page_category.addItems(category_list.keys())
+                        self.ui.lbl_info_edit_page_label.setText(Label_Category_dict["Label"][0])
+                        if Label_Category_dict["Category"][0] == "":
+                            self.ui.input_info_edit_page_category.setCurrentText("Choose Category")
                         else:
-                            self.add_new_combobox()
-                    except Exception as e:
-                        print(str(e))
-                        continue
+                            self.ui.input_info_edit_page_category.setCurrentText(Label_Category_dict["Category"][0])
+                    else:
+                        self.add_new_combobox()
+                except Exception as e:
+                    print(str(e))
+                    continue
+            try:
                 if Keywords_Exist_dict["Exist?"][0] == "Yes":
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
@@ -226,11 +228,10 @@ class MainWindow(QMainWindow):
                 else:
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
                 self.ui.lbl_info_page_error_msg.setVisible(False)
-        except Exception as e:
-            self.ui.lbl_info_page_error_msg.setText(str(e))
-            self.ui.lbl_info_page_error_msg.setVisible(True)
-            print(str(e))
-            pass
+            except Exception as e:
+                print(str(e))
+        #self.ui.lbl_info_page_error_msg.setText(str(e))
+        #self.ui.lbl_info_page_error_msg.setVisible(True)
         self.scene_info_edit_page_screenshot = QGraphicsScene()
         if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
             self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
@@ -254,22 +255,66 @@ class MainWindow(QMainWindow):
     def add_new_combobox(self):
         self.columnWidgets = []
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
-        print(row)
         try:
             Category = QComboBox()
-            Category.addItems(self.categoryList.categories.keys())
-            print(Category.itemText(i) for i in range(Category.count()))
+            font = QtGui.QFont()
+            font.setFamily("Arial Black")
+            font.setPointSize(10)
+            font.setBold(False)
+            font.setItalic(False)
+            font.setWeight(10)
+            Category.setFont(font)
+            Category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+            Category.setStyleSheet("QComboBox\n"
+                                                             "{\n"
+                                                             "    background-color: rgb(238, 238, 238);\n"
+                                                             "    color: rgb(98, 98, 98);\n"
+                                                             "    border-radius: 15px;\n"
+                                                             "    font-size: 15px;\n"
+                                                             "    padding-left: 20px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "QComboBox::down-arrow\n"
+                                                             "{\n"
+                                                             "    border-image: url(:/image/arrow_down_grey.png);\n"
+                                                             "    height: 15px;\n"
+                                                             "    width: 15px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "QComboBox::drop-down\n"
+                                                             "{\n"
+                                                             "    subcontrol-origin: padding;\n"
+                                                             "    subcontrol-position: top right;\n"
+                                                             "    width: 45px; \n"
+                                                             "    border-top-right-radius: 3px;\n"
+                                                             "    border-bottom-right-radius: 3px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "QComboBox QAbstractItemView\n"
+                                                             "{\n"
+                                                             "    color: rgb(98, 98, 98); /*dark grey*/\n"
+                                                             "    background-color: white;\n"
+                                                             "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+                                                             "    selection-color: white;\n"
+                                                             "    border-radius: 0px;\n"
+                                                             "}\n"
+                                                             "\n"
+                                                             "")
+            Category.setEditable(False)
+            Category.addItems(list(self.categoryList.categories.keys()))
+            print(Label_Category_dict)
+            print(row)
             try:
-                if Label_Category_dict["Category"][0] == "":
+                if Label_Category_dict["Category"][row-2] == "":
                     Category.setCurrentText("Choose Category")
                 else:
-                    Category.setCurrentText(Label_Category_dict["Category"][0])
+                    Category.setCurrentText(Label_Category_dict["Category"][row-2])
+                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Label_Category_dict["Label"][row-2], Category)
+                self.columnWidgets.append(Category)
             except Exception as e:
-                print("another error", str(e))
-            self.ui.formLayout_info_edit_page_scrolling_content.addRow(Label_Category_dict["Label"][row], Category)
-            self.columnWidgets.append(Category)
+                print("this error", str(e))
         except Exception as e:
-            print("new error", str(e))
+            print(str(e))
 
     def get_combobox_data(self):
         return [t.currentText() for t in self.columnWidgets]
