@@ -53,16 +53,13 @@ class MainWindow(QMainWindow):
         self.ui.button_info_edit_page_previous.clicked.connect(self.previous_page)
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
         self.ui.button_report_page_back_edits.clicked.connect(self.back_to_edits)
-        #        self.ui.button_report_page_export_csv.clicked.connect()
+        self.ui.button_report_page_export_csv.clicked.connect(self.export_to_csv)
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
-        # update dropdown = update category list
-        #        self.ui.input_info_edit_page_category.currentTextChanged.connect(self.update_page)
-
-        # change page when manually typed page number
+        # change page when page number changed
         self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
 
     def search_urls_from_csv(self):
@@ -109,7 +106,6 @@ class MainWindow(QMainWindow):
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
         fb_page_name = fb_page_name
         source = "Facebook"
-
         for post in get_posts(fb_page_name,
                               pages=10,
 
@@ -168,28 +164,21 @@ class MainWindow(QMainWindow):
         #Debug
         try:
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[page_number - 1])
-        except:
+        except Exception as e:
             self.ui.lbl_info_edit_page_full_url.setText("Full url here")
 
-        #Set new page items
-        self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
-        self.ui.input_info_edit_page_expiring_date.date().toPyDate()
-        self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-        self.ui.input_info_edit_page_pics.setCurrentIndex(0)
-        self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
-        self.ui.input_info_edit_page_remarks.clear()
+        # Clear old label-categories pairs
         while self.ui.formLayout_info_edit_page_scrolling_content.rowCount() > 0:
             self.ui.formLayout_info_edit_page_scrolling_content.removeRow(0)
-        self.scene_info_edit_page_screenshot = QGraphicsScene()
-        if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
-            self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
-        self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
+
+        # generate new list of label-categories
+        self.generate_category_page()
 
     def scrape_website_page(self):
-        page_number = int(self.ui.input_info_edit_page_current_page.text())
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         # use url from last step for scraping
         url_list = list(self.url_pool)
+        self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
         try:
             for i, url in enumerate(url_list):
                 if not (url.startswith("http://") or url.startswith("https://")):
@@ -201,43 +190,46 @@ class MainWindow(QMainWindow):
                 full_url_list.append(full_url)
 
             # put to new function and call for update and initialize, input = page number
-            self.ui.lbl_info_edit_page_full_url.setText(full_url_list[0])
-            self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
-            Label_Category_dict = all_Label_Category_dict[0]
-            print(Label_Category_dict)
-            if Label_Category_dict != []:
-                for items_no in range(len(Label_Category_dict)):
-                    try:
-                        self.add_new_combobox()
-                        print(Label_Category_dict[items_no])
-                        print(items_no, "times")
-                    except Exception as e:
-                        print(str(e))
-                        continue
-                try:
-                    if Keywords_Exist_dict["Exist?"][0] == "Yes":
-                        self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
-                    else:
-                        self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
-                    if Keywords_Exist_dict["Exist?"][1] == "Yes":
-                        self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                    else:
-                        self.ui.input_info_edit_page_pics.setCurrentIndex(2)
-                    if Keywords_Exist_dict["Exist?"][2] == "Yes":
-                        self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-                    else:
-                        self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
-                    self.ui.lbl_info_page_error_msg.setVisible(False)
-                except Exception as e:
-                    print(str(e))
+            self.generate_category_page()
+            self.ui.lbl_info_page_error_msg.setVisible(False)
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
-        self.scene_info_edit_page_screenshot = QGraphicsScene()
-        if os.path.exists(f"Screen_Captures/ScreenShot_{page_number - 1}.png"):
-            self.scene_info_edit_page_screenshot.addPixmap(QPixmap(f"Screen_Captures/ScreenShot_{page_number - 1}.png"))
-        self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
 
+    def generate_category_page(self):
+        list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
+        self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
+        self.ui.input_info_edit_page_expiring_date.date().toPyDate()
+        self.ui.input_info_edit_page_remarks.clear()
+        self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
+        Label_Category_dict = all_Label_Category_dict[list_index]
+        print(Label_Category_dict)
+        if Label_Category_dict != []:
+            for items_no in range(len(Label_Category_dict)):
+                try:
+                    self.add_new_combobox()
+                except Exception as e:
+                    print("some error", str(e))
+                    continue
+
+            if Keywords_Exist_dict["Exist?"][0] == "Yes":
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
+            if Keywords_Exist_dict["Exist?"][1] == "Yes":
+                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_pics.setCurrentIndex(2)
+            if Keywords_Exist_dict["Exist?"][2] == "Yes":
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
+
+            self.scene_info_edit_page_screenshot = QGraphicsScene()
+            if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
+                self.scene_info_edit_page_screenshot.addPixmap(
+                    QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
+            self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
 
     def update_category(self):
         self.categoryList.update_defined_category(self.ui.lbl_info_edit_page_label.text(), self.ui.input_info_edit_page_category.text())
@@ -249,12 +241,21 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
     def export_to_csv(self):
-        pass
+        with open("test_output.csv", "r", encoding="utf8") as word_file:
+            word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out")
+            exports = list(self.export_info)
+            for info in exports:
+                word_file.write(info)
+
         # save scraped results from local variable to csv format
 
     def add_new_combobox(self):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
         try:
+            Scraped_label = QLabel()
+            Scraped_label.setMinimumSize(QtCore.QSize(100, 0))
+            Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
+            Scraped_label.setText(Label_Category_dict["Label"][row])
             Category = QComboBox()
             Category.setMinimumSize(QtCore.QSize(250, 30))
             Category.setMaximumSize(QtCore.QSize(270, 30))
@@ -304,22 +305,22 @@ class MainWindow(QMainWindow):
             Category.setEditable(False)
             Category.addItem("Choose Category")
             Category.addItems(list(self.categoryList.categories.keys()))
-            print(row)
             try:
                 if Label_Category_dict["Category"][row] == "":
                     Category.setCurrentText("Choose Category")
                 else:
                     Category.setCurrentText(Label_Category_dict["Category"][row])
-                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Label_Category_dict["Label"][row], Category)
+                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
                 self.columnWidgets.append(Category)
             except Exception as e:
-                print(str(e))
-            print(row)
+                print("old", str(e))
         except Exception as e:
-            print(str(e))
+            print("bad", str(e))
 
     def get_combobox_data(self):
-        return [t.currentText() for t in self.columnWidgets]
+        changed_category = [t.currentText() for t in self.columnWidgets]
+        print(changed_category)
+
 
 
 def main():
