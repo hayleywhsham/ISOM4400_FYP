@@ -928,119 +928,119 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_label.setStyleSheet("color: rgb(255, 255, 255);")
         self.lbl_info_edit_page_label.setObjectName("lbl_info_edit_page_label")
         self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label)
-        self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
-        self.input_info_edit_page_category.setMinimumSize(QtCore.QSize(250, 30))
-        self.input_info_edit_page_category.setMaximumSize(QtCore.QSize(270, 30))
-        font = QtGui.QFont()
-        font.setFamily("Arial Black")
-        font.setPointSize(-1)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(10)
-        self.input_info_edit_page_category.setFont(font)
-        self.input_info_edit_page_category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        self.input_info_edit_page_category.setStyleSheet("QComboBox\n"
-"{\n"
-"    background-color: rgb(238, 238, 238);\n"
-"    color: rgb(98, 98, 98);\n"
-"    border-radius: 15px;\n"
-"    font-size: 15px;\n"
-"    padding-left: 20px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow\n"
-"{\n"
-"    border-image: url(:/image/arrow_down_grey.png);\n"
-"    height: 15px;\n"
-"    width: 15px;\n"
-"}\n"
-"\n"
-"QComboBox::drop-down\n"
-"{\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 45px; \n"
-"    border-top-right-radius: 3px;\n"
-"    border-bottom-right-radius: 3px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView\n"
-"{\n"
-"    color: rgb(98, 98, 98); /*dark grey*/\n"
-"    background-color: white;\n"
-"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-"    selection-color: white;\n"
-"    border-radius: 0px;\n"
-"}\n"
-"\n"
-"")
-        self.input_info_edit_page_category.setEditable(False)
-        self.input_info_edit_page_category.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        self.input_info_edit_page_category.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
-        self.input_info_edit_page_category.setObjectName("input_info_edit_page_category")
-        self.input_info_edit_page_category.addItem("")
-        self.input_info_edit_page_category.addItem("")
-        self.input_info_edit_page_category.addItem("")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category)
-        self.lbl_info_edit_page_label_2 = QtWidgets.QLabel(self.formLayoutWidget)
-        self.lbl_info_edit_page_label_2.setMinimumSize(QtCore.QSize(100, 0))
-        self.lbl_info_edit_page_label_2.setStyleSheet("color: rgb(255, 255, 255);")
-        self.lbl_info_edit_page_label_2.setObjectName("lbl_info_edit_page_label_2")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label_2)
-        self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
-        self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
-        self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
-        font = QtGui.QFont()
-        font.setFamily("Arial Black")
-        font.setPointSize(-1)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(10)
-        self.input_info_edit_page_category_2.setFont(font)
-        self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
-"{\n"
-"    background-color: rgb(238, 238, 238);\n"
-"    color: rgb(98, 98, 98);\n"
-"    border-radius: 15px;\n"
-"    font-size: 15px;\n"
-"    padding-left: 20px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow\n"
-"{\n"
-"    border-image: url(:/image/arrow_down_grey.png);\n"
-"    height: 15px;\n"
-"    width: 15px;\n"
-"}\n"
-"\n"
-"QComboBox::drop-down\n"
-"{\n"
-"    subcontrol-origin: padding;\n"
-"    subcontrol-position: top right;\n"
-"    width: 45px; \n"
-"    border-top-right-radius: 3px;\n"
-"    border-bottom-right-radius: 3px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView\n"
-"{\n"
-"    color: rgb(98, 98, 98); /*dark grey*/\n"
-"    background-color: white;\n"
-"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-"    selection-color: white;\n"
-"    border-radius: 0px;\n"
-"}\n"
-"\n"
-"")
-        self.input_info_edit_page_category_2.setEditable(False)
-        self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
-        self.input_info_edit_page_category_2.setObjectName("input_info_edit_page_category_2")
-        self.input_info_edit_page_category_2.addItem("")
-        self.input_info_edit_page_category_2.addItem("")
-        self.input_info_edit_page_category_2.addItem("")
-        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category_2)
+        #self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
+        #self.input_info_edit_page_category.setMinimumSize(QtCore.QSize(250, 30))
+        #self.input_info_edit_page_category.setMaximumSize(QtCore.QSize(270, 30))
+        #font = QtGui.QFont()
+        #font.setFamily("Arial Black")
+        #font.setPointSize(-1)
+        #font.setBold(False)
+        #font.setItalic(False)
+        #font.setWeight(10)
+        #self.input_info_edit_page_category.setFont(font)
+        #self.input_info_edit_page_category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        #self.input_info_edit_page_category.setStyleSheet("QComboBox\n"
+#"{\n"
+#"    background-color: rgb(238, 238, 238);\n"
+#"    color: rgb(98, 98, 98);\n"
+#"    border-radius: 15px;\n"
+#"    font-size: 15px;\n"
+#"    padding-left: 20px;\n"
+#"}\n"
+#"\n"
+#"QComboBox::down-arrow\n"
+#"{\n"
+#"    border-image: url(:/image/arrow_down_grey.png);\n"
+#"    height: 15px;\n"
+#"    width: 15px;\n"
+#"}\n"
+#"\n"
+#"QComboBox::drop-down\n"
+#"{\n"
+#"    subcontrol-origin: padding;\n"
+#"    subcontrol-position: top right;\n"
+#"    width: 45px; \n"
+#"    border-top-right-radius: 3px;\n"
+#"    border-bottom-right-radius: 3px;\n"
+#"}\n"
+#"\n"
+#"QComboBox QAbstractItemView\n"
+#"{\n"
+#"    color: rgb(98, 98, 98); /*dark grey*/\n"
+#"    background-color: white;\n"
+#"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+#"    selection-color: white;\n"
+#"    border-radius: 0px;\n"
+#"}\n"
+#"\n"
+#"")
+        #self.input_info_edit_page_category.setEditable(False)
+        #self.input_info_edit_page_category.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        #self.input_info_edit_page_category.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        #self.input_info_edit_page_category.setObjectName("input_info_edit_page_category")
+        #self.input_info_edit_page_category.addItem("")
+        #self.input_info_edit_page_category.addItem("")
+        #self.input_info_edit_page_category.addItem("")
+        #self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category)
+        #self.lbl_info_edit_page_label_2 = QtWidgets.QLabel(self.formLayoutWidget)
+        #self.lbl_info_edit_page_label_2.setMinimumSize(QtCore.QSize(100, 0))
+        #self.lbl_info_edit_page_label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        #self.lbl_info_edit_page_label_2.setObjectName("lbl_info_edit_page_label_2")
+        #self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label_2)
+        #self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
+        #self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
+        #self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
+        #font = QtGui.QFont()
+        #font.setFamily("Arial Black")
+        #font.setPointSize(-1)
+        #font.setBold(False)
+        #font.setItalic(False)
+        #font.setWeight(10)
+        #self.input_info_edit_page_category_2.setFont(font)
+        #self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        #self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
+#"{\n"
+#"    background-color: rgb(238, 238, 238);\n"
+#"    color: rgb(98, 98, 98);\n"
+#"    border-radius: 15px;\n"
+#"    font-size: 15px;\n"
+#"    padding-left: 20px;\n"
+#"}\n"
+#"\n"
+#"QComboBox::down-arrow\n"
+#"{\n"
+#"    border-image: url(:/image/arrow_down_grey.png);\n"
+#"    height: 15px;\n"
+#"    width: 15px;\n"
+#"}\n"
+#"\n"
+#"QComboBox::drop-down\n"
+#"{\n"
+#"    subcontrol-origin: padding;\n"
+#"    subcontrol-position: top right;\n"
+#"    width: 45px; \n"
+#"    border-top-right-radius: 3px;\n"
+#"    border-bottom-right-radius: 3px;\n"
+#"}\n"
+#"\n"
+#"QComboBox QAbstractItemView\n"
+#"{\n"
+#"    color: rgb(98, 98, 98); /*dark grey*/\n"
+#"    background-color: white;\n"
+#"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+#"    selection-color: white;\n"
+#"    border-radius: 0px;\n"
+#"}\n"
+#"\n"
+#"")
+        #self.input_info_edit_page_category_2.setEditable(False)
+        #self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        #self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        #self.input_info_edit_page_category_2.setObjectName("input_info_edit_page_category_2")
+        #self.input_info_edit_page_category_2.addItem("")
+        #self.input_info_edit_page_category_2.addItem("")
+        #self.input_info_edit_page_category_2.addItem("")
+        #self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category_2)
         self.scrollArea_info_edit_page_categorisation_content.setWidget(self.scrollAreaWidgetContents_info_edit_page)
         self.deco_info_edit_page_vline = QtWidgets.QFrame(self.widget_info_edit_page_result)
         self.deco_info_edit_page_vline.setGeometry(QtCore.QRect(590, 70, 20, 381))
@@ -1777,14 +1777,14 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_save_all_edits.setText(_translate("MainWindow", "Save All Edits"))
         self.lbl_info_edit_page_screenshot.setText(_translate("MainWindow", "Screenshot"))
         self.lbl_info_edit_page_pii_categorisation.setText(_translate("MainWindow", "PII - Form Labels Categorisation"))
-        self.lbl_info_edit_page_label.setText(_translate("MainWindow", "label 1"))
-        self.input_info_edit_page_category.setItemText(0, _translate("MainWindow", "Choose Category"))
-        self.input_info_edit_page_category.setItemText(1, _translate("MainWindow", "Name"))
-        self.input_info_edit_page_category.setItemText(2, _translate("MainWindow", "Address"))
-        self.lbl_info_edit_page_label_2.setText(_translate("MainWindow", "label 2"))
-        self.input_info_edit_page_category_2.setItemText(0, _translate("MainWindow", "Choose Category"))
-        self.input_info_edit_page_category_2.setItemText(1, _translate("MainWindow", "Name"))
-        self.input_info_edit_page_category_2.setItemText(2, _translate("MainWindow", "Address"))
+        #self.lbl_info_edit_page_label.setText(_translate("MainWindow", "label 1"))
+        #self.input_info_edit_page_category.setItemText(0, _translate("MainWindow", "Choose Category"))
+        #self.input_info_edit_page_category.setItemText(1, _translate("MainWindow", "Name"))
+        #self.input_info_edit_page_category.setItemText(2, _translate("MainWindow", "Address"))
+        #self.lbl_info_edit_page_label_2.setText(_translate("MainWindow", "label 2"))
+        #self.input_info_edit_page_category_2.setItemText(0, _translate("MainWindow", "Choose Category"))
+        #self.input_info_edit_page_category_2.setItemText(1, _translate("MainWindow", "Name"))
+        #elf.input_info_edit_page_category_2.setItemText(2, _translate("MainWindow", "Address"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(0, _translate("MainWindow", "Marketing Purpose"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(1, _translate("MainWindow", "Promotion"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(2, _translate("MainWindow", "Member Registration"))
