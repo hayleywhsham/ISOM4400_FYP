@@ -1,1 +1,11 @@
-Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out
+ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out[0, 'https://bit.ly/3GKomJQ', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[1, 'https://bit.ly/3X01L1G', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[2, 'https://bit.ly/3QlyMm6', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[3, 'https://bit.ly/3QokAJg', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[4, 'https://bit.ly/3ihnUtd', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[5, 'http://bit.ly/3W7ZeRV', 'https://docs.google.com/forms/d/e/1FAIpQLSc-1iY5u2agkRZ3Oo8oGW2Wn5SBoOySGZ5S3rhtYqTmkPmJjw/viewform', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[6, 'https://bit.ly/3vLoDWs', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[7, 'https://bit.ly/3Iwd3pL', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[8, 'https://bit.ly/3Zlytfa', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[9, 'http://bit.ly/3IVxNFU', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]
+[10, 'https://bit.ly/3IygPza', 'https://www.hktvmall.com/downloadapp', "dict_items([('Keyword', ['T&C', 'P.I.C.S', 'Opt-in/Opt-out']), ('Exist?', ['No', 'No', 'No'])])"]

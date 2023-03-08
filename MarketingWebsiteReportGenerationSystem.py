@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
-        self.export_info = set()
+        self.export_info = []
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -60,7 +60,7 @@ class MainWindow(QMainWindow):
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
         # change page when page number changed
-        self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
+        self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
 
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
@@ -153,13 +153,13 @@ class MainWindow(QMainWindow):
     def update_page(self):
         #Get current page information (i.e. selected dropdown items)
         page_number = int(self.ui.input_info_edit_page_current_page.text())
-        marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
-        exp_date = self.ui.input_info_edit_page_expiring_date.date()
-        tnc = self.ui.input_info_edit_page_tnc.currentText()
-        pics = self.ui.input_info_edit_page_pics.currentText()
-        opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
-        remarks = self.ui.input_info_edit_page_remarks.toPlainText()
-        self.export_info.update([page_number, self.user_input, "Facebook", marketing_purpose, exp_date, tnc, pics, opt_in_out, remarks])
+        #marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        #exp_date = self.ui.input_info_edit_page_expiring_date.date()
+        #tnc = self.ui.input_info_edit_page_tnc.currentText()
+        #pics = self.ui.input_info_edit_page_pics.currentText()
+        #opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
+        #remarks = self.ui.input_info_edit_page_remarks.toPlainText()
+        #self.export_info.update([page_number, self.user_input, "Facebook", marketing_purpose, exp_date, tnc, pics, opt_in_out, remarks])
 
         #Debug
         try:
@@ -188,8 +188,9 @@ class MainWindow(QMainWindow):
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
                 full_url_list.append(full_url)
+                self.export_info.append([i, url, full_url, str(Keywords_Exist_dict.items())])
 
-            # put to new function and call for update and initialize, input = page number
+            # put to new function and call for update and initialize
             self.generate_category_page()
             self.ui.lbl_info_page_error_msg.setVisible(False)
         except Exception as e:
@@ -203,7 +204,6 @@ class MainWindow(QMainWindow):
         self.ui.input_info_edit_page_remarks.clear()
         self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
         Label_Category_dict = all_Label_Category_dict[list_index]
-        print(Label_Category_dict)
         if Label_Category_dict != []:
             for items_no in range(len(Label_Category_dict)):
                 try:
@@ -231,6 +231,7 @@ class MainWindow(QMainWindow):
                     QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
             self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
 
+
     def update_category(self):
         self.categoryList.update_defined_category(self.ui.lbl_info_edit_page_label.text(), self.ui.input_info_edit_page_category.text())
 
@@ -241,11 +242,11 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
     def export_to_csv(self):
-        with open("test_output.csv", "r", encoding="utf8") as word_file:
+        with open("test_output.csv", "w", encoding="utf8") as word_file:
             word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out")
-            exports = list(self.export_info)
-            for info in exports:
-                word_file.write(info)
+            for exports in self.export_info:
+                print(exports)
+                word_file.write(str(exports) + "\n")
 
         # save scraped results from local variable to csv format
 
