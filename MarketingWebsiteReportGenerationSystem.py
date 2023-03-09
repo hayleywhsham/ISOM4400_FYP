@@ -62,6 +62,8 @@ class MainWindow(QMainWindow):
         # change page when page number changed
         self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
 
+        #self.columnWidgets.item
+
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
         csv_path = filedialog.askopenfilename(filetypes=[("Excel files", ".csv")])
@@ -140,18 +142,21 @@ class MainWindow(QMainWindow):
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
 
     def next_page(self):
+        self.get_combobox_data()
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
         if page_number < max_pages:
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
 
     def previous_page(self):
+        self.get_combobox_data()
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
 
     def update_page(self):
         #Get current page information (i.e. selected dropdown items)
+        self.get_combobox_data()
         try:
             page_number = int(self.ui.input_info_edit_page_current_page.text())
         except ValueError as e:
@@ -159,15 +164,6 @@ class MainWindow(QMainWindow):
                 pass
             else:
                 print(str(e))
-
-        #marketing_purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
-        #exp_date = self.ui.input_info_edit_page_expiring_date.date()
-        #tnc = self.ui.input_info_edit_page_tnc.currentText()
-        #pics = self.ui.input_info_edit_page_pics.currentText()
-        #opt_in_out = self.ui.input_info_edit_page_choose_opt_in_out.currentText()
-        #remarks = self.ui.input_info_edit_page_remarks.toPlainText()
-        #self.export_info.update([page_number, self.user_input, "Facebook", marketing_purpose, exp_date, tnc, pics, opt_in_out, remarks])
-
         #Debug
         try:
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[page_number - 1])
@@ -177,14 +173,12 @@ class MainWindow(QMainWindow):
         # Clear old label-categories pairs
         while self.ui.formLayout_info_edit_page_scrolling_content.rowCount() > 0:
             self.ui.formLayout_info_edit_page_scrolling_content.removeRow(0)
-            self.columnWidgets.pop()
-
-        #debug
-        print("Page updated)")
+        self.columnWidgets.clear()
 
         # generate new list of label-categories
         self.generate_category_page()
-
+        self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
+        self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
 
     def scrape_website_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
@@ -208,6 +202,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
 
     def generate_category_page(self):
         try:
@@ -220,7 +215,7 @@ class MainWindow(QMainWindow):
             if Label_Category_dict != []:
                 for items_no in range(len(Label_Category_dict["Label"])):
                     try:
-                        self.add_new_combobox()
+                        self.add_new_combobox(Label_Category_dict)
                     except Exception as e:
                         print("some error", str(e))
                         continue
@@ -243,16 +238,16 @@ class MainWindow(QMainWindow):
                     self.scene_info_edit_page_screenshot.addPixmap(
                         QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
                 self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
-                print(self.columnWidgets)
         except ValueError as e:
             print(str(e))
             pass
 
 
     def update_category(self):
-        self.categoryList.update_defined_category(self.ui.lbl_info_edit_page_label.text(), self.ui.input_info_edit_page_category.text())
+        self.categoryList.update_defined_category(label, category)
 
     def preview_output(self):
+        self.get_combobox_data()
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
@@ -266,73 +261,85 @@ class MainWindow(QMainWindow):
 
         # save scraped results from local variable to csv format
 
-    def add_new_combobox(self):
+    def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
-        try:
-            Scraped_label = QLabel()
-            Scraped_label.setMinimumSize(QtCore.QSize(100, 0))
-            Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
-            Scraped_label.setText(Label_Category_dict["Label"][row])
-            Category = QComboBox()
-            Category.setMinimumSize(QtCore.QSize(250, 30))
-            Category.setMaximumSize(QtCore.QSize(270, 30))
-            font = QtGui.QFont()
-            font.setFamily("Arial Black")
-            font.setPointSize(10)
-            font.setBold(False)
-            font.setItalic(False)
-            font.setWeight(10)
-            Category.setFont(font)
-            Category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-            Category.setStyleSheet("QComboBox\n"
-                                                             "{\n"
-                                                             "    background-color: rgb(238, 238, 238);\n"
-                                                             "    color: rgb(98, 98, 98);\n"
-                                                             "    border-radius: 15px;\n"
-                                                             "    font-size: 15px;\n"
-                                                             "    padding-left: 20px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "QComboBox::down-arrow\n"
-                                                             "{\n"
-                                                             "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                                             "    height: 15px;\n"
-                                                             "    width: 15px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "QComboBox::drop-down\n"
-                                                             "{\n"
-                                                             "    subcontrol-origin: padding;\n"
-                                                             "    subcontrol-position: top right;\n"
-                                                             "    width: 45px; \n"
-                                                             "    border-top-right-radius: 3px;\n"
-                                                             "    border-bottom-right-radius: 3px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "QComboBox QAbstractItemView\n"
-                                                             "{\n"
-                                                             "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                                             "    background-color: white;\n"
-                                                             "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                                             "    selection-color: white;\n"
-                                                             "    border-radius: 0px;\n"
-                                                             "}\n"
-                                                             "\n"
-                                                             "")
-            Category.setEditable(False)
-            Category.addItem("Choose Category")
-            Category.addItems(list(self.categoryList.categories.keys()))
+        if Label_Category_dict["Label"][0] != "":
             try:
-                if Label_Category_dict["Category"][row] == "":
-                    Category.setCurrentText("Choose Category")
-                else:
-                    Category.setCurrentText(Label_Category_dict["Category"][row])
-                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
-                self.columnWidgets.append(Category)
+                Scraped_label = QLabel()
+                Scraped_label.setMinimumSize(QtCore.QSize(100, 0))
+                Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
+                Scraped_label.setText(Label_Category_dict["Label"][row])
+                Scraped_label.setWordWrap(True)
+                Category = QComboBox()
+                Category.setMinimumSize(QtCore.QSize(250, 30))
+                Category.setMaximumSize(QtCore.QSize(270, 30))
+                font = QtGui.QFont()
+                font.setFamily("Arial Black")
+                font.setPointSize(10)
+                font.setBold(False)
+                font.setItalic(False)
+                font.setWeight(10)
+                Category.setFont(font)
+                Category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+                Category.setStyleSheet("QComboBox\n"
+                                                                 "{\n"
+                                                                 "    background-color: rgb(238, 238, 238);\n"
+                                                                 "    color: rgb(98, 98, 98);\n"
+                                                                 "    border-radius: 15px;\n"
+                                                                 "    font-size: 15px;\n"
+                                                                 "    padding-left: 20px;\n"
+                                                                 "}\n"
+                                                                 "\n"
+                                                                 "QComboBox::down-arrow\n"
+                                                                 "{\n"
+                                                                 "    border-image: url(:/image/arrow_down_grey.png);\n"
+                                                                 "    height: 15px;\n"
+                                                                 "    width: 15px;\n"
+                                                                 "}\n"
+                                                                 "\n"
+                                                                 "QComboBox::drop-down\n"
+                                                                 "{\n"
+                                                                 "    subcontrol-origin: padding;\n"
+                                                                 "    subcontrol-position: top right;\n"
+                                                                 "    width: 45px; \n"
+                                                                 "    border-top-right-radius: 3px;\n"
+                                                                 "    border-bottom-right-radius: 3px;\n"
+                                                                 "}\n"
+                                                                 "\n"
+                                                                 "QComboBox QAbstractItemView\n"
+                                                                 "{\n"
+                                                                 "    color: rgb(98, 98, 98); /*dark grey*/\n"
+                                                                 "    background-color: white;\n"
+                                                                 "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+                                                                 "    selection-color: white;\n"
+                                                                 "    border-radius: 0px;\n"
+                                                                 "}\n"
+                                                                 "\n"
+                                                                 "")
+                Category.setEditable(False)
+                Category.addItem("Choose Category")
+                Category.addItems(list(self.categoryList.categories.keys()))
+                try:
+                    if Label_Category_dict["Category"][row] == "":
+                        Category.setCurrentText("Choose Category")
+                    else:
+                        Category.setCurrentText(Label_Category_dict["Category"][row])
+                    self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
+                    self.columnWidgets.append(Category)
+                except Exception as e:
+                    print("old", str(e))
             except Exception as e:
-                print("old", str(e))
-        except Exception as e:
-            print("bad", str(e))
+                print("bad", str(e))
+        else:
+            try:
+                Empty_label = QLabel()
+                Empty_label.setMinimumSize(QtCore.QSize(100, 0))
+                Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
+                Empty_label.setText("No items scraped")
+                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
+            except Exception as e:
+                print("oh no", str(e))
+
 
     def get_combobox_data(self):
         changed_category = [t.currentText() for t in self.columnWidgets]
