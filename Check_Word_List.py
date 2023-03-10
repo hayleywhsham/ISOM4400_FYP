@@ -99,15 +99,14 @@ class CategoryList:
             for defined_categories, category_texts in self.categories.items():
                 for defined_text in category_texts:
                     if item.casefold() == defined_text.casefold():
-                        Label_Category_dict["Category"].append(defined_categories[0])
-                        break
+                        Label_Category_dict["Category"].append(defined_text)
             # check for keywords (not exact match)
             Category_Matched = False
             if len(Label_Category_dict["Category"]) < len(Label_Category_dict["Label"]):
                 for defined_categories, category_texts in self.categories.items():
                     for defined_text in category_texts:
                         if defined_text.casefold() in item.casefold():
-                            Label_Category_dict["Category"].append(defined_categories[0])
+                            Label_Category_dict["Category"].append(defined_text)
                             Category_Matched = True
                             break
 

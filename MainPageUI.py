@@ -1677,7 +1677,7 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setShowGrid(False)
         self.table_report_page_report.setGridStyle(QtCore.Qt.DotLine)
         self.table_report_page_report.setObjectName("table_report_page_report")
-        self.table_report_page_report.setColumnCount(10)
+        self.table_report_page_report.setColumnCount(11)
         self.table_report_page_report.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setBackground(QtGui.QColor(255, 255, 255))
@@ -1701,6 +1701,8 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setHorizontalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_report_page_report.setHorizontalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_report_page_report.setHorizontalHeaderItem(10, item)
         self.table_report_page_report.horizontalHeader().setVisible(True)
         self.table_report_page_report.horizontalHeader().setCascadingSectionResizes(True)
         self.table_report_page_report.horizontalHeader().setHighlightSections(True)
@@ -1832,6 +1834,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "T&C?"))
         item = self.table_report_page_report.horizontalHeaderItem(9)
         item.setText(_translate("MainWindow", "Opt-in/Opt-out?"))
+        item = self.table_report_page_report.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "Remarks"))
         self.button_report_page_back_edits.setText(_translate("MainWindow", "Back to Edits"))
 import image_rc
 

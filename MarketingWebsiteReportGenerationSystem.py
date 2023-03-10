@@ -62,7 +62,6 @@ class MainWindow(QMainWindow):
         # change page when page number changed
         self.ui.input_info_edit_page_current_page.textChanged.connect(self.update_page)
 
-        #self.columnWidgets.item
 
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
@@ -106,9 +105,9 @@ class MainWindow(QMainWindow):
         self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
         self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
-        self.fb_page_name = fb_page_name
-        self.source = "Facebook"
-        for post in get_posts(self.fb_page_name,
+        fb_page_name = fb_page_name
+        source = "Facebook"
+        for post in get_posts(fb_page_name,
                               pages=10,
 
                               # Will be blocked easily by Facebook, Facebook API highly restricted
@@ -132,24 +131,27 @@ class MainWindow(QMainWindow):
                 for url in urls:
                     row_position = self.ui.table_links_page_link_list.rowCount()
                     self.ui.table_links_page_link_list.insertRow(row_position)
-                    self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(self.fb_page_name))
-                    self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(self.source))
+                    self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(fb_page_name))
+                    self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(source))
                     self.ui.table_links_page_link_list.setItem(row_position, 2,
                                                                QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
                     self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(url))
+
+                    self.export_info.append([fb_page_name,
+                                             source,
+                                             post_time.strftime("%Y/%m/%d %H:%M"),
+                                             url])
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
 
     def next_page(self):
-        self.get_combobox_data()
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
         if page_number < max_pages:
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
 
     def previous_page(self):
-        self.get_combobox_data()
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
@@ -177,6 +179,8 @@ class MainWindow(QMainWindow):
 
         # generate new list of label-categories
         self.generate_category_page()
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
+        self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
         self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
         self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
 
@@ -194,8 +198,19 @@ class MainWindow(QMainWindow):
                 all_Label_Category_dict.append(Label_Category_dict)
                 all_Keywords_Exist_dict.append(Keywords_Exist_dict)
                 full_url_list.append(full_url)
-                self.export_info.append([i, self.fb_page_name, self.source, url, full_url, str(Keywords_Exist_dict.items())])
+                self.export_info[i].append(full_url)
+                self.export_info[i].append("Marketing Purpose")
+                self.export_info[i].append(datetime.datetime.now().strftime("%Y/%m/%d"))
+                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][0]))
+                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][1]))
+                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][2]))
+                self.export_info[i].append("")
+                print(self.export_info)
+                print(Label_Category_dict)
+        except Exception as e:
+            print("debug scrape website", str(e))
 
+        try:
             # put to new function and call for update and initialize
             self.generate_category_page()
             self.ui.lbl_info_page_error_msg.setVisible(False)
@@ -207,6 +222,7 @@ class MainWindow(QMainWindow):
     def generate_category_page(self):
         try:
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
+            print(list_index)
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate()
             self.ui.input_info_edit_page_remarks.clear()
@@ -232,6 +248,8 @@ class MainWindow(QMainWindow):
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
+                self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
+                self.ui.input_info_edit_page_expiring_date.date().toPyDate()
 
                 self.scene_info_edit_page_screenshot = QGraphicsScene()
                 if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
@@ -243,11 +261,24 @@ class MainWindow(QMainWindow):
             pass
 
 
-    def update_category(self):
-        self.categoryList.update_defined_category(label, category)
-
     def preview_output(self):
         self.get_combobox_data()
+        print(list(self.export_info))
+        print(len(list(self.export_info)))
+        for line in range(len(list(self.export_info))):
+            row_position = self.ui.table_links_page_link_list.rowCount()
+            self.ui.table_links_page_link_list.insertRow(row_position)
+            self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(self.export_info[line][0]))
+            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(self.export_info[line][1]))
+            self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(self.export_info[line][2]))
+            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(self.export_info[line][3]))
+            self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.export_info[line][4]))
+            self.ui.table_links_page_link_list.setItem(row_position, 5, QTableWidgetItem(self.export_info[line][5]))
+            self.ui.table_links_page_link_list.setItem(row_position, 6, QTableWidgetItem(self.export_info[line][6]))
+            self.ui.table_links_page_link_list.setItem(row_position, 7, QTableWidgetItem(self.export_info[line][7]))
+            self.ui.table_links_page_link_list.setItem(row_position, 8, QTableWidgetItem(self.export_info[line][8]))
+            self.ui.table_links_page_link_list.setItem(row_position, 9, QTableWidgetItem(self.export_info[line][9]))
+            self.ui.table_links_page_link_list.setItem(row_position, 10, QTableWidgetItem(self.export_info[line][10]))
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
@@ -255,7 +286,7 @@ class MainWindow(QMainWindow):
 
     def export_to_csv(self):
         with open("test_output.csv", "w", encoding="utf8") as word_file:
-            word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out\n")
+            word_file.write("ID, Brand, Source, Post Date, Link, Full True Path, Purpose, Status, PII?, T&C?, Opt-in/Opt-out, remarks\n")
             for exports in self.export_info:
                 word_file.write(str(exports) + "\n")
 
@@ -317,6 +348,7 @@ class MainWindow(QMainWindow):
                                                                  "\n"
                                                                  "")
                 Category.setEditable(False)
+                Category.wheelEvent = lambda e:e.ignore
                 Category.addItem("Choose Category")
                 Category.addItems(list(self.categoryList.categories.keys()))
                 try:
@@ -342,8 +374,14 @@ class MainWindow(QMainWindow):
 
 
     def get_combobox_data(self):
-        changed_category = [t.currentText() for t in self.columnWidgets]
-        print(changed_category)
+        Label_Category_dict = all_Label_Category_dict[int(self.ui.input_info_edit_page_current_page.text()) - 1]
+        if self.columnWidgets:
+            changed_category = [t.currentText() for t in self.columnWidgets]
+            for index, item in enumerate(changed_category):
+                if item == "Choose Category":
+                    item = ""
+                #if item != Label_Category_dict["Category"][index]:
+                    #CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
 
 
 
