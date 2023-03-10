@@ -840,6 +840,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollArea_info_edit_page_categorisation_content.sizePolicy().hasHeightForWidth())
         self.scrollArea_info_edit_page_categorisation_content.setSizePolicy(sizePolicy)
+
         self.scrollArea_info_edit_page_categorisation_content.setStyleSheet("*{background-color: rgb(0, 145, 218);}\n"
 "\n"
 "QScrollBar:vertical\n"
