@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -74,7 +74,6 @@ class MainWindow(QMainWindow):
         end_date = self.ui.input_search_page_to_date.date().toPyDate()
 
         for fb_name in fb_names:
-            print(fb_name[0])
             t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
             t.start()
 
@@ -179,8 +178,10 @@ class MainWindow(QMainWindow):
 
         # generate new list of label-categories
         self.generate_category_page()
-        self.ui.scrollArea_info_edit_page_categorisation_content.update()
         self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
+        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
         self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
         self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
 
@@ -205,8 +206,6 @@ class MainWindow(QMainWindow):
                 self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][1]))
                 self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][2]))
                 self.export_info[i].append("")
-                print(self.export_info)
-                print(Label_Category_dict)
         except Exception as e:
             print("debug scrape website", str(e))
 
@@ -217,12 +216,13 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
             self.ui.lbl_info_page_error_msg.setVisible(True)
+        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.ui.scrollArea_info_edit_page_categorisation_content.update()
 
     def generate_category_page(self):
         try:
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
-            print(list_index)
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate()
             self.ui.input_info_edit_page_remarks.clear()
@@ -261,10 +261,9 @@ class MainWindow(QMainWindow):
             pass
 
 
+
     def preview_output(self):
         self.get_combobox_data()
-        print(list(self.export_info))
-        print(len(list(self.export_info)))
         for line in range(len(list(self.export_info))):
             row_position = self.ui.table_links_page_link_list.rowCount()
             self.ui.table_links_page_link_list.insertRow(row_position)
@@ -359,9 +358,9 @@ class MainWindow(QMainWindow):
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
                     self.columnWidgets.append(Category)
                 except Exception as e:
-                    print("old", str(e))
+                    print("debug:", str(e))
             except Exception as e:
-                print("bad", str(e))
+                print("debug:", str(e))
         else:
             try:
                 Empty_label = QLabel()
@@ -370,7 +369,7 @@ class MainWindow(QMainWindow):
                 Empty_label.setText("No items scraped")
                 self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
             except Exception as e:
-                print("oh no", str(e))
+                print("debug:", str(e))
 
 
     def get_combobox_data(self):
