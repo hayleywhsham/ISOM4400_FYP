@@ -265,19 +265,19 @@ class MainWindow(QMainWindow):
     def preview_output(self):
         self.get_combobox_data()
         for line in range(len(list(self.export_info))):
-            row_position = self.ui.table_links_page_link_list.rowCount()
-            self.ui.table_links_page_link_list.insertRow(row_position)
-            self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(self.export_info[line][0]))
-            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(self.export_info[line][1]))
-            self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(self.export_info[line][2]))
-            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(self.export_info[line][3]))
-            self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.export_info[line][4]))
-            self.ui.table_links_page_link_list.setItem(row_position, 5, QTableWidgetItem(self.export_info[line][5]))
-            self.ui.table_links_page_link_list.setItem(row_position, 6, QTableWidgetItem(self.export_info[line][6]))
-            self.ui.table_links_page_link_list.setItem(row_position, 7, QTableWidgetItem(self.export_info[line][7]))
-            self.ui.table_links_page_link_list.setItem(row_position, 8, QTableWidgetItem(self.export_info[line][8]))
-            self.ui.table_links_page_link_list.setItem(row_position, 9, QTableWidgetItem(self.export_info[line][9]))
-            self.ui.table_links_page_link_list.setItem(row_position, 10, QTableWidgetItem(self.export_info[line][10]))
+            row_position = self.ui.table_report_page_report.rowCount()
+            self.ui.table_report_page_report.insertRow(row_position)
+            self.ui.table_report_page_report.setItem(row_position, 0, QTableWidgetItem(self.export_info[line][0]))
+            self.ui.table_report_page_report.setItem(row_position, 1, QTableWidgetItem(self.export_info[line][1]))
+            self.ui.table_report_page_report.setItem(row_position, 2, QTableWidgetItem(self.export_info[line][2]))
+            self.ui.table_report_page_report.setItem(row_position, 3, QTableWidgetItem(self.export_info[line][3]))
+            self.ui.table_report_page_report.setItem(row_position, 4, QTableWidgetItem(self.export_info[line][4]))
+            self.ui.table_report_page_report.setItem(row_position, 5, QTableWidgetItem(self.export_info[line][5]))
+            self.ui.table_report_page_report.setItem(row_position, 6, QTableWidgetItem(self.export_info[line][6]))
+            self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem(self.export_info[line][7]))
+            self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem(self.export_info[line][8]))
+            self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem(self.export_info[line][9]))
+            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(self.export_info[line][10]))
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
@@ -379,8 +379,8 @@ class MainWindow(QMainWindow):
             for index, item in enumerate(changed_category):
                 if item == "Choose Category":
                     item = ""
-                #if item != Label_Category_dict["Category"][index]:
-                    #CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+                if item != Label_Category_dict["Category"][index]:
+                    CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
 
 
 
