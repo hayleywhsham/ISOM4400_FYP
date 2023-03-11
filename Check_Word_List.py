@@ -94,19 +94,21 @@ class CategoryList:
     def check_word_list(self, scraped_list: list):
         # check for keywords (exact match) and categories
         Label_Category_dict = {"Label": [],  "Category": []}
+        Category_Matched = False
         for item in scraped_list:
             Label_Category_dict["Label"].append(item)
             for defined_categories, category_texts in self.categories.items():
                 for defined_text in category_texts:
-                    if item.casefold() == defined_text.casefold():
-                        Label_Category_dict["Category"].append(defined_text)
+                    while Category_Matched == False:
+                        if item.casefold() == defined_text.casefold():
+                            Label_Category_dict["Category"].append(defined_categories)
+                            Category_Matched = True
             # check for keywords (not exact match)
-            Category_Matched = False
             if len(Label_Category_dict["Category"]) < len(Label_Category_dict["Label"]):
                 for defined_categories, category_texts in self.categories.items():
                     for defined_text in category_texts:
                         if defined_text.casefold() in item.casefold():
-                            Label_Category_dict["Category"].append(defined_text)
+                            Label_Category_dict["Category"].append(defined_categories)
                             Category_Matched = True
                             break
 
