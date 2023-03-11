@@ -373,16 +373,15 @@ class MainWindow(QMainWindow):
 
     def get_combobox_data(self):
         Label_Category_dict = all_Label_Category_dict[int(self.ui.input_info_edit_page_current_page.text()) - 1]
-        print(len(Label_Category_dict["Category"]), Label_Category_dict)
-        print(len(self.columnWidgets))
-        if self.columnWidgets:
-            changed_category = [t.currentText() for t in self.columnWidgets]
-            for index, item in enumerate(changed_category):
-                print(item, Label_Category_dict["Category"][index])
-                if item == "Choose Category":
-                    item = ""
-                if item != Label_Category_dict["Category"][index]:
-                    CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+        if len(Label_Category_dict["Category"]) == len(self.columnWidgets):
+            if self.columnWidgets:
+                changed_category = [t.currentText() for t in self.columnWidgets]
+                for index, item in enumerate(changed_category):
+                    print(item, Label_Category_dict["Category"][index])
+                    if item == "Choose Category":
+                        item = ""
+                    if item != Label_Category_dict["Category"][index]:
+                        CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
 
 
 def main():
