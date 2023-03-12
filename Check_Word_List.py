@@ -94,28 +94,30 @@ class CategoryList:
     def check_word_list(self, scraped_list: list):
         # check for keywords (exact match) and categories
         Label_Category_dict = {"Label": [],  "Category": []}
+        Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
         Category_Matched = False
         for item in scraped_list:
             Label_Category_dict["Label"].append(item)
             for defined_categories, category_texts in self.categories.items():
                 for defined_text in category_texts:
-                    while Category_Matched == False:
+                    if Category_Matched == False:
                         if item.casefold() == defined_text.casefold():
                             Label_Category_dict["Category"].append(defined_categories)
                             Category_Matched = True
-            # check for keywords (not exact match)
+
+# check for keywords (not exact match) : lengthy labels may be wrongly categorized, need consider
+            #print(len(Label_Category_dict["Category"]), len(Label_Category_dict["Label"]))
             if len(Label_Category_dict["Category"]) < len(Label_Category_dict["Label"]):
-                for defined_categories, category_texts in self.categories.items():
-                    for defined_text in category_texts:
-                        if defined_text.casefold() in item.casefold():
-                            Label_Category_dict["Category"].append(defined_categories)
-                            Category_Matched = True
-                            break
+                #for defined_categories, category_texts in self.categories.items():
+                    #for defined_text in category_texts:
+                        #if Category_Matched == False:
+                            #if defined_text.casefold() in item.casefold():
+                                #Label_Category_dict["Category"].append(defined_categories)
+                                #Category_Matched = True
 
                 # if no match at all then empty
                 if Category_Matched == False:
                     Label_Category_dict["Category"].append("")
-
         # Convert from category list to keyword list
         for category in Label_Category_dict["Category"]:
             if category == "T&C":

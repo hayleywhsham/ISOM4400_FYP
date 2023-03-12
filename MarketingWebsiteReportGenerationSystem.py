@@ -137,7 +137,7 @@ class MainWindow(QMainWindow):
 
                     self.export_info.append([fb_page_name,
                                              source,
-                                             post_time.strftime("%Y/%m/%d %H:%M"),
+                                             post_time.strftime("%Y/%m/%d"),
                                              url])
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
@@ -149,12 +149,14 @@ class MainWindow(QMainWindow):
         if page_number < max_pages:
             self.update_page()
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
+            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number + 1][10])
 
     def previous_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         if page_number > 1:
             self.update_page()
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
+            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number - 1][10])
 
     def update_page(self):
         # Get current page information (i.e. selected dropdown items)
@@ -163,6 +165,8 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(str(e))
             pass
+
+        # Update page manually might crash after delete but not yet input page number
         try:
             page_number = int(self.ui.input_info_edit_page_current_page.text())
         except ValueError as e:
@@ -262,6 +266,8 @@ class MainWindow(QMainWindow):
 
     def preview_output(self):
         self.get_combobox_data()
+        while self.ui.table_report_page_report.rowCount() > 0:
+            self.ui.table_report_page_report.removeRow(0)
         for line in range(len(list(self.export_info))):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
@@ -358,9 +364,9 @@ class MainWindow(QMainWindow):
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
                     self.columnWidgets.append(Category)
                 except Exception as e:
-                    print("debug:", str(e))
+                    print("debug a:", str(e))
             except Exception as e:
-                print("debug:", str(e))
+                print("debug b:", str(e))
         else:
             try:
                 Empty_label = QLabel()
@@ -369,7 +375,7 @@ class MainWindow(QMainWindow):
                 Empty_label.setText("No items scraped")
                 self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
             except Exception as e:
-                print("debug:", str(e))
+                print("debug c:", str(e))
 
     def get_combobox_data(self):
         Label_Category_dict = all_Label_Category_dict[int(self.ui.input_info_edit_page_current_page.text()) - 1]
@@ -377,11 +383,30 @@ class MainWindow(QMainWindow):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
                 for index, item in enumerate(changed_category):
-                    print(item, Label_Category_dict["Category"][index])
                     if item == "Choose Category":
-                        item = ""
+                        item = "Unrelated"
                     if item != Label_Category_dict["Category"][index]:
-                        CategoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+                        self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+
+        # Get current page data
+        self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][5] = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        # self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][6] = self.ui.input_info_edit_page_expiring_date.date()
+        if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][7] = "Yes"
+        else:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][7] = "No"
+        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][8] = "Yes"
+        else:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][8] = "No"
+        if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][9] = "Yes"
+        else:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][9] = "No"
+        if self.ui.input_info_edit_page_remarks.toPlainText():
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][10] = self.ui.input_info_edit_page_remarks.toPlainText()
+        else:
+            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][10] = ""
 
 
 def main():
