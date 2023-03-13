@@ -149,14 +149,14 @@ class MainWindow(QMainWindow):
         if page_number < max_pages:
             self.update_page()
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
-            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number + 1][10])
+            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number][10])
 
     def previous_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         if page_number > 1:
             self.update_page()
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
-            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number - 1][10])
+            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number - 2][10])
 
     def update_page(self):
         # Get current page information (i.e. selected dropdown items)
