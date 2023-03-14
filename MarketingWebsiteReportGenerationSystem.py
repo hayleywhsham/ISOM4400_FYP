@@ -264,7 +264,6 @@ class MainWindow(QMainWindow):
         dictionary_number = 0
         for dictionary in all_Label_Category_dict:
             for labels, categories in zip(dictionary["Label"], dictionary["Category"]):
-                print(labels, categories)
                 if categories != "Unrelated" and categories != "":
                     self.export_info[dictionary_number][11] = self.export_info[dictionary_number][11] + labels + ": " + categories + ","
             self.export_info[dictionary_number][11].rstrip(",")
@@ -292,7 +291,8 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
     def export_to_csv(self):
-        with open("test_output.csv", "w", encoding="utf8", newline="") as word_file:
+        save_to_path = filedialog.asksaveasfile(defaultextension=".csv")
+        with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
             word_file.write(
                 "ID,Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
             writecsv = csv.writer(word_file)
