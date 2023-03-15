@@ -181,6 +181,7 @@ class MainWindow(QMainWindow):
         self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.ui.scrollArea_info_edit_page_categorisation_content.update()
+        #self.ui.scrollArea_info_edit_page_categorisation_content.setAlignment(Qt.ScrollBegin)
         self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
         self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
 
@@ -297,6 +298,8 @@ class MainWindow(QMainWindow):
                 "ID,Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
             writecsv = csv.writer(word_file)
             writecsv.writerows(self.export_info)
+        word_file.close()
+        #clear_screenshots()
 
         # save scraped results from local variable to csv format
 
@@ -305,11 +308,15 @@ class MainWindow(QMainWindow):
 
         if Label_Category_dict["Label"][0] != "":
             try:
+                #Label_area = QScrollArea()
+                #Label_area.setWidgetResizable(True)
                 Scraped_label = QLabel()
                 Scraped_label.setMinimumSize(QtCore.QSize(100, 0))
                 Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                 Scraped_label.setText(Label_Category_dict["Label"][row])
                 Scraped_label.setWordWrap(True)
+                Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+                #Label_area.setWidget(Scraped_label)
                 Category = QComboBox()
                 Category.setMinimumSize(QtCore.QSize(250, 30))
                 Category.setMaximumSize(QtCore.QSize(270, 30))
@@ -390,7 +397,7 @@ class MainWindow(QMainWindow):
                     if item == "Choose Category":
                         item = "Unrelated"
                     if item != Label_Category_dict["Category"][index]:
-                        self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+                        #self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
                         Label_Category_dict["Category"][index] = item
 
         else:
