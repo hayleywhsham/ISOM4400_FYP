@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
         self.ui.input_search_page_from_fb_page.returnPressed.connect(
             self.ui.button_search_page_search_marketing_sites.click)
         self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
-        self.ui.button_links_page_scrap_info.clicked.connect(self.scrape_website_page)
+        self.ui.button_links_page_scrap_info.clicked.connect(self.initial_edit_page)
         self.ui.button_info_edit_page_next.clicked.connect(self.next_page)
         self.ui.button_info_edit_page_previous.clicked.connect(self.previous_page)
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
@@ -185,31 +185,36 @@ class MainWindow(QMainWindow):
         self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
         self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
 
-    def scrape_website_page(self):
+    def initial_edit_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         # use url from last step for scraping
         url_list = list(self.url_pool)
         self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
-        try:
-            for i, url in enumerate(url_list):
-                if not (url.startswith("http://") or url.startswith("https://")):
-                    url = "http://" + url
-                scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
-                Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
-                all_Label_Category_dict.append(Label_Category_dict)
-                all_Keywords_Exist_dict.append(Keywords_Exist_dict)
-                full_url_list.append(full_url)
-                self.export_info[i].append(full_url)
-                self.export_info[i].append("Marketing Purpose")
-                self.export_info[i].append("Ongoing")
-                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][0]))
-                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][1]))
-                self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][2]))
-                self.export_info[i].append("")
-                self.export_info[i].append("")
-        except Exception as e:
-            print("debug scrape website", str(e))
-
+        threads = []
+        for url_number, url in enumerate(url_list):
+            t = threading.Thread(target=self.scrape_website_page, args=(url_number, url))
+            t.start()
+            threads.append(t)
+        for thread in threads:
+            thread.join()
+        all_Label_Category_dict_list.sort()
+        for elem in all_Label_Category_dict_list:
+            elem.pop(0)
+        all_Keywords_Exist_dict_list.sort()
+        for elem in all_Keywords_Exist_dict_list:
+            elem.pop(0)
+        full_url_list_list.sort()
+        for elem in full_url_list_list:
+            elem.pop(0)
+        for items in all_Label_Category_dict_list:
+            all_Label_Category_dict.append(items[0])
+        for items in all_Keywords_Exist_dict_list:
+            all_Keywords_Exist_dict.append(items[0])
+        for items in full_url_list_list:
+            full_url_list.append(items[0])
+            print(all_Label_Category_dict)
+            print(all_Keywords_Exist_dict)
+            print(full_url_list)
         try:
             # put to new function and call for update and initialize
             self.generate_category_page()
@@ -220,6 +225,26 @@ class MainWindow(QMainWindow):
         self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.ui.scrollArea_info_edit_page_categorisation_content.update()
+
+    def scrape_website_page(self, i, url):
+        try:
+            if not (url.startswith("http://") or url.startswith("https://")):
+                url = "http://" + url
+            scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
+            Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
+            all_Label_Category_dict_list.append([i, Label_Category_dict])
+            all_Keywords_Exist_dict_list.append([i, Keywords_Exist_dict])
+            full_url_list_list.append([i, full_url])
+            self.export_info[i].append(full_url)
+            self.export_info[i].append("Marketing Purpose")
+            self.export_info[i].append("Ongoing")
+            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][0]))
+            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][1]))
+            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][2]))
+            self.export_info[i].append("")
+            self.export_info[i].append("")
+        except Exception as e:
+            print("debug scrape website", str(e))
 
     def generate_category_page(self):
         try:
