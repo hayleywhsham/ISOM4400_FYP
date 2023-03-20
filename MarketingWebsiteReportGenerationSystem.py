@@ -251,7 +251,6 @@ class MainWindow(QMainWindow):
             self.ui.input_info_edit_page_remarks.setText(self.export_info[list_index][10])
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
             Label_Category_dict = all_Label_Category_dict[list_index]
-            print(len(Label_Category_dict["Label"]), len(Label_Category_dict["Category"]))
             if Label_Category_dict != []:
                 for items_no in range(len(Label_Category_dict["Label"])):
                     try:
@@ -322,23 +321,24 @@ class MainWindow(QMainWindow):
             writecsv = csv.writer(word_file)
             writecsv.writerows(self.export_info)
         word_file.close()
-        #clear_screenshots()
 
         # save scraped results from local variable to csv format
 
     def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
+        self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
 
         if Label_Category_dict["Label"][0] != "":
             try:
-                #Label_area = QScrollArea()
-                #Label_area.setWidgetResizable(True)
+                Scraped_label_scroll = QScrollArea()
+                Scraped_label_scroll.setWidgetResizable(True)
                 Scraped_label = QLabel()
-                Scraped_label.setMinimumSize(QtCore.QSize(100, 0))
+                Scraped_label.setMinimumSize(QtCore.QSize(210, 0))
                 Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                 Scraped_label.setText(Label_Category_dict["Label"][row])
                 Scraped_label.setWordWrap(True)
                 Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+                Scraped_label_scroll.setWidget(Scraped_label)
                 #Label_area.setWidget(Scraped_label)
                 Category = QComboBox()
                 Category.setMinimumSize(QtCore.QSize(250, 30))
@@ -387,7 +387,8 @@ class MainWindow(QMainWindow):
                                        "\n"
                                        "")
                 Category.setEditable(False)
-                Category.wheelEvent = lambda e: e.ignore
+                #TODO
+                # Category.wheelEvent = lambda e: e.ignore
                 Category.addItem("Choose Category")
                 Category.addItems(list(self.categoryList.categories.keys()))
                 try:
@@ -395,7 +396,7 @@ class MainWindow(QMainWindow):
                         Category.setCurrentText("Choose Category")
                     else:
                         Category.setCurrentText(Label_Category_dict["Category"][row])
-                    self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label, Category)
+                    self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label_scroll, Category)
                     self.columnWidgets.append(Category)
                 except Exception as e:
                     print("debug a:", str(e))
@@ -412,6 +413,7 @@ class MainWindow(QMainWindow):
                 Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
                 Empty_label.setText("No items scraped")
                 self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
+                self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
             except Exception as e:
                 print("debug c:", str(e))
 
