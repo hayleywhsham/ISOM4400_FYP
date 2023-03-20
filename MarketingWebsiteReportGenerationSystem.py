@@ -315,7 +315,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
     def export_to_csv(self):
-        save_to_path = filedialog.asksaveasfile(defaultextension=".csv")
+        save_to_path = filedialog.asksaveasfilename(defaultextension=".csv")
         with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
             word_file.write(
                 "ID,Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
