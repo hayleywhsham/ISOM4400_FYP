@@ -212,9 +212,6 @@ class MainWindow(QMainWindow):
             all_Keywords_Exist_dict.append(items[0])
         for items in full_url_list_list:
             full_url_list.append(items[0])
-            print(all_Label_Category_dict)
-            print(all_Keywords_Exist_dict)
-            print(full_url_list)
         try:
             # put to new function and call for update and initialize
             self.generate_category_page()
@@ -254,6 +251,7 @@ class MainWindow(QMainWindow):
             self.ui.input_info_edit_page_remarks.setText(self.export_info[list_index][10])
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
             Label_Category_dict = all_Label_Category_dict[list_index]
+            print(len(Label_Category_dict["Label"]), len(Label_Category_dict["Category"]))
             if Label_Category_dict != []:
                 for items_no in range(len(Label_Category_dict["Label"])):
                     try:
@@ -401,8 +399,12 @@ class MainWindow(QMainWindow):
                     self.columnWidgets.append(Category)
                 except Exception as e:
                     print("debug a:", str(e))
+                    self.ui.lbl_info_page_error_msg.setText(str(e))
+                    self.ui.lbl_info_page_error_msg.setVisible(True)
             except Exception as e:
                 print("debug b:", str(e))
+                self.ui.lbl_info_page_error_msg.setText(str(e))
+                self.ui.lbl_info_page_error_msg.setVisible(True)
         else:
             try:
                 Empty_label = QLabel()
