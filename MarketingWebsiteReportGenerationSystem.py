@@ -332,6 +332,7 @@ class MainWindow(QMainWindow):
             try:
                 Scraped_label_scroll = QScrollArea()
                 Scraped_label_scroll.setWidgetResizable(True)
+                self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                 Scraped_label = QLabel()
                 Scraped_label.setMinimumSize(QtCore.QSize(210, 0))
                 Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
@@ -387,8 +388,7 @@ class MainWindow(QMainWindow):
                                        "\n"
                                        "")
                 Category.setEditable(False)
-                #TODO
-                # Category.wheelEvent = lambda e: e.ignore
+                Category.wheelEvent = lambda e: e.ignore
                 Category.addItem("Choose Category")
                 Category.addItems(list(self.categoryList.categories.keys()))
                 try:
