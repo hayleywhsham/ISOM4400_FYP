@@ -813,7 +813,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_screenshot.setStyleSheet("font: 87 10pt \"Arial Black\";")
         self.lbl_info_edit_page_screenshot.setObjectName("lbl_info_edit_page_screenshot")
         self.frame_info_edit_page_pii_categorisation = QtWidgets.QFrame(self.widget_info_edit_page_result)
-        self.frame_info_edit_page_pii_categorisation.setGeometry(QtCore.QRect(620, 70, 601, 281))
+        self.frame_info_edit_page_pii_categorisation.setGeometry(QtCore.QRect(560, 70, 541, 281))
         self.frame_info_edit_page_pii_categorisation.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_info_edit_page_pii_categorisation.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_info_edit_page_pii_categorisation.setObjectName("frame_info_edit_page_pii_categorisation")
@@ -822,7 +822,7 @@ class Ui_MainWindow(object):
         self.lbl_info_edit_page_pii_categorisation.setStyleSheet("font: 87 10pt \"Arial Black\";")
         self.lbl_info_edit_page_pii_categorisation.setObjectName("lbl_info_edit_page_pii_categorisation")
         self.frame_info_edit_page_categorisation_box = QtWidgets.QFrame(self.frame_info_edit_page_pii_categorisation)
-        self.frame_info_edit_page_categorisation_box.setGeometry(QtCore.QRect(10, 40, 601, 241))
+        self.frame_info_edit_page_categorisation_box.setGeometry(QtCore.QRect(0, 40, 541, 241))
         self.frame_info_edit_page_categorisation_box.setStyleSheet("*{font: 87 10pt \"Arial Black\";}\n"
 "\n"
 "QFrame\n"
@@ -834,13 +834,12 @@ class Ui_MainWindow(object):
         self.frame_info_edit_page_categorisation_box.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_info_edit_page_categorisation_box.setObjectName("frame_info_edit_page_categorisation_box")
         self.scrollArea_info_edit_page_categorisation_content = QtWidgets.QScrollArea(self.frame_info_edit_page_categorisation_box)
-        self.scrollArea_info_edit_page_categorisation_content.setGeometry(QtCore.QRect(10, 9, 581, 221))
+        self.scrollArea_info_edit_page_categorisation_content.setGeometry(QtCore.QRect(10, 9, 511, 221))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollArea_info_edit_page_categorisation_content.sizePolicy().hasHeightForWidth())
         self.scrollArea_info_edit_page_categorisation_content.setSizePolicy(sizePolicy)
-
         self.scrollArea_info_edit_page_categorisation_content.setStyleSheet("*{background-color: rgb(0, 145, 218);}\n"
 "\n"
 "QScrollBar:vertical\n"
@@ -910,12 +909,12 @@ class Ui_MainWindow(object):
         self.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
         self.scrollArea_info_edit_page_categorisation_content.setObjectName("scrollArea_info_edit_page_categorisation_content")
         self.scrollAreaWidgetContents_info_edit_page = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_info_edit_page.setGeometry(QtCore.QRect(0, 0, 566, 500))
+        self.scrollAreaWidgetContents_info_edit_page.setGeometry(QtCore.QRect(0, 0, 496, 500))
         self.scrollAreaWidgetContents_info_edit_page.setMinimumSize(QtCore.QSize(450, 500))
         self.scrollAreaWidgetContents_info_edit_page.setStyleSheet("QWidget{background-color: rgb(0, 145, 218);}")
         self.scrollAreaWidgetContents_info_edit_page.setObjectName("scrollAreaWidgetContents_info_edit_page")
         self.formLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents_info_edit_page)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(6, 10, 561, 281))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(6, 10, 471, 281))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout_info_edit_page_scrolling_content = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
@@ -924,127 +923,127 @@ class Ui_MainWindow(object):
         self.formLayout_info_edit_page_scrolling_content.setContentsMargins(0, 0, 0, 0)
         self.formLayout_info_edit_page_scrolling_content.setVerticalSpacing(6)
         self.formLayout_info_edit_page_scrolling_content.setObjectName("formLayout_info_edit_page_scrolling_content")
-        #self.lbl_info_edit_page_label = QtWidgets.QLabel(self.formLayoutWidget)
-        #self.lbl_info_edit_page_label.setMinimumSize(QtCore.QSize(100, 0))
-        #self.lbl_info_edit_page_label.setStyleSheet("color: rgb(255, 255, 255);")
-        #self.lbl_info_edit_page_label.setObjectName("lbl_info_edit_page_label")
-        #self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label)
-        #self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
-        #self.input_info_edit_page_category.setMinimumSize(QtCore.QSize(250, 30))
-        #self.input_info_edit_page_category.setMaximumSize(QtCore.QSize(270, 30))
-        #font = QtGui.QFont()
-        #font.setFamily("Arial Black")
-        #font.setPointSize(-1)
-        #font.setBold(False)
-        #font.setItalic(False)
-        #font.setWeight(10)
-        #self.input_info_edit_page_category.setFont(font)
-        #self.input_info_edit_page_category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        #self.input_info_edit_page_category.setStyleSheet("QComboBox\n"
-#"{\n"
-#"    background-color: rgb(238, 238, 238);\n"
-#"    color: rgb(98, 98, 98);\n"
-#"    border-radius: 15px;\n"
-#"    font-size: 15px;\n"
-#"    padding-left: 20px;\n"
-#"}\n"
-#"\n"
-#"QComboBox::down-arrow\n"
-#"{\n"
-#"    border-image: url(:/image/arrow_down_grey.png);\n"
-#"    height: 15px;\n"
-#"    width: 15px;\n"
-#"}\n"
-#"\n"
-#"QComboBox::drop-down\n"
-#"{\n"
-#"    subcontrol-origin: padding;\n"
-#"    subcontrol-position: top right;\n"
-#"    width: 45px; \n"
-#"    border-top-right-radius: 3px;\n"
-#"    border-bottom-right-radius: 3px;\n"
-#"}\n"
-#"\n"
-#"QComboBox QAbstractItemView\n"
-#"{\n"
-#"    color: rgb(98, 98, 98); /*dark grey*/\n"
-#"    background-color: white;\n"
-#"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-#"    selection-color: white;\n"
-#"    border-radius: 0px;\n"
-#"}\n"
-#"\n"
-#"")
-        #self.input_info_edit_page_category.setEditable(False)
-        #self.input_info_edit_page_category.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        #self.input_info_edit_page_category.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
-        #self.input_info_edit_page_category.setObjectName("input_info_edit_page_category")
-        #self.input_info_edit_page_category.addItem("")
-        #self.input_info_edit_page_category.addItem("")
-        #self.input_info_edit_page_category.addItem("")
-        #self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category)
-        #self.lbl_info_edit_page_label_2 = QtWidgets.QLabel(self.formLayoutWidget)
-        #self.lbl_info_edit_page_label_2.setMinimumSize(QtCore.QSize(100, 0))
-        #self.lbl_info_edit_page_label_2.setStyleSheet("color: rgb(255, 255, 255);")
-        #self.lbl_info_edit_page_label_2.setObjectName("lbl_info_edit_page_label_2")
-        #self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label_2)
-        #self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
-        #self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
-        #self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
-        #font = QtGui.QFont()
-        #font.setFamily("Arial Black")
-        #font.setPointSize(-1)
-        #font.setBold(False)
-        #font.setItalic(False)
-        #font.setWeight(10)
-        #self.input_info_edit_page_category_2.setFont(font)
-        #self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-        #self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
-#"{\n"
-#"    background-color: rgb(238, 238, 238);\n"
-#"    color: rgb(98, 98, 98);\n"
-#"    border-radius: 15px;\n"
-#"    font-size: 15px;\n"
-#"    padding-left: 20px;\n"
-#"}\n"
-#"\n"
-#"QComboBox::down-arrow\n"
-#"{\n"
-#"    border-image: url(:/image/arrow_down_grey.png);\n"
-#"    height: 15px;\n"
-#"    width: 15px;\n"
-#"}\n"
-#"\n"
-#"QComboBox::drop-down\n"
-#"{\n"
-#"    subcontrol-origin: padding;\n"
-#"    subcontrol-position: top right;\n"
-#"    width: 45px; \n"
-#"    border-top-right-radius: 3px;\n"
-#"    border-bottom-right-radius: 3px;\n"
-#"}\n"
-#"\n"
-#"QComboBox QAbstractItemView\n"
-#"{\n"
-#"    color: rgb(98, 98, 98); /*dark grey*/\n"
-#"    background-color: white;\n"
-#"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-#"    selection-color: white;\n"
-#"    border-radius: 0px;\n"
-#"}\n"
-#"\n"
-#"")
-        #self.input_info_edit_page_category_2.setEditable(False)
-        #self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
-        #self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
-        #self.input_info_edit_page_category_2.setObjectName("input_info_edit_page_category_2")
-        #self.input_info_edit_page_category_2.addItem("")
-        #self.input_info_edit_page_category_2.addItem("")
-        #self.input_info_edit_page_category_2.addItem("")
-        #self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category_2)
+        self.lbl_info_edit_page_label = QtWidgets.QLabel(self.formLayoutWidget)
+        self.lbl_info_edit_page_label.setMinimumSize(QtCore.QSize(100, 0))
+        self.lbl_info_edit_page_label.setStyleSheet("color: rgb(255, 255, 255);")
+        self.lbl_info_edit_page_label.setObjectName("lbl_info_edit_page_label")
+        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label)
+        self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
+        self.input_info_edit_page_category.setMinimumSize(QtCore.QSize(250, 30))
+        self.input_info_edit_page_category.setMaximumSize(QtCore.QSize(270, 30))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(10)
+        self.input_info_edit_page_category.setFont(font)
+        self.input_info_edit_page_category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.input_info_edit_page_category.setStyleSheet("QComboBox\n"
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"    font-size: 15px;\n"
+"    padding-left: 20px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
+        self.input_info_edit_page_category.setEditable(False)
+        self.input_info_edit_page_category.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        self.input_info_edit_page_category.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        self.input_info_edit_page_category.setObjectName("input_info_edit_page_category")
+        self.input_info_edit_page_category.addItem("")
+        self.input_info_edit_page_category.addItem("")
+        self.input_info_edit_page_category.addItem("")
+        self.formLayout_info_edit_page_scrolling_content.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category)
+        self.lbl_info_edit_page_label_2 = QtWidgets.QLabel(self.formLayoutWidget)
+        self.lbl_info_edit_page_label_2.setMinimumSize(QtCore.QSize(100, 0))
+        self.lbl_info_edit_page_label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.lbl_info_edit_page_label_2.setObjectName("lbl_info_edit_page_label_2")
+        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.lbl_info_edit_page_label_2)
+        self.input_info_edit_page_category_2 = QtWidgets.QComboBox(self.formLayoutWidget)
+        self.input_info_edit_page_category_2.setMinimumSize(QtCore.QSize(250, 30))
+        self.input_info_edit_page_category_2.setMaximumSize(QtCore.QSize(270, 30))
+        font = QtGui.QFont()
+        font.setFamily("Arial Black")
+        font.setPointSize(-1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(10)
+        self.input_info_edit_page_category_2.setFont(font)
+        self.input_info_edit_page_category_2.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.input_info_edit_page_category_2.setStyleSheet("QComboBox\n"
+"{\n"
+"    background-color: rgb(238, 238, 238);\n"
+"    color: rgb(98, 98, 98);\n"
+"    border-radius: 15px;\n"
+"    font-size: 15px;\n"
+"    padding-left: 20px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    border-image: url(:/image/arrow_down_grey.png);\n"
+"    height: 15px;\n"
+"    width: 15px;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down\n"
+"{\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 45px; \n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    color: rgb(98, 98, 98); /*dark grey*/\n"
+"    background-color: white;\n"
+"        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+"    selection-color: white;\n"
+"    border-radius: 0px;\n"
+"}\n"
+"\n"
+"")
+        self.input_info_edit_page_category_2.setEditable(False)
+        self.input_info_edit_page_category_2.setInsertPolicy(QtWidgets.QComboBox.InsertAtBottom)
+        self.input_info_edit_page_category_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToMinimumContentsLength)
+        self.input_info_edit_page_category_2.setObjectName("input_info_edit_page_category_2")
+        self.input_info_edit_page_category_2.addItem("")
+        self.input_info_edit_page_category_2.addItem("")
+        self.input_info_edit_page_category_2.addItem("")
+        self.formLayout_info_edit_page_scrolling_content.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.input_info_edit_page_category_2)
         self.scrollArea_info_edit_page_categorisation_content.setWidget(self.scrollAreaWidgetContents_info_edit_page)
         self.deco_info_edit_page_vline = QtWidgets.QFrame(self.widget_info_edit_page_result)
-        self.deco_info_edit_page_vline.setGeometry(QtCore.QRect(590, 70, 20, 381))
+        self.deco_info_edit_page_vline.setGeometry(QtCore.QRect(540, 70, 20, 381))
         self.deco_info_edit_page_vline.setStyleSheet("color: rgb(217, 217, 217);")
         self.deco_info_edit_page_vline.setFrameShadow(QtWidgets.QFrame.Plain)
         self.deco_info_edit_page_vline.setFrameShape(QtWidgets.QFrame.VLine)
@@ -1395,16 +1394,16 @@ class Ui_MainWindow(object):
         self.input_info_edit_page_tnc.addItem(icon4, "")
         self.input_info_edit_page_tnc.addItem(icon5, "")
         self.frame_info_edit_page_remarks = QtWidgets.QFrame(self.widget_info_edit_page_result)
-        self.frame_info_edit_page_remarks.setGeometry(QtCore.QRect(620, 360, 601, 91))
+        self.frame_info_edit_page_remarks.setGeometry(QtCore.QRect(560, 360, 541, 91))
         self.frame_info_edit_page_remarks.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_info_edit_page_remarks.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_info_edit_page_remarks.setObjectName("frame_info_edit_page_remarks")
         self.lbl_info_edit_page_remarks = QtWidgets.QLabel(self.frame_info_edit_page_remarks)
-        self.lbl_info_edit_page_remarks.setGeometry(QtCore.QRect(10, 10, 521, 16))
+        self.lbl_info_edit_page_remarks.setGeometry(QtCore.QRect(10, 10, 561, 16))
         self.lbl_info_edit_page_remarks.setStyleSheet("font: 87 10pt \"Arial Black\";")
         self.lbl_info_edit_page_remarks.setObjectName("lbl_info_edit_page_remarks")
         self.input_info_edit_page_remarks = QtWidgets.QTextEdit(self.frame_info_edit_page_remarks)
-        self.input_info_edit_page_remarks.setGeometry(QtCore.QRect(13, 38, 581, 51))
+        self.input_info_edit_page_remarks.setGeometry(QtCore.QRect(13, 38, 521, 51))
         self.input_info_edit_page_remarks.setStyleSheet("background-color: rgb(217, 217, 217);\n"
 "border-radius: 15px;\n"
 "font: 87 10pt \"Arial Black\";\n"
@@ -1415,7 +1414,7 @@ class Ui_MainWindow(object):
         self.graphicsView_info_edit_page_screenshot.setStyleSheet("")
         self.graphicsView_info_edit_page_screenshot.setObjectName("graphicsView_info_edit_page_screenshot")
         self.button_info_edit_page_next = QtWidgets.QPushButton(self.widget_info_edit_page_result)
-        self.button_info_edit_page_next.setGeometry(QtCore.QRect(1190, 460, 31, 31))
+        self.button_info_edit_page_next.setGeometry(QtCore.QRect(1070, 460, 31, 31))
         self.button_info_edit_page_next.setStyleSheet("background-color: rgb(0, 51, 141);\n"
 "border-radius: 15px;\n"
 "font: 87 9pt \"Arial Black\";\n"
@@ -1428,7 +1427,7 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_next.setFlat(False)
         self.button_info_edit_page_next.setObjectName("button_info_edit_page_next")
         self.button_info_edit_page_previous = QtWidgets.QPushButton(self.widget_info_edit_page_result)
-        self.button_info_edit_page_previous.setGeometry(QtCore.QRect(1020, 460, 31, 31))
+        self.button_info_edit_page_previous.setGeometry(QtCore.QRect(900, 460, 31, 31))
         self.button_info_edit_page_previous.setStyleSheet("background-color: rgb(0, 51, 141);\n"
 "border-radius: 15px;\n"
 "font: 87 9pt \"Arial Black\";\n"
@@ -1441,21 +1440,21 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_previous.setFlat(False)
         self.button_info_edit_page_previous.setObjectName("button_info_edit_page_previous")
         self.lbl_info_edit_page_total_pages = QtWidgets.QLabel(self.widget_info_edit_page_result)
-        self.lbl_info_edit_page_total_pages.setGeometry(QtCore.QRect(1130, 460, 41, 31))
+        self.lbl_info_edit_page_total_pages.setGeometry(QtCore.QRect(1020, 460, 41, 31))
         self.lbl_info_edit_page_total_pages.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_info_edit_page_total_pages.setObjectName("lbl_info_edit_page_total_pages")
         self.lbl_info_edit_page_slash = QtWidgets.QLabel(self.widget_info_edit_page_result)
-        self.lbl_info_edit_page_slash.setGeometry(QtCore.QRect(1110, 460, 31, 31))
+        self.lbl_info_edit_page_slash.setGeometry(QtCore.QRect(990, 460, 31, 31))
         self.lbl_info_edit_page_slash.setAlignment(QtCore.Qt.AlignCenter)
         self.lbl_info_edit_page_slash.setObjectName("lbl_info_edit_page_slash")
         self.input_info_edit_page_current_page = QtWidgets.QLineEdit(self.widget_info_edit_page_result)
-        self.input_info_edit_page_current_page.setGeometry(QtCore.QRect(1070, 459, 41, 31))
+        self.input_info_edit_page_current_page.setGeometry(QtCore.QRect(950, 459, 41, 31))
         self.input_info_edit_page_current_page.setStyleSheet("border: 1px solid rgb(217, 217, 217);\n"
 "border-radius: 5px;")
         self.input_info_edit_page_current_page.setAlignment(QtCore.Qt.AlignCenter)
         self.input_info_edit_page_current_page.setObjectName("input_info_edit_page_current_page")
         self.lbl_info_page_error_msg = QtWidgets.QLabel(self.widget_info_edit_page_result)
-        self.lbl_info_page_error_msg.setGeometry(QtCore.QRect(70, 10, 981, 51))
+        self.lbl_info_page_error_msg.setGeometry(QtCore.QRect(70, 20, 981, 41))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -1678,7 +1677,7 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setShowGrid(False)
         self.table_report_page_report.setGridStyle(QtCore.Qt.DotLine)
         self.table_report_page_report.setObjectName("table_report_page_report")
-        self.table_report_page_report.setColumnCount(12)
+        self.table_report_page_report.setColumnCount(10)
         self.table_report_page_report.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setBackground(QtGui.QColor(255, 255, 255))
@@ -1688,6 +1687,7 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.table_report_page_report.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(255, 255, 255))
         self.table_report_page_report.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_report_page_report.setHorizontalHeaderItem(4, item)
@@ -1701,16 +1701,12 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setHorizontalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_report_page_report.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_report_page_report.setHorizontalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_report_page_report.setHorizontalHeaderItem(11, item)
         self.table_report_page_report.horizontalHeader().setVisible(True)
         self.table_report_page_report.horizontalHeader().setCascadingSectionResizes(True)
         self.table_report_page_report.horizontalHeader().setHighlightSections(True)
         self.table_report_page_report.horizontalHeader().setSortIndicatorShown(True)
         self.table_report_page_report.horizontalHeader().setStretchLastSection(False)
-        self.table_report_page_report.verticalHeader().setVisible(False)
+        self.table_report_page_report.verticalHeader().setVisible(True)
         self.table_report_page_report.verticalHeader().setCascadingSectionResizes(False)
         self.button_report_page_back_edits = QtWidgets.QPushButton(self.widget_report_page_result)
         self.button_report_page_back_edits.setGeometry(QtCore.QRect(70, 20, 161, 41))
@@ -1781,14 +1777,14 @@ class Ui_MainWindow(object):
         self.button_info_edit_page_save_all_edits.setText(_translate("MainWindow", "Save All Edits"))
         self.lbl_info_edit_page_screenshot.setText(_translate("MainWindow", "Screenshot"))
         self.lbl_info_edit_page_pii_categorisation.setText(_translate("MainWindow", "PII - Form Labels Categorisation"))
-        #self.lbl_info_edit_page_label.setText(_translate("MainWindow", "label 1"))
-        #self.input_info_edit_page_category.setItemText(0, _translate("MainWindow", "Choose Category"))
-        #self.input_info_edit_page_category.setItemText(1, _translate("MainWindow", "Name"))
-        #self.input_info_edit_page_category.setItemText(2, _translate("MainWindow", "Address"))
-        #self.lbl_info_edit_page_label_2.setText(_translate("MainWindow", "label 2"))
-        #self.input_info_edit_page_category_2.setItemText(0, _translate("MainWindow", "Choose Category"))
-        #self.input_info_edit_page_category_2.setItemText(1, _translate("MainWindow", "Name"))
-        #elf.input_info_edit_page_category_2.setItemText(2, _translate("MainWindow", "Address"))
+        self.lbl_info_edit_page_label.setText(_translate("MainWindow", "label 1"))
+        self.input_info_edit_page_category.setItemText(0, _translate("MainWindow", "Choose Category"))
+        self.input_info_edit_page_category.setItemText(1, _translate("MainWindow", "Name"))
+        self.input_info_edit_page_category.setItemText(2, _translate("MainWindow", "Address"))
+        self.lbl_info_edit_page_label_2.setText(_translate("MainWindow", "label 2"))
+        self.input_info_edit_page_category_2.setItemText(0, _translate("MainWindow", "Choose Category"))
+        self.input_info_edit_page_category_2.setItemText(1, _translate("MainWindow", "Name"))
+        self.input_info_edit_page_category_2.setItemText(2, _translate("MainWindow", "Address"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(0, _translate("MainWindow", "Marketing Purpose"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(1, _translate("MainWindow", "Promotion"))
         self.input_info_edit_page_choose_marketing_purpose.setItemText(2, _translate("MainWindow", "Member Registration"))
@@ -1831,15 +1827,11 @@ class Ui_MainWindow(object):
         item = self.table_report_page_report.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Status"))
         item = self.table_report_page_report.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "PICS?"))
+        item.setText(_translate("MainWindow", "PII?"))
         item = self.table_report_page_report.horizontalHeaderItem(8)
         item.setText(_translate("MainWindow", "T&C?"))
         item = self.table_report_page_report.horizontalHeaderItem(9)
         item.setText(_translate("MainWindow", "Opt-in/Opt-out?"))
-        item = self.table_report_page_report.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "Remarks"))
-        item = self.table_report_page_report.horizontalHeaderItem(11)
-        item.setText(_translate("MainWindow", "PII"))
         self.button_report_page_back_edits.setText(_translate("MainWindow", "Back to Edits"))
 import image_rc
 
