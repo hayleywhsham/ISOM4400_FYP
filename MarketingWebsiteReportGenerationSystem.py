@@ -191,6 +191,19 @@ class MainWindow(QMainWindow):
             threads.append(t)
         for thread in threads:
             thread.join()
+        self.sort_all_lists()
+        try:
+            # put to new function and call for update and initialize
+            self.update_page()
+            self.ui.lbl_info_page_error_msg.setVisible(False)
+        except Exception as e:
+            self.ui.lbl_info_page_error_msg.setText(str(e))
+            self.ui.lbl_info_page_error_msg.setVisible(True)
+        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
+
+    def sort_all_lists(self):
         all_Label_Category_dict_list.sort()
         for elem in all_Label_Category_dict_list:
             elem.pop(0)
@@ -206,16 +219,6 @@ class MainWindow(QMainWindow):
             all_Keywords_Exist_dict.append(items[0])
         for items in full_url_list_list:
             full_url_list.append(items[0])
-        try:
-            # put to new function and call for update and initialize
-            self.update_page()
-            self.ui.lbl_info_page_error_msg.setVisible(False)
-        except Exception as e:
-            self.ui.lbl_info_page_error_msg.setText(str(e))
-            self.ui.lbl_info_page_error_msg.setVisible(True)
-        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.ui.scrollArea_info_edit_page_categorisation_content.update()
 
     def scrape_website_page(self, i, url):
         try:
@@ -315,8 +318,19 @@ class MainWindow(QMainWindow):
             writecsv = csv.writer(word_file)
             writecsv.writerows(self.export_info)
         word_file.close()
-
         # save scraped results from local variable to csv format
+
+    def reset_app(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+        all_Label_Category_dict.clear()
+        Label_Category_dict.clear()
+        all_Keywords_Exist_dict.clear()
+        Keywords_Exist_dict.clear()
+        full_url_list.clear()
+        full_url_list_list.clear()
+        self.columnWidgets.clear()
+        clear_screenshots()
+        self.url_pool.clear()
 
     def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
@@ -325,15 +339,16 @@ class MainWindow(QMainWindow):
             self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustToContents)
             self.ui.scrollArea_info_edit_page_categorisation_content.update()
-            #self.ui.scrollArea_info_edit_page_categorisation_content.setWidget()
             if Label_Category_dict["Label"][0] != "":
                 try:
                     Scraped_label_scroll = QScrollArea()
                     Scraped_label_scroll.setWidgetResizable(True)
                     Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-                    Scraped_label_scroll.setFixedSize(200, 0)
+                    Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+                    Scraped_label_scroll.setFixedSize(180, 30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
+                    Scraped_label.setMaximumWidth(130)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setWordWrap(True)
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
@@ -410,7 +425,7 @@ class MainWindow(QMainWindow):
                     Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Empty_label.setText("No items scraped")
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
-                    self.ui.scrollAreaWidgetContents_info_edit_page.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
+                    #self.ui.scrollAreaWidgetContents_info_edit_page.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
                     self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
                 except Exception as e:
                     print("debug c:", str(e))
@@ -426,7 +441,7 @@ class MainWindow(QMainWindow):
                     if item == "Choose Category":
                         item = "Unrelated"
                     if item != Label_Category_dict["Category"][index]:
-                        #self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
+                        self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
                         Label_Category_dict["Category"][index] = item
 
         else:

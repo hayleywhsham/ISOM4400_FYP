@@ -7,6 +7,18 @@ from time import sleep
 from selenium.webdriver.chrome.options import Options
 
 
+def get_full_url(link):
+    #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    chrome_options = Options()
+    #    chrome_options.add_argument("start-maximized")
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    driver.get(link)
+    driver.implicitly_wait(10)
+    full_url = driver.current_url
+    return full_url
+
+
 def web_scrape(counter, link):
 #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     chrome_options = Options()
