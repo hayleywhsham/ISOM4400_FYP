@@ -177,13 +177,7 @@ class MainWindow(QMainWindow):
 
         # generate new list of label-categories
         self.generate_category_page()
-        self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
-        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.ui.scrollArea_info_edit_page_categorisation_content.update()
-        #self.ui.scrollArea_info_edit_page_categorisation_content.setAlignment(Qt.ScrollBegin)
-        self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
-        self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
+
 
     def initial_edit_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
@@ -214,7 +208,7 @@ class MainWindow(QMainWindow):
             full_url_list.append(items[0])
         try:
             # put to new function and call for update and initialize
-            self.generate_category_page()
+            self.update_page()
             self.ui.lbl_info_page_error_msg.setVisible(False)
         except Exception as e:
             self.ui.lbl_info_page_error_msg.setText(str(e))
@@ -252,12 +246,10 @@ class MainWindow(QMainWindow):
             self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
             Label_Category_dict = all_Label_Category_dict[list_index]
             if Label_Category_dict != []:
-                for items_no in range(len(Label_Category_dict["Label"])):
-                    try:
-                        self.add_new_combobox(Label_Category_dict)
-                    except Exception as e:
-                        print("some error", str(e))
-                        continue
+                try:
+                    self.add_new_combobox(Label_Category_dict)
+                except Exception as e:
+                    print("some error", str(e))
 
                 if self.export_info[list_index][7] == "Yes":
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
@@ -277,6 +269,8 @@ class MainWindow(QMainWindow):
                 if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
                     self.scene_info_edit_page_screenshot.addPixmap(
                         QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
+                self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
+                self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
                 self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
         except ValueError as e:
             print(str(e))
@@ -317,7 +311,7 @@ class MainWindow(QMainWindow):
         save_to_path = filedialog.asksaveasfilename(defaultextension=".csv")
         with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
             word_file.write(
-                "ID,Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
+                "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
             writecsv = csv.writer(word_file)
             writecsv.writerows(self.export_info)
         word_file.close()
@@ -326,96 +320,102 @@ class MainWindow(QMainWindow):
 
     def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
-        self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
-
-        if Label_Category_dict["Label"][0] != "":
-            try:
-                Scraped_label_scroll = QScrollArea()
-                Scraped_label_scroll.setWidgetResizable(True)
-                self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-                Scraped_label = QLabel()
-                Scraped_label.setMinimumSize(QtCore.QSize(210, 0))
-                Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
-                Scraped_label.setText(Label_Category_dict["Label"][row])
-                Scraped_label.setWordWrap(True)
-                Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-                Scraped_label_scroll.setWidget(Scraped_label)
-                #Label_area.setWidget(Scraped_label)
-                Category = QComboBox()
-                Category.setMinimumSize(QtCore.QSize(250, 30))
-                Category.setMaximumSize(QtCore.QSize(270, 30))
-                font = QtGui.QFont()
-                font.setFamily("Arial Black")
-                font.setPointSize(10)
-                font.setBold(False)
-                font.setItalic(False)
-                font.setWeight(10)
-                Category.setFont(font)
-                Category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
-                Category.setStyleSheet("QComboBox\n"
-                                       "{\n"
-                                       "    background-color: rgb(238, 238, 238);\n"
-                                       "    color: rgb(98, 98, 98);\n"
-                                       "    border-radius: 15px;\n"
-                                       "    font-size: 15px;\n"
-                                       "    padding-left: 20px;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QComboBox::down-arrow\n"
-                                       "{\n"
-                                       "    border-image: url(:/image/arrow_down_grey.png);\n"
-                                       "    height: 15px;\n"
-                                       "    width: 15px;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QComboBox::drop-down\n"
-                                       "{\n"
-                                       "    subcontrol-origin: padding;\n"
-                                       "    subcontrol-position: top right;\n"
-                                       "    width: 45px; \n"
-                                       "    border-top-right-radius: 3px;\n"
-                                       "    border-bottom-right-radius: 3px;\n"
-                                       "}\n"
-                                       "\n"
-                                       "QComboBox QAbstractItemView\n"
-                                       "{\n"
-                                       "    color: rgb(98, 98, 98); /*dark grey*/\n"
-                                       "    background-color: white;\n"
-                                       "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
-                                       "    selection-color: white;\n"
-                                       "    border-radius: 0px;\n"
-                                       "}\n"
-                                       "\n"
-                                       "")
-                Category.setEditable(False)
-                Category.wheelEvent = lambda e: e.ignore
-                Category.addItem("Choose Category")
-                Category.addItems(list(self.categoryList.categories.keys()))
+        while len(Label_Category_dict["Label"]) > row:
+            self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
+            self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
+                QtWidgets.QAbstractScrollArea.AdjustToContents)
+            self.ui.scrollArea_info_edit_page_categorisation_content.update()
+            #self.ui.scrollArea_info_edit_page_categorisation_content.setWidget()
+            if Label_Category_dict["Label"][0] != "":
                 try:
-                    if Label_Category_dict["Category"][row] == "":
-                        Category.setCurrentText("Choose Category")
-                    else:
-                        Category.setCurrentText(Label_Category_dict["Category"][row])
-                    self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label_scroll, Category)
-                    self.columnWidgets.append(Category)
+                    Scraped_label_scroll = QScrollArea()
+                    Scraped_label_scroll.setWidgetResizable(True)
+                    Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+                    Scraped_label_scroll.setFixedSize(200, 0)
+                    Scraped_label = QLabel()
+                    Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
+                    Scraped_label.setText(Label_Category_dict["Label"][row])
+                    Scraped_label.setWordWrap(True)
+                    Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+                    Scraped_label_scroll.setWidget(Scraped_label)
+                    Category = QComboBox()
+                    Category.setMinimumSize(QtCore.QSize(250, 30))
+                    Category.setMaximumSize(QtCore.QSize(270, 30))
+                    font = QtGui.QFont()
+                    font.setFamily("Arial Black")
+                    font.setPointSize(10)
+                    font.setBold(False)
+                    font.setItalic(False)
+                    font.setWeight(10)
+                    Category.setFont(font)
+                    Category.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+                    Category.setStyleSheet("QComboBox\n"
+                                           "{\n"
+                                           "    background-color: rgb(238, 238, 238);\n"
+                                           "    color: rgb(98, 98, 98);\n"
+                                           "    border-radius: 15px;\n"
+                                           "    font-size: 15px;\n"
+                                           "    padding-left: 20px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QComboBox::down-arrow\n"
+                                           "{\n"
+                                           "    border-image: url(:/image/arrow_down_grey.png);\n"
+                                           "    height: 15px;\n"
+                                           "    width: 15px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QComboBox::drop-down\n"
+                                           "{\n"
+                                           "    subcontrol-origin: padding;\n"
+                                           "    subcontrol-position: top right;\n"
+                                           "    width: 45px; \n"
+                                           "    border-top-right-radius: 3px;\n"
+                                           "    border-bottom-right-radius: 3px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "QComboBox QAbstractItemView\n"
+                                           "{\n"
+                                           "    color: rgb(98, 98, 98); /*dark grey*/\n"
+                                           "    background-color: white;\n"
+                                           "        selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/\n"
+                                           "    selection-color: white;\n"
+                                           "    border-radius: 0px;\n"
+                                           "}\n"
+                                           "\n"
+                                           "")
+                    Category.setEditable(False)
+                    Category.wheelEvent = lambda e: e.ignore
+                    Category.addItem("Choose Category")
+                    Category.addItems(list(self.categoryList.categories.keys()))
+                    try:
+                        if Label_Category_dict["Category"][row] == "":
+                            Category.setCurrentText("Choose Category")
+                        else:
+                            Category.setCurrentText(Label_Category_dict["Category"][row])
+                        self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label_scroll, Category)
+                        self.columnWidgets.append(Category)
+                    except Exception as e:
+                        print("debug a:", str(e))
+                        self.ui.lbl_info_page_error_msg.setText(str(e))
+                        self.ui.lbl_info_page_error_msg.setVisible(True)
                 except Exception as e:
-                    print("debug a:", str(e))
+                    print("debug b:", str(e))
                     self.ui.lbl_info_page_error_msg.setText(str(e))
                     self.ui.lbl_info_page_error_msg.setVisible(True)
-            except Exception as e:
-                print("debug b:", str(e))
-                self.ui.lbl_info_page_error_msg.setText(str(e))
-                self.ui.lbl_info_page_error_msg.setVisible(True)
-        else:
-            try:
-                Empty_label = QLabel()
-                Empty_label.setMinimumSize(QtCore.QSize(100, 0))
-                Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
-                Empty_label.setText("No items scraped")
-                self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
-                self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
-            except Exception as e:
-                print("debug c:", str(e))
+            else:
+                try:
+                    Empty_label = QLabel()
+                    Empty_label.setMinimumSize(QtCore.QSize(100, 0))
+                    Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
+                    Empty_label.setText("No items scraped")
+                    self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
+                    self.ui.scrollAreaWidgetContents_info_edit_page.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
+                    self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
+                except Exception as e:
+                    print("debug c:", str(e))
+            row += 1
+        self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
 
     def get_combobox_data(self):
         Label_Category_dict = all_Label_Category_dict[int(self.ui.input_info_edit_page_current_page.text()) - 1]
