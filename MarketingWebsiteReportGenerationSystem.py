@@ -105,6 +105,7 @@ class MainWindow(QMainWindow):
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
         fb_page_name = fb_page_name
         source = "Facebook"
+        count = 0
         for post in get_posts(fb_page_name,
                               pages=99999,
 
@@ -115,6 +116,8 @@ class MainWindow(QMainWindow):
                                cookies="./fbUserToken.json",):
 
             url  = post['link']
+
+
             if url and url not in self.url_pool:
                 post_time = post['time']
 
@@ -135,11 +138,13 @@ class MainWindow(QMainWindow):
                                              source,
                                              post_time.strftime("%Y/%m/%d"),
                                              url])
+                    count +=1
                 else:
                     break
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
+        print(f'Scrapped {count} post(s). Got {len(self.url_pool)} link(s).')
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
