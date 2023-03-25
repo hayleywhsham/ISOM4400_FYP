@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.categoryList = CategoryList()
         self.columnWidgets = []
-        self.url_pool = []
+        self.url_pool = set()
         self.export_info = []
 
         self.ui = Ui_MainWindow()
@@ -115,17 +115,17 @@ class MainWindow(QMainWindow):
 
                                cookies="./fbUserToken.json",):
 
-            url  = post['link']
-
-
-            if url and url not in self.url_pool:
-                post_time = post['time']
-
-                if post_time.date() <= end_date and post_time.date() >= start_date :
-                    # urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                    # self.url_pool.update(urls)
-                    # print(urls)
-                    self.url_pool.append(url)
+            post_time = post['time']
+            # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
+            # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
+            # post["text"][:10]}\n')
+            if post_time.date() < start_date:
+                break
+            if post_time.date() <= end_date:
+                urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+                self.url_pool.update(urls)
+                # print(urls)
+                for url in urls:
                     row_position = self.ui.table_links_page_link_list.rowCount()
                     self.ui.table_links_page_link_list.insertRow(row_position)
                     self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(fb_page_name))
@@ -139,8 +139,7 @@ class MainWindow(QMainWindow):
                                              post_time.strftime("%Y/%m/%d"),
                                              url])
                     count +=1
-                else:
-                    break
+
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
