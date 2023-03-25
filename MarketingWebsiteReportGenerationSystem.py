@@ -29,6 +29,7 @@ class MainWindow(QMainWindow):
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
+        self.full_url_pool = set()
         self.export_info = []
 
         self.ui = Ui_MainWindow()
@@ -144,6 +145,14 @@ class MainWindow(QMainWindow):
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
         print(f'Scrapped {count} post(s). Got {len(self.url_pool)} link(s).')
+
+    def remove_dup_links(self, urls):
+        for i, url in enumerate(urls):
+            full_url = get_full_url(url)
+            if full_url in self.full_url_pool:
+                urls.remove(urls[i])
+            else:
+                self.full_url_pool.add(full_url)
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
