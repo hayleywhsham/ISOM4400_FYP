@@ -259,15 +259,15 @@ class MainWindow(QMainWindow):
                 if self.export_info[list_index][7] == "Yes":
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
-                    self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
+                    self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
                 if self.export_info[list_index][8] == "Yes":
                     self.ui.input_info_edit_page_pics.setCurrentIndex(1)
                 else:
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(2)
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
                 if self.export_info[list_index][9] == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
-                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
+                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
                     self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.export_info[list_index][5])
                 self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
                 self.scene_info_edit_page_screenshot = QGraphicsScene()
@@ -285,9 +285,9 @@ class MainWindow(QMainWindow):
         self.get_combobox_data()
         dictionary_number = 0
         for dictionary in all_Label_Category_dict:
-            for labels, categories in zip(dictionary["Label"], dictionary["Category"]):
+            for categories in dictionary["Category"]:
                 if categories != "Unrelated" and categories != "":
-                    self.export_info[dictionary_number][11] = self.export_info[dictionary_number][11] + labels + ": " + categories + ","
+                    self.export_info[dictionary_number][11] = self.export_info[dictionary_number][11] + categories + ","
             self.export_info[dictionary_number][11].rstrip(",")
             dictionary_number += 1
         while self.ui.table_report_page_report.rowCount() > 0:

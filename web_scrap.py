@@ -14,7 +14,6 @@ def get_full_url(link):
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(link)
-    driver.implicitly_wait(10)
     full_url = driver.current_url
     return full_url
 
