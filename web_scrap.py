@@ -59,5 +59,4 @@ def web_scrape(counter, link):
         print(str(e))
         pass
     sleep(10)
-    full_url = driver.current_url
-    return text_list, link_list, full_url
+    return text_list, link_list
