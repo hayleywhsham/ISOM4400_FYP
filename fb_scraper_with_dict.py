@@ -9,7 +9,7 @@ def get_all_url_from_string(string) -> list[str]:
     urls = []
 
     target_list = ["http", "bit.ly"]
-    end_target_list = ["\n", " ", "更多"]
+    end_target_list = ["\n", " ", "更多", "，"]
     end_pos = 0
 
     while end_pos < len(string):
