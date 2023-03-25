@@ -224,15 +224,10 @@ class MainWindow(QMainWindow):
         all_Keywords_Exist_dict_list.sort()
         for elem in all_Keywords_Exist_dict_list:
             elem.pop(0)
-        full_url_list_list.sort()
-        for elem in full_url_list_list:
-            elem.pop(0)
         for items in all_Label_Category_dict_list:
             all_Label_Category_dict.append(items[0])
         for items in all_Keywords_Exist_dict_list:
             all_Keywords_Exist_dict.append(items[0])
-        for items in full_url_list_list:
-            full_url_list.append(items[0])
 
     def scrape_website_page(self, i, url):
         try:
@@ -242,7 +237,6 @@ class MainWindow(QMainWindow):
             Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
             all_Label_Category_dict_list.append([i, Label_Category_dict])
             all_Keywords_Exist_dict_list.append([i, Keywords_Exist_dict])
-            full_url_list_list.append([i, full_url])
             self.export_info[i].append(full_url)
             self.export_info[i].append("Marketing Purpose")
             self.export_info[i].append("Ongoing")
@@ -260,7 +254,7 @@ class MainWindow(QMainWindow):
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate()
             self.ui.input_info_edit_page_remarks.setText(self.export_info[list_index][10])
-            self.ui.lbl_info_edit_page_full_url.setText(full_url_list[list_index])
+            self.ui.lbl_info_edit_page_full_url.setText(self.full_url_list[list_index])
             Label_Category_dict = all_Label_Category_dict[list_index]
             if Label_Category_dict != []:
                 try:
@@ -340,11 +334,14 @@ class MainWindow(QMainWindow):
         Label_Category_dict.clear()
         all_Keywords_Exist_dict.clear()
         Keywords_Exist_dict.clear()
-        full_url_list.clear()
-        full_url_list_list.clear()
         self.columnWidgets.clear()
         clear_screenshots()
         self.url_pool.clear()
+        self.full_url_list.clear()
+        while self.ui.table_links_page_link_list.rowCount() > 0:
+            self.ui.table_links_page_link_list.removeRow(0)
+        while self.ui.table_report_page_report.rowCount() > 0:
+            self.ui.table_report_page_report.removeRow(0)
 
     def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
