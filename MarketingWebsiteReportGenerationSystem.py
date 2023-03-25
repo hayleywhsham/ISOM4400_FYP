@@ -31,6 +31,7 @@ class MainWindow(QMainWindow):
         self.url_pool = set()
         self.full_url_pool = set()
         self.export_info = []
+        self.full_url_list= []
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -134,11 +135,13 @@ class MainWindow(QMainWindow):
                     self.ui.table_links_page_link_list.setItem(row_position, 2,
                                                                QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
                     self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(url))
+                    self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.full_url_list[count]))
 
                     self.export_info.append([fb_page_name,
                                              source,
                                              post_time.strftime("%Y/%m/%d"),
-                                             url])
+                                             url,
+                                             self.full_url_list[count]])
                     count +=1
 
 
@@ -147,12 +150,12 @@ class MainWindow(QMainWindow):
         print(f'Scrapped {count} post(s). Got {len(self.url_pool)} link(s).')
 
     def remove_dup_links(self, urls):
-        for i, url in enumerate(urls):
+        for url in urls:
             full_url = get_full_url(url)
-            if full_url in self.full_url_pool:
-                urls.remove(urls[i])
+            if full_url not in self.full_url_list:
+                self.full_url_list.append(full_url)
             else:
-                self.full_url_pool.add(full_url)
+                self.url_pool.remove(url)
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
