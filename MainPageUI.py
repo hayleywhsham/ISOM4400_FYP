@@ -1748,7 +1748,7 @@ class Ui_MainWindow(object):
         self.table_report_page_report.verticalHeader().setCascadingSectionResizes(False)
         self.button_report_page_back_edits = QtWidgets.QPushButton(self.widget_report_page_result)
         self.button_report_page_back_edits.setGeometry(QtCore.QRect(70, 20, 161, 41))
-        self.button_report_page_back_edits.setStyleSheet("background-color: rgb(109, 32, 119);\n"
+        self.button_report_page_back_edits.setStyleSheet("background-color: rgb(0, 51, 141);\n"
 "border-radius: 15px;\n"
 "font: 87 10pt \"Arial Black\";\n"
 "color: white;")
@@ -1760,7 +1760,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
         self.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
         self.input_info_edit_page_tnc.setCurrentIndex(0)

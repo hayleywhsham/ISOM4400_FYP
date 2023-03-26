@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -3686,7 +3686,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(109, 32, 119);
+        <string notr="true">background-color: rgb(0, 51, 141);
 border-radius: 15px;
 font: 87 10pt &quot;Arial Black&quot;;
 color: white;</string>
