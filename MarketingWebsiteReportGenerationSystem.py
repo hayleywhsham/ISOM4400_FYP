@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
-        self.full_url_pool = set()
+        self.url_list = []
         self.export_info = []
         self.full_url_list= []
 
@@ -125,9 +125,12 @@ class MainWindow(QMainWindow):
                 break
             if post_time.date() <= end_date:
                 urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                self.url_pool.update(urls)
-                # print(urls)
                 for url in urls:
+                    if not (url.startswith("http://") or url.startswith("https://")):
+                        new_url = "http://" + url
+                        self.url_pool.add(new_url)
+                self.remove_dup_links(self.url_pool)
+                for url in self.url_list:
                     row_position = self.ui.table_links_page_link_list.rowCount()
                     self.ui.table_links_page_link_list.insertRow(row_position)
                     self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(fb_page_name))
@@ -135,7 +138,7 @@ class MainWindow(QMainWindow):
                     self.ui.table_links_page_link_list.setItem(row_position, 2,
                                                                QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
                     self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(url))
-                    self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.full_url_list[count]))
+                    self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.full_url_list[row_position]))
 
                     self.export_info.append([fb_page_name,
                                              source,
@@ -154,8 +157,8 @@ class MainWindow(QMainWindow):
             full_url = get_full_url(url)
             if full_url not in self.full_url_list:
                 self.full_url_list.append(full_url)
-            else:
-                self.url_pool.remove(url)
+                self.url_list.append(url)
+
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
@@ -231,13 +234,10 @@ class MainWindow(QMainWindow):
 
     def scrape_website_page(self, i, url):
         try:
-            if not (url.startswith("http://") or url.startswith("https://")):
-                url = "http://" + url
-            scraped_text_list, scraped_link_list, full_url = web_scrape(i, url)
+            scraped_text_list, scraped_link_list = web_scrape(i, url)
             Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
             all_Label_Category_dict_list.append([i, Label_Category_dict])
             all_Keywords_Exist_dict_list.append([i, Keywords_Exist_dict])
-            self.export_info[i].append(full_url)
             self.export_info[i].append("Marketing Purpose")
             self.export_info[i].append("Ongoing")
             self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][0]))
