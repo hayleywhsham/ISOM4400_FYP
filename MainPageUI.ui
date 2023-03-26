@@ -117,7 +117,7 @@ color: white;</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="search_page">
      <widget class="QWidget" name="widget_search_page_progress" native="true">
@@ -1185,10 +1185,10 @@ font: 75 12pt &quot;Arial&quot;;</string>
        <widget class="QLabel" name="lbl_links_page_title">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>10</y>
+          <x>100</x>
+          <y>0</y>
           <width>231</width>
-          <height>31</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1201,10 +1201,10 @@ font: 75 12pt &quot;Arial&quot;;</string>
        <widget class="QLabel" name="lbl_links_page_last_updated">
         <property name="geometry">
          <rect>
-          <x>280</x>
-          <y>10</y>
+          <x>350</x>
+          <y>0</y>
           <width>101</width>
-          <height>31</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1218,10 +1218,10 @@ color: rgb(98, 98, 98);</string>
        <widget class="QLabel" name="lbl_links_page_last_updated_datetime">
         <property name="geometry">
          <rect>
-          <x>380</x>
-          <y>10</y>
-          <width>571</width>
-          <height>31</height>
+          <x>460</x>
+          <y>0</y>
+          <width>491</width>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1230,6 +1230,47 @@ color: rgb(98, 98, 98);</string>
         </property>
         <property name="text">
          <string>2022/09/15 13:54</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="button_links_page_back">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>91</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>10</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 51, 141);
+border-radius: 15px;
+font: 87 10pt &quot;Arial Black&quot;;
+color: rgb(255, 255, 255);</string>
+        </property>
+        <property name="text">
+         <string>Back</string>
+        </property>
+        <property name="icon">
+         <iconset resource="images/image.qrc">
+          <normaloff>:/image/arrow_left_white.png</normaloff>:/image/arrow_left_white.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </widget>
@@ -1406,7 +1447,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
          <bool>false</bool>
         </property>
         <attribute name="horizontalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>true</bool>
@@ -1699,9 +1740,9 @@ font: 87 9pt &quot;Arial Black&quot;;</string>
       <widget class="QFrame" name="frame_info_edit_page_full_true_path">
        <property name="geometry">
         <rect>
-         <x>70</x>
-         <y>70</y>
-         <width>471</width>
+         <x>30</x>
+         <y>60</y>
+         <width>631</width>
          <height>41</height>
         </rect>
        </property>
@@ -1732,7 +1773,7 @@ font: 87 9pt &quot;Arial Black&quot;;</string>
          <rect>
           <x>120</x>
           <y>10</y>
-          <width>351</width>
+          <width>511</width>
           <height>21</height>
          </rect>
         </property>
@@ -1754,6 +1795,9 @@ color: rgb(0, 163, 161);</string>
          <string>www.abcde.com</string>
         </property>
         <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
          <bool>true</bool>
         </property>
        </widget>
@@ -1793,10 +1837,10 @@ color: white;</string>
       <widget class="QFrame" name="frame_info_edit_page_screenshot">
        <property name="geometry">
         <rect>
-         <x>69</x>
-         <y>220</y>
-         <width>471</width>
-         <height>21</height>
+         <x>30</x>
+         <y>100</y>
+         <width>381</width>
+         <height>231</height>
         </rect>
        </property>
        <property name="frameShape">
@@ -1808,10 +1852,10 @@ color: white;</string>
        <widget class="QLabel" name="lbl_info_edit_page_screenshot">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>-10</y>
+          <x>10</x>
+          <y>0</y>
           <width>131</width>
-          <height>31</height>
+          <height>21</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1821,14 +1865,27 @@ color: white;</string>
          <string>Screenshot</string>
         </property>
        </widget>
+       <widget class="QGraphicsView" name="graphicsView_info_edit_page_screenshot">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>361</width>
+          <height>211</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
       </widget>
       <widget class="QFrame" name="frame_info_edit_page_pii_categorisation">
        <property name="geometry">
         <rect>
-         <x>560</x>
+         <x>680</x>
          <y>70</y>
          <width>541</width>
-         <height>281</height>
+         <height>311</height>
         </rect>
        </property>
        <property name="frameShape">
@@ -1850,7 +1907,7 @@ color: white;</string>
          <string notr="true">font: 87 10pt &quot;Arial Black&quot;;</string>
         </property>
         <property name="text">
-         <string>PII - Form Labels Categorisation</string>
+         <string>Labels Categorisation</string>
         </property>
        </widget>
        <widget class="QFrame" name="frame_info_edit_page_categorisation_box">
@@ -1859,7 +1916,7 @@ color: white;</string>
           <x>0</x>
           <y>40</y>
           <width>541</width>
-          <height>241</height>
+          <height>261</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1988,21 +2045,24 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
           <widget class="QWidget" name="formLayoutWidget">
            <property name="geometry">
             <rect>
-             <x>6</x>
+             <x>10</x>
              <y>10</y>
-             <width>471</width>
-             <height>281</height>
+             <width>491</width>
+             <height>501</height>
             </rect>
            </property>
            <layout class="QFormLayout" name="formLayout_info_edit_page_scrolling_content">
             <property name="sizeConstraint">
-             <enum>QLayout::SetMinimumSize</enum>
+             <enum>QLayout::SetNoConstraint</enum>
             </property>
             <property name="fieldGrowthPolicy">
-             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             <enum>QFormLayout::ExpandingFieldsGrow</enum>
             </property>
             <property name="rowWrapPolicy">
              <enum>QFormLayout::DontWrapRows</enum>
+            </property>
+            <property name="formAlignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
             <property name="verticalSpacing">
              <number>6</number>
@@ -2019,24 +2079,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="lbl_info_edit_page_label">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">color: rgb(255, 255, 255);</string>
-              </property>
-              <property name="text">
-               <string>label 1</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="1">
              <widget class="QComboBox" name="input_info_edit_page_category">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>250</width>
@@ -2045,7 +2095,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
               </property>
               <property name="maximumSize">
                <size>
-                <width>270</width>
+                <width>250</width>
                 <height>30</height>
                </size>
               </property>
@@ -2126,22 +2176,59 @@ QComboBox QAbstractItemView
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="lbl_info_edit_page_label_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
-                <width>100</width>
-                <height>0</height>
+                <width>218</width>
+                <height>20</height>
                </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Arial Black</family>
+                <pointsize>10</pointsize>
+                <weight>10</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+                <kerning>true</kerning>
+               </font>
               </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(255, 255, 255);</string>
               </property>
               <property name="text">
-               <string>label 2</string>
+               <string>12345678912345678941 23456789f</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::AutoText</enum>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item row="1" column="1">
              <widget class="QComboBox" name="input_info_edit_page_category_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>250</width>
@@ -2150,7 +2237,7 @@ QComboBox QAbstractItemView
               </property>
               <property name="maximumSize">
                <size>
-                <width>270</width>
+                <width>250</width>
                 <height>30</height>
                </size>
               </property>
@@ -2229,6 +2316,53 @@ QComboBox QAbstractItemView
               </item>
              </widget>
             </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="lbl_info_edit_page_label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>200</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>200</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Arial Black</family>
+                <pointsize>10</pointsize>
+                <weight>10</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+                <kerning>true</kerning>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string>long text try laaaaaaaaa 1234567890123456789 more text here so long labels trying wtf must be hktv mall links so long aaaaaabbbbbbbbbbbbbbccccccccccccccccccddddddddddddddddddddddddddd</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::AutoText</enum>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </widget>
@@ -2238,7 +2372,7 @@ QComboBox QAbstractItemView
       <widget class="Line" name="deco_info_edit_page_vline">
        <property name="geometry">
         <rect>
-         <x>540</x>
+         <x>660</x>
          <y>70</y>
          <width>20</width>
          <height>381</height>
@@ -2257,9 +2391,9 @@ QComboBox QAbstractItemView
       <widget class="QFrame" name="frame_info_edit_page_marketing_web_details">
        <property name="geometry">
         <rect>
-         <x>70</x>
-         <y>110</y>
-         <width>471</width>
+         <x>30</x>
+         <y>350</y>
+         <width>631</width>
          <height>101</height>
         </rect>
        </property>
@@ -2268,9 +2402,10 @@ QComboBox QAbstractItemView
 
 QFrame
 {
-	background-color: rgb(0, 145, 218);
+	background-color: rgb(72, 54, 152);
 	border-radius: 25px;
-}</string>
+}
+</string>
        </property>
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -2281,9 +2416,9 @@ QFrame
        <widget class="QComboBox" name="input_info_edit_page_choose_marketing_purpose">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>241</width>
+          <x>30</x>
+          <y>60</y>
+          <width>221</width>
           <height>30</height>
          </rect>
         </property>
@@ -2340,7 +2475,7 @@ QComboBox QAbstractItemView
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="insertPolicy">
          <enum>QComboBox::InsertAtBottom</enum>
@@ -2367,9 +2502,9 @@ QComboBox QAbstractItemView
        <widget class="QDateEdit" name="input_info_edit_page_expiring_date">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>380</x>
           <y>60</y>
-          <width>241</width>
+          <width>221</width>
           <height>30</height>
          </rect>
         </property>
@@ -2513,338 +2648,14 @@ QCalendarWidget QAbstractItemView:disabled{color: rgb(64, 64, 64); /*dark grey*/
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QComboBox" name="input_info_edit_page_choose_opt_in_out">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>70</y>
-          <width>191</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial Black</family>
-          <pointsize>-1</pointsize>
-          <weight>10</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="contextMenuPolicy">
-         <enum>Qt::DefaultContextMenu</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox
-{
-	background-color: rgb(238, 238, 238);
-	color: rgb(98, 98, 98);
-	border-radius: 5px;
-	font-size: 12px;
-	padding-left: 10px;
-}
-
-
-QComboBox::down-arrow
-{
-	border-image: url(:/image/arrow_down_grey.png);
-	height: 10px;
-	width: 10px;
-}
-
-QComboBox::drop-down
-{
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-QComboBox QAbstractItemView
-{
-    color: rgb(98, 98, 98); /*dark grey*/
-	background-color: white;
-    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
-	selection-color: white;
-	border-radius: 0px;
-}
-
-</string>
-        </property>
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <property name="maxVisibleItems">
-         <number>3</number>
-        </property>
-        <property name="insertPolicy">
-         <enum>QComboBox::InsertAtBottom</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>15</width>
-          <height>15</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Opt-in/Opt-out</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Opt-in/Opt-out</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Opt-in/Opt-out</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
-         </property>
-        </item>
-       </widget>
-       <widget class="QComboBox" name="input_info_edit_page_pics">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>40</y>
-          <width>191</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial Black</family>
-          <pointsize>-1</pointsize>
-          <weight>10</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="contextMenuPolicy">
-         <enum>Qt::DefaultContextMenu</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox
-{
-	background-color: rgb(238, 238, 238);
-	color: rgb(98, 98, 98);
-	border-radius: 5px;
-	font-size: 12px;
-	padding-left: 10px;
-}
-
-
-QComboBox::down-arrow
-{
-	border-image: url(:/image/arrow_down_grey.png);
-	height: 10px;
-	width: 10px;
-}
-
-QComboBox::drop-down
-{
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-QComboBox QAbstractItemView
-{
-    color: rgb(98, 98, 98); /*dark grey*/
-	background-color: white;
-    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
-	selection-color: white;
-	border-radius: 0px;
-}
-
-</string>
-        </property>
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <property name="maxVisibleItems">
-         <number>3</number>
-        </property>
-        <property name="insertPolicy">
-         <enum>QComboBox::InsertAtBottom</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>15</width>
-          <height>15</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>P.I.C.S.</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>P.I.C.S.</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>P.I.C.S.</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
-         </property>
-        </item>
-       </widget>
-       <widget class="QComboBox" name="input_info_edit_page_tnc">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>10</y>
-          <width>191</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Arial Black</family>
-          <pointsize>-1</pointsize>
-          <weight>10</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="contextMenuPolicy">
-         <enum>Qt::DefaultContextMenu</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QComboBox
-{
-	background-color: rgb(238, 238, 238);
-	color: rgb(98, 98, 98);
-	border-radius: 5px;
-	font-size: 12px;
-	padding-left: 10px;
-}
-
-
-QComboBox::down-arrow
-{
-	border-image: url(:/image/arrow_down_grey.png);
-	height: 10px;
-	width: 10px;
-}
-
-QComboBox::drop-down
-{
-	subcontrol-origin: padding;
-	subcontrol-position: top right;
-	width: 25px; 
-	border-top-right-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-QComboBox QAbstractItemView
-{
-    color: rgb(98, 98, 98); /*dark grey*/
-	background-color: white;
-    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
-	selection-color: white;
-	border-radius: 0px;
-}
-
-</string>
-        </property>
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <property name="maxVisibleItems">
-         <number>3</number>
-        </property>
-        <property name="insertPolicy">
-         <enum>QComboBox::InsertAtBottom</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>15</width>
-          <height>15</height>
-         </size>
-        </property>
-        <item>
-         <property name="text">
-          <string>Terms &amp; Conditions</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Terms &amp; Conditions</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Terms &amp; Conditions</string>
-         </property>
-         <property name="icon">
-          <iconset resource="images/image.qrc">
-           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
-         </property>
-        </item>
-       </widget>
       </widget>
       <widget class="QFrame" name="frame_info_edit_page_remarks">
        <property name="geometry">
         <rect>
-         <x>560</x>
-         <y>360</y>
+         <x>680</x>
+         <y>380</y>
          <width>541</width>
-         <height>91</height>
+         <height>71</height>
         </rect>
        </property>
        <property name="frameShape">
@@ -2858,7 +2669,7 @@ QComboBox QAbstractItemView
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>561</width>
+          <width>531</width>
           <height>16</height>
          </rect>
         </property>
@@ -2872,10 +2683,10 @@ QComboBox QAbstractItemView
        <widget class="QTextEdit" name="input_info_edit_page_remarks">
         <property name="geometry">
          <rect>
-          <x>13</x>
-          <y>38</y>
+          <x>10</x>
+          <y>30</y>
           <width>521</width>
-          <height>51</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -2886,23 +2697,10 @@ padding: 5px;</string>
         </property>
        </widget>
       </widget>
-      <widget class="QGraphicsView" name="graphicsView_info_edit_page_screenshot">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>240</y>
-         <width>471</width>
-         <height>211</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-      </widget>
       <widget class="QPushButton" name="button_info_edit_page_next">
        <property name="geometry">
         <rect>
-         <x>1070</x>
+         <x>1190</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -2934,7 +2732,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QPushButton" name="button_info_edit_page_previous">
        <property name="geometry">
         <rect>
-         <x>900</x>
+         <x>1030</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -2966,7 +2764,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLabel" name="lbl_info_edit_page_total_pages">
        <property name="geometry">
         <rect>
-         <x>1020</x>
+         <x>1140</x>
          <y>460</y>
          <width>41</width>
          <height>31</height>
@@ -2982,7 +2780,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLabel" name="lbl_info_edit_page_slash">
        <property name="geometry">
         <rect>
-         <x>990</x>
+         <x>1120</x>
          <y>460</y>
          <width>31</width>
          <height>31</height>
@@ -2998,7 +2796,7 @@ color: rgb(255, 255, 255);</string>
       <widget class="QLineEdit" name="input_info_edit_page_current_page">
        <property name="geometry">
         <rect>
-         <x>950</x>
+         <x>1080</x>
          <y>459</y>
          <width>41</width>
          <height>31</height>
@@ -3018,9 +2816,9 @@ border-radius: 5px;</string>
       <widget class="QLabel" name="lbl_info_page_error_msg">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>140</x>
          <y>20</y>
-         <width>981</width>
+         <width>901</width>
          <height>41</height>
         </rect>
        </property>
@@ -3044,6 +2842,288 @@ font: 75 10pt &quot;Arial&quot;;</string>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
+      </widget>
+      <widget class="QPushButton" name="button_info_edit_page_back">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>20</y>
+         <width>91</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial Black</family>
+         <pointsize>10</pointsize>
+         <weight>10</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(0, 51, 141);
+border-radius: 15px;
+font: 87 10pt &quot;Arial Black&quot;;
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images/image.qrc">
+         <normaloff>:/image/arrow_left_white.png</normaloff>:/image/arrow_left_white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>15</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QFrame" name="frame_info_edit_page_marketing_web_details_2">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>120</y>
+         <width>251</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">*{font: 87 10pt &quot;Arial Black&quot;;}
+
+QFrame
+{
+	background-color: rgb(0, 145, 218);
+	border-radius: 25px;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <widget class="QComboBox" name="input_info_edit_page_choose_opt_in_out">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>60</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>-1</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 5px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+
+QComboBox::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 10px;
+	width: 10px;
+}
+
+QComboBox::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView
+{
+    color: rgb(98, 98, 98); /*dark grey*/
+	background-color: white;
+    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	selection-color: white;
+	border-radius: 0px;
+}
+
+</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="maxVisibleItems">
+         <number>3</number>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtBottom</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Opt-in/Opt-out</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Opt-in/Opt-out</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Opt-in/Opt-out</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
+         </property>
+        </item>
+       </widget>
+       <widget class="QComboBox" name="input_info_edit_page_tnc">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>20</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial Black</family>
+          <pointsize>-1</pointsize>
+          <weight>10</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	background-color: rgb(238, 238, 238);
+	color: rgb(98, 98, 98);
+	border-radius: 5px;
+	font-size: 12px;
+	padding-left: 10px;
+}
+
+
+QComboBox::down-arrow
+{
+	border-image: url(:/image/arrow_down_grey.png);
+	height: 10px;
+	width: 10px;
+}
+
+QComboBox::drop-down
+{
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 25px; 
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+QComboBox QAbstractItemView
+{
+    color: rgb(98, 98, 98); /*dark grey*/
+	background-color: white;
+    	selection-background-color: rgb(71, 10, 104); /*KPMG Purple*/
+	selection-color: white;
+	border-radius: 0px;
+}
+
+</string>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="maxVisibleItems">
+         <number>3</number>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtBottom</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>15</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/question_mark_grey.png</normaloff>:/image/question_mark_grey.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/tick_green.png</normaloff>:/image/tick_green.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Terms &amp; Conditions</string>
+         </property>
+         <property name="icon">
+          <iconset resource="images/image.qrc">
+           <normaloff>:/image/cross_red.png</normaloff>:/image/cross_red.png</iconset>
+         </property>
+        </item>
+       </widget>
       </widget>
      </widget>
     </widget>
