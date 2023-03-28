@@ -1,10 +1,2 @@
 username: str = "hugofyptest@gmail.com"
 password: str = "FYP4400test"
-defined_category_list: list[list[str]] = []
-text_list = []
-Label_Category_dict = {"Label": [],  "Category": []}
-Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
-all_Label_Category_dict = []
-all_Keywords_Exist_dict = []
-all_Label_Category_dict_list = []
-all_Keywords_Exist_dict_list = []

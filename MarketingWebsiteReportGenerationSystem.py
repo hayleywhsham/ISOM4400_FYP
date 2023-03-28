@@ -7,7 +7,6 @@ import os
 from MainPageUI import Ui_MainWindow
 from fb_scraper_with_dict import get_all_url_from_string
 from Check_Word_List import CategoryList
-from Page_3_variables import *
 from web_scrap import *
 import datetime
 import csv
@@ -31,7 +30,6 @@ class MainWindow(QMainWindow):
         self.columnWidgets = []
         self.url_pool = set()
         self.url_list = []
-        self.export_info = []
         self.edit_information_pages = []
 
         self.ui = Ui_MainWindow()
@@ -184,7 +182,7 @@ class MainWindow(QMainWindow):
             pass
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
-            self.ui.input_info_edit_page_remarks.setText(self.export_info[page_number - 2][10])
+            self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[page_number - 2].remarks)
             self.update_page()
 
     def update_page(self):
@@ -203,13 +201,12 @@ class MainWindow(QMainWindow):
         url_list = list(self.url_pool)
         self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
         threads = []
-        for url_number, url in enumerate(url_list):
-            t = threading.Thread(target=self.scrape_website_page, args=(url_number, url))
+        for page_index, page in enumerate(self.edit_information_pages):
+            t = threading.Thread(target=self.scrape_website_page, args=(page_index, page))
             t.start()
             threads.append(t)
         for thread in threads:
             thread.join()
-        self.sort_all_lists()
         try:
             # put to new function and call for update and initialize
             self.update_page()
@@ -221,32 +218,11 @@ class MainWindow(QMainWindow):
             QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.ui.scrollArea_info_edit_page_categorisation_content.update()
 
-    def sort_all_lists(self):
-        all_Label_Category_dict_list.sort()
-        for elem in all_Label_Category_dict_list:
-            elem.pop(0)
-        all_Keywords_Exist_dict_list.sort()
-        for elem in all_Keywords_Exist_dict_list:
-            elem.pop(0)
-        for items in all_Label_Category_dict_list:
-            all_Label_Category_dict.append(items[0])
-        for items in all_Keywords_Exist_dict_list:
-            all_Keywords_Exist_dict.append(items[0])
-
-    def scrape_website_page(self, i, url):
+    def scrape_website_page(self, page_index, page_object):
         try:
-            scraped_text_list = []
-            scraped_text_list, scraped_link_list = web_scrape(i, url)
-            Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
-            all_Label_Category_dict_list.append([i, Label_Category_dict])
-            all_Keywords_Exist_dict_list.append([i, Keywords_Exist_dict])
-            self.export_info[i].append("Marketing Purpose")
-            self.export_info[i].append("Ongoing")
-            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][0]))
-            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][1]))
-            self.export_info[i].append(str(Keywords_Exist_dict["Exist?"][2]))
-            self.export_info[i].append("")
-            self.export_info[i].append("")
+            scraped_text_list, scraped_link_list = web_scrape(page_index, page_object.full_url)
+            page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
+            page_object.dict_to_PII_out()
         except Exception as e:
             print("debug scrape website", str(e))
 
@@ -255,28 +231,28 @@ class MainWindow(QMainWindow):
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate()
-            self.ui.input_info_edit_page_remarks.setText(self.export_info[list_index][10])
+            self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
             self.ui.lbl_info_edit_page_full_url.setText(self.full_url_list[list_index])
-            Label_Category_dict = all_Label_Category_dict[list_index]
+            Label_Category_dict = self.edit_information_pages[list_index].Label_Category_dict
             if Label_Category_dict != []:
                 try:
                     self.add_new_combobox(Label_Category_dict)
                 except Exception as e:
                     print("some error", str(e))
 
-                if self.export_info[list_index][7] == "Yes":
+                if self.edit_information_pages[list_index].TnC == "Yes":
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                if self.export_info[list_index][8] == "Yes":
+                if self.edit_information_pages[list_index].PIC == "Yes":
                     self.ui.input_info_edit_page_pics.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_pics.setCurrentIndex(0)
-                if self.export_info[list_index][9] == "Yes":
+                if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
-                    self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.export_info[list_index][5])
+                    self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
                 self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
                 self.scene_info_edit_page_screenshot = QGraphicsScene()
                 if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
@@ -291,30 +267,23 @@ class MainWindow(QMainWindow):
 
     def preview_output(self):
         self.get_combobox_data()
-        dictionary_number = 0
-        for dictionary in all_Label_Category_dict:
-            for categories in dictionary["Category"]:
-                if categories != "Unrelated" and categories != "":
-                    self.export_info[dictionary_number][11] = self.export_info[dictionary_number][11] + categories + ","
-            self.export_info[dictionary_number][11].rstrip(",")
-            dictionary_number += 1
         while self.ui.table_report_page_report.rowCount() > 0:
             self.ui.table_report_page_report.removeRow(0)
-        for line in range(len(list(self.export_info))):
+        for line in range(len(self.edit_information_pages)):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
-            self.ui.table_report_page_report.setItem(row_position, 0, QTableWidgetItem(self.export_info[line][0]))
-            self.ui.table_report_page_report.setItem(row_position, 1, QTableWidgetItem(self.export_info[line][1]))
-            self.ui.table_report_page_report.setItem(row_position, 2, QTableWidgetItem(self.export_info[line][2]))
-            self.ui.table_report_page_report.setItem(row_position, 3, QTableWidgetItem(self.export_info[line][3]))
-            self.ui.table_report_page_report.setItem(row_position, 4, QTableWidgetItem(self.export_info[line][4]))
-            self.ui.table_report_page_report.setItem(row_position, 5, QTableWidgetItem(self.export_info[line][5]))
-            self.ui.table_report_page_report.setItem(row_position, 6, QTableWidgetItem(self.export_info[line][6]))
-            self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem(self.export_info[line][7]))
-            self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem(self.export_info[line][8]))
-            self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem(self.export_info[line][9]))
-            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(self.export_info[line][10]))
-            self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(self.export_info[line][11]))
+            self.ui.table_report_page_report.setItem(row_position, 0, QTableWidgetItem(self.edit_information_pages[line].fb_page_name))
+            self.ui.table_report_page_report.setItem(row_position, 1, QTableWidgetItem(self.edit_information_pages[line].source))
+            self.ui.table_report_page_report.setItem(row_position, 2, QTableWidgetItem(self.edit_information_pages[line].post_time))
+            self.ui.table_report_page_report.setItem(row_position, 3, QTableWidgetItem(self.edit_information_pages[line].url))
+            self.ui.table_report_page_report.setItem(row_position, 4, QTableWidgetItem(self.edit_information_pages[line].full_url))
+            self.ui.table_report_page_report.setItem(row_position, 5, QTableWidgetItem(self.edit_information_pages[line].purpose))
+            self.ui.table_report_page_report.setItem(row_position, 6, QTableWidgetItem(self.edit_information_pages[line].status))
+            self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem(self.edit_information_pages[line].PICS))
+            self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem(self.edit_information_pages[line].TnC))
+            self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
+            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(self.edit_information_pages[line].remarks))
+            self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(self.edit_information_pages[line].PII))
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
@@ -326,16 +295,13 @@ class MainWindow(QMainWindow):
             word_file.write(
                 "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
             writecsv = csv.writer(word_file)
-            writecsv.writerows(self.export_info)
+            writecsv.writerows(self.edit_information_pages.export())
         word_file.close()
         # save scraped results from local variable to csv format
 
     def reset_app(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
-        all_Label_Category_dict.clear()
-        Label_Category_dict.clear()
-        all_Keywords_Exist_dict.clear()
-        Keywords_Exist_dict.clear()
+        self.edit_information_pages.clear()
         self.columnWidgets.clear()
         clear_screenshots()
         self.url_pool.clear()
@@ -446,7 +412,7 @@ class MainWindow(QMainWindow):
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
 
     def get_combobox_data(self):
-        Label_Category_dict = all_Label_Category_dict[int(self.ui.input_info_edit_page_current_page.text()) - 1]
+        Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
         if len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
@@ -461,26 +427,31 @@ class MainWindow(QMainWindow):
             print("debug test")
 
         # Get current page data
-        self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][5] = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
-        # self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][6] = self.ui.input_info_edit_page_expiring_date.date()
+        self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        """
+        if self.ui.input_info_edit_page_expiring_date.date() < date().today():
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expired'
+        elif self.ui.input_info_edit_page_expiring_date.date() - date().today() > 90:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Ongoing'
+        else:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
+        """
         if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][7] = "Yes"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "Yes"
         else:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][7] = "No"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "No"
         if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][8] = "Yes"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][8] = "No"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][9] = "Yes"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][9] = "No"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "No"
         if self.ui.input_info_edit_page_remarks.toPlainText():
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][10] = self.ui.input_info_edit_page_remarks.toPlainText()
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
         else:
-            self.export_info[int(self.ui.input_info_edit_page_current_page.text()) - 1][10] = ""
-
-
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = ""
 
 def main():
     clear_screenshots()

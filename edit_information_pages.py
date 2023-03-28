@@ -13,13 +13,25 @@ class EditInformationPage:
         self.full_url = get_full_url(self.url)
         self.purpose = "Marketing Purpose"
         self.status = "Ongoing"
-        self.Label_Category_dict = {"Label": [],  "Category": []}
-        self.Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
-        self.PIC = "No"
+        self.PICS = "No"
         self.TnC = "No"
         self.Opt_in_out = "No"
         self.remarks = ""
         self.PII = ""
+        self.Label_Category_dict = {"Label": [], "Category": []}
+        self.Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
+
+    def dict_to_output(self):
+        # convert Label_Category_dict to PII export item
+        for categories in self.Label_Category_dict["Category"]:
+            if categories != "Unrelated" and categories != "":
+                self.PII = self.PII + categories + ","
+        self.PII.rstrip(",")
+
+        # convert Keywords_Exist_dict to export items
+        self.TnC = self.Keywords_Exist_dict["Exist?"][0]
+        self.PICS = self.Keywords_Exist_dict["Exist?"][1]
+        self.Opt_in_out = self.Keywords_Exist_dict["Exist?"][2]
 
 
 
