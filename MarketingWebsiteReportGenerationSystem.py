@@ -234,6 +234,7 @@ class MainWindow(QMainWindow):
 
     def scrape_website_page(self, i, url):
         try:
+            scraped_text_list = []
             scraped_text_list, scraped_link_list = web_scrape(i, url)
             Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
             all_Label_Category_dict_list.append([i, Label_Category_dict])

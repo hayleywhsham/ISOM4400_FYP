@@ -116,10 +116,10 @@ class CategoryList:
                                 #Label_Category_dict["Category"].append(defined_categories)
                                 #Category_Matched = True
 
-                # if no match at all then empty
+# if no match at all then empty
                 if Category_Matched == False:
                     Label_Category_dict["Category"].append("")
-        # Convert from category list to keyword list
+# Convert from category list to keyword list
         for category in Label_Category_dict["Category"]:
             if category == "T&C":
                 Keywords_Exist_dict["Exist?"][0] = "Yes"
