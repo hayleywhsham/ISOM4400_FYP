@@ -21,13 +21,5 @@ class EditInformationPage:
         self.remarks = ""
         self.PII = ""
 
-object_list = []
-obj1 = EditInformationPage("hktvmall", "2/2", "http://hktvmall.com")
-obj2 = EditInformationPage("nike", "3/3", "http://nike.com")
-obj3 = EditInformationPage("hktvmall", "2/2", "http://hktvmall.com")
-object_list.append(obj1)
-object_list.append(obj2)
-object_list.append(obj3)
-
 
 
