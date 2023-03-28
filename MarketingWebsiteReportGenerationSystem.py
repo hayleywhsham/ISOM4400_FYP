@@ -14,6 +14,7 @@ import csv
 import tkinter
 from tkinter import filedialog
 import threading
+from edit_information_pages import EditInformationPage
 
 from facebook_scraper import get_posts
 
@@ -31,7 +32,7 @@ class MainWindow(QMainWindow):
         self.url_pool = set()
         self.url_list = []
         self.export_info = []
-        self.full_url_list= []
+        self.edit_information_pages = []
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -128,36 +129,36 @@ class MainWindow(QMainWindow):
                 for url in urls:
                     if not (url.startswith("http://") or url.startswith("https://")):
                         new_url = "http://" + url
-                        self.url_pool.add(new_url)
-                self.remove_dup_links(self.url_pool)
-                for url in self.url_list:
-                    row_position = self.ui.table_links_page_link_list.rowCount()
-                    self.ui.table_links_page_link_list.insertRow(row_position)
-                    self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(fb_page_name))
-                    self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(source))
-                    self.ui.table_links_page_link_list.setItem(row_position, 2,
-                                                               QTableWidgetItem(post_time.strftime("%Y/%m/%d %H:%M")))
-                    self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(url))
-                    self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(self.full_url_list[row_position]))
+                        self.edit_information_pages.append(EditInformationPage(fb_page_name,
+                                                                               source,
+                                                                               post_time.strftime("%Y/%m/%d"),
+                                                                               new_url))
+                count += 1
 
-                    self.export_info.append([fb_page_name,
-                                             source,
-                                             post_time.strftime("%Y/%m/%d"),
-                                             url,
-                                             self.full_url_list[count]])
-                    count +=1
-
+        self.remove_dup_links()
+        for pages in self.edit_information_pages:
+            row_position = self.ui.table_links_page_link_list.rowCount()
+            self.ui.table_links_page_link_list.insertRow(row_position)
+            self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(pages.fb_page_name))
+            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(pages.source))
+            self.ui.table_links_page_link_list.setItem(row_position, 2,
+                                                        QTableWidgetItem(pages.post_time))
+            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(pages.url))
+            self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(pages.full_url))
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
         print(f'Scrapped {count} post(s). Got {len(self.url_pool)} link(s).')
 
-    def remove_dup_links(self, urls):
-        for url in urls:
-            full_url = get_full_url(url)
-            if full_url not in self.full_url_list:
-                self.full_url_list.append(full_url)
-                self.url_list.append(url)
+    def check_dup_links(self):
+        full_url_list = []
+        index = 0
+        while index < len(self.edit_information_pages):
+            if self.edit_information_pages[index].full_url not in full_url_list:
+                full_url_list.append(self.edit_information_pages[index].full_url)
+                index += 1
+            else:
+                del self.edit_information_pages[index]
 
 
     def next_page(self):
