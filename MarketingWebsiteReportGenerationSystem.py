@@ -29,7 +29,6 @@ class MainWindow(QMainWindow):
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
-        self.url_list = []
         self.edit_information_pages = []
 
         self.ui = Ui_MainWindow()
@@ -106,7 +105,7 @@ class MainWindow(QMainWindow):
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
         fb_page_name = fb_page_name
         source = "Facebook"
-        count = 0
+        post_count = 0
         for post in get_posts(fb_page_name,
                               pages=99999,
 
@@ -131,7 +130,7 @@ class MainWindow(QMainWindow):
                                                                                source,
                                                                                post_time.strftime("%Y/%m/%d"),
                                                                                new_url))
-                count += 1
+                post_count += 1
 
         self.remove_dup_links()
         for pages in self.edit_information_pages:
@@ -139,16 +138,15 @@ class MainWindow(QMainWindow):
             self.ui.table_links_page_link_list.insertRow(row_position)
             self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(pages.fb_page_name))
             self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(pages.source))
-            self.ui.table_links_page_link_list.setItem(row_position, 2,
-                                                        QTableWidgetItem(pages.post_time))
+            self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(pages.post_time))
             self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(pages.url))
             self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(pages.full_url))
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-        print(f'Scrapped {count} post(s). Got {len(self.url_pool)} link(s).')
+        print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
 
-    def check_dup_links(self):
+    def remove_dup_links(self):
         full_url_list = []
         index = 0
         while index < len(self.edit_information_pages):
@@ -198,8 +196,7 @@ class MainWindow(QMainWindow):
     def initial_edit_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         # use url from last step for scraping
-        url_list = list(self.url_pool)
-        self.ui.lbl_info_edit_page_total_pages.setText(str(len(url_list)))
+        self.ui.lbl_info_edit_page_total_pages.setText(str(len(self.edit_information_pages)))
         threads = []
         for page_index, page in enumerate(self.edit_information_pages):
             t = threading.Thread(target=self.scrape_website_page, args=(page_index, page))
@@ -222,7 +219,7 @@ class MainWindow(QMainWindow):
         try:
             scraped_text_list, scraped_link_list = web_scrape(page_index, page_object.full_url)
             page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
-            page_object.dict_to_PII_out()
+            page_object.dict_to_output()
         except Exception as e:
             print("debug scrape website", str(e))
 
@@ -232,7 +229,7 @@ class MainWindow(QMainWindow):
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate()
             self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
-            self.ui.lbl_info_edit_page_full_url.setText(self.full_url_list[list_index])
+            self.ui.lbl_info_edit_page_full_url.setText(self.edit_information_pages[list_index].full_url)
             Label_Category_dict = self.edit_information_pages[list_index].Label_Category_dict
             if Label_Category_dict != []:
                 try:
@@ -244,10 +241,10 @@ class MainWindow(QMainWindow):
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                if self.edit_information_pages[list_index].PIC == "Yes":
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                else:
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+                #if self.edit_information_pages[list_index].PICS == "Yes":
+                #    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+                #else:
+                #    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
                 if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
@@ -437,13 +434,13 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
         """
         if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "Yes"
-        else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "No"
-        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+        #if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+        #else:
+        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:
