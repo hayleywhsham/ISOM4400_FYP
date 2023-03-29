@@ -48,7 +48,9 @@ class MainWindow(QMainWindow):
         self.ui.input_search_page_from_fb_page.returnPressed.connect(
             self.ui.button_search_page_search_marketing_sites.click)
         self.ui.button_search_page_import_csv.clicked.connect(self.search_urls_from_csv)
+        self.ui.button_links_page_back.clicked.connect(self.back_to_search_page)
         self.ui.button_links_page_scrap_info.clicked.connect(self.initial_edit_page)
+        self.ui.button_info_edit_page_back.clicked.connect(self.back_to_links_page)
         self.ui.button_info_edit_page_next.clicked.connect(self.next_page)
         self.ui.button_info_edit_page_previous.clicked.connect(self.previous_page)
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
@@ -62,6 +64,14 @@ class MainWindow(QMainWindow):
         # change page when page number changed, currently debugging due to page number change
         #self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
 
+    def back_to_search_page(self):
+        while self.ui.table_links_page_link_list.rowCount() > 0:
+            self.ui.table_links_page_link_list.removeRow(0)
+        self.edit_information_pages.clear()
+        self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+
+    def back_to_links_page(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
         csv_path = filedialog.askopenfilename(filetypes=[("Excel files", ".csv")])
@@ -241,10 +251,10 @@ class MainWindow(QMainWindow):
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                #if self.edit_information_pages[list_index].PICS == "Yes":
-                #    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                #else:
-                #    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+                if self.edit_information_pages[list_index].PICS == "Yes":
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+                else:
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
                 if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
@@ -437,10 +447,10 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
-        #if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
-        #else:
-        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+        else:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:
