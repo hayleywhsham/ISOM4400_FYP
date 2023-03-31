@@ -207,13 +207,13 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
         # use url from last step for scraping
         self.ui.lbl_info_edit_page_total_pages.setText(str(len(self.edit_information_pages)))
-        threads = []
+        first_page_thread = None
         for page_index, page in enumerate(self.edit_information_pages):
             t = threading.Thread(target=self.scrape_website_page, args=(page_index, page))
             t.start()
-            threads.append(t)
-        for thread in threads:
-            thread.join()
+            if first_page_thread == None:
+                first_page_thread = t
+        first_page_thread.join()
         try:
             # put to new function and call for update and initialize
             self.update_page()
@@ -251,10 +251,10 @@ class MainWindow(QMainWindow):
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                if self.edit_information_pages[list_index].PICS == "Yes":
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                else:
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+                #if self.edit_information_pages[list_index].PICS == "Yes":
+                #    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+                #else:
+                #    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
                 if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
@@ -302,7 +302,10 @@ class MainWindow(QMainWindow):
             word_file.write(
                 "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
             writecsv = csv.writer(word_file)
-            writecsv.writerows(self.edit_information_pages.export())
+            export_info = []
+            for pages in self.edit_information_pages:
+                export_info.append(pages.export())
+            writecsv.writerows(export_info)
         word_file.close()
         # save scraped results from local variable to csv format
 
@@ -447,10 +450,10 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
-        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
-        else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+        #if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+        #else:
+        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:
