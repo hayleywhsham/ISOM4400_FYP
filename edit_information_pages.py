@@ -35,5 +35,17 @@ class EditInformationPage:
         self.PICS = self.Keywords_Exist_dict["Exist?"][1]
         self.Opt_in_out = self.Keywords_Exist_dict["Exist?"][2]
 
-
+    def export(self):
+        export_list = [self.fb_page_name,
+                       self.source,
+                       self.post_time,
+                       self.url,
+                       self.full_url,
+                       self.purpose,
+                       self.status,
+                       self.PICS,
+                       self.TnC,
+                       self.Opt_in_out,
+                       self.remarks,
+                       self.PII]
 
