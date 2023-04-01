@@ -58,5 +58,5 @@ def web_scrape(counter, link):
     except Exception as e:
         print(str(e))
         pass
-    sleep(10)
+    text_list = [text.replace("\\", "\\\\").replace("'", "") for text in text_list]
     return text_list, link_list
