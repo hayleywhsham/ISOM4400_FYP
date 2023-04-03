@@ -271,6 +271,7 @@ class MainWindow(QMainWindow):
         except ValueError as e:
             print(str(e))
             pass
+        print(Label_Category_dict["Label"])
 
     def preview_output(self):
         self.get_combobox_data()
@@ -337,7 +338,7 @@ class MainWindow(QMainWindow):
                     Scraped_label_scroll.setFixedSize(180, 30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
-                    Scraped_label.setMaximumWidth(130)
+                    Scraped_label.setMaximumSize(130, 30)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setWordWrap(True)
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)

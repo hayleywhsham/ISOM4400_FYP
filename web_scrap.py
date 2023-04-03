@@ -46,7 +46,7 @@ def web_scrape(counter, link):
         text = soup.get_text()
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-        text = '\n'.join(chunk for chunk in chunks if chunk)
+        text = '\n'.join(chunk.replace("\\", "\\\\") for chunk in chunks if chunk)
         text_list = text.split("\n")
     except Exception as e:
         print(str(e))
@@ -58,5 +58,4 @@ def web_scrape(counter, link):
     except Exception as e:
         print(str(e))
         pass
-    text_list = [text.replace("\\", "\\\\").replace("'", "") for text in text_list]
     return text_list, link_list
