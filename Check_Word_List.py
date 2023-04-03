@@ -95,7 +95,6 @@ class CategoryList:
         # check for keywords (exact match) and categories
         Label_Category_dict = {"Label": [],  "Category": []}
         Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
-        Category_Matched = False
         for item in scraped_list:
             Category_Matched = False
             Label_Category_dict["Label"].append(item)

@@ -297,31 +297,6 @@ class MainWindow(QMainWindow):
     def back_to_edits(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
-    def export_to_csv(self):
-        save_to_path = filedialog.asksaveasfilename(defaultextension=".csv")
-        with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
-            word_file.write(
-                "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
-            writecsv = csv.writer(word_file)
-            export_info = []
-            for pages in self.edit_information_pages:
-                export_info.append(pages.export())
-            writecsv.writerows(export_info)
-        word_file.close()
-        # save scraped results from local variable to csv format
-
-    def reset_app(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
-        self.edit_information_pages.clear()
-        self.columnWidgets.clear()
-        clear_screenshots()
-        self.url_pool.clear()
-        self.full_url_list.clear()
-        while self.ui.table_links_page_link_list.rowCount() > 0:
-            self.ui.table_links_page_link_list.removeRow(0)
-        while self.ui.table_report_page_report.rowCount() > 0:
-            self.ui.table_report_page_report.removeRow(0)
-
     def add_new_combobox(self, Label_Category_dict):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
         while len(Label_Category_dict["Label"]) > row:
@@ -344,8 +319,7 @@ class MainWindow(QMainWindow):
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
                     Scraped_label_scroll.setWidget(Scraped_label)
                     Category = QComboBox()
-                    Category.setMinimumSize(QtCore.QSize(250, 30))
-                    Category.setMaximumSize(QtCore.QSize(270, 30))
+                    Scraped_label_scroll.setFixedSize(260, 30)
                     font = QtGui.QFont()
                     font.setFamily("Arial Black")
                     font.setPointSize(10)
@@ -463,6 +437,32 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = ""
+
+    def export_to_csv(self):
+        save_to_path = filedialog.asksaveasfilename(defaultextension=".csv")
+        with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
+            word_file.write(
+                "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
+            writecsv = csv.writer(word_file)
+            export_info = []
+            for pages in self.edit_information_pages:
+                export_info.append(pages.export())
+            writecsv.writerows(export_info)
+        word_file.close()
+        # save scraped results from local variable to csv format
+
+    def reset_app(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+        self.edit_information_pages.clear()
+        self.columnWidgets.clear()
+        clear_screenshots()
+        self.url_pool.clear()
+        self.full_url_list.clear()
+        while self.ui.table_links_page_link_list.rowCount() > 0:
+            self.ui.table_links_page_link_list.removeRow(0)
+        while self.ui.table_report_page_report.rowCount() > 0:
+            self.ui.table_report_page_report.removeRow(0)
+
 
 def main():
     clear_screenshots()
