@@ -251,10 +251,10 @@ class MainWindow(QMainWindow):
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
                 else:
                     self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                #if self.edit_information_pages[list_index].PICS == "Yes":
-                #    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                #else:
-                #    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+                if self.edit_information_pages[list_index].PICS == "Yes":
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+                else:
+                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
                 if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                     self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
                 else:
@@ -271,7 +271,7 @@ class MainWindow(QMainWindow):
         except ValueError as e:
             print(str(e))
             pass
-        print(Label_Category_dict["Label"])
+        print(Label_Category_dict)
 
     def preview_output(self):
         self.get_combobox_data()
@@ -290,8 +290,14 @@ class MainWindow(QMainWindow):
             self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem(self.edit_information_pages[line].PICS))
             self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem(self.edit_information_pages[line].TnC))
             self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
-            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(self.edit_information_pages[line].remarks))
-            self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(self.edit_information_pages[line].PII))
+            remarks = self.edit_information_pages[line].remarks
+            if remarks == "":
+                remarks = "NIL"
+            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(remarks))
+            PII = self.edit_information_pages[line].PII
+            if PII == "":
+                PII = "NIL"
+            self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(PII))
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
@@ -313,13 +319,12 @@ class MainWindow(QMainWindow):
                     Scraped_label_scroll.setFixedSize(180, 30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
-                    Scraped_label.setMaximumSize(130, 30)
+                    Scraped_label.setMaximumSize(150, 30)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setWordWrap(True)
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
                     Scraped_label_scroll.setWidget(Scraped_label)
                     Category = QComboBox()
-                    Scraped_label_scroll.setFixedSize(260, 30)
                     font = QtGui.QFont()
                     font.setFamily("Arial Black")
                     font.setPointSize(10)
@@ -367,6 +372,7 @@ class MainWindow(QMainWindow):
                     Category.wheelEvent = lambda e: e.ignore
                     Category.addItem("Choose Category")
                     Category.addItems(list(self.categoryList.categories.keys()))
+                    Category.setFixedSize(260, 30)
                     try:
                         if Label_Category_dict["Category"][row] == "":
                             Category.setCurrentText("Choose Category")
@@ -425,10 +431,10 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
-        #if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
-        #else:
-        #    self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+        else:
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:

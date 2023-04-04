@@ -25,7 +25,7 @@ def web_scrape(counter, link):
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(link)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(15)
     page_rect = driver.execute_cdp_cmd('Page.getLayoutMetrics', {})
     screenshot_config = {'captureBeyondViewport': True,
                                  'fromSurface': True,
@@ -44,7 +44,7 @@ def web_scrape(counter, link):
         for script in soup(["script", "style"]):
             script.extract()
         text = soup.get_text()
-        text = text.replace("\\", "\\\\")
+        text = text.replace("\\", "\\\\").replace("'", "")
         lines = (line.strip() for line in text.splitlines())
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
         text = '\n'.join(chunk for chunk in chunks if chunk)

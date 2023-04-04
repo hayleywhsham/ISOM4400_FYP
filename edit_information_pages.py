@@ -48,4 +48,5 @@ class EditInformationPage:
                        self.Opt_in_out,
                        self.remarks,
                        self.PII]
+        return export_list
 
