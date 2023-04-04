@@ -2,7 +2,6 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-
 import sys
 import os
 from MainPageUI import Ui_MainWindow
@@ -124,11 +123,11 @@ class MainWindow(QMainWindow):
             for post in get_posts(fb_page_name,
                                   pages=99999,
 
-                                  # Will be blocked easily by Facebook, Facebook API highly restricted
-                                  # Without cookie can only get 60 newest posts from page
-                                  # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+                              # Will be blocked easily by Facebook, Facebook API highly restricted
+                              # Without cookie can only get 60 newest posts from page
+                              # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-                                   cookies="./fbUserToken.json",):
+                               cookies="./fbUserToken.json",):
 
                 post_time = post['time']
                 # print("Hi")
@@ -162,7 +161,7 @@ class MainWindow(QMainWindow):
 
         except TemporarilyBanned:
             msg = "You being Temporarily Banned by facebook!"
-            
+
             self.ui.lbl_links_page_error_msg_ban.setText(msg)
 
             msg_heading = "\nThe following page have not been searched: "
@@ -179,6 +178,7 @@ class MainWindow(QMainWindow):
             self.lock.release()
 
 
+
         self.remove_dup_links()
         for pages in self.edit_information_pages:
             row_position = self.ui.table_links_page_link_list.rowCount()
@@ -191,10 +191,7 @@ class MainWindow(QMainWindow):
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-        # print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
-
-
-
+        print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
 
     def remove_dup_links(self):
         full_url_list = []
