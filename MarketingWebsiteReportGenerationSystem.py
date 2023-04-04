@@ -110,51 +110,54 @@ class MainWindow(QMainWindow):
             self.ui.lbl_search_page_from_fb_page_error_msg.setText("Please input Facebook Page tag!")
 
     def init_links_page(self, fb_page_name: str, start_date: datetime.date, end_date: datetime.date):
-        self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
-        self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
-        fb_page_name = fb_page_name
-        source = "Facebook"
-        post_count = 0
-        for post in get_posts(fb_page_name,
-                              pages=99999,
+        try:
+            self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
+            self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+            self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
+            fb_page_name = fb_page_name
+            source = "Facebook"
+            post_count = 0
+            for post in get_posts(fb_page_name,
+                                  pages=99999,
 
-                              # Will be blocked easily by Facebook, Facebook API highly restricted
-                              # Without cookie can only get 60 newest posts from page
-                              # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+                                  # Will be blocked easily by Facebook, Facebook API highly restricted
+                                  # Without cookie can only get 60 newest posts from page
+                                  # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-                               cookies="./fbUserToken.json",):
+                                   cookies="./fbUserToken.json",):
 
-            post_time = post['time']
-            # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
-            # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
-            # post["text"][:10]}\n')
-            if post_time.date() < start_date:
-                break
-            if post_time.date() <= end_date:
-                urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                for url in urls:
-                    if not (url.startswith("http://") or url.startswith("https://")):
-                        new_url = "http://" + url
-                        self.edit_information_pages.append(EditInformationPage(fb_page_name,
-                                                                               source,
-                                                                               post_time.strftime("%Y/%m/%d"),
-                                                                               new_url))
-                post_count += 1
+                post_time = post['time']
+                # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
+                # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
+                # post["text"][:10]}\n')
+                if post_time.date() < start_date:
+                    break
+                if post_time.date() <= end_date:
+                    urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+                    for url in urls:
+                        if not (url.startswith("http://") or url.startswith("https://")):
+                            new_url = "http://" + url
+                            self.edit_information_pages.append(EditInformationPage(fb_page_name,
+                                                                                   source,
+                                                                                   post_time.strftime("%Y/%m/%d"),
+                                                                                   new_url))
+                    post_count += 1
 
-        self.remove_dup_links()
-        for pages in self.edit_information_pages:
-            row_position = self.ui.table_links_page_link_list.rowCount()
-            self.ui.table_links_page_link_list.insertRow(row_position)
-            self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(pages.fb_page_name))
-            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(pages.source))
-            self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(pages.post_time))
-            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(pages.url))
-            self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(pages.full_url))
-
-        last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-        print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
+            self.remove_dup_links()
+            for pages in self.edit_information_pages:
+                row_position = self.ui.table_links_page_link_list.rowCount()
+                self.ui.table_links_page_link_list.insertRow(row_position)
+                self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(pages.fb_page_name))
+                self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(pages.source))
+                self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(pages.post_time))
+                self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(pages.url))
+                self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(pages.full_url))
+        except OSError as e:
+            print(str(e))
+        finally:
+            last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
+            self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
+            print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
 
     def remove_dup_links(self):
         full_url_list = []
