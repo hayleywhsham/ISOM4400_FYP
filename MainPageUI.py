@@ -551,7 +551,7 @@ class Ui_MainWindow(object):
 "color: rgb(98, 98, 98);")
         self.lbl_links_page_last_updated.setObjectName("lbl_links_page_last_updated")
         self.lbl_links_page_last_updated_datetime = QtWidgets.QLabel(self.frame_links_page_heading)
-        self.lbl_links_page_last_updated_datetime.setGeometry(QtCore.QRect(460, 0, 491, 41))
+        self.lbl_links_page_last_updated_datetime.setGeometry(QtCore.QRect(460, 0, 111, 41))
         self.lbl_links_page_last_updated_datetime.setStyleSheet("font: 87 8pt \"Arial Black\";\n"
 "color: rgb(98, 98, 98);")
         self.lbl_links_page_last_updated_datetime.setObjectName("lbl_links_page_last_updated_datetime")
@@ -574,6 +574,26 @@ class Ui_MainWindow(object):
         self.button_links_page_back.setIconSize(QtCore.QSize(15, 15))
         self.button_links_page_back.setFlat(False)
         self.button_links_page_back.setObjectName("button_links_page_back")
+        self.lbl_links_page_error_msg_ban = QtWidgets.QLabel(self.frame_links_page_heading)
+        self.lbl_links_page_error_msg_ban.setGeometry(QtCore.QRect(570, 0, 381, 41))
+        self.lbl_links_page_error_msg_ban.setMinimumSize(QtCore.QSize(360, 41))
+        self.lbl_links_page_error_msg_ban.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
+        self.lbl_links_page_error_msg_ban.setFont(font)
+        self.lbl_links_page_error_msg_ban.setStyleSheet("color: rgb(255, 0, 0);\n"
+"background-color: transparent;\n"
+"font: 75 12pt \"Arial\";\n"
+"font-weight:600;")
+        self.lbl_links_page_error_msg_ban.setText("")
+        self.lbl_links_page_error_msg_ban.setScaledContents(True)
+        self.lbl_links_page_error_msg_ban.setAlignment(QtCore.Qt.AlignCenter)
+        self.lbl_links_page_error_msg_ban.setWordWrap(True)
+        self.lbl_links_page_error_msg_ban.setObjectName("lbl_links_page_error_msg_ban")
         self.button_links_page_scrap_info = QtWidgets.QPushButton(self.widget_links_page_result)
         self.button_links_page_scrap_info.setGeometry(QtCore.QRect(1030, 20, 191, 41))
         self.button_links_page_scrap_info.setStyleSheet("background-color: rgb(109, 32, 119);\n"
@@ -585,7 +605,7 @@ class Ui_MainWindow(object):
         self.button_links_page_scrap_info.setFlat(False)
         self.button_links_page_scrap_info.setObjectName("button_links_page_scrap_info")
         self.frame_links_page_list = QtWidgets.QFrame(self.widget_links_page_result)
-        self.frame_links_page_list.setGeometry(QtCore.QRect(69, 69, 1151, 411))
+        self.frame_links_page_list.setGeometry(QtCore.QRect(69, 109, 1151, 371))
         self.frame_links_page_list.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_links_page_list.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_links_page_list.setObjectName("frame_links_page_list")
@@ -699,13 +719,109 @@ class Ui_MainWindow(object):
         self.table_links_page_link_list.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_links_page_link_list.setHorizontalHeaderItem(4, item)
-        self.table_links_page_link_list.horizontalHeader().setVisible(True)
+        self.table_links_page_link_list.horizontalHeader().setVisible(False)
         self.table_links_page_link_list.horizontalHeader().setCascadingSectionResizes(True)
         self.table_links_page_link_list.horizontalHeader().setHighlightSections(True)
         self.table_links_page_link_list.horizontalHeader().setSortIndicatorShown(True)
         self.table_links_page_link_list.horizontalHeader().setStretchLastSection(False)
         self.table_links_page_link_list.verticalHeader().setVisible(False)
         self.table_links_page_link_list.verticalHeader().setCascadingSectionResizes(False)
+        self.scrollArea = QtWidgets.QScrollArea(self.widget_links_page_result)
+        self.scrollArea.setGeometry(QtCore.QRect(70, 70, 1151, 41))
+        self.scrollArea.setStyleSheet("#scrollArea\n"
+"{\n"
+"    border:none;\n"
+"}\n"
+"\n"
+"QScrollBar:vertical\n"
+"{\n"
+"    background-color: rgb(217, 217, 217,0); /*Grey*/\n"
+"    width: 15px;\n"
+"    margin: 15px 3px 15px 3px;\n"
+"    border-radius: 4px;\n"
+"    }\n"
+"\n"
+"QScrollBar::handle:vertical\n"
+"{\n"
+"    background-color: rgb(71, 10, 104,0); /*KPMG Purple*/\n"
+"    min-height: 5px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/up_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical\n"
+"{\n"
+"    margin: 3px 0px 3px 0px;\n"
+"    border-image: url(:/qss_icons/rc/down_arrow_disabled.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/up_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: top;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on\n"
+"{\n"
+"    border-image: url(:/qss_icons/rc/down_arrow.png);\n"
+"    height: 10px;\n"
+"    width: 10px;\n"
+"    subcontrol-position: bottom;\n"
+"    subcontrol-origin: margin;\n"
+"}\n"
+"\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical\n"
+"{\n"
+"    background: none;\n"
+"}\n"
+"\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical\n"
+"{\n"
+"    background: none;\n"
+"}")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1136, 59))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.lbl_links_page_error_msg = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.lbl_links_page_error_msg.setMinimumSize(QtCore.QSize(360, 41))
+        self.lbl_links_page_error_msg.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(9)
+        self.lbl_links_page_error_msg.setFont(font)
+        self.lbl_links_page_error_msg.setStyleSheet("color: rgb(255, 0, 0);\n"
+"background-color: transparent;\n"
+"font: 75 10pt \"Arial\";")
+        self.lbl_links_page_error_msg.setText("")
+        self.lbl_links_page_error_msg.setScaledContents(True)
+        self.lbl_links_page_error_msg.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lbl_links_page_error_msg.setWordWrap(True)
+        self.lbl_links_page_error_msg.setObjectName("lbl_links_page_error_msg")
+        self.horizontalLayout.addWidget(self.lbl_links_page_error_msg)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.stackedWidget.addWidget(self.links_page)
         self.info_edit_page = QtWidgets.QWidget()
         self.info_edit_page.setObjectName("info_edit_page")
@@ -942,7 +1058,7 @@ class Ui_MainWindow(object):
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout_info_edit_page_scrolling_content = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
-        self.formLayout_info_edit_page_scrolling_content.setFieldGrowthPolicy(QtWidgets.QFormLayout.FieldsStayAtSizeHint)
+        self.formLayout_info_edit_page_scrolling_content.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
         self.formLayout_info_edit_page_scrolling_content.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
         self.formLayout_info_edit_page_scrolling_content.setFormAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.formLayout_info_edit_page_scrolling_content.setContentsMargins(0, 0, 0, 0)
@@ -1880,7 +1996,7 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setShowGrid(False)
         self.table_report_page_report.setGridStyle(QtCore.Qt.DotLine)
         self.table_report_page_report.setObjectName("table_report_page_report")
-        self.table_report_page_report.setColumnCount(12)
+        self.table_report_page_report.setColumnCount(10)
         self.table_report_page_report.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setBackground(QtGui.QColor(255, 255, 255))
@@ -1904,11 +2020,7 @@ class Ui_MainWindow(object):
         self.table_report_page_report.setHorizontalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_report_page_report.setHorizontalHeaderItem(9, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_report_page_report.setHorizontalHeaderItem(10, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_report_page_report.setHorizontalHeaderItem(11, item)
-        self.table_report_page_report.horizontalHeader().setVisible(True)
+        self.table_report_page_report.horizontalHeader().setVisible(False)
         self.table_report_page_report.horizontalHeader().setCascadingSectionResizes(True)
         self.table_report_page_report.horizontalHeader().setHighlightSections(True)
         self.table_report_page_report.horizontalHeader().setSortIndicatorShown(True)
@@ -2041,15 +2153,11 @@ class Ui_MainWindow(object):
         item = self.table_report_page_report.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Status"))
         item = self.table_report_page_report.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "PICS?"))
+        item.setText(_translate("MainWindow", "PII?"))
         item = self.table_report_page_report.horizontalHeaderItem(8)
         item.setText(_translate("MainWindow", "T&C?"))
         item = self.table_report_page_report.horizontalHeaderItem(9)
         item.setText(_translate("MainWindow", "Opt-in/Opt-out?"))
-        item = self.table_report_page_report.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "Remarks"))
-        item = self.table_report_page_report.horizontalHeaderItem(11)
-        item.setText(_translate("MainWindow", "PII"))
         self.button_report_page_back_edits.setText(_translate("MainWindow", "Back to Edits"))
 import image_rc
 

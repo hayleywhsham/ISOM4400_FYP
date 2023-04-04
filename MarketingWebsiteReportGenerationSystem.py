@@ -2,6 +2,7 @@ from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
+
 import sys
 import os
 from MainPageUI import Ui_MainWindow
@@ -16,6 +17,7 @@ import threading
 from edit_information_pages import EditInformationPage
 
 from facebook_scraper import get_posts
+from facebook_scraper.exceptions import NotFound,TemporarilyBanned
 
 
 def clear_screenshots():
@@ -60,6 +62,8 @@ class MainWindow(QMainWindow):
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
+
+        self.lock = threading.Lock()
 
         # change page when page number changed, currently debugging due to page number change
         #self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
@@ -116,31 +120,64 @@ class MainWindow(QMainWindow):
         fb_page_name = fb_page_name
         source = "Facebook"
         post_count = 0
-        for post in get_posts(fb_page_name,
-                              pages=99999,
+        try:
+            for post in get_posts(fb_page_name,
+                                  pages=99999,
 
-                              # Will be blocked easily by Facebook, Facebook API highly restricted
-                              # Without cookie can only get 60 newest posts from page
-                              # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+                                  # Will be blocked easily by Facebook, Facebook API highly restricted
+                                  # Without cookie can only get 60 newest posts from page
+                                  # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-                               cookies="./fbUserToken.json",):
+                                   cookies="./fbUserToken.json",):
 
-            post_time = post['time']
-            # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
-            # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
-            # post["text"][:10]}\n')
-            if post_time.date() < start_date:
-                break
-            if post_time.date() <= end_date:
-                urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                for url in urls:
-                    if not (url.startswith("http://") or url.startswith("https://")):
-                        new_url = "http://" + url
-                        self.edit_information_pages.append(EditInformationPage(fb_page_name,
-                                                                               source,
-                                                                               post_time.strftime("%Y/%m/%d"),
-                                                                               new_url))
-                post_count += 1
+                post_time = post['time']
+                # print("Hi")
+                # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
+                # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
+                # post["text"][:10]}\n')
+                if post_time.date() < start_date:
+                    break
+                if post_time.date() <= end_date:
+                    urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+                    for url in urls:
+                        if not (url.startswith("http://") or url.startswith("https://")):
+                            new_url = "http://" + url
+                            self.edit_information_pages.append(EditInformationPage(fb_page_name,
+                                                                                   source,
+                                                                                   post_time.strftime("%Y/%m/%d"),
+                                                                                   new_url))
+                    post_count += 1
+        except NotFound:
+
+            self.lock.acquire()
+            error_msg  = self.ui.lbl_links_page_error_msg.text()
+
+            if error_msg =="":
+                error_msg = f'{fb_page_name} doesn\'t not exist! Please check again!'
+            else:
+                error_msg = f'{fb_page_name}, {error_msg}'
+
+            self.ui.lbl_links_page_error_msg.setText(error_msg)
+            self.lock.release()
+
+        except TemporarilyBanned:
+            msg = "You being Temporarily Banned by facebook!"
+            
+            self.ui.lbl_links_page_error_msg_ban.setText(msg)
+
+            msg_heading = "\nThe following page have not been searched: "
+
+            self.lock.acquire()
+            error_msg = self.ui.lbl_links_page_error_msg.text()
+
+            if (msg_heading not in error_msg):
+                error_msg = error_msg + msg_heading + fb_page_name
+            else:
+                error_msg = f'{error_msg},{fb_page_name}'
+
+            self.ui.lbl_links_page_error_msg.setText(error_msg)
+            self.lock.release()
+
 
         self.remove_dup_links()
         for pages in self.edit_information_pages:
@@ -154,7 +191,10 @@ class MainWindow(QMainWindow):
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-        print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
+        # print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
+
+
+
 
     def remove_dup_links(self):
         full_url_list = []
