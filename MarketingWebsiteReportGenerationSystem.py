@@ -357,8 +357,8 @@ class MainWindow(QMainWindow):
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Scraped_label.setMaximumSize(150, 30)
-                    Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setWordWrap(True)
+                    Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
                     Scraped_label_scroll.setWidget(Scraped_label)
                     Category = QComboBox()
@@ -428,20 +428,22 @@ class MainWindow(QMainWindow):
             else:
                 try:
                     Empty_label = QLabel()
-                    Empty_label.setMinimumSize(QtCore.QSize(100, 0))
+                    Empty_label.setMinimumSize(QtCore.QSize(100, 30))
                     Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Empty_label.setText("No items scraped")
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
-                    #self.ui.scrollAreaWidgetContents_info_edit_page.setWidget(self.ui.formLayout_info_edit_page_scrolling_content)
                     self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
                 except Exception as e:
                     print("debug c:", str(e))
             row += 1
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
+        self.ui.scrollArea_info_edit_page_categorisation_content.setLayout(self.ui.scrollAreaWidgetContents_info_edit_page)
 
     def get_combobox_data(self):
         Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
-        if len(Label_Category_dict["Category"]) == len(self.columnWidgets):
+        if Label_Category_dict["Label"] == [""]:
+            print("debug test - no items scraped")
+        elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
                 for index, item in enumerate(changed_category):
