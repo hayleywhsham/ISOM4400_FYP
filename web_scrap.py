@@ -25,7 +25,7 @@ def web_scrape(counter, link):
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.get(link)
-    driver.implicitly_wait(30)
+    sleep(30)
     page_rect = driver.execute_cdp_cmd('Page.getLayoutMetrics', {})
     screenshot_config = {'captureBeyondViewport': True,
                                  'fromSurface': True,

@@ -365,17 +365,13 @@ class MainWindow(QMainWindow):
                     Scraped_label_scroll.setWidgetResizable(True)
                     Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
                     Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-                    Scraped_label_scroll.setMinimumSize(180, 30)
-                    content_area = QWidget(Scraped_label_scroll)
-                    Scraped_label_scroll.setWidget(content_area)
-                    lay = QVBoxLayout(content_area)
-                    Scraped_label = QLabel(content_area)
+                    Scraped_label_scroll.setMaximumSize(180, 30)
+                    Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
-                    Scraped_label.setMaximumSize(150, 30)
                     Scraped_label.setWordWrap(True)
+                    Scraped_label.setFixedWidth(180)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-                    lay.addWidget(Scraped_label)
                     Scraped_label_scroll.setWidget(Scraped_label)
                     Category = QComboBox()
                     font = QtGui.QFont()
@@ -433,6 +429,7 @@ class MainWindow(QMainWindow):
                             Category.setCurrentText(Label_Category_dict["Category"][row])
                         self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label_scroll, Category)
                         self.columnWidgets.append(Category)
+                        self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
                     except Exception as e:
                         print("debug a:", str(e))
                         self.ui.lbl_info_page_error_msg.setText(str(e))
@@ -453,7 +450,6 @@ class MainWindow(QMainWindow):
                     print("debug c:", str(e))
             row += 1
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
-        #self.ui.scrollArea_info_edit_page_categorisation_content.setLayout(self.ui.scrollAreaWidgetContents_info_edit_page)
 
     def get_combobox_data(self):
         Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
