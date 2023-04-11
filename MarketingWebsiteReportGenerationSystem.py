@@ -70,7 +70,6 @@ class MainWindow(QMainWindow):
     def back_to_search_page(self):
         while self.ui.table_links_page_link_list.rowCount() > 0:
             self.ui.table_links_page_link_list.removeRow(0)
-        self.edit_information_pages.clear()
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
 
     def back_to_links_page(self):
@@ -114,6 +113,7 @@ class MainWindow(QMainWindow):
 
     def init_links_page(self, fb_page_name: str, start_date: datetime.date, end_date: datetime.date):
         self.ui.table_links_page_link_list.verticalHeader().setVisible(True)
+        self.ui.table_links_page_link_list.horizontalHeader().setVisible(True)
         self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
         fb_page_name = fb_page_name
@@ -311,9 +311,21 @@ class MainWindow(QMainWindow):
         print(Label_Category_dict)
 
     def preview_output(self):
+        _translate = QtCore.QCoreApplication.translate
         self.get_combobox_data()
         while self.ui.table_report_page_report.rowCount() > 0:
             self.ui.table_report_page_report.removeRow(0)
+            self.ui.table_report_page_report.horizontalHeader().setVisible(True)
+            self.ui.table_report_page_report.verticalHeader().setVisible(True)
+            self.ui.table_report_page_report.setColumnCount(12)
+            item = QtWidgets.QTableWidgetItem()
+            self.ui.table_report_page_report.setHorizontalHeaderItem(10, item)
+            item = self.ui.table_report_page_report.horizontalHeaderItem(10)
+            item.setText(_translate("MainWindow", "Remarks"))
+            item = QtWidgets.QTableWidgetItem()
+            self.ui.table_report_page_report.setHorizontalHeaderItem(11, item)
+            item = self.ui.table_report_page_report.horizontalHeaderItem(11)
+            item.setText(_translate("MainWindow", "PII"))
         for line in range(len(self.edit_information_pages)):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
@@ -351,15 +363,19 @@ class MainWindow(QMainWindow):
                 try:
                     Scraped_label_scroll = QScrollArea()
                     Scraped_label_scroll.setWidgetResizable(True)
-                    Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+                    Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
                     Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-                    Scraped_label_scroll.setFixedSize(180, 30)
-                    Scraped_label = QLabel()
+                    Scraped_label_scroll.setMinimumSize(180, 30)
+                    content_area = QWidget(Scraped_label_scroll)
+                    Scraped_label_scroll.setWidget(content_area)
+                    lay = QVBoxLayout(content_area)
+                    Scraped_label = QLabel(content_area)
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Scraped_label.setMaximumSize(150, 30)
                     Scraped_label.setWordWrap(True)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+                    lay.addWidget(Scraped_label)
                     Scraped_label_scroll.setWidget(Scraped_label)
                     Category = QComboBox()
                     font = QtGui.QFont()
@@ -437,7 +453,7 @@ class MainWindow(QMainWindow):
                     print("debug c:", str(e))
             row += 1
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
-        self.ui.scrollArea_info_edit_page_categorisation_content.setLayout(self.ui.scrollAreaWidgetContents_info_edit_page)
+        #self.ui.scrollArea_info_edit_page_categorisation_content.setLayout(self.ui.scrollAreaWidgetContents_info_edit_page)
 
     def get_combobox_data(self):
         Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
