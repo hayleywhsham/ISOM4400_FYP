@@ -179,8 +179,6 @@ class MainWindow(QMainWindow):
             self.ui.lbl_links_page_error_msg.setText(error_msg)
             self.lock.release()
 
-
-
         self.remove_dup_links()
         for pages in self.edit_information_pages:
             row_position = self.ui.table_links_page_link_list.rowCount()
@@ -198,16 +196,13 @@ class MainWindow(QMainWindow):
     def remove_dup_links(self):
         full_url_list = []
         index = 0
-        while index < len(self.edit_information_pages):
-            if self.edit_information_pages[index].full_url not in full_url_list:
-                full_url_list.append(self.edit_information_pages[index].full_url)
-                index += 1
-        index = 0
-        while index < len(self.edit_information_pages):
-            if self.edit_information_pages[index].full_url not in full_url_list:
-                del self.edit_information_pages[index]
-            else:
-                index += 1
+        if len(self.edit_information_pages) > 0:
+            while index < len(self.edit_information_pages):
+                if self.edit_information_pages[index].full_url not in full_url_list:
+                    full_url_list.append(self.edit_information_pages[index].full_url)
+                    index += 1
+                else:
+                    del self.edit_information_pages[index]
 
 
     def next_page(self):
@@ -464,6 +459,7 @@ class MainWindow(QMainWindow):
         Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
         if Label_Category_dict["Label"] == [""]:
             print("debug test - no items scraped")
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
         elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
@@ -520,8 +516,6 @@ class MainWindow(QMainWindow):
         self.edit_information_pages.clear()
         self.columnWidgets.clear()
         clear_screenshots()
-        self.url_pool.clear()
-        self.full_url_list.clear()
         while self.ui.table_links_page_link_list.rowCount() > 0:
             self.ui.table_links_page_link_list.removeRow(0)
         while self.ui.table_report_page_report.rowCount() > 0:

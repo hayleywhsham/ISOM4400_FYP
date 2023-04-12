@@ -29,17 +29,17 @@ def web_scrape(counter, link):
 #    chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    driver.get(link)
     driver.set_page_load_timeout(30)
+    driver.get(link)
     page_rect = driver.execute_cdp_cmd('Page.getLayoutMetrics', {})
     screenshot_config = {'captureBeyondViewport': True,
-                                 'fromSurface': True,
-                                 'clip': {'width': page_rect['contentSize']['width'],
-                                          'height': page_rect['contentSize']['height'],
-                                          'x': 0,
-                                          'y': 0,
-                                          'scale': 1},
-                                 }
+                         'fromSurface': True,
+                         'clip': {'width': page_rect['contentSize']['width'],
+                                  'height': page_rect['contentSize']['height'],
+                                  'x': 0,
+                                  'y': 0,
+                                  'scale': 1},
+                         }
     base_64_png = driver.execute_cdp_cmd('Page.captureScreenshot', screenshot_config)
     ScreenShot_path = str("Screen_Captures/ScreenShot_" + str(counter))
     with open(f"{ScreenShot_path}.png", "wb") as fh:
