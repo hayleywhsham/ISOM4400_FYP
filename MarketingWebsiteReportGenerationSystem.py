@@ -57,6 +57,7 @@ class MainWindow(QMainWindow):
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
         self.ui.button_report_page_back_edits.clicked.connect(self.back_to_edits)
         self.ui.button_report_page_export_csv.clicked.connect(self.export_to_csv)
+        self.ui.button_report_page_export_csv.clicked.connect(self.reset_app)
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
@@ -71,6 +72,7 @@ class MainWindow(QMainWindow):
         while self.ui.table_links_page_link_list.rowCount() > 0:
             self.ui.table_links_page_link_list.removeRow(0)
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+        self.edit_information_pages.clear()
 
     def back_to_links_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
@@ -271,6 +273,8 @@ class MainWindow(QMainWindow):
             scraped_text_list, scraped_link_list = web_scrape(page_index, page_object.full_url)
             page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
             page_object.dict_to_output()
+        except TimeoutException:
+            page_object.remarks = "Connection failed - Timed out when fetching info"
         except Exception as e:
             print("debug scrape website", str(e))
 
@@ -475,14 +479,12 @@ class MainWindow(QMainWindow):
 
         # Get current page data
         self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
-        """
-        if self.ui.input_info_edit_page_expiring_date.date() < date().today():
+        if self.ui.input_info_edit_page_expiring_date.date().toPyDate() < datetime.date.today():
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expired'
-        elif self.ui.input_info_edit_page_expiring_date.date() - date().today() > 90:
+        elif (self.ui.input_info_edit_page_expiring_date.date().toPyDate() - datetime.date.today()).days > 90:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Ongoing'
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
-        """
         if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
