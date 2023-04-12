@@ -18,7 +18,7 @@ from dataclasses import dataclass
 def get_all_url(string):
     urls = []
 
-    target_list = ["http", "bit.ly"]
+    target_list = ["http", "bit.ly", "👉"]
     end_target_list = ["\n", " ", "更多"]
     end_pos = 0
 

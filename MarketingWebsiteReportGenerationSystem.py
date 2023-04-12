@@ -274,7 +274,8 @@ class MainWindow(QMainWindow):
         try:
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
-            self.ui.input_info_edit_page_expiring_date.date().toPyDate()
+            # self.ui.input_info_edit_page_expiring_date.date().toPyDate()
+            self.ui.input_info_edit_page_expiring_date.setDateTime(QDateTime.currentDateTime())
             self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
             self.ui.lbl_info_edit_page_full_url.setText(self.edit_information_pages[list_index].full_url)
             Label_Category_dict = self.edit_information_pages[list_index].Label_Category_dict
