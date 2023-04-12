@@ -8,7 +8,7 @@ from facebook_scraper import get_posts
 def get_all_url_from_string(string) -> list[str]:
     urls = []
 
-    target_list = ["http", "bit.ly", "：", "👉"]
+    target_list = ["http", "bit.ly"]
     end_target_list = ["\n", " ", "更多", "，"]
     end_pos = 0
 
