@@ -1,6 +1,7 @@
 import base64
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.common import TimeoutException
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
@@ -13,8 +14,12 @@ def get_full_url(link):
     #    chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    driver.get(link)
-    full_url = driver.current_url
+    driver.set_page_load_timeout(30)
+    try:
+        driver.get(link)
+        full_url = driver.current_url
+    except TimeoutException:
+        full_url = link
     return full_url
 
 

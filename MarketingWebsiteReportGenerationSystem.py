@@ -149,9 +149,9 @@ class MainWindow(QMainWindow):
         except NotFound:
 
             self.lock.acquire()
-            error_msg  = self.ui.lbl_links_page_error_msg.text()
+            error_msg = self.ui.lbl_links_page_error_msg.text()
 
-            if error_msg =="":
+            if error_msg == "":
                 error_msg = f'{fb_page_name} doesn\'t not exist! Please check again!'
             else:
                 error_msg = f'{fb_page_name}, {error_msg}'
@@ -200,8 +200,12 @@ class MainWindow(QMainWindow):
             if self.edit_information_pages[index].full_url not in full_url_list:
                 full_url_list.append(self.edit_information_pages[index].full_url)
                 index += 1
-            else:
+        index = 0
+        while index < len(self.edit_information_pages):
+            if self.edit_information_pages[index].full_url not in full_url_list:
                 del self.edit_information_pages[index]
+            else:
+                index += 1
 
 
     def next_page(self):
@@ -364,13 +368,13 @@ class MainWindow(QMainWindow):
                 try:
                     Scraped_label_scroll = QScrollArea()
                     Scraped_label_scroll.setWidgetResizable(True)
-                    Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+                    Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
                     Scraped_label_scroll.setMaximumSize(180, 30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Scraped_label.setWordWrap(True)
-                    Scraped_label.setFixedWidth(180)
+                    Scraped_label.setFixedWidth(160)
                     Scraped_label.setText(Label_Category_dict["Label"][row])
                     Scraped_label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
                     Scraped_label_scroll.setWidget(Scraped_label)
