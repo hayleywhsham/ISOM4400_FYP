@@ -7,7 +7,11 @@
 # print(data["id"])
 # print(data["name"])
 
-from facebook_scraper import get_posts
+# from facebook_scraper import get_posts
+#
+# for count,post in enumerate(get_posts('nintendo', pages=999, cookies="./fbUserToken.json",)):
+#      print(f'Index: {count}, link:[{post["link"]}]')
 
-for count,post in enumerate(get_posts('nintendo', pages=999, cookies="./fbUserToken.json",)):
-     print(f'Index: {count}, link:[{post["link"]}]')
+a = [1,2,3,4]
+
+print(a[1].haha)

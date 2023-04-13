@@ -64,6 +64,7 @@ class MainWindow(QMainWindow):
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
         self.lock = threading.Lock()
+        self.add_content_lock = threading.Lock()
 
         # change page when page number changed, currently debugging due to page number change
         #self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
@@ -129,24 +130,26 @@ class MainWindow(QMainWindow):
                               # Without cookie can only get 60 newest posts from page
                               # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-                               cookies="./fbUserToken.json",):
+                               cookies="./fbUserToken.json",
+                                  ):
 
                 post_time = post['time']
-                # print("Hi")
-                # print("Post Time:",type(post['time'])) print(f'data: start_date:{start_date},post_time: {post_time},
-                # end_date: {end_date}, \nlogic check {post_time < start_date}, {post_time <= end_date}, \npost text : {
-                # post["text"][:10]}\n')
                 if post_time.date() < start_date:
                     break
                 if post_time.date() <= end_date:
                     urls = set(get_all_url_from_string(post['text']))  # set: unique per post
+                    print(urls)
                     for url in urls:
                         if not (url.startswith("http://") or url.startswith("https://")):
-                            new_url = "http://" + url
-                            self.edit_information_pages.append(EditInformationPage(fb_page_name,
-                                                                                   source,
-                                                                                   post_time.strftime("%Y/%m/%d"),
-                                                                                   new_url))
+                            url = "http://" + url
+
+                        self.add_content_lock.acquire()
+
+                        self.edit_information_pages.append(EditInformationPage(fb_page_name,
+                                                                               source,
+                                                                               post_time.strftime("%Y/%m/%d"),
+                                                                               url))
+                        self.add_content_lock.release()
                     post_count += 1
         except NotFound:
 
@@ -178,8 +181,10 @@ class MainWindow(QMainWindow):
 
             self.ui.lbl_links_page_error_msg.setText(error_msg)
             self.lock.release()
-
+        # print(f'Before: {[page.url for page in self.edit_information_pages]}')
         self.remove_dup_links()
+        # print(f'After: {[page.url for page in self.edit_information_pages]}')
+
         for pages in self.edit_information_pages:
             row_position = self.ui.table_links_page_link_list.rowCount()
             self.ui.table_links_page_link_list.insertRow(row_position)
