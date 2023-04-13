@@ -138,7 +138,7 @@ class MainWindow(QMainWindow):
                     break
                 if post_time.date() <= end_date:
                     urls = set(get_all_url_from_string(post['text']))  # set: unique per post
-                    print(urls)
+                    # print(urls)
                     for url in urls:
                         if not (url.startswith("http://") or url.startswith("https://")):
                             url = "http://" + url
