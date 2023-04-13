@@ -14,7 +14,7 @@ def get_full_url(link):
     #    chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    driver.set_page_load_timeout(30)
+    driver.set_page_load_timeout(10)
     try:
         driver.get(link)
         full_url = driver.current_url
