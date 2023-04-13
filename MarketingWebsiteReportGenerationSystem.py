@@ -282,33 +282,32 @@ class MainWindow(QMainWindow):
             self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
             self.ui.lbl_info_edit_page_full_url.setText(self.edit_information_pages[list_index].full_url)
             Label_Category_dict = self.edit_information_pages[list_index].Label_Category_dict
-            if Label_Category_dict != []:
-                try:
-                    self.add_new_combobox(Label_Category_dict)
-                except Exception as e:
-                    print("some error", str(e))
+            try:
+                self.add_new_combobox(Label_Category_dict, self.edit_information_pages[list_index])
+            except Exception as e:
+                print("some error", str(e))
 
-                if self.edit_information_pages[list_index].TnC == "Yes":
-                    self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
-                else:
-                    self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
-                if self.edit_information_pages[list_index].PICS == "Yes":
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-                else:
-                    self.ui.input_info_edit_page_pics.setCurrentIndex(0)
-                if self.edit_information_pages[list_index].Opt_in_out == "Yes":
-                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-                else:
-                    self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
-                    self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
-                self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
-                self.scene_info_edit_page_screenshot = QGraphicsScene()
-                if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
-                    self.scene_info_edit_page_screenshot.addPixmap(
-                        QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
-                self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
-                self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
-                self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
+            if self.edit_information_pages[list_index].TnC == "Yes":
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
+            if self.edit_information_pages[list_index].PICS == "Yes":
+                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+            if self.edit_information_pages[list_index].Opt_in_out == "Yes":
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
+            else:
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
+                self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
+            self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
+            self.scene_info_edit_page_screenshot = QGraphicsScene()
+            if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
+                self.scene_info_edit_page_screenshot.addPixmap(
+                    QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
+            self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
+            self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
+            self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
         except ValueError as e:
             print(str(e))
             pass
@@ -351,19 +350,21 @@ class MainWindow(QMainWindow):
             if PII == "":
                 PII = "NIL"
             self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(PII))
+        last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
+        self.ui.lbl_report_page_last_updated_datetime.setText(last_update_time)
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
-    def add_new_combobox(self, Label_Category_dict):
+    def add_new_combobox(self, Label_Category_dict, page_object):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
         while len(Label_Category_dict["Label"]) > row:
             self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
             self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustToContents)
             self.ui.scrollArea_info_edit_page_categorisation_content.update()
-            if Label_Category_dict["Label"][0] != "":
+            if (Label_Category_dict["Label"]) and (Label_Category_dict["Label"][0] != ""):
                 try:
                     Scraped_label_scroll = QScrollArea()
                     Scraped_label_scroll.setWidgetResizable(True)
@@ -450,6 +451,7 @@ class MainWindow(QMainWindow):
                     Empty_label.setText("No items scraped")
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
                     self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
+                    page_object.remarks = "No text scraped"
                 except Exception as e:
                     print("debug c:", str(e))
             row += 1
