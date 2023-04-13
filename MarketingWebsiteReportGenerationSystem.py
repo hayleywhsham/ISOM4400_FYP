@@ -182,6 +182,7 @@ class MainWindow(QMainWindow):
             self.ui.lbl_links_page_error_msg.setText(error_msg)
             self.lock.release()
         # print(f'Before: {[page.url for page in self.edit_information_pages]}')
+        total_number_of_link = len(self.edit_information_pages)
         self.remove_dup_links()
         # print(f'After: {[page.url for page in self.edit_information_pages]}')
 
@@ -196,7 +197,8 @@ class MainWindow(QMainWindow):
 
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
-        print(f'Scrapped {post_count} post(s). Got {len(self.edit_information_pages)} link(s).')
+        print(f'Scrapped {post_count} post(s) for {fb_page_name}. Got {total_number_of_link} link(s). '
+              f'Got {len(self.edit_information_pages)} unique links.')
 
     def remove_dup_links(self):
         full_url_list = []
