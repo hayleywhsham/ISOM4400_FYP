@@ -219,7 +219,7 @@ class MainWindow(QMainWindow):
         try:
             self.get_combobox_data()
         except Exception as e:
-            print(str(e))
+            #print(str(e))
             pass
         if page_number < max_pages:
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
@@ -231,7 +231,7 @@ class MainWindow(QMainWindow):
         try:
             self.get_combobox_data()
         except Exception as e:
-            print(str(e))
+            #print(str(e))
             pass
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
@@ -277,8 +277,6 @@ class MainWindow(QMainWindow):
             page_object.dict_to_output()
         except TimeoutException:
             page_object.remarks = "Connection failed - Timed out when fetching info"
-        except Exception as e:
-            print("debug scrape website", str(e))
 
     def generate_category_page(self):
         try:
@@ -292,7 +290,8 @@ class MainWindow(QMainWindow):
             try:
                 self.add_new_combobox(Label_Category_dict, self.edit_information_pages[list_index])
             except Exception as e:
-                print("some error", str(e))
+                #print("some error", str(e))
+                pass
 
             if self.edit_information_pages[list_index].TnC == "Yes":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
@@ -316,9 +315,9 @@ class MainWindow(QMainWindow):
             self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
             self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
         except ValueError as e:
-            print(str(e))
+            #print(str(e))
             pass
-        print(Label_Category_dict)
+        #print(Label_Category_dict)
 
     def preview_output(self):
         _translate = QtCore.QCoreApplication.translate
@@ -443,11 +442,9 @@ class MainWindow(QMainWindow):
                         self.columnWidgets.append(Category)
                         self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
                     except Exception as e:
-                        print("debug a:", str(e))
                         self.ui.lbl_info_page_error_msg.setText(str(e))
                         self.ui.lbl_info_page_error_msg.setVisible(True)
                 except Exception as e:
-                    print("debug b:", str(e))
                     self.ui.lbl_info_page_error_msg.setText(str(e))
                     self.ui.lbl_info_page_error_msg.setVisible(True)
             else:
@@ -460,14 +457,14 @@ class MainWindow(QMainWindow):
                     self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
                     page_object.remarks = "No text scraped"
                 except Exception as e:
-                    print("debug c:", str(e))
+                    self.ui.lbl_info_page_error_msg.setText(str(e))
+                    self.ui.lbl_info_page_error_msg.setVisible(True)
             row += 1
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
 
     def get_combobox_data(self):
         Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
         if Label_Category_dict["Label"] == [""]:
-            print("debug test - no items scraped")
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
         elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
@@ -479,8 +476,6 @@ class MainWindow(QMainWindow):
                         self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
                         Label_Category_dict["Category"][index] = item
 
-        else:
-            print("debug test")
 
         # Get current page data
         self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
