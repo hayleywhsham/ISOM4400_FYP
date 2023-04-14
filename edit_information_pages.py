@@ -1,4 +1,4 @@
-from web_scrap import get_full_url
+from web_scrap import get_full_url_2
 
 class EditInformationPage:
 
@@ -10,7 +10,7 @@ class EditInformationPage:
         self.source = source
         self.post_time = post_time
         self.url = url
-        self.full_url = get_full_url(self.url)
+        self.full_url = get_full_url_2(self.url)
         self.purpose = "Marketing Purpose"
         self.status = "Ongoing"
         self.PICS = "No"

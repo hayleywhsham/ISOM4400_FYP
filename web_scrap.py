@@ -4,8 +4,8 @@ from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from time import sleep
 from selenium.webdriver.chrome.options import Options
+import requests
 
 
 def get_full_url(link):
@@ -20,6 +20,12 @@ def get_full_url(link):
         full_url = driver.current_url
     except TimeoutException:
         full_url = link
+    return full_url
+
+def get_full_url_2(link):
+    session = requests.session()
+    resp = session.head(link, allow_redirects=True)
+    full_url = resp.url
     return full_url
 
 
