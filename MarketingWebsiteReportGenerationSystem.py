@@ -329,15 +329,14 @@ class MainWindow(QMainWindow):
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
             else:
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
-                self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(
-                    self.edit_information_pages[list_index].purpose)
+            self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
             self.scene_info_edit_page_screenshot = QGraphicsScene()
             if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
                 self.scene_info_edit_page_screenshot.addPixmap(
                     QPixmap(f"Screen_Captures/ScreenShot_{list_index}.png"))
-            self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(1)
-            self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
+            self.ui.graphicsView_info_edit_page_screenshot.verticalScrollBar().setSliderPosition(0)
+            self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(0)
             self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
         except ValueError as e:
             # print(str(e))
@@ -349,19 +348,19 @@ class MainWindow(QMainWindow):
         self.get_combobox_data()
         while self.ui.table_report_page_report.rowCount() > 0:
             self.ui.table_report_page_report.removeRow(0)
-            self.ui.table_report_page_report.horizontalHeader().setVisible(True)
-            self.ui.table_report_page_report.verticalHeader().setVisible(True)
-            self.ui.table_report_page_report.setColumnCount(12)
-            item = QtWidgets.QTableWidgetItem()
-            item = self.ui.table_report_page_report.horizontalHeaderItem(7)
-            item.setText(_translate("MainWindow", "P.I.C.S."))
-            self.ui.table_report_page_report.setHorizontalHeaderItem(10, item)
-            item = self.ui.table_report_page_report.horizontalHeaderItem(10)
-            item.setText(_translate("MainWindow", "Remarks"))
-            item = QtWidgets.QTableWidgetItem()
-            self.ui.table_report_page_report.setHorizontalHeaderItem(11, item)
-            item = self.ui.table_report_page_report.horizontalHeaderItem(11)
-            item.setText(_translate("MainWindow", "PII"))
+        self.ui.table_report_page_report.horizontalHeader().setVisible(True)
+        self.ui.table_report_page_report.verticalHeader().setVisible(True)
+        self.ui.table_report_page_report.setColumnCount(12)
+        item = QtWidgets.QTableWidgetItem()
+        item = self.ui.table_report_page_report.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "P.I.C.S."))
+        self.ui.table_report_page_report.setHorizontalHeaderItem(10, item)
+        item = self.ui.table_report_page_report.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "Remarks"))
+        item = QtWidgets.QTableWidgetItem()
+        self.ui.table_report_page_report.setHorizontalHeaderItem(11, item)
+        item = self.ui.table_report_page_report.horizontalHeaderItem(11)
+        item.setText(_translate("MainWindow", "PII"))
         for line in range(len(self.edit_information_pages)):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
@@ -402,11 +401,11 @@ class MainWindow(QMainWindow):
 
     def add_new_combobox(self, Label_Category_dict, page_object):
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
+        self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
+        self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
         while len(Label_Category_dict["Label"]) > row:
-            self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
-            self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
-                QtWidgets.QAbstractScrollArea.AdjustToContents)
-            self.ui.scrollArea_info_edit_page_categorisation_content.update()
             if (Label_Category_dict["Label"]) and (Label_Category_dict["Label"][0] != ""):
                 try:
                     Scraped_label_scroll = QScrollArea()
@@ -414,6 +413,7 @@ class MainWindow(QMainWindow):
                     Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
                     Scraped_label_scroll.setMaximumSize(180, 30)
+                    Scraped_label_scroll.setMinimumSize(160,30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Scraped_label.setWordWrap(True)
@@ -505,8 +505,7 @@ class MainWindow(QMainWindow):
         Label_Category_dict = self.edit_information_pages[
             int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
         if Label_Category_dict["Label"] == [""]:
-            self.edit_information_pages[
-                int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
         elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
@@ -532,9 +531,9 @@ class MainWindow(QMainWindow):
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
         if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "Yes"
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
         else:
