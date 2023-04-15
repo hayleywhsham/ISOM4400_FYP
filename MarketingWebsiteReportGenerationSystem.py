@@ -57,7 +57,6 @@ class MainWindow(QMainWindow):
         self.ui.button_info_edit_page_save_all_edits.clicked.connect(self.preview_output)
         self.ui.button_report_page_back_edits.clicked.connect(self.back_to_edits)
         self.ui.button_report_page_export_csv.clicked.connect(self.export_to_csv)
-        self.ui.button_report_page_export_csv.clicked.connect(self.reset_app)
 
         # reset Max from_date when to_date is changed
         self.ui.input_search_page_to_date.dateChanged.connect(
@@ -81,17 +80,18 @@ class MainWindow(QMainWindow):
         tkinter.Tk().withdraw()
         csv_path = filedialog.askopenfilename(filetypes=[("Excel files", ".csv")])
 
-        with open(csv_path, "r") as file:
-            fb_names = list(csv.reader(file, delimiter=","))
+        if csv_path:
+            with open(csv_path, "r") as file:
+                fb_names = list(csv.reader(file, delimiter=","))
 
-        start_date = self.ui.input_search_page_from_date.date().toPyDate()
-        end_date = self.ui.input_search_page_to_date.date().toPyDate()
+            start_date = self.ui.input_search_page_from_date.date().toPyDate()
+            end_date = self.ui.input_search_page_to_date.date().toPyDate()
 
-        for fb_name in fb_names:
-            t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
-            t.start()
+            for fb_name in fb_names:
+                t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
+                t.start()
 
-        self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
+            self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
 
     def search_urls(self):
 
@@ -503,16 +503,19 @@ class MainWindow(QMainWindow):
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = ""
 
     def export_to_csv(self):
+        tkinter.Tk().withdraw()
         save_to_path = filedialog.asksaveasfilename(defaultextension=".csv")
-        with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
-            word_file.write(
-                "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
-            writecsv = csv.writer(word_file)
-            export_info = []
-            for pages in self.edit_information_pages:
-                export_info.append(pages.export())
-            writecsv.writerows(export_info)
-        word_file.close()
+        if save_to_path:
+            with open(save_to_path, "w", encoding="utf8", newline="") as word_file:
+                word_file.write(
+                    "Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII\n")
+                writecsv = csv.writer(word_file)
+                export_info = []
+                for pages in self.edit_information_pages:
+                    export_info.append(pages.export())
+                writecsv.writerows(export_info)
+            word_file.close()
+            self.reset_app()
         # save scraped results from local variable to csv format
 
     def reset_app(self):
