@@ -2161,7 +2161,7 @@ class Ui_MainWindow(object):
         item = self.table_report_page_report.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Status"))
         item = self.table_report_page_report.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "PII?"))
+        item.setText(_translate("MainWindow", "P.I.C.S."))
         item = self.table_report_page_report.horizontalHeaderItem(8)
         item.setText(_translate("MainWindow", "T&C?"))
         item = self.table_report_page_report.horizontalHeaderItem(9)
