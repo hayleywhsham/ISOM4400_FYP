@@ -307,7 +307,6 @@ class MainWindow(QMainWindow):
         try:
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
-            # self.ui.input_info_edit_page_expiring_date.date().toPyDate()
             self.ui.input_info_edit_page_expiring_date.setDateTime(QDateTime.currentDateTime())
             self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
             self.ui.lbl_info_edit_page_full_url.setText(self.edit_information_pages[list_index].full_url)
@@ -401,11 +400,12 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
 
     def add_new_combobox(self, Label_Category_dict, page_object):
+        self.ui.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         row = self.ui.formLayout_info_edit_page_scrolling_content.rowCount()
         self.ui.scrollArea_info_edit_page_categorisation_content.setWidgetResizable(True)
         self.ui.scrollArea_info_edit_page_categorisation_content.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.ui.scrollArea_info_edit_page_categorisation_content.update()
+
         while len(Label_Category_dict["Label"]) > row:
             if (Label_Category_dict["Label"]) and (Label_Category_dict["Label"][0] != ""):
                 try:
@@ -501,6 +501,8 @@ class MainWindow(QMainWindow):
                     self.ui.lbl_info_page_error_msg.setVisible(True)
             row += 1
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
+        self.ui.scrollArea_info_edit_page_categorisation_content.update()
+        self.ui.scrollAreaWidgetContents_info_edit_page.update()
 
     def get_combobox_data(self):
         Label_Category_dict = self.edit_information_pages[

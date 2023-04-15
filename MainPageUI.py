@@ -1057,7 +1057,7 @@ class Ui_MainWindow(object):
         self.formLayoutWidget.setGeometry(QtCore.QRect(10, 10, 491, 501))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout_info_edit_page_scrolling_content = QtWidgets.QFormLayout(self.formLayoutWidget)
-        self.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
+        self.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.formLayout_info_edit_page_scrolling_content.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
         self.formLayout_info_edit_page_scrolling_content.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
         self.formLayout_info_edit_page_scrolling_content.setFormAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
