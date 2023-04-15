@@ -11,7 +11,7 @@ class EditInformationPage:
         self.post_time = post_time
         self.url = url
         self.full_url = get_full_url_2(self.url)
-        self.purpose = "Marketing Purpose"
+        self.purpose = "Choose Marketing Purpose"
         self.status = "Ongoing"
         self.PICS = "No"
         self.TnC = "No"
