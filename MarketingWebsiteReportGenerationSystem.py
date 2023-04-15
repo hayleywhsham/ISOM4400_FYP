@@ -544,6 +544,7 @@ class MainWindow(QMainWindow):
 
     def reset_app(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
+        self.ui.input_search_page_from_fb_page.clear()
         self.edit_information_pages.clear()
         self.columnWidgets.clear()
         clear_screenshots()
