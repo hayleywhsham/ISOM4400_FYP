@@ -1062,7 +1062,7 @@ class Ui_MainWindow(object):
         self.formLayout_info_edit_page_scrolling_content.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
         self.formLayout_info_edit_page_scrolling_content.setFormAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.formLayout_info_edit_page_scrolling_content.setContentsMargins(0, 0, 0, 0)
-        self.formLayout_info_edit_page_scrolling_content.setVerticalSpacing(6)
+        self.formLayout_info_edit_page_scrolling_content.setVerticalSpacing(10)
         self.formLayout_info_edit_page_scrolling_content.setObjectName("formLayout_info_edit_page_scrolling_content")
         self.input_info_edit_page_category = QtWidgets.QComboBox(self.formLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
