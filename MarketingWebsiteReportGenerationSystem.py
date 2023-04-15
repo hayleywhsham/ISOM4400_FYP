@@ -328,6 +328,8 @@ class MainWindow(QMainWindow):
             self.ui.table_report_page_report.verticalHeader().setVisible(True)
             self.ui.table_report_page_report.setColumnCount(12)
             item = QtWidgets.QTableWidgetItem()
+            item = self.ui.table_report_page_report.horizontalHeaderItem(7)
+            item.setText(_translate("MainWindow", "P.I.C.S."))
             self.ui.table_report_page_report.setHorizontalHeaderItem(10, item)
             item = self.ui.table_report_page_report.horizontalHeaderItem(10)
             item.setText(_translate("MainWindow", "Remarks"))
