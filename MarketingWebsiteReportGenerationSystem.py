@@ -73,6 +73,8 @@ class MainWindow(QMainWindow):
             self.ui.table_links_page_link_list.removeRow(0)
         self.ui.stackedWidget.setCurrentWidget(self.ui.search_page)
         self.edit_information_pages.clear()
+        self.ui.lbl_links_page_error_msg.setText(None)
+        self.ui.lbl_links_page_error_msg_ban.setText(None)
 
     def back_to_links_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
@@ -158,7 +160,6 @@ class MainWindow(QMainWindow):
                     post_count += 1
 
         except NotFound:
-
             self.lock.acquire()
             error_msg = self.ui.lbl_links_page_error_msg.text()
 
