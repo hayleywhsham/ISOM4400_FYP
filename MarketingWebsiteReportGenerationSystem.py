@@ -16,7 +16,7 @@ import threading
 from edit_information_pages import EditInformationPage
 
 from facebook_scraper import get_posts
-from facebook_scraper.exceptions import NotFound,TemporarilyBanned
+from facebook_scraper.exceptions import NotFound, TemporarilyBanned
 
 
 def clear_screenshots():
@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
         self.add_content_lock = threading.Lock()
 
         # change page when page number changed, currently debugging due to page number change
-        #self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
+        # self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
 
     def back_to_search_page(self):
         while self.ui.table_links_page_link_list.rowCount() > 0:
@@ -76,6 +76,7 @@ class MainWindow(QMainWindow):
 
     def back_to_links_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
+
     def search_urls_from_csv(self):
         tkinter.Tk().withdraw()
         csv_path = filedialog.askopenfilename(filetypes=[("Excel files", ".csv")])
@@ -126,16 +127,20 @@ class MainWindow(QMainWindow):
             for post in get_posts(fb_page_name,
                                   pages=99999,
 
-                              # Will be blocked easily by Facebook, Facebook API highly restricted
-                              # Without cookie can only get 60 newest posts from page
-                              # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+                                  # Will be blocked easily by Facebook, Facebook API highly restricted
+                                  # Without cookie can only get 60 newest posts from page
+                                  # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-                               cookies="./fbUserToken.json",
+                                  cookies="./fbUserToken.json",
                                   ):
 
                 post_time = post['time']
                 if post_time.date() < start_date:
-                    break
+                    if post_count == 0:
+                        continue  # for skipping the (first) pinned post
+                    else:
+                        break
+
                 if post_time.date() <= end_date:
                     urls = set(get_all_url_from_string(post['text']))  # set: unique per post
                     # print(urls)
@@ -151,6 +156,7 @@ class MainWindow(QMainWindow):
                                                                                url))
                         self.add_content_lock.release()
                     post_count += 1
+
         except NotFound:
 
             self.lock.acquire()
@@ -211,7 +217,6 @@ class MainWindow(QMainWindow):
                 else:
                     del self.edit_information_pages[index]
 
-
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
         max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
@@ -219,7 +224,7 @@ class MainWindow(QMainWindow):
         try:
             self.get_combobox_data()
         except Exception as e:
-            #print(str(e))
+            # print(str(e))
             pass
         if page_number < max_pages:
             self.ui.input_info_edit_page_current_page.setText(str(page_number + 1))
@@ -231,7 +236,7 @@ class MainWindow(QMainWindow):
         try:
             self.get_combobox_data()
         except Exception as e:
-            #print(str(e))
+            # print(str(e))
             pass
         if page_number > 1:
             self.ui.input_info_edit_page_current_page.setText(str(page_number - 1))
@@ -246,7 +251,6 @@ class MainWindow(QMainWindow):
 
         # generate new list of label-categories
         self.generate_category_page()
-
 
     def initial_edit_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
@@ -273,7 +277,8 @@ class MainWindow(QMainWindow):
     def scrape_website_page(self, page_index, page_object):
         try:
             scraped_text_list, scraped_link_list = web_scrape(page_index, page_object.full_url)
-            page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(scraped_text_list)
+            page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(
+                scraped_text_list)
             page_object.dict_to_output()
         except TimeoutException:
             page_object.remarks = "Connection failed - Timed out when fetching info"
@@ -290,7 +295,7 @@ class MainWindow(QMainWindow):
             try:
                 self.add_new_combobox(Label_Category_dict, self.edit_information_pages[list_index])
             except Exception as e:
-                #print("some error", str(e))
+                # print("some error", str(e))
                 pass
 
             if self.edit_information_pages[list_index].TnC == "Yes":
@@ -305,7 +310,8 @@ class MainWindow(QMainWindow):
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
             else:
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
-                self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
+                self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(
+                    self.edit_information_pages[list_index].purpose)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
             self.scene_info_edit_page_screenshot = QGraphicsScene()
             if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
@@ -315,9 +321,9 @@ class MainWindow(QMainWindow):
             self.ui.graphicsView_info_edit_page_screenshot.horizontalScrollBar().setSliderPosition(1)
             self.ui.graphicsView_info_edit_page_screenshot.setScene(self.scene_info_edit_page_screenshot)
         except ValueError as e:
-            #print(str(e))
+            # print(str(e))
             pass
-        #print(Label_Category_dict)
+        # print(Label_Category_dict)
 
     def preview_output(self):
         _translate = QtCore.QCoreApplication.translate
@@ -340,16 +346,26 @@ class MainWindow(QMainWindow):
         for line in range(len(self.edit_information_pages)):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
-            self.ui.table_report_page_report.setItem(row_position, 0, QTableWidgetItem(self.edit_information_pages[line].fb_page_name))
-            self.ui.table_report_page_report.setItem(row_position, 1, QTableWidgetItem(self.edit_information_pages[line].source))
-            self.ui.table_report_page_report.setItem(row_position, 2, QTableWidgetItem(self.edit_information_pages[line].post_time))
-            self.ui.table_report_page_report.setItem(row_position, 3, QTableWidgetItem(self.edit_information_pages[line].url))
-            self.ui.table_report_page_report.setItem(row_position, 4, QTableWidgetItem(self.edit_information_pages[line].full_url))
-            self.ui.table_report_page_report.setItem(row_position, 5, QTableWidgetItem(self.edit_information_pages[line].purpose))
-            self.ui.table_report_page_report.setItem(row_position, 6, QTableWidgetItem(self.edit_information_pages[line].status))
-            self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem(self.edit_information_pages[line].PICS))
-            self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem(self.edit_information_pages[line].TnC))
-            self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
+            self.ui.table_report_page_report.setItem(row_position, 0,
+                                                     QTableWidgetItem(self.edit_information_pages[line].fb_page_name))
+            self.ui.table_report_page_report.setItem(row_position, 1,
+                                                     QTableWidgetItem(self.edit_information_pages[line].source))
+            self.ui.table_report_page_report.setItem(row_position, 2,
+                                                     QTableWidgetItem(self.edit_information_pages[line].post_time))
+            self.ui.table_report_page_report.setItem(row_position, 3,
+                                                     QTableWidgetItem(self.edit_information_pages[line].url))
+            self.ui.table_report_page_report.setItem(row_position, 4,
+                                                     QTableWidgetItem(self.edit_information_pages[line].full_url))
+            self.ui.table_report_page_report.setItem(row_position, 5,
+                                                     QTableWidgetItem(self.edit_information_pages[line].purpose))
+            self.ui.table_report_page_report.setItem(row_position, 6,
+                                                     QTableWidgetItem(self.edit_information_pages[line].status))
+            self.ui.table_report_page_report.setItem(row_position, 7,
+                                                     QTableWidgetItem(self.edit_information_pages[line].PICS))
+            self.ui.table_report_page_report.setItem(row_position, 8,
+                                                     QTableWidgetItem(self.edit_information_pages[line].TnC))
+            self.ui.table_report_page_report.setItem(row_position, 9,
+                                                     QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
             remarks = self.edit_information_pages[line].remarks
             if remarks == "":
                 remarks = "NIL"
@@ -442,7 +458,8 @@ class MainWindow(QMainWindow):
                             Category.setCurrentText(Label_Category_dict["Category"][row])
                         self.ui.formLayout_info_edit_page_scrolling_content.addRow(Scraped_label_scroll, Category)
                         self.columnWidgets.append(Category)
-                        self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
+                        self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(
+                            self.ui.scrollAreaWidgetContents_info_edit_page)
                     except Exception as e:
                         self.ui.lbl_info_page_error_msg.setText(str(e))
                         self.ui.lbl_info_page_error_msg.setVisible(True)
@@ -456,7 +473,8 @@ class MainWindow(QMainWindow):
                     Empty_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Empty_label.setText("No items scraped")
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
-                    self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(self.ui.scrollAreaWidgetContents_info_edit_page)
+                    self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(
+                        self.ui.scrollAreaWidgetContents_info_edit_page)
                     page_object.remarks = "No text scraped"
                 except Exception as e:
                     self.ui.lbl_info_page_error_msg.setText(str(e))
@@ -465,9 +483,11 @@ class MainWindow(QMainWindow):
         self.ui.scrollAreaWidgetContents_info_edit_page.setLayout(self.ui.formLayout_info_edit_page_scrolling_content)
 
     def get_combobox_data(self):
-        Label_Category_dict = self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
+        Label_Category_dict = self.edit_information_pages[
+            int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
         if Label_Category_dict["Label"] == [""]:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
+            self.edit_information_pages[
+                int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
         elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
@@ -478,15 +498,16 @@ class MainWindow(QMainWindow):
                         self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
                         Label_Category_dict["Category"][index] = item
 
-
         # Get current page data
-        self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        self.edit_information_pages[
+            int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
         if self.ui.input_info_edit_page_expiring_date.date().toPyDate() < datetime.date.today():
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expired'
         elif (self.ui.input_info_edit_page_expiring_date.date().toPyDate() - datetime.date.today()).days > 90:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Ongoing'
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
+            self.edit_information_pages[
+                int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
         if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
         else:
@@ -500,7 +521,8 @@ class MainWindow(QMainWindow):
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "No"
         if self.ui.input_info_edit_page_remarks.toPlainText():
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
+            self.edit_information_pages[
+                int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
         else:
             self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = ""
 
