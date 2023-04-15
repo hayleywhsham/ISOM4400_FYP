@@ -106,7 +106,7 @@ class MainWindow(QMainWindow):
     def multi_thread_search(self,fb_names,start_date,end_date):
         threads = []
         for fb_name in fb_names:
-            t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
+            t = threading.Thread(target=self.init_links_page, args=(fb_name, start_date, end_date))
             t.start()
             threads.append(t)
 
@@ -127,7 +127,8 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
             start_date = self.ui.input_search_page_from_date.date().toPyDate()
             end_date = self.ui.input_search_page_to_date.date().toPyDate()
-            t1 = threading.Thread(target=self.init_links_page, args=(self.user_input, start_date, end_date))
+
+            t1 = threading.Thread(target=self.multi_thread_search, args=([self.user_input], start_date, end_date))
             t1.start()
         else:
             self.ui.lbl_search_page_from_fb_page_error_msg.setStyleSheet("""
