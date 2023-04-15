@@ -27,6 +27,12 @@ def clear_screenshots():
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        # Will be blocked easily by Facebook, Facebook API highly restricted
+        # Without cookie can only get 60 newest posts from page
+        # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
+
+        self.cookie_mode = True
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
@@ -62,8 +68,9 @@ class MainWindow(QMainWindow):
         self.ui.input_search_page_to_date.dateChanged.connect(
             lambda: self.ui.input_search_page_from_date.setMaximumDate(self.ui.input_search_page_to_date.date()))
 
-        self.lock = threading.Lock()
+        self.error_message_lock = threading.Lock()
         self.add_content_lock = threading.Lock()
+        self.add_table_row_lock = threading.Lock()
 
         # change page when page number changed, currently debugging due to page number change
         # self.ui.input_info_edit_page_current_page.textEdited.connect(self.update_page)
@@ -90,11 +97,24 @@ class MainWindow(QMainWindow):
             start_date = self.ui.input_search_page_from_date.date().toPyDate()
             end_date = self.ui.input_search_page_to_date.date().toPyDate()
 
-            for fb_name in fb_names:
-                t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
-                t.start()
+            t = threading.Thread(target=self.multi_thread_search, args=(fb_names, start_date, end_date))
+            t.start()
+
 
             self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
+
+    def multi_thread_search(self,fb_names,start_date,end_date):
+        threads = []
+        for fb_name in fb_names:
+            t = threading.Thread(target=self.init_links_page, args=(fb_name[0], start_date, end_date))
+            t.start()
+            threads.append(t)
+
+        for t in threads:
+            t.join()
+
+        last_update_time = datetime.datetime.now().strftime("%H:%M")
+        self.ui.lbl_links_page_last_updated_datetime.setText(f'Done - {last_update_time}')
 
     def search_urls(self):
 
@@ -122,20 +142,18 @@ class MainWindow(QMainWindow):
         self.ui.table_links_page_link_list.horizontalHeader().setVisible(True)
         self.ui.table_links_page_link_list.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.ui.lbl_links_page_last_updated_datetime.setText("Loading")
+        # edit_information_pages = []
+        full_urls = []
         fb_page_name = fb_page_name
         source = "Facebook"
         post_count = 0
+        total_number_of_link = 0
+        number_of_link = 0
         try:
-            for post in get_posts(fb_page_name,
-                                  pages=99999,
+            posts = get_posts(fb_page_name,pages=99999,cookies="./fbUserToken.json") if self.cookie_mode else \
+                    get_posts(fb_page_name,pages=99999)
 
-                                  # Will be blocked easily by Facebook, Facebook API highly restricted
-                                  # Without cookie can only get 60 newest posts from page
-                                  # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
-
-                                  cookies="./fbUserToken.json",
-                                  ):
-
+            for post in posts:
                 post_time = post['time']
                 if post_time.date() < start_date:
                     if post_count == 0:
@@ -150,17 +168,41 @@ class MainWindow(QMainWindow):
                         if not (url.startswith("http://") or url.startswith("https://")):
                             url = "http://" + url
 
-                        self.add_content_lock.acquire()
+                        link_object = EditInformationPage(fb_page_name,
+                                                           source,
+                                                           post_time.strftime("%Y/%m/%d"),
+                                                           url)
+                        total_number_of_link += 1
+                        if link_object.full_url not in full_urls:
+                            number_of_link += 1
+                            full_urls.append(link_object.full_url)
 
-                        self.edit_information_pages.append(EditInformationPage(fb_page_name,
-                                                                               source,
-                                                                               post_time.strftime("%Y/%m/%d"),
-                                                                               url))
-                        self.add_content_lock.release()
+                            # edit_information_pages.append(link_object)
+
+                            self.add_content_lock.acquire()
+                            self.edit_information_pages.append(link_object)
+                            self.add_content_lock.release()
+
+                            self.add_table_row_lock.acquire()
+                            row_position = self.ui.table_links_page_link_list.rowCount()
+                            self.ui.table_links_page_link_list.insertRow(row_position)
+                            self.ui.table_links_page_link_list.setItem(row_position, 0,
+                                                                       QTableWidgetItem(link_object.fb_page_name))
+                            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(link_object.source))
+                            self.ui.table_links_page_link_list.setItem(row_position, 2,
+                                                                       QTableWidgetItem(link_object.post_time))
+                            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(link_object.url))
+                            self.ui.table_links_page_link_list.setItem(row_position, 4,
+                                                                       QTableWidgetItem(link_object.full_url))
+
+                            last_update_time = datetime.datetime.now().strftime("%H:%M")
+                            self.ui.lbl_links_page_last_updated_datetime.setText(f'Loading - {last_update_time}')
+
+                            self.add_table_row_lock.release()
                     post_count += 1
 
         except NotFound:
-            self.lock.acquire()
+            self.error_message_lock.acquire()
             error_msg = self.ui.lbl_links_page_error_msg.text()
 
             if error_msg == "":
@@ -169,7 +211,7 @@ class MainWindow(QMainWindow):
                 error_msg = f'{fb_page_name}, {error_msg}'
 
             self.ui.lbl_links_page_error_msg.setText(error_msg)
-            self.lock.release()
+            self.error_message_lock.release()
 
         except TemporarilyBanned:
             msg = "You being Temporarily Banned by facebook!"
@@ -178,7 +220,7 @@ class MainWindow(QMainWindow):
 
             msg_heading = "\nThe following page have not been searched: "
 
-            self.lock.acquire()
+            self.error_message_lock.acquire()
             error_msg = self.ui.lbl_links_page_error_msg.text()
 
             if (msg_heading not in error_msg):
@@ -187,36 +229,12 @@ class MainWindow(QMainWindow):
                 error_msg = f'{error_msg},{fb_page_name}'
 
             self.ui.lbl_links_page_error_msg.setText(error_msg)
-            self.lock.release()
-        # print(f'Before: {[page.url for page in self.edit_information_pages]}')
-        total_number_of_link = len(self.edit_information_pages)
-        self.remove_dup_links()
-        # print(f'After: {[page.url for page in self.edit_information_pages]}')
+            self.error_message_lock.release()
 
-        for pages in self.edit_information_pages:
-            row_position = self.ui.table_links_page_link_list.rowCount()
-            self.ui.table_links_page_link_list.insertRow(row_position)
-            self.ui.table_links_page_link_list.setItem(row_position, 0, QTableWidgetItem(pages.fb_page_name))
-            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(pages.source))
-            self.ui.table_links_page_link_list.setItem(row_position, 2, QTableWidgetItem(pages.post_time))
-            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(pages.url))
-            self.ui.table_links_page_link_list.setItem(row_position, 4, QTableWidgetItem(pages.full_url))
 
-        last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
-        self.ui.lbl_links_page_last_updated_datetime.setText(last_update_time)
         print(f'Scrapped {post_count} post(s) for {fb_page_name}. Got {total_number_of_link} link(s). '
-              f'Got {len(self.edit_information_pages)} unique links.')
+              f'Got {number_of_link} unique links.')
 
-    def remove_dup_links(self):
-        full_url_list = []
-        index = 0
-        if len(self.edit_information_pages) > 0:
-            while index < len(self.edit_information_pages):
-                if self.edit_information_pages[index].full_url not in full_url_list:
-                    full_url_list.append(self.edit_information_pages[index].full_url)
-                    index += 1
-                else:
-                    del self.edit_information_pages[index]
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
