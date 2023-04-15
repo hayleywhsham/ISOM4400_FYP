@@ -12,7 +12,7 @@ class EditInformationPage:
         self.url = url
         self.full_url = get_full_url_2(self.url)
         self.purpose = "Choose Marketing Purpose"
-        self.status = "Ongoing"
+        self.status = "Expire soon"
         self.PICS = "No"
         self.TnC = "No"
         self.Opt_in_out = "No"
