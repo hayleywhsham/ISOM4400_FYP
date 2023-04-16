@@ -19,7 +19,7 @@ class EditInformationPage:
         self.remarks = ""
         self.PII = ""
         self.Label_Category_dict = {"Label": [], "Category": []}
-        self.Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S.", "Opt-in/Opt-out"], "Exist?": ["No", "No", "No"]}
+        self.Keywords_Exist_dict = {"Keyword": ["T&C", "P.I.C.S.", "Opt-in/Opt-out"], "Exist?": ["Default", "Default", "Default"]}
 
     def dict_to_output(self):
         # convert Label_Category_dict to PII export item
