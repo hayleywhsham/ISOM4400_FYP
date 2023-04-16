@@ -320,7 +320,7 @@ class MainWindow(QMainWindow):
         try:
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
-            self.ui.input_info_edit_page_expiring_date.setDateTime(QDateTime.currentDateTime())
+            self.ui.input_info_edit_page_expiring_date.setDate(self.edit_information_pages[list_index].expire_date)
             if self.edit_information_pages[list_index].remarks != "NIL":
                 self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
             else:
@@ -355,7 +355,6 @@ class MainWindow(QMainWindow):
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
 
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
-            self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
             self.scene_info_edit_page_screenshot = QGraphicsScene()
             if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
                 self.scene_info_edit_page_screenshot.addPixmap(
@@ -559,6 +558,7 @@ class MainWindow(QMainWindow):
 
         # Get current page data
         self.edit_information_pages[page_index].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        self.edit_information_pages[page_index].expire_date = self.ui.input_info_edit_page_expiring_date.date().toPyDate()
         if self.ui.input_info_edit_page_expiring_date.date().toPyDate() < datetime.date.today():
             self.edit_information_pages[page_index].status = 'Expired'
         elif (self.ui.input_info_edit_page_expiring_date.date().toPyDate() - datetime.date.today()).days > 90:

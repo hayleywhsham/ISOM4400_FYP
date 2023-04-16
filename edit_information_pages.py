@@ -1,4 +1,5 @@
 from web_scrap import get_full_url_2
+import datetime
 
 class EditInformationPage:
 
@@ -12,6 +13,7 @@ class EditInformationPage:
         self.url = url
         self.full_url = get_full_url_2(self.url)
         self.purpose = "Choose Marketing Purpose"
+        self.expire_date = datetime.date.today()
         self.status = "Expire soon"
         self.PICS = "No"
         self.TnC = "No"
