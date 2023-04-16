@@ -278,8 +278,10 @@ class MainWindow(QMainWindow):
             max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
             for page in range(max_pages):
                 page_object = self.edit_information_pages[page]
-                page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(
-                    page_object.Label_Category_dict["Label"])
+                page_object.Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(page_object.Label_Category_dict["Label"])
+                for index, keyword in enumerate(Keywords_Exist_dict["Exist?"]):
+                    if keyword = "Yes":
+                        page_object.Keywords_Exist_dict["Exist?"][index] = "Yes"
                 page_object.dict_to_output()
                 if (page_object.Label_Category_dict["Label"] == [""]) and (page_object.remarks == ""):
                     page_object.remarks = "No text scraped"
