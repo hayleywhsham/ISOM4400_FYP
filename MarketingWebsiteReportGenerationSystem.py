@@ -281,7 +281,7 @@ class MainWindow(QMainWindow):
                 page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(
                     page_object.Label_Category_dict["Label"])
                 page_object.dict_to_output()
-                if not page_object.Label_Category_dict["Label"]:
+                if (page_object.Label_Category_dict["Label"] == [""]) and (page_object.remarks == ""):
                     page_object.remarks = "No text scraped"
         except Exception:
             pass

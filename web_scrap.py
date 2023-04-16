@@ -60,6 +60,9 @@ def web_scrape(counter, link):
         chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
         text = '\n'.join(chunk for chunk in chunks if chunk)
         text_list = text.split("\n")
+        for index, text in enumerate(text_list):
+            text = r"%r" % text
+            text_list[index] = str(text.replace("\\", ""))[1:-1]
     except Exception as e:
         print(str(e))
     try:
