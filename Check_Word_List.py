@@ -34,7 +34,7 @@ class CategoryList:
 
             # append new item in an existing cat.
             elif new_category_names.casefold() not in [c.casefold() for c in self.categories[new_category]]:
-                self.categories[new_category].append(new_category_names.replace("\\", "\\\\"))
+                self.categories[new_category].append(new_category_names)
                 isChanged = True
 
             # remove existing word in the other cat.
