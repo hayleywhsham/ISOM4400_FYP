@@ -279,9 +279,6 @@ class MainWindow(QMainWindow):
             for page in range(max_pages):
                 page_object = self.edit_information_pages[page]
                 page_object.Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(page_object.Label_Category_dict["Label"])
-                for index, keyword in enumerate(Keywords_Exist_dict["Exist?"]):
-                    if keyword = "Yes":
-                        page_object.Keywords_Exist_dict["Exist?"][index] = "Yes"
                 page_object.dict_to_output()
                 if (page_object.Label_Category_dict["Label"] == [""]) and (page_object.remarks == ""):
                     page_object.remarks = "No text scraped"
@@ -338,16 +335,22 @@ class MainWindow(QMainWindow):
 
             if self.edit_information_pages[list_index].TnC == "Yes":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
-            else:
+            elif self.edit_information_pages[list_index].TnC == "Default":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
+            else:
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
             if self.edit_information_pages[list_index].PICS == "Yes":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-            else:
+              elif self.edit_information_pages[list_index].PICS == "Default":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+            else:
+                self.ui.input_info_edit_page_pics.setCurrentIndex(2)
             if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-            else:
+              elif self.edit_information_pages[list_index].Opt_in_out == "Default":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
+            else:
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
             self.scene_info_edit_page_screenshot = QGraphicsScene()
