@@ -268,9 +268,21 @@ class MainWindow(QMainWindow):
         while self.ui.formLayout_info_edit_page_scrolling_content.rowCount() > 0:
             self.ui.formLayout_info_edit_page_scrolling_content.removeRow(0)
         self.columnWidgets.clear()
+        self.update_categories()
 
         # generate new list of label-categories
         self.generate_category_page()
+
+    def update_categories(self):
+        try:
+            max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
+            for page in range(max_pages):
+                page_object = self.edit_information_pages[page]
+                page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(
+                    page_object.Label_Category_dict["Label"])
+                page_object.dict_to_output()
+        except Exception:
+            pass
 
     def initial_edit_page(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
@@ -308,7 +320,10 @@ class MainWindow(QMainWindow):
             list_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentIndex(0)
             self.ui.input_info_edit_page_expiring_date.setDateTime(QDateTime.currentDateTime())
-            self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
+            if self.edit_information_pages[list_index].remarks != "NIL":
+                self.ui.input_info_edit_page_remarks.setText(self.edit_information_pages[list_index].remarks)
+            else:
+                self.ui.input_info_edit_page_remarks.setText("")
             self.ui.lbl_info_edit_page_full_url.setText(self.edit_information_pages[list_index].full_url)
             Label_Category_dict = self.edit_information_pages[list_index].Label_Category_dict
             try:
@@ -346,25 +361,20 @@ class MainWindow(QMainWindow):
     def preview_output(self):
         _translate = QtCore.QCoreApplication.translate
         self.get_combobox_data()
-
+        self.update_page()
         while self.ui.table_report_page_report.rowCount() > 0:
             self.ui.table_report_page_report.removeRow(0)
-
         self.ui.table_report_page_report.horizontalHeader().setVisible(True)
         self.ui.table_report_page_report.verticalHeader().setVisible(True)
 
         self.ui.table_report_page_report.setColumnCount(12)
-
+        self.ui.table_report_page_report.horizontalHeaderItem(7).setText(_translate("MainWindow", "P.I.C.S."))
         item = QtWidgets.QTableWidgetItem()
-        item = self.ui.table_report_page_report.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "P.I.C.S."))
         self.ui.table_report_page_report.setHorizontalHeaderItem(10, item)
-        item = self.ui.table_report_page_report.horizontalHeaderItem(10)
-        item.setText(_translate("MainWindow", "Remarks"))
+        self.ui.table_report_page_report.horizontalHeaderItem(10).setText(_translate("MainWindow", "Remarks"))
         item = QtWidgets.QTableWidgetItem()
         self.ui.table_report_page_report.setHorizontalHeaderItem(11, item)
-        item = self.ui.table_report_page_report.horizontalHeaderItem(11)
-        item.setText(_translate("MainWindow", "PII"))
+        self.ui.table_report_page_report.horizontalHeaderItem(11).setText(_translate("MainWindow", "PII"))
 
         for line in range(len(self.edit_information_pages)):
             self.edit_information_pages[line].dict_to_output()
@@ -390,20 +400,22 @@ class MainWindow(QMainWindow):
                                                      QTableWidgetItem(self.edit_information_pages[line].TnC))
             self.ui.table_report_page_report.setItem(row_position, 9,
                                                      QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
-            remarks = self.edit_information_pages[line].remarks
-            if remarks == "":
-                remarks = "NIL"
-            self.ui.table_report_page_report.setItem(row_position, 10, QTableWidgetItem(remarks))
-            PII = self.edit_information_pages[line].PII
-            if PII == "":
-                PII = "NIL"
-            self.ui.table_report_page_report.setItem(row_position, 11, QTableWidgetItem(PII))
+            if self.edit_information_pages[line].remarks == "":
+                self.edit_information_pages[line].remarks = "NIL"
+            self.ui.table_report_page_report.setItem(row_position, 10,
+                                                     QTableWidgetItem(self.edit_information_pages[line].remarks))
+            if self.edit_information_pages[line].PII == "":
+                self.edit_information_pages[line].PII = "NIL"
+            self.ui.table_report_page_report.setItem(row_position, 11,
+                                                     QTableWidgetItem(self.edit_information_pages[line].PII))
         last_update_time = datetime.datetime.now().strftime("%Y/%m/%d %H:%M")
         self.ui.lbl_report_page_last_updated_datetime.setText(last_update_time)
         self.ui.stackedWidget.setCurrentWidget(self.ui.report_page)
 
     def back_to_edits(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.info_edit_page)
+        while self.ui.table_report_page_report.rowCount() > 0:
+            self.ui.table_report_page_report.removeRow(0)
 
     def add_new_combobox(self, Label_Category_dict, page_object):
         self.ui.formLayout_info_edit_page_scrolling_content.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
