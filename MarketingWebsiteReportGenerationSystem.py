@@ -341,13 +341,13 @@ class MainWindow(QMainWindow):
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
             if self.edit_information_pages[list_index].PICS == "Yes":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-              elif self.edit_information_pages[list_index].PICS == "Default":
+            elif self.edit_information_pages[list_index].PICS == "Default":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(0)
             else:
                 self.ui.input_info_edit_page_pics.setCurrentIndex(2)
             if self.edit_information_pages[list_index].Opt_in_out == "Yes":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-              elif self.edit_information_pages[list_index].Opt_in_out == "Default":
+            elif self.edit_information_pages[list_index].Opt_in_out == "Default":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
             else:
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
