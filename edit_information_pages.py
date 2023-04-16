@@ -28,7 +28,8 @@ class EditInformationPage:
             if categories != "Unrelated" and categories != "P.I.C.S." and categories != "T&C" and \
                     categories != "Opt-in/Opt-out" and categories != "Marketing Purpose" and \
                     categories != "Expiry Date" and categories != "":
-                self.PII = self.PII + categories + ","
+                if categories not in self.PII:
+                    self.PII = self.PII + categories + ", "
         self.PII = self.PII.rstrip(", ")
 
         # convert Keywords_Exist_dict to export items
