@@ -17,6 +17,12 @@ class CategoryList:
             self.categories = json.loads(word_file.readline().replace("'", '"'))
 
     def update_defined_category(self, new_category_names: str, new_category: str):
+        new_category_names = r"%r" % new_category_names
+        new_category_names = new_category_names.replace("\\", "")
+        new_category = r"%r" % new_category
+        new_category = new_category.replace("\\", "")
+
+
         if new_category != "Unrelated":
             isChanged = False
 
@@ -43,7 +49,10 @@ class CategoryList:
             # update Wordlist.txt
             if isChanged:
                 with open("WordList.txt", "w", encoding="utf8") as word_file:
-                    word_file.write(str(self.categories))
+                    new_line =str(self.categories)
+                    # new_line = r"%r" % new_line
+                    # new_line = new_line.replace("\\", "")
+                    word_file.write(new_line)
 
         # categories are personal information and keywords such as T&C, P.I.C.S and opt-in/opt-out
         # def import_categories():

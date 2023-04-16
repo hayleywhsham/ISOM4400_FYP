@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
         # Without cookie can only get 60 newest posts from page
         # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-        self.cookie_mode = True
+        self.cookie_mode = False
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
@@ -346,11 +346,15 @@ class MainWindow(QMainWindow):
     def preview_output(self):
         _translate = QtCore.QCoreApplication.translate
         self.get_combobox_data()
+
         while self.ui.table_report_page_report.rowCount() > 0:
             self.ui.table_report_page_report.removeRow(0)
+
         self.ui.table_report_page_report.horizontalHeader().setVisible(True)
         self.ui.table_report_page_report.verticalHeader().setVisible(True)
+
         self.ui.table_report_page_report.setColumnCount(12)
+
         item = QtWidgets.QTableWidgetItem()
         item = self.ui.table_report_page_report.horizontalHeaderItem(7)
         item.setText(_translate("MainWindow", "P.I.C.S."))
@@ -361,6 +365,7 @@ class MainWindow(QMainWindow):
         self.ui.table_report_page_report.setHorizontalHeaderItem(11, item)
         item = self.ui.table_report_page_report.horizontalHeaderItem(11)
         item.setText(_translate("MainWindow", "PII"))
+
         for line in range(len(self.edit_information_pages)):
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
