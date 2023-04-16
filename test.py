@@ -11,9 +11,13 @@
 #
 # for count,post in enumerate(get_posts('nintendo', pages=999, cookies="./fbUserToken.json",)):
 #      print(f'Index: {count}, link:[{post["link"]}]')
-s = '開啟 Mac App \xa0 Store 購買和下載 App。'
+s = "開啟 Mac App \xa0 Store 購買和下載 App。"
 s = r"%r" % s
-s = s.replace("\\","")
-# print("\\" in r"%r" % s)
+print(s)
+
+s = str(s)
 
 print(s)
+# s = s.replace("\\","")
+# print("\\" in r"%r" % s)
+
