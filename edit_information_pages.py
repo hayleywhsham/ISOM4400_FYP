@@ -23,12 +23,13 @@ class EditInformationPage:
 
     def dict_to_output(self):
         # convert Label_Category_dict to PII export item
+        self.PII = ""
         for categories in self.Label_Category_dict["Category"]:
             if categories != "Unrelated" and categories != "P.I.C.S." and categories != "T&C" and \
                     categories != "Opt-in/Opt-out" and categories != "Marketing Purpose" and \
                     categories != "Expiry Date" and categories != "":
                 self.PII = self.PII + categories + ","
-        self.PII.rstrip(",")
+        self.PII = self.PII.rstrip(", ")
 
         # convert Keywords_Exist_dict to export items
         self.TnC = self.Keywords_Exist_dict["Exist?"][0]

@@ -362,6 +362,7 @@ class MainWindow(QMainWindow):
         item = self.ui.table_report_page_report.horizontalHeaderItem(11)
         item.setText(_translate("MainWindow", "PII"))
         for line in range(len(self.edit_information_pages)):
+            self.edit_information_pages[line].dict_to_output()
             row_position = self.ui.table_report_page_report.rowCount()
             self.ui.table_report_page_report.insertRow(row_position)
             self.ui.table_report_page_report.setItem(row_position, 0,
@@ -505,10 +506,10 @@ class MainWindow(QMainWindow):
         self.ui.scrollAreaWidgetContents_info_edit_page.update()
 
     def get_combobox_data(self):
-        Label_Category_dict = self.edit_information_pages[
-            int(self.ui.input_info_edit_page_current_page.text()) - 1].Label_Category_dict
+        page_index = int(self.ui.input_info_edit_page_current_page.text()) - 1
+        Label_Category_dict = self.edit_information_pages[page_index].Label_Category_dict
         if Label_Category_dict["Label"] == [""]:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = "no text scraped"
+            self.edit_information_pages[page_index].remarks = "no text scraped"
         elif len(Label_Category_dict["Category"]) == len(self.columnWidgets):
             if self.columnWidgets:
                 changed_category = [t.currentText() for t in self.columnWidgets]
@@ -519,33 +520,33 @@ class MainWindow(QMainWindow):
                         self.categoryList.update_defined_category(Label_Category_dict["Label"][index], item)
                         Label_Category_dict["Category"][index] = item
 
+        self.edit_information_pages[page_index].Label_Category_dict = Label_Category_dict
+
         # Get current page data
-        self.edit_information_pages[
-            int(self.ui.input_info_edit_page_current_page.text()) - 1].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        self.edit_information_pages[page_index].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
         if self.ui.input_info_edit_page_expiring_date.date().toPyDate() < datetime.date.today():
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expired'
+            self.edit_information_pages[page_index].status = 'Expired'
         elif (self.ui.input_info_edit_page_expiring_date.date().toPyDate() - datetime.date.today()).days > 90:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Ongoing'
+            self.edit_information_pages[page_index].status = 'Ongoing'
         else:
             self.edit_information_pages[
                 int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
         if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "Yes"
+            self.edit_information_pages[page_index].TnC = "Yes"
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].TnC = "No"
+            self.edit_information_pages[page_index].TnC = "No"
         if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "Yes"
+            self.edit_information_pages[page_index].PICS = "Yes"
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].PICS = "No"
+            self.edit_information_pages[page_index].PICS = "No"
         if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "Yes"
+            self.edit_information_pages[page_index].Opt_in_out = "Yes"
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].Opt_in_out = "No"
+            self.edit_information_pages[page_index].Opt_in_out = "No"
         if self.ui.input_info_edit_page_remarks.toPlainText():
-            self.edit_information_pages[
-                int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
+            self.edit_information_pages[page_index].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
         else:
-            self.edit_information_pages[int(self.ui.input_info_edit_page_current_page.text()) - 1].remarks = ""
+            self.edit_information_pages[page_index].remarks = ""
 
     def export_to_csv(self):
         tkinter.Tk().withdraw()
