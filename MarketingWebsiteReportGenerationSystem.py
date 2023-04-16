@@ -333,24 +333,27 @@ class MainWindow(QMainWindow):
                 # print("some error", str(e))
                 pass
 
-            if self.edit_information_pages[list_index].TnC == "Yes":
-                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
-            elif self.edit_information_pages[list_index].TnC == "Default":
+            if self.edit_information_pages[list_index].TnC == "Default":
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(0)
+            elif self.edit_information_pages[list_index].TnC == "Yes":
+                self.ui.input_info_edit_page_tnc.setCurrentIndex(1)
             else:
                 self.ui.input_info_edit_page_tnc.setCurrentIndex(2)
-            if self.edit_information_pages[list_index].PICS == "Yes":
-                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
-            elif self.edit_information_pages[list_index].PICS == "Default":
+
+            if self.edit_information_pages[list_index].PICS == "Default":
                 self.ui.input_info_edit_page_pics.setCurrentIndex(0)
+            elif self.edit_information_pages[list_index].PICS == "Yes":
+                self.ui.input_info_edit_page_pics.setCurrentIndex(1)
             else:
                 self.ui.input_info_edit_page_pics.setCurrentIndex(2)
-            if self.edit_information_pages[list_index].Opt_in_out == "Yes":
-                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
-            elif self.edit_information_pages[list_index].Opt_in_out == "Default":
+
+            if self.edit_information_pages[list_index].Opt_in_out == "Default":
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(0)
+            elif self.edit_information_pages[list_index].Opt_in_out == "Yes":
+                self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(1)
             else:
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
+
             self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
             self.ui.input_info_edit_page_expiring_date.date().toPyDate().today()
             self.scene_info_edit_page_screenshot = QGraphicsScene()
@@ -401,11 +404,20 @@ class MainWindow(QMainWindow):
                                                      QTableWidgetItem(self.edit_information_pages[line].purpose))
             self.ui.table_report_page_report.setItem(row_position, 6,
                                                      QTableWidgetItem(self.edit_information_pages[line].status))
-            self.ui.table_report_page_report.setItem(row_position, 7,
-                                                     QTableWidgetItem(self.edit_information_pages[line].PICS))
-            self.ui.table_report_page_report.setItem(row_position, 8,
+            if self.edit_information_pages[line].PICS == "Default":
+                self.ui.table_report_page_report.setItem(row_position, 7, QTableWidgetItem("No"))
+            else:
+                self.ui.table_report_page_report.setItem(row_position, 7,
+                                                         QTableWidgetItem(self.edit_information_pages[line].PICS))
+            if self.edit_information_pages[line].TnC == "Default":
+                self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem("No"))
+            else:
+                self.ui.table_report_page_report.setItem(row_position, 8,
                                                      QTableWidgetItem(self.edit_information_pages[line].TnC))
-            self.ui.table_report_page_report.setItem(row_position, 9,
+            if self.edit_information_pages[line].Opt_in_out == "Default":
+                self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem("No"))
+            else:
+                self.ui.table_report_page_report.setItem(row_position, 9,
                                                      QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
             if self.edit_information_pages[line].remarks == "":
                 self.edit_information_pages[line].remarks = "NIL"
@@ -554,18 +566,28 @@ class MainWindow(QMainWindow):
         else:
             self.edit_information_pages[
                 int(self.ui.input_info_edit_page_current_page.text()) - 1].status = 'Expire soon'
-        if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
-            self.edit_information_pages[page_index].TnC = "Yes"
+
+        if int(self.ui.input_info_edit_page_tnc.currentIndex()) == 0:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][0] = "Default"
+        elif int(self.ui.input_info_edit_page_tnc.currentIndex()) == 1:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][0] = "Yes"
         else:
-            self.edit_information_pages[page_index].TnC = "No"
-        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
-            self.edit_information_pages[page_index].PICS = "Yes"
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][0] = "No"
+
+        if int(self.ui.input_info_edit_page_pics.currentIndex()) == 0:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][1] = "Default"
+        elif int(self.ui.input_info_edit_page_pics.currentIndex()) == 1:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][1] = "Yes"
         else:
-            self.edit_information_pages[page_index].PICS = "No"
-        if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
-            self.edit_information_pages[page_index].Opt_in_out = "Yes"
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][1] = "No"
+
+        if int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 0:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][2] = "Default"
+        elif int(self.ui.input_info_edit_page_choose_opt_in_out.currentIndex()) == 1:
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][2] = "Yes"
         else:
-            self.edit_information_pages[page_index].Opt_in_out = "No"
+            self.edit_information_pages[page_index].Keywords_Exist_dict["Exist?"][2] = "No"
+
         if self.ui.input_info_edit_page_remarks.toPlainText():
             self.edit_information_pages[page_index].remarks = self.ui.input_info_edit_page_remarks.toPlainText()
         else:

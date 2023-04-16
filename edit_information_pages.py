@@ -38,6 +38,13 @@ class EditInformationPage:
         self.Opt_in_out = self.Keywords_Exist_dict["Exist?"][2]
 
     def export(self):
+        if self.TnC == "Default":
+            self.TnC = "No"
+        if self.PICS == "Default":
+            self.PICS = "No"
+        if self.Opt_in_out == "Default":
+            self.Opt_in_out = "No"
+
         export_list = [self.fb_page_name,
                        self.source,
                        self.post_time,
