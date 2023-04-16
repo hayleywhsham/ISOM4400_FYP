@@ -281,6 +281,8 @@ class MainWindow(QMainWindow):
                 page_object.Label_Category_dict, page_object.Keywords_Exist_dict = self.categoryList.check_word_list(
                     page_object.Label_Category_dict["Label"])
                 page_object.dict_to_output()
+                if not page_object.Label_Category_dict["Label"]:
+                    page_object.remarks = "No text scraped"
         except Exception:
             pass
 
@@ -513,7 +515,6 @@ class MainWindow(QMainWindow):
                     self.ui.formLayout_info_edit_page_scrolling_content.addRow(Empty_label)
                     self.ui.scrollArea_info_edit_page_categorisation_content.setWidget(
                         self.ui.scrollAreaWidgetContents_info_edit_page)
-                    page_object.remarks = "No text scraped"
                 except Exception as e:
                     self.ui.lbl_info_page_error_msg.setText(str(e))
                     self.ui.lbl_info_page_error_msg.setVisible(True)
