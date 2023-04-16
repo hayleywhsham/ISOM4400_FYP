@@ -18,9 +18,10 @@ class CategoryList:
 
     def update_defined_category(self, new_category_names: str, new_category: str):
         new_category_names = r"%r" % new_category_names
-        new_category_names = new_category_names.replace("\\", "")
+        new_category_names = str(new_category_names.replace("\\", ""))[1:-1]
+
         new_category = r"%r" % new_category
-        new_category = new_category.replace("\\", "")
+        new_category = str(new_category.replace("\\", ""))[1:-1]
 
 
         if new_category != "Unrelated":
