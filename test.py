@@ -11,13 +11,22 @@
 #
 # for count,post in enumerate(get_posts('nintendo', pages=999, cookies="./fbUserToken.json",)):
 #      print(f'Index: {count}, link:[{post["link"]}]')
-s = "開啟 Mac App \xa0 Store 購買和下載 App。"
-s = r"%r" % s
-print(s)
+# s = "開啟 Mac App \xa0 Store 購買和下載 App。"
+# s = r"%r" % s
+# print(s)
+#
+# s = str(s)
+#
+# print(s)
+# # s = s.replace("\\","")
+# # print("\\" in r"%r" % s)
 
-s = str(s)
+from myException import GetFullURLFail
+def test ():
+    raise GetFullURLFail("www.abc")
 
-print(s)
-# s = s.replace("\\","")
-# print("\\" in r"%r" % s)
+try:
+    test()
+except GetFullURLFail as e:
+    print(e.short_URL)
 

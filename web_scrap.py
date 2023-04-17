@@ -6,6 +6,9 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import requests
+from requests.exceptions import InvalidURL
+from myException import GetFullURLFail
+
 
 
 def get_full_url(link):
@@ -23,13 +26,19 @@ def get_full_url(link):
     return full_url
 
 def get_full_url_2(link):
-    session = requests.session()
-    resp = session.head(link, allow_redirects=True)
-    full_url = resp.url
+    try:
+        session = requests.session()
+        resp = session.head(link, allow_redirects=True)
+        full_url = resp.url
+    except Exception:
+        return f'Fail-{link}'
+
     return full_url
 
 
 def web_scrape(counter, link):
+    if link[0:4] == "Fail":
+        raise GetFullURLFail(link[5:])
 #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     chrome_options = Options()
 #    chrome_options.add_argument("start-maximized")

@@ -14,6 +14,7 @@ import tkinter
 from tkinter import filedialog
 import threading
 from edit_information_pages import EditInformationPage
+from myException import GetFullURLFail
 
 from facebook_scraper import get_posts
 from facebook_scraper.exceptions import NotFound, TemporarilyBanned
@@ -32,7 +33,7 @@ class MainWindow(QMainWindow):
         # Without cookie can only get 60 newest posts from page
         # Source : https://developers.facebook.com/docs/graph-api/overview/rate-limiting/
 
-        self.cookie_mode = False
+        self.cookie_mode = True
         self.categoryList = CategoryList()
         self.columnWidgets = []
         self.url_pool = set()
@@ -92,7 +93,13 @@ class MainWindow(QMainWindow):
 
         if csv_path:
             with open(csv_path, "r") as file:
-                fb_names = list(csv.reader(file, delimiter=","))
+                fb_names_csv_reader = csv.reader(file, delimiter=",")
+                fb_names = []
+                for fb_name in fb_names_csv_reader:
+                    if type(fb_name) == list:
+                        fb_names.append(fb_name[0])
+                    else:
+                        fb_names.append(fb_name)
 
             start_date = self.ui.input_search_page_from_date.date().toPyDate()
             end_date = self.ui.input_search_page_to_date.date().toPyDate()
@@ -100,10 +107,9 @@ class MainWindow(QMainWindow):
             t = threading.Thread(target=self.multi_thread_search, args=(fb_names, start_date, end_date))
             t.start()
 
-
             self.ui.stackedWidget.setCurrentWidget(self.ui.links_page)
 
-    def multi_thread_search(self,fb_names,start_date,end_date):
+    def multi_thread_search(self, fb_names, start_date, end_date):
         threads = []
         for fb_name in fb_names:
             t = threading.Thread(target=self.init_links_page, args=(fb_name, start_date, end_date))
@@ -151,28 +157,33 @@ class MainWindow(QMainWindow):
         total_number_of_link = 0
         number_of_link = 0
         try:
-            posts = get_posts(fb_page_name,pages=99999,cookies="./fbUserToken.json") if self.cookie_mode else \
-                    get_posts(fb_page_name,pages=99999)
+            posts = get_posts(fb_page_name, pages=99999, cookies="./fbUserToken.json") if self.cookie_mode else \
+                get_posts(fb_page_name, pages=99999)
 
             for post in posts:
+                # print(1)
                 post_time = post['time']
-                if post_time.date() < start_date:
+
+                if post_time is not None and post_time.date() < start_date:
                     if post_count == 0:
+                        post_count += 1
                         continue  # for skipping the (first) pinned post
                     else:
                         break
-
-                if post_time.date() <= end_date:
+                # print(2)
+                if post_time is None or post_time.date() <= end_date:
                     urls = set(get_all_url_from_string(post['text']))  # set: unique per post
                     # print(urls)
+                    # print(3)
                     for url in urls:
+
                         if not (url.startswith("http://") or url.startswith("https://")):
                             url = "http://" + url
-
+                        post_time_str = post_time.strftime("%Y/%m/%d") if post_time is not None else ""
                         link_object = EditInformationPage(fb_page_name,
-                                                           source,
-                                                           post_time.strftime("%Y/%m/%d"),
-                                                           url)
+                                                          source,
+                                                          post_time_str,
+                                                          url)
                         total_number_of_link += 1
                         if link_object.full_url not in full_urls:
                             number_of_link += 1
@@ -185,14 +196,17 @@ class MainWindow(QMainWindow):
                             self.add_content_lock.release()
 
                             self.add_table_row_lock.acquire()
+
                             row_position = self.ui.table_links_page_link_list.rowCount()
                             self.ui.table_links_page_link_list.insertRow(row_position)
                             self.ui.table_links_page_link_list.setItem(row_position, 0,
                                                                        QTableWidgetItem(link_object.fb_page_name))
-                            self.ui.table_links_page_link_list.setItem(row_position, 1, QTableWidgetItem(link_object.source))
+                            self.ui.table_links_page_link_list.setItem(row_position, 1,
+                                                                       QTableWidgetItem(link_object.source))
                             self.ui.table_links_page_link_list.setItem(row_position, 2,
                                                                        QTableWidgetItem(link_object.post_time))
-                            self.ui.table_links_page_link_list.setItem(row_position, 3, QTableWidgetItem(link_object.url))
+                            self.ui.table_links_page_link_list.setItem(row_position, 3,
+                                                                       QTableWidgetItem(link_object.url))
                             self.ui.table_links_page_link_list.setItem(row_position, 4,
                                                                        QTableWidgetItem(link_object.full_url))
 
@@ -232,10 +246,8 @@ class MainWindow(QMainWindow):
             self.ui.lbl_links_page_error_msg.setText(error_msg)
             self.error_message_lock.release()
 
-
         print(f'Scrapped {post_count} post(s) for {fb_page_name}. Got {total_number_of_link} link(s). '
               f'Got {number_of_link} unique links.')
-
 
     def next_page(self):
         page_number = int(self.ui.input_info_edit_page_current_page.text())
@@ -278,7 +290,8 @@ class MainWindow(QMainWindow):
             max_pages = int(self.ui.lbl_info_edit_page_total_pages.text())
             for page in range(max_pages):
                 page_object = self.edit_information_pages[page]
-                page_object.Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(page_object.Label_Category_dict["Label"])
+                page_object.Label_Category_dict, Keywords_Exist_dict = self.categoryList.check_word_list(
+                    page_object.Label_Category_dict["Label"])
                 page_object.dict_to_output()
                 if (page_object.Label_Category_dict["Label"] == [""]) and (page_object.remarks == ""):
                     page_object.remarks = "No text scraped"
@@ -315,6 +328,8 @@ class MainWindow(QMainWindow):
             page_object.dict_to_output()
         except TimeoutException:
             page_object.remarks = "Connection failed - Timed out when fetching info"
+        except GetFullURLFail as error :
+            page_object.remarks = f'URL Error - The full URL is empty. Maybe the shorten url ({error.short_URL}) is already broken.'
 
     def generate_category_page(self):
         try:
@@ -354,7 +369,8 @@ class MainWindow(QMainWindow):
             else:
                 self.ui.input_info_edit_page_choose_opt_in_out.setCurrentIndex(2)
 
-            self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(self.edit_information_pages[list_index].purpose)
+            self.ui.input_info_edit_page_choose_marketing_purpose.setCurrentText(
+                self.edit_information_pages[list_index].purpose)
             self.scene_info_edit_page_screenshot = QGraphicsScene()
             if os.path.exists(f"Screen_Captures/ScreenShot_{list_index}.png"):
                 self.scene_info_edit_page_screenshot.addPixmap(
@@ -412,12 +428,12 @@ class MainWindow(QMainWindow):
                 self.ui.table_report_page_report.setItem(row_position, 8, QTableWidgetItem("No"))
             else:
                 self.ui.table_report_page_report.setItem(row_position, 8,
-                                                     QTableWidgetItem(self.edit_information_pages[line].TnC))
+                                                         QTableWidgetItem(self.edit_information_pages[line].TnC))
             if self.edit_information_pages[line].Opt_in_out == "Default":
                 self.ui.table_report_page_report.setItem(row_position, 9, QTableWidgetItem("No"))
             else:
                 self.ui.table_report_page_report.setItem(row_position, 9,
-                                                     QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
+                                                         QTableWidgetItem(self.edit_information_pages[line].Opt_in_out))
             if self.edit_information_pages[line].remarks == "":
                 self.edit_information_pages[line].remarks = "NIL"
             self.ui.table_report_page_report.setItem(row_position, 10,
@@ -450,7 +466,7 @@ class MainWindow(QMainWindow):
                     Scraped_label_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
                     Scraped_label_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
                     Scraped_label_scroll.setMaximumSize(180, 30)
-                    Scraped_label_scroll.setMinimumSize(160,30)
+                    Scraped_label_scroll.setMinimumSize(160, 30)
                     Scraped_label = QLabel()
                     Scraped_label.setStyleSheet("color: rgb(255, 255, 255);")
                     Scraped_label.setWordWrap(True)
@@ -557,8 +573,10 @@ class MainWindow(QMainWindow):
         self.edit_information_pages[page_index].Label_Category_dict = Label_Category_dict
 
         # Get current page data
-        self.edit_information_pages[page_index].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
-        self.edit_information_pages[page_index].expire_date = self.ui.input_info_edit_page_expiring_date.date().toPyDate()
+        self.edit_information_pages[
+            page_index].purpose = self.ui.input_info_edit_page_choose_marketing_purpose.currentText()
+        self.edit_information_pages[
+            page_index].expire_date = self.ui.input_info_edit_page_expiring_date.date().toPyDate()
         if self.ui.input_info_edit_page_expiring_date.date().toPyDate() < datetime.date.today():
             self.edit_information_pages[page_index].status = 'Expired'
         elif (self.ui.input_info_edit_page_expiring_date.date().toPyDate() - datetime.date.today()).days > 90:
