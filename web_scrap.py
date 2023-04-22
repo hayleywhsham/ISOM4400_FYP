@@ -10,11 +10,10 @@ from requests.exceptions import InvalidURL
 from myException import GetFullURLFail
 
 
-
+'''
 def get_full_url(link):
-    #   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    # Old method for getting full true path with selenium
     chrome_options = Options()
-    #    chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     driver.set_page_load_timeout(10)
@@ -24,28 +23,32 @@ def get_full_url(link):
     except TimeoutException:
         full_url = link
     return full_url
+'''
+
 
 def get_full_url_2(link):
+    # Getting full true path with requests
     try:
         session = requests.session()
         resp = session.head(link, allow_redirects=True)
         full_url = resp.url
     except Exception:
         return f'Fail-{link}'
-
     return full_url
 
 
 def web_scrape(counter, link):
+    # Scraping Marketing Website Information
     if link[0:4] == "Fail":
         raise GetFullURLFail(link[5:])
-#   driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    timeout_timer = 30    # Set timeout timer (in seconds) for unresponsive pages
     chrome_options = Options()
-#    chrome_options.add_argument("start-maximized")
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-    driver.set_page_load_timeout(30)
+    driver.set_page_load_timeout(timeout_timer)
     driver.get(link)
+
+    # Get screenshot from Marketing Website and save to directory
     page_rect = driver.execute_cdp_cmd('Page.getLayoutMetrics', {})
     screenshot_config = {'captureBeyondViewport': True,
                          'fromSurface': True,
@@ -59,6 +62,8 @@ def web_scrape(counter, link):
     ScreenShot_path = str("Screen_Captures/ScreenShot_" + str(counter))
     with open(f"{ScreenShot_path}.png", "wb") as fh:
         fh.write(base64.urlsafe_b64decode(base_64_png['data']))
+
+    # Scrape Marketing Website text labels for categorization
     try:
         soup = BeautifulSoup(driver.page_source, "html.parser")
         for script in soup(["script", "style"]):

@@ -7,7 +7,7 @@ class EditInformationPage:
         """
         information saved: Brand,Source,Post Date,Link,Full True Path,Purpose,Status,PIC?,T&C?,Opt-in/Opt-out,remarks,PII
         """
-        self.fb_page_name = fb_page_name
+        self.brand = fb_page_name
         self.source = source
         self.post_time = post_time
         self.url = url
@@ -40,6 +40,7 @@ class EditInformationPage:
         self.Opt_in_out = self.Keywords_Exist_dict["Exist?"][2]
 
     def export(self):
+        # Convert information to export values
         if self.TnC == "Default":
             self.TnC = "No"
         if self.PICS == "Default":
@@ -47,7 +48,7 @@ class EditInformationPage:
         if self.Opt_in_out == "Default":
             self.Opt_in_out = "No"
 
-        export_list = [self.fb_page_name,
+        export_list = [self.brand,
                        self.source,
                        self.post_time,
                        self.url,
