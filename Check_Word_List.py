@@ -1,5 +1,3 @@
-import pandas as pd
-from Page_3_variables import *
 import json
 
 
