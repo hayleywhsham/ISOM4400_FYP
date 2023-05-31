@@ -2,7 +2,7 @@
 ## post['link'] will only return the first link in that post
 import datetime
 
-from facebook_scraper import get_posts
+
 
 
 def get_all_url_from_string(string) -> list[str]:
